@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>One Piece - Episódio 166</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="video-js.css?v5" rel="stylesheet">
+        <link href="plugins/videojs-resolution-switcher.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/4.2.6/videojs.ads.css" />
+	<link rel="stylesheet" href="./videojs.ima.css" />
+
+
+        <script src="https://vjs.zencdn.net/5.15.1/video.js"></script>
+        <script src="../js/jquery-1.11.3.min.js" type="text/javascript"></script>
+	<script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/4.2.6/videojs.ads.js"></script>
+	<script src="./videojs.ima.js"></script>
+
+        <script>
+            (function () {
+
+                window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
+
+                    // Just let default handler run.
+                    return true;
+                }
+
+            })();
+            $(document).ready(function () {
+                playerResize();
+
+                $(".vjs-menu-content").on("click", "li", function () {
+                    var versao = $(this).context.innerText.toLowerCase();
+                    var magnets = {"mq":"magnet:?xt=urn:btih:707889e585c5c31928477439e4e99a729919b657&dn=166.mp4&xl=89991416&tr=wss:\/\/tracker.btorrent.xyz&tr=wss:\/\/tracker.fastcast.nz&xs=https:\/\/st01hd.animesproject.com.br\/torrents\/O\/one-piece\/MQ\/episodios\/166.mp4.torrent&ws=https:\/\/st01hd.animesproject.com.br\/download\/VzpwRSRCb7FECT28lQHH3A\/1496029248\/O\/one-piece\/MQ\/episodios\/166.mp4","lq":"magnet:?xt=urn:btih:51af4655588fa1d868ebedfa43d535262a236be7&dn=166.mp4&xl=38374810&tr=wss:\/\/tracker.btorrent.xyz&tr=wss:\/\/tracker.fastcast.nz&xs=https:\/\/st01hd.animesproject.com.br\/torrents\/O\/one-piece\/LQ\/episodios\/166.mp4.torrent&ws=https:\/\/st01hd.animesproject.com.br\/download\/JWK-onvHKWtwJMzoSwhbNg\/1496029248\/O\/one-piece\/LQ\/episodios\/166.mp4"};
+                    if (WebTorrent.WEBRTC_SUPPORT) {
+                        client.destroy();
+                        client = new WebTorrent();
+                        client.add(magnets[versao], function (torrent) {
+                            // Stream the file in the browser
+                            torrent.files[0].renderTo('#anpvideo_html5_api');
+
+                        });
+                    }
+                });
+            });
+            var playerResize = function () {
+                setTimeout(function () {
+                    $('.video-js').width($(window).width());
+                    $('.video-js').height($(window).height());
+                    playerResize();
+                }, 500);
+            }
+        </script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-92768117-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+
+        <!-- pop -->
+
+        <script data-cfasync="false" type="text/javascript" src="https://www.tradeadexchange.com/a/display.php?r=335020"></script>
+
+
+    </head>
+    <body>
+        <div id="debugps4"></div>
+        <video id="anpvideo" class="video-js" controls preload="none" data-setup="{}" src="https://st01hd.animesproject.com.br/download/VzpwRSRCb7FECT28lQHH3A/1496029248/O/one-piece/MQ/episodios/166.mp4">
+            <!--<source src="PUNCH_Boku_no_Hero_Academia_-_13_HD.mp4" type='video/mp4'>-->
+            <p class="vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a web browser that
+                <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+            </p>
+        </video>
+        <script src="plugins/videojs-resolution-switcher.js"></script>
+        <script src="https://cdn.jsdelivr.net/webtorrent/latest/webtorrent.min.js"></script>
+        <script type="text/javascript">
+            player = videojs('anpvideo', {
+                width: $(window).width(),
+                height: $(window).height(),
+                plugins: {
+                    videoJsResolutionSwitcher: {
+                        default: 480, // Default resolution [{Number}, 'low', 'high'],
+                        dynamicLabel: true // Display dynamic labels or gear symbol
+                    }
+                }
+            }, function () {
+                var player = this;
+                window.player = player;
+            });
+
+
+var options = {
+id: 'anpvideo',
+forceNonLinearFullSlot: '1',
+nonLinearHeight: '400',
+nonLinearWidth: '400',
+adTagUrl: 'https://googleads.g.doubleclick.net/pagead/ads?client=ca-video-pub-7363809219244122&slotname=8882477887&ad_type=image_text&description_url=http%3A%2F%2Faniteca.zlx.com.br&max_ad_duration=30000&videoad_start_delay=0'
+
+};
+ 
+player.ima(options);
+player.ima.requestAds();
+
+            while (!player.updateSrc([{src: 'https://st01hd.animesproject.com.br/download/VzpwRSRCb7FECT28lQHH3A/1496029248/O/one-piece/MQ/episodios/166.mp4',type: 'video/mp4',label: 'MQ',res: 480},{src: 'https://st01hd.animesproject.com.br/download/JWK-onvHKWtwJMzoSwhbNg/1496029248/O/one-piece/LQ/episodios/166.mp4',type: 'video/mp4',label: 'LQ',res: 360}])) {
+
+            }
+
+            if (WebTorrent.WEBRTC_SUPPORT) {
+                client = new WebTorrent();
+                client.add("magnet:?xt=urn:btih:707889e585c5c31928477439e4e99a729919b657&dn=166.mp4&xl=89991416&tr=wss://tracker.btorrent.xyz&tr=wss://tracker.fastcast.nz&xs=https://st01hd.animesproject.com.br/torrents/O/one-piece/MQ/episodios/166.mp4.torrent&ws=https://st01hd.animesproject.com.br/download/VzpwRSRCb7FECT28lQHH3A/1496029248/O/one-piece/MQ/episodios/166.mp4", function (torrent) {
+                    // Stream the file in the browser
+                    torrent.files[0].renderTo('#anpvideo_html5_api');
+
+                    client.on('torrent', function (torrent) {
+                        var add = document.querySelector('#adsImage');
+
+                    });
+
+                });
+            }
+        </script>
+    </body>
+</html>
