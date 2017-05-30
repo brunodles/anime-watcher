@@ -18,10 +18,10 @@ class UrlFetcher {
         private val INVALID_TEXT_PATTERN = Regex("[^\\d\\w]+")
 
         fun fetchUrl(url: String): Document {
-            logger { "fetchUrl $url" }
+            logger { "fetchUrl \"$url\"" }
             if (useCache)
                 return fetchUrlWithCacheControl(url)
-            logger { "get $url" }
+            logger { "get \"$url\"" }
             return Jsoup.connect(url)
                     .userAgent(USER_AGENT)
                     .referrer(REFERRER)
@@ -29,18 +29,18 @@ class UrlFetcher {
         }
 
         private fun logger(function: () -> String) {
-//            if (useLog)
-            println("UrlFetcher: ${function()}")
+            if (useLog)
+                println("UrlFetcher: ${function()}")
         }
 
         private fun fetchUrlWithCacheControl(url: String): Document {
             val key = urlToKey(url)
             val page: String
             if (isPageCached(key)) {
-                logger { "load page $key" }
+                logger { "load page \"$key\"" }
                 page = loadPage(key)
             } else {
-                logger { "download and save $url" }
+                logger { "download and save \"$url\"" }
                 page = downloadPage(url)
                 savePage(key, page)
             }
