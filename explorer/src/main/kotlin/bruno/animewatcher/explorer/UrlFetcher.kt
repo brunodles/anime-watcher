@@ -5,46 +5,60 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 import java.io.File
-import java.net.HttpURLConnection
-import java.net.URL
+import java.net.URLEncoder
 
-class UrlFetcher {
+class UrlFetcher(private val url: String) {
+
+    private val connection = Jsoup.connect(url)
+            .userAgent(USER_AGENT)
+            .referrer(REFERRER)
+            .timeout(10000)
+    private val key by lazy { urlToKey(url) }
+
+    fun post(): Document {
+        logger { "fetchUrl \"$url\"" }
+        if (useCache && isPageCached(key))
+            return Jsoup.parse(loadPage(key))
+        val document = connection.post()
+        logger { "post \"$url\"" }
+        if (useCache)
+            savePage(key, document.html())
+        return document
+    }
+
+    fun get(): Document {
+        logger { "fetchUrl \"$url\"" }
+        if (useCache && isPageCached(key))
+            return Jsoup.parse(loadPage(key))
+        val document = connection.get()
+        logger { "get \"$url\"" }
+        if (useCache)
+            savePage(key, document.html())
+        return document
+    }
+
+    fun data(data: Map<String, String>?): UrlFetcher {
+        logger { "data $data" }
+        connection.data(data)
+        return this
+    }
 
     companion object {
-        var useCache = false
-        var useLog = false
+        val UTF8 = "UTF-8"
         private val USER_AGENT = "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"
         private val REFERRER = "http://www.google.com"
         private val INVALID_TEXT_PATTERN = Regex("[^\\d\\w]+")
 
+        var useCache = false
+        var useLog = false
+
         fun fetchUrl(url: String): Document {
-            logger { "fetchUrl \"$url\"" }
-            if (useCache)
-                return fetchUrlWithCacheControl(url)
-            logger { "get \"$url\"" }
-            return Jsoup.connect(url)
-                    .userAgent(USER_AGENT)
-                    .referrer(REFERRER)
-                    .get()
+            return UrlFetcher(url).get()
         }
 
         private fun logger(function: () -> String) {
             if (useLog)
                 println("UrlFetcher: ${function()}")
-        }
-
-        private fun fetchUrlWithCacheControl(url: String): Document {
-            val key = urlToKey(url)
-            val page: String
-            if (isPageCached(key)) {
-                logger { "load page \"$key\"" }
-                page = loadPage(key)
-            } else {
-                logger { "download and save \"$url\"" }
-                page = downloadPage(url)
-                savePage(key, page)
-            }
-            return Jsoup.parse(page)
         }
 
         private fun isPageCached(key: String): Boolean = file(key).exists()
@@ -55,13 +69,7 @@ class UrlFetcher {
         private fun loadPage(key: String): String =
                 file(key).inputStream().bufferedReader().use { it.readText() }
 
-        private fun urlToKey(url: String): String = url.replace(INVALID_TEXT_PATTERN, "")
-
-        private fun downloadPage(url: String): String {
-            val connection = URL(url).openConnection() as HttpURLConnection
-            connection.setRequestProperty("User-Agent", USER_AGENT)
-            return connection.inputStream.bufferedReader().use { it.readText() }
-        }
+        private fun urlToKey(url: String): String = url.replace(INVALID_TEXT_PATTERN, "").max(30)
 
         private fun file(key: String): File {
             val dir = File("./cache")
@@ -75,3 +83,7 @@ class UrlFetcher {
 
 fun Elements.src() = this.attr("src")
 fun Element.src() = this.attr("src")
+fun Elements.href() = this.attr("href")
+fun Element.href() = this.attr("href")
+fun String.max(max: Int) = this.substring(0, if (length < max) length else max)
+fun String.encodeUTF8() = URLEncoder.encode(this, UrlFetcher.UTF8)
