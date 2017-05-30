@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+ <head> 
+  <meta charset="UTF-8"> 
+  <title>anP</title> 
+  <link rel="stylesheet" href="/css/main.css"> 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> 
+  <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script> 
+  <script type="text/javascript" src="/js/main.js"></script> 
+  <script type="text/javascript" src="/js/destaques.json"></script> 
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-92768117-1', 'auto');
+  ga('send', 'pageview');
+
+</script> 
+ </head> 
+ <body> 
+  <div id="site-container"> 
+   <div id="l-bar" class="side-bars"></div> 
+   <div id="r-bar" class="side-bars"></div> 
+   <div id="site-content"> 
+    <header> 
+     <div id="top-menu" class="border-bottom-rounded"> 
+      <div id="top-menu-main"> 
+       <div id="top-menu-left"> 
+        <div id="top-menu-buttons"> 
+         <ul> 
+          <li> <a class="top-color" href="/" this-color="red"><span class="top-menu-span" id="top-menu-home">Home</span></a> 
+           <div class="colored-line gradient-red"></div> </li> 
+          <li> <a class="top-color" href="/series/" this-color="yellow"><span class="top-menu-span" id="top-menu-series">Séries</span></a> 
+           <div class="colored-line gradient-yellow"></div> </li> 
+          <li> <a class="top-color" href="/calendario.php" this-color="green"><span class="top-menu-span" id="top-menu-calendario">Calendário</span></a> 
+           <div class="colored-line gradient-green"></div> </li> 
+          <li> <a class="top-color" href="/series/rank/" this-color="blue"><span class="top-menu-span" id="top-menu-rank">Rank</span></a> 
+           <div class="colored-line gradient-blue"></div> </li> 
+          <li> <a class="top-color" href="/contato/" this-color="gold"><span class="top-menu-span" id="top-menu-contato">Contato</span></a> 
+           <div class="colored-line gradient-gold"></div> </li> 
+         </ul> 
+        </div> 
+        <a href="/"> 
+         <div id="top-logo"> 
+          <div class="colored-line gradient-blue"></div> 
+         </div> </a> 
+       </div> 
+       <div id="top-menu-right"> 
+        <div class="search-box"> 
+         <div class="search-container"> 
+          <div class="user-container"> 
+           <div class="user-login"> 
+            <a class="user-account" this-open="user-login-container"><i class="fa fa-user"></i> Login <i class="fa fa-caret-down"></i></a> 
+            <div class="user-login-container"> 
+             <form action="/login/" method="post" style="margin: 0px; padding:0px"> 
+              <div class="login-row"> 
+               <i class="fa fa-user user-icon"></i> 
+               <input type="text" name="user-login-input" class="user-input" id="user-login-input"> 
+              </div> 
+              <div class="login-row"> 
+               <i class="fa fa-key user-icon"></i> 
+               <input type="password" name="user-pass-input" class="user-input" id="user-pass-input"> 
+              </div> 
+              <div class="login-row"> 
+               <input type="submit" class="user-input login-button" value="Login"> 
+               <div style="float: right; margin-top: 2px;">
+                 Esqueceu a senha? 
+               </div> 
+              </div> 
+             </form> 
+            </div> 
+           </div> 
+           <div class="user-registro">
+            <a class="user-account" href="/registrar/"><i class="fa fa-unlock-alt"></i> Registrar</a>
+           </div> 
+          </div> 
+          <div class="search-div"> 
+           <input type="text" name="search" class="search-input" id="top-search" onkeyup="topBusca(event);" placeholder="Digite aqui o anime que procura...">
+           <input type="button" onclick="doTopBusca();" class="search-button" value="&nbsp;"> 
+          </div> 
+          <ul id="search-results-container"> 
+          </ul> 
+         </div> 
+        </div> 
+        <div class="colored-line search-line gradient-blue"></div> 
+       </div> 
+      </div> 
+     </div> 
+    </header> 
+    <div id="banner1"> 
+     <div id="banner1_placeholder"> 
+      <script type="text/javascript">
+                            <!--//<![CDATA[
+                               document.MAX_ct0 ='';
+                               var m3_u = (location.protocol=='https:'?'https://cas.criteo.com/delivery/ajs.php?':'http://cas.criteo.com/delivery/ajs.php?');
+                               var m3_r = Math.floor(Math.random()*99999999999);
+                               document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+                               document.write ("zoneid=203126");document.write("&amp;nodis=1");
+                               document.write ('&amp;cb=' + m3_r);
+                               if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+                               document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+                               document.write ("&amp;loc=" + escape(window.location).substring(0,1600));
+                               if (document.context) document.write ("&context=" + escape(document.context));
+                               if ((typeof(document.MAX_ct0) != 'undefined') && (document.MAX_ct0.substring(0,4) == 'http')) {
+                                   document.write ("&amp;ct0=" + escape(document.MAX_ct0));
+                               }
+                               if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+
+                               document.write ("'></scr"+"ipt>");
+                            //]]>--></script> 
+     </div> 
+    </div> 
+    <div class="div-table"> 
+     <div id="index-conteudo" style="width: auto;">
+       no vid
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>

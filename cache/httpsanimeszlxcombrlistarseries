@@ -1,0 +1,199 @@
+<html>
+ <head></head>
+ <body>
+  <div class="series-paginacao">
+   <div class="paginacao-container">
+    <ul>
+     <li><a class="series-pagina pagina-atual" href="1">01</a></li>
+    </ul>
+   </div>
+   <div class="paginacao-resultado">
+    Página 1 de 1 (6 resultados)
+   </div>
+  </div> 
+  <li> <a class="serie-block" href="/serie/o/one-piece/117"> 
+    <div class="serie-img" style="background-image: url('/imgs/series/small/eb160de1de89d9058fcb0b968dbbbd68.jpg'); background-size: 118px auto; background-position: center;"></div> 
+    <div class="serie-info"> 
+     <div class="serie-inside"> 
+      <h1 class="serie-nome">One Piece</h1> 
+      <h2 class="serie-creator">por Eiichiro Oda</h2> 
+      <p class="serie-generos">Gêneros: <span>Ação</span>, <span>Aventura</span>, <span>Super Poderes</span>, <span>Shounen</span>, <span>Fantasia</span>, <span>Drama</span>, <span>Comédia</span></p> 
+     </div> 
+    </div> 
+    <div class="serie-trivia"> 
+     <div class="serie-trivia-inside"> 
+      <div>
+       <label>Rank:</label>
+       <span>#2</span>
+      </div> 
+      <div>
+       <label>Nota:</label>
+       <span>8.00</span>
+      </div> 
+      <div>
+       <label>Status:</label>
+       <span>Andamento</span>
+      </div> 
+      <div>
+       <label>Iniciada em:</label>
+       <span>10/1999</span>
+      </div> 
+     </div> 
+    </div> </a> </li> 
+  <li> <a class="serie-block" href="/serie/o/one-piece-film-gold/1625"> 
+    <div class="serie-img" style="background-image: url('/imgs/series/small/a981f2b708044d6fb4a71a1463242520.jpg'); background-size: 118px auto; background-position: center;"></div> 
+    <div class="serie-info"> 
+     <div class="serie-inside"> 
+      <h1 class="serie-nome">One Piece Film: Gold</h1> 
+      <h2 class="serie-creator">por </h2> 
+      <p class="serie-generos">Gêneros: </p> 
+     </div> 
+    </div> 
+    <div class="serie-trivia"> 
+     <div class="serie-trivia-inside"> 
+      <div>
+       <label>Rank:</label>
+       <span>#599</span>
+      </div> 
+      <div>
+       <label>Nota:</label>
+       <span>0.00</span>
+      </div> 
+      <div>
+       <label>Status:</label>
+       <span>Andamento</span>
+      </div> 
+      <div>
+       <label>Iniciada em:</label>
+       <span></span>
+      </div> 
+     </div> 
+    </div> </a> </li> 
+  <li> <a class="serie-block" href="/serie/o/one-piece-3d2y/713"> 
+    <div class="serie-img" style="background-image: url('/imgs/series/small/07c5807d0d927dcd0980f86024e5208b.jpg'); background-size: 118px auto; background-position: center;"></div> 
+    <div class="serie-info"> 
+     <div class="serie-inside"> 
+      <h1 class="serie-nome">One Piece: 3D2Y</h1> 
+      <h2 class="serie-creator">por Eiichiro Oda</h2> 
+      <p class="serie-generos">Gêneros: <span>Aventura</span>, <span>Comédia</span>, <span>Fantasia</span>, <span>Shounen</span></p> 
+     </div> 
+    </div> 
+    <div class="serie-trivia"> 
+     <div class="serie-trivia-inside"> 
+      <div>
+       <label>Rank:</label>
+       <span>#1437</span>
+      </div> 
+      <div>
+       <label>Nota:</label>
+       <span>8.10</span>
+      </div> 
+      <div>
+       <label>Status:</label>
+       <span>Concluído</span>
+      </div> 
+      <div>
+       <label>Iniciada em:</label>
+       <span>08/2014</span>
+      </div> 
+     </div> 
+    </div> </a> </li> 
+  <li> <a class="serie-block" href="/serie/o/one-piece-adventure-of-nebulandia/1345"> 
+    <div class="serie-img" style="background-image: url('/imgs/series/small/86109d400f0ed29e840b47ed72777c84.jpg'); background-size: 118px auto; background-position: center;"></div> 
+    <div class="serie-info"> 
+     <div class="serie-inside"> 
+      <h1 class="serie-nome">One Piece: Adventure of Nebulandia</h1> 
+      <h2 class="serie-creator">por Konosuke Uda</h2> 
+      <p class="serie-generos">Gêneros: <span>Ação</span>, <span>Aventura</span>, <span>Comédia</span>, <span>Fantasia</span>, <span>Shounen</span>, <span>Super Poderes</span></p> 
+     </div> 
+    </div> 
+    <div class="serie-trivia"> 
+     <div class="serie-trivia-inside"> 
+      <div>
+       <label>Rank:</label>
+       <span>#229</span>
+      </div> 
+      <div>
+       <label>Nota:</label>
+       <span>0.00</span>
+      </div> 
+      <div>
+       <label>Status:</label>
+       <span>Concluído</span>
+      </div> 
+      <div>
+       <label>Iniciada em:</label>
+       <span>/</span>
+      </div> 
+     </div> 
+    </div> </a> </li> 
+  <li> <a class="serie-block" href="/serie/o/one-piece-episode-of-sabo--3-kyoudai-no-kizuna-kiseki-no-saikai-to-uketsugareru-ishi/1202"> 
+    <div class="serie-img" style="background-image: url('/imgs/series/small/147702db07145348245dc5a2f2fe5683.jpg'); background-size: 118px auto; background-position: center;"></div> 
+    <div class="serie-info"> 
+     <div class="serie-inside"> 
+      <h1 class="serie-nome">One Piece: Episode of Sabo - 3 Kyoudai no Kizuna Kiseki no Saikai to Uketsugareru Ishi</h1> 
+      <h2 class="serie-creator">por ?</h2> 
+      <p class="serie-generos">Gêneros: <span>Ação</span>, <span>Aventura</span>, <span>Comédia</span>, <span>Drama</span>, <span>Fantasia</span>, <span>Shounen</span>, <span>Super Poderes</span></p> 
+     </div> 
+    </div> 
+    <div class="serie-trivia"> 
+     <div class="serie-trivia-inside"> 
+      <div>
+       <label>Rank:</label>
+       <span>#324</span>
+      </div> 
+      <div>
+       <label>Nota:</label>
+       <span>7.70</span>
+      </div> 
+      <div>
+       <label>Status:</label>
+       <span>Concluído</span>
+      </div> 
+      <div>
+       <label>Iniciada em:</label>
+       <span>08/2015</span>
+      </div> 
+     </div> 
+    </div> </a> </li> 
+  <li> <a class="serie-block" href="/serie/o/one-piece-heart-of-gold/1483"> 
+    <div class="serie-img" style="background-image: url('/imgs/series/small/bffc98347ee35b3ead06728d6f073c68.jpg'); background-size: 118px auto; background-position: center;"></div> 
+    <div class="serie-info"> 
+     <div class="serie-inside"> 
+      <h1 class="serie-nome">One Piece: Heart of Gold</h1> 
+      <h2 class="serie-creator">por </h2> 
+      <p class="serie-generos">Gêneros: </p> 
+     </div> 
+    </div> 
+    <div class="serie-trivia"> 
+     <div class="serie-trivia-inside"> 
+      <div>
+       <label>Rank:</label>
+       <span>#647</span>
+      </div> 
+      <div>
+       <label>Nota:</label>
+       <span>0.00</span>
+      </div> 
+      <div>
+       <label>Status:</label>
+       <span>Andamento</span>
+      </div> 
+      <div>
+       <label>Iniciada em:</label>
+       <span>07/2016</span>
+      </div> 
+     </div> 
+    </div> </a> </li> 
+  <div class="series-paginacao">
+   <div class="paginacao-container">
+    <ul>
+     <li><a class="series-pagina pagina-atual" href="1">01</a></li>
+    </ul>
+   </div>
+   <div class="paginacao-resultado">
+    Página 1 de 1 (6 resultados)
+   </div>
+  </div>
+ </body>
+</html>

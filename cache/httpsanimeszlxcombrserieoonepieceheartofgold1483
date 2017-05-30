@@ -1,0 +1,325 @@
+<!doctype html>
+<html>
+ <head> 
+  <meta charset="UTF-8"> 
+  <title>anP</title> 
+  <link rel="stylesheet" href="/css/main.css"> 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> 
+  <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script> 
+  <script type="text/javascript" src="/js/main.js"></script> 
+  <script type="text/javascript" src="/js/destaques.json"></script> 
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-92768117-1', 'auto');
+  ga('send', 'pageview');
+
+</script> 
+ </head> 
+ <body> 
+  <div id="site-container"> 
+   <div id="l-bar" class="side-bars"></div> 
+   <div id="r-bar" class="side-bars"></div> 
+   <div id="site-content"> 
+    <header> 
+     <div id="top-menu" class="border-bottom-rounded"> 
+      <div id="top-menu-main"> 
+       <div id="top-menu-left"> 
+        <div id="top-menu-buttons"> 
+         <ul> 
+          <li> <a class="top-color" href="/" this-color="red"><span class="top-menu-span" id="top-menu-home">Home</span></a> 
+           <div class="colored-line gradient-red"></div> </li> 
+          <li> <a class="top-color" href="/series/" this-color="yellow"><span class="top-menu-span" id="top-menu-series">Séries</span></a> 
+           <div class="colored-line gradient-yellow"></div> </li> 
+          <li> <a class="top-color" href="/calendario.php" this-color="green"><span class="top-menu-span" id="top-menu-calendario">Calendário</span></a> 
+           <div class="colored-line gradient-green"></div> </li> 
+          <li> <a class="top-color" href="/series/rank/" this-color="blue"><span class="top-menu-span" id="top-menu-rank">Rank</span></a> 
+           <div class="colored-line gradient-blue"></div> </li> 
+          <li> <a class="top-color" href="/contato/" this-color="gold"><span class="top-menu-span" id="top-menu-contato">Contato</span></a> 
+           <div class="colored-line gradient-gold"></div> </li> 
+         </ul> 
+        </div> 
+        <a href="/"> 
+         <div id="top-logo"> 
+          <div class="colored-line gradient-blue"></div> 
+         </div> </a> 
+       </div> 
+       <div id="top-menu-right"> 
+        <div class="search-box"> 
+         <div class="search-container"> 
+          <div class="user-container"> 
+           <div class="user-login"> 
+            <a class="user-account" this-open="user-login-container"><i class="fa fa-user"></i> Login <i class="fa fa-caret-down"></i></a> 
+            <div class="user-login-container"> 
+             <form action="/login/" method="post" style="margin: 0px; padding:0px"> 
+              <div class="login-row"> 
+               <i class="fa fa-user user-icon"></i> 
+               <input type="text" name="user-login-input" class="user-input" id="user-login-input"> 
+              </div> 
+              <div class="login-row"> 
+               <i class="fa fa-key user-icon"></i> 
+               <input type="password" name="user-pass-input" class="user-input" id="user-pass-input"> 
+              </div> 
+              <div class="login-row"> 
+               <input type="submit" class="user-input login-button" value="Login"> 
+               <div style="float: right; margin-top: 2px;">
+                 Esqueceu a senha? 
+               </div> 
+              </div> 
+             </form> 
+            </div> 
+           </div> 
+           <div class="user-registro">
+            <a class="user-account" href="/registrar/"><i class="fa fa-unlock-alt"></i> Registrar</a>
+           </div> 
+          </div> 
+          <div class="search-div"> 
+           <input type="text" name="search" class="search-input" id="top-search" onkeyup="topBusca(event);" placeholder="Digite aqui o anime que procura...">
+           <input type="button" onclick="doTopBusca();" class="search-button" value="&nbsp;"> 
+          </div> 
+          <ul id="search-results-container"> 
+          </ul> 
+         </div> 
+        </div> 
+        <div class="colored-line search-line gradient-blue"></div> 
+       </div> 
+      </div> 
+     </div> 
+    </header> 
+    <div id="banner1"> 
+     <div id="banner1_placeholder"> 
+      <script type="text/javascript">
+                            <!--//<![CDATA[
+                               document.MAX_ct0 ='';
+                               var m3_u = (location.protocol=='https:'?'https://cas.criteo.com/delivery/ajs.php?':'http://cas.criteo.com/delivery/ajs.php?');
+                               var m3_r = Math.floor(Math.random()*99999999999);
+                               document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+                               document.write ("zoneid=203126");document.write("&amp;nodis=1");
+                               document.write ('&amp;cb=' + m3_r);
+                               if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+                               document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+                               document.write ("&amp;loc=" + escape(window.location).substring(0,1600));
+                               if (document.context) document.write ("&context=" + escape(document.context));
+                               if ((typeof(document.MAX_ct0) != 'undefined') && (document.MAX_ct0.substring(0,4) == 'http')) {
+                                   document.write ("&amp;ct0=" + escape(document.MAX_ct0));
+                               }
+                               if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+
+                               document.write ("'></scr"+"ipt>");
+                            //]]>--></script> 
+     </div> 
+    </div> 
+    <div class="div-table"> 
+     <div id="index-conteudo" style="width: auto;"> 
+      <div class="serie-pagina-container"> 
+       <div class="serie-pagina-left"> 
+        <div style="width: 160px; height: 600px; border: 1px solid silver;"> 
+         <script type="text/javascript">
+                    <!--//<![CDATA[
+                       document.MAX_ct0 ='';
+                       var m3_u = (location.protocol=='https:'?'https://cas.criteo.com/delivery/ajs.php?':'http://cas.criteo.com/delivery/ajs.php?');
+                       var m3_r = Math.floor(Math.random()*99999999999);
+                       document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+                       document.write ("zoneid=285407");document.write("&amp;nodis=1");
+                       document.write ('&amp;cb=' + m3_r);
+                       if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+                       document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+                       document.write ("&amp;loc=" + escape(window.location).substring(0,1600));
+                       if (document.context) document.write ("&context=" + escape(document.context));
+                       if ((typeof(document.MAX_ct0) != 'undefined') && (document.MAX_ct0.substring(0,4) == 'http')) {
+                           document.write ("&amp;ct0=" + escape(document.MAX_ct0));
+                       }
+                       if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+
+                       document.write ("'></scr"+"ipt>");
+                    //]]>--></script> 
+        </div> 
+       </div> 
+       <div class="serie-pagina-right"> 
+        <div class="serie-pagina-rank"> 
+         <span>#647</span> 
+        </div> 
+        <div class="serie-header" style="background-image: url('/images/noheader.jpg'); background-size: 779px 161px; background-position: center; background-repeat: no-repeat;"></div> 
+        <div class="serie-pagina-info"> 
+         <div class="serie-pagina-info-left"> 
+          <div class="serie-pagina-subheader"> 
+           <span>One Piece: Heart of Gold</span> 
+          </div> 
+          <div class="serie-pagina-content"> 
+           <div class="serie-pagina-content-inside" id="serie-trailer"> 
+            <div class="serie-trailer-container"> 
+             <div class="trailer-placeholder"> 
+              <iframe allowfullscreen webkitallowfullscreen="" scrolling="no" id="player_frame" style="" width="545" height="346" src="/anplayer2/?v=preview&amp;s=1483" frameborder="0"></iframe> 
+             </div> 
+            </div> 
+            <div class="serie-trailer-rodape"> 
+             <div class="serie-pagina-fansub">
+              Fansub(s): 
+              <a href="http://www.aliancaproject.com.br" target="_blank">SubPROJECT</a>
+             </div> 
+             <div class="serie-pagina-sinopse">
+              <img width="19" height="15" src="/images/sinopse.jpg" border="0" title="Sinopse" alt="Sinopse">&nbsp;Sinopse
+             </div> 
+             <div class="serie-pagina-nota">
+              <span>0</span>
+             </div> 
+            </div> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="serie-pagina-info-right"> 
+          <div class="serie-pagina-subheader"> 
+           <span>Informações</span> 
+          </div> 
+          <div class="serie-pagina-content" id="serie-infos-box"> 
+           <div class="serie-pagina-content-inside"> 
+            <div class="serie-pagina-info-entry">
+             <label>Diretor:</label> 
+             <span></span>
+            </div> 
+            <div class="serie-pagina-info-entry">
+             <label>Último vídeo:</label> 
+             <span>Episódio 01</span>
+            </div> 
+            <div class="serie-pagina-info-entry">
+             <label>Última adição:</label> 
+             <span>25/07/2016</span>
+            </div> 
+            <div class="serie-pagina-info-entry">
+             <label>Status:</label> 
+             <span>Andamento</span>
+            </div> 
+            <div class="serie-pagina-info-entry">
+             <label>Rank atual:</label> 
+             <span>#647º</span>
+            </div> 
+            <div class="serie-pagina-info-entry">
+             <label>Rank anterior:</label> 
+             <span>#647º</span>
+            </div> 
+            <div class="serie-pagina-info-entry">
+             <label>Visualizações:</label> 
+             <span>2440</span>
+            </div> 
+            <div class="serie-pagina-info-entry">
+             <label>Variação:</label> 
+             <span>-13%</span>
+            </div> 
+            <div class="serie-pagina-info-entry">
+             <label>Início da série:</label> 
+             <span>07/2016</span>
+            </div> 
+            <div class="serie-pagina-info-entry">
+             <label>Uploader(s):</label> 
+             <span>k3y</span>
+            </div> 
+            <div class="serie-pagina-info-entry">
+             Gêneros: 
+             <a href="/series/g/2" class="serie-tags">Aventura</a> 
+            </div> 
+           </div> 
+          </div> 
+          <div class="serie-pagina-links"> 
+           <ul class="serie-ul-links"> 
+            <li> <a class="serie-link link-prequel">Fase Anterior <span>(prequel)</span></a> 
+             <div class="serie-sub-link"> 
+              <a href="serie.php?id=117">One Piece</a> 
+             </div> </li> 
+            <li> <a class="serie-link link-parent">História Principal <span>(parent story)</span></a> 
+             <div class="serie-sub-link"> 
+              <a href="serie.php?id=117">One Piece</a> 
+             </div> </li> 
+           </ul> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="serie-pagina-meio"> 
+       <div class="serie-pagina-sinopse-tab"> 
+        <article class="serie-sinopse-article">
+          Antecedendo 
+         <i>One Piece Film: Gold</i>. 
+        </article> 
+       </div> 
+       <div class="serie-pagina-formatos"> 
+        <a href="#" class="serie-pagina-formato serie-pagina-tv serie-formato-selectedd" style="width: 222px; background-color: rgb(44, 160, 225);" selected-color="44, 160, 225" this-open="tv">TV</a> 
+       </div> 
+      </div> 
+      <div id="serie-pagina-listagem-link" style="background-color: rgb(44, 160, 225);"></div> 
+      <div class="serie-pagina-listagem"> 
+       <div class="serie-pagina-listagem-left"> 
+        <script type="text/javascript">
+                <!--//<![CDATA[
+                   document.MAX_ct0 ='';
+                   var m3_u = (location.protocol=='https:'?'https://cas.criteo.com/delivery/ajs.php?':'http://cas.criteo.com/delivery/ajs.php?');
+                   var m3_r = Math.floor(Math.random()*99999999999);
+                   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+                   document.write ("zoneid=203129");document.write("&amp;nodis=1");
+                   document.write ('&amp;cb=' + m3_r);
+                   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+                   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+                   document.write ("&amp;loc=" + escape(window.location).substring(0,1600));
+                   if (document.context) document.write ("&context=" + escape(document.context));
+                   if ((typeof(document.MAX_ct0) != 'undefined') && (document.MAX_ct0.substring(0,4) == 'http')) {
+                       document.write ("&amp;ct0=" + escape(document.MAX_ct0));
+                   }
+                   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+
+                   document.write ("'></scr"+"ipt>");
+                //]]>--></script> 
+       </div> 
+       <div class="serie-pagina-listagem-right"> 
+        <div class="serie-pagina-content"> 
+         <div class="serie-pagina-content-inside"> 
+          <div class="serie-pagina-listagem-videos"> 
+           <div id="this-serie-tv" class="this-serie-videos" style="display: block;"> 
+            <a class="serie-pagina-video-link" href="/exibir/1483/28749/one-piece-heart-of-gold-01">Episódio 01</a> 
+           </div> 
+          </div> 
+          <a class="serie-pagina-listagem-expandir arrow-down" style="background-color: rgb(44, 160, 225);" href="#"></a> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <br>
+      <br>
+      <br>
+      <br> 
+     </div> 
+    </div> 
+    <script>PaginaAtual('series');</script> 
+    <div id="footer"> 
+     <div class="rodape-container"> 
+      <div class="rodape-cores"></div> 
+      <div class="rodape-icones"> 
+       <ul> 
+        <li style="margin-left: 15px;"><a href="#"><img border="0" width="78" height="77" alt="Twitter" src="/images/rodape_twitter.png"></a></li> 
+        <li><a href="#"><img border="0" width="78" height="77" alt="RSS" src="/images/rodape_gplus.png"></a></li> 
+        <li><a href="#"><img border="0" width="78" height="77" alt="RSS" src="/images/rodape_facebook.png"></a></li> 
+        <li><a href="#"><img border="0" width="78" height="77" alt="RSS" src="/images/rodape_rss.png"></a></li> 
+       </ul> 
+      </div> 
+      <div class="rodape-menu"> 
+       <ul> 
+        <li><a href="/anunciantes">
+          <div class="rodape-botao rodape-anunciantes"></div><span style="border-left: 0px;">Anunciantes</span></a></li> 
+        <li><a href="/dmca">
+          <div class="rodape-botao rodape-dm"></div><span>DMCA (English)</span></a></li> 
+        <li><a href="/termos-de-uso">
+          <div class="rodape-botao rodape-termos"></div><span>Termos de Uso</span></a></li> 
+        <li><a href="/politica-de-privacidade">
+          <div class="rodape-botao rodape-privacidade"></div><span style="width: 140px;">Política de Privacidade</span></a></li> 
+        <li><a href="/contato">
+          <div class="rodape-botao rodape-contato"></div><span style="border-right: 0px;">Contato</span></a></li> 
+       </ul> 
+      </div> 
+     </div> 
+    </div>
+   </div> 
+  </div>   
+ </body>
+</html>
