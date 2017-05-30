@@ -24,7 +24,7 @@ class AnitubexFinderTest {
                     assertEquals(2, result.size)
                 }
 
-                it("should return itens with text") {
+                it("should return items with text") {
                     assertEquals("Especial One Piece Heart of Gold", result[0].title)
                     assertEquals("One Piece", result[1].title)
                 }
