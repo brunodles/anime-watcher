@@ -18,7 +18,8 @@ class AnitubexFinder : AnimeFinder {
             val title = titleRef.text()
             val href = titleRef.attr("href")
 
-            Anime(title, null, null, img, findList(href))
+            val episodes = findList(href)
+            Anime(title, null, episodes[0].link, img, episodes)
         }.toList()
     }
 
@@ -29,7 +30,7 @@ class AnitubexFinder : AnimeFinder {
             val href = it.attr("href")
             val text = it.text()
             EpisodeLink(href, text, null)
-        }.toList()
+        }.toList().reversed()
     }
 
     private fun searchUrl(keywork: String) = "http://www.anitubex.com/buscar/" + URLEncoder.encode(keywork, UTF8)

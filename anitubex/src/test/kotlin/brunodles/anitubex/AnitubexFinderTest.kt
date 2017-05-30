@@ -33,6 +33,11 @@ class AnitubexFinderTest {
                     assertEquals(1, result[0].episodes.size)
                     assertEquals(790, result[1].episodes.size)
                 }
+
+                it("should return the link to the first episode") {
+                    assertEquals("http://www.anitubex.com/especial-one-piece-heart-of-gold-1", result[0].link)
+                    assertEquals("http://www.anitubex.com/one-piece-1", result[1].link)
+                }
             }
         }
 
