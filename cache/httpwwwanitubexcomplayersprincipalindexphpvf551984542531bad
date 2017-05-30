@@ -1,0 +1,240 @@
+<!-- PopAds.net Popunder Code for www.anitubex.com -->
+<script type="text/javascript" data-cfasync="false">
+/*<![CDATA[/* */
+  var _pop = _pop || [];
+  _pop.push(['siteId', 1918965]);
+  _pop.push(['minBid', 0]);
+  _pop.push(['popundersPerIP', 0]);
+  _pop.push(['delayBetween', 0]);
+  _pop.push(['default', false]);
+  _pop.push(['defaultPerDay', 0]);
+  _pop.push(['topmostLayer', false]);
+  (function() {
+    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+    var s = document.getElementsByTagName('script')[0]; 
+    pa.src = '//c1.popads.net/pop.js';
+    pa.onerror = function() {
+      var sa = document.createElement('script'); sa.type = 'text/javascript'; sa.async = true;
+      sa.src = '//c2.popads.net/pop.js';
+      s.parentNode.insertBefore(sa, s);
+    };
+    s.parentNode.insertBefore(pa, s);
+  })();
+/*]]>/* */
+</script>
+<!-- PopAds.net Popunder Code End --><!-- PopAds.net Popunder Code for www.anitubex.com | 2017-04-13,1918965,0,0 -->
+<script type="text/javascript" data-cfasync="false">
+/*<![CDATA[/* */
+ (function(){ var c=window;c["\u005f\u0070\u006fp"]=[["si\x74\x65\u0049\x64",1918965],["mi\u006eBi\u0064",0],["p\x6f\u0070\x75\x6ed\x65r\x73P\u0065\u0072\u0049P",0],["de\x6ca\u0079Be\x74\u0077\u0065\u0065n",0],["\x64e\x66\u0061\u0075\u006c\x74",false],["d\u0065\u0066\x61\u0075\u006ct\x50\x65\u0072D\x61\x79",0],["\u0074\u006fpmos\u0074L\u0061\u0079er",!0]];var o=["\x2f/c\x31.\u0070o\u0070\x61\x64s\u002e\x6e\x65\u0074\u002f\x70\u006fp\x2ej\x73","\x2f\u002f\x63\x32.p\x6f\u0070ad\x73.\x6e\x65\x74\x2f\u0070\x6f\u0070\x2e\u006a\u0073","\x2f\x2f\x77\x77\x77\x2e\u0075\x62xtoq\x73q\u0075\u0073\x79x\x2e\u0063om\u002f\x6a\x63xn\u002ej\x73","\u002f\u002f\u0077w\x77\x2eb\u0061\u0069ac\x6c\x77\u0064\x70zt\x64\x2e\u0063\x6fm\x2f\x75\u006dj.js",""],y=0,z,j=function(){if(""==o[y])return;z=c["\u0064o\x63\x75\u006d\x65\u006e\u0074"]["c\u0072ea\u0074\x65\u0045\x6c\u0065\x6de\x6e\x74"]("\u0073\u0063ri\x70\u0074");z["\u0074yp\u0065"]="t\u0065\x78t\x2f\u006a\x61\u0076as\u0063rip\u0074";z["\x61\x73\u0079n\u0063"]=!0;var b=c["\x64\u006f\x63u\x6d\u0065\u006et"]["g\x65tE\x6c\u0065\x6d\u0065nts\x42\u0079\x54\u0061g\u004e\x61\u006d\x65"]("s\u0063ri\u0070\x74")[0];z["s\x72\x63"]=o[y];if(y<2){z["\u0063r\x6fs\u0073O\x72i\x67in"]="\x61\x6eo\x6ey\x6dous";};z["\x6f\x6e\x65r\x72\u006f\u0072"]=function(){y++;j()};b["\u0070\u0061\x72e\x6e\u0074\u004eo\x64\x65"]["\x69\u006e\u0073er\x74B\x65for\x65"](z,b)};j()})();
+/*]]>/* */
+</script>
+
+<title>Player</title>
+<style>body{margin:0;background:#000}</style>
+<link href="http://www.anitubex.com/players/principal/p/adplayerX.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="http://www.anitubex.com/players/principal/p/jquery.min.js"></script>
+<script type="text/javascript" src="http://www.anitubex.com/players/principal/p/adplayerX.js?v=wr"></script>
+<meta charset="utf-8">
+<script type="text/javascript">
+
+    $(function(){
+        
+        $("#advideox").adplayer({
+            share:0,
+            volume: 1,
+            keyboard: true,
+            light: false,
+            brightness: true,
+            logo: {
+                src: "http://i.imgur.com/ABkBALo.png",
+                position: "TopRight",
+                href: "http://www.blogger.com/video-play.mp4?contentId=f551984542531bad",
+                opacity: "0.5",
+                height: "64",
+                width: "64"
+            },
+            // subtitles: "",
+            quality: {
+                "default": "360p",
+                "360p": "http://www.blogger.com/video-play.mp4?contentId=f551984542531bad"          },
+            
+
+            // adroll: {
+                // src: "",
+                // adrolltime: 5,
+                // adlink: "http://www.anitubex.com/"
+            // },
+            advertising: {
+                
+            },
+            
+        });
+        
+    });
+
+</script>
+ 
+<div style="max-width:853px;height:470px!important;">
+<video id="advideox" width="853" height="470"></video>
+</div>
+<script> 
+  document.oncontextmenu = function() {return false;};
+
+  window.onload = function(){ 
+    setTimeout(function() { 
+      var ad = document.querySelector("ins.adsbygoogle");
+      // var ad = document.querySelector("div.ad-layer-settings");
+      
+      // If the ad contains no innerHTML, ad blockers are at work
+      if (ad && ad.innerHTML.replace(/\s/g, "").length == 0) {
+        
+        // Since ad blocks hide ads using CSS too
+        ad.style.cssText = 'display:block !important'; 
+        
+        // You can put any text, image or even IFRAME tags here
+        ad.innerHTML = '<div style="background:#FFF;width:100%;height:100%;text-align:center;font-size:2em"><br />Se gosta do que fazemos aqui, considere desativar o adblock!</div>';
+      console.log('adblock');
+      }
+      
+    }, 2000);
+  }; 
+  
+function mudancaQualidade() {console.log('ok =P')}
+
+function mudancaQualidade() {
+    if ($('.ad-layer-settings').height() == 0) {
+        $('.ad-layer-settings').css("height", "35px");
+        $('.ad-layer-settings').css("text-align", "center");
+        $('.ad-layer-settings').html("Para verificar se há uma <strong>qualidade melhor</strong>, desative o AdBlock neste site!");
+        $('.ad-layer-settings').css("color", "#FFF");
+    }
+}
+
+$(document).ready(function(){
+    // Editando
+    // Removendo temporariamente
+    // $("#setagear").hide();
+    // $("#aviso").hide();
+    
+    var testEl = document.createElement( "video" ),
+        mpeg4, h264, ogg, webm;
+    if ( testEl.canPlayType ) {
+        mpeg4 = "" !== testEl.canPlayType( 'video/mp4; codecs="mp4v.20.8"' );
+        h264 = "" !== ( testEl.canPlayType( 'video/mp4; codecs="avc1.42E01E"' )
+            || testEl.canPlayType( 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"' ) );
+        ogg = "" !== testEl.canPlayType( 'video/ogg; codecs="theora"' );
+        webm = "" !== testEl.canPlayType( 'video/webm; codecs="vp8, vorbis"' );
+    }
+    
+    if (webm == false){
+        $('.ad-gear').trigger('click');
+        $('.ad-quality-menu').trigger('click');
+        $('.ad-quality-option').last().trigger('click');
+        $('.ad-gear').trigger('click').hide();;
+    }
+    
+    var player = document.getElementById("advideox");
+    proximo = false;
+    localStorage['1'] = 'f551984542531bad';
+        
+    $(".ad-video").after($(''));
+    $(".ad-video").after($('<div id="aviso">Nenhum episódio não está hospedado no nosso servidor, apenas está indexado aqui! <br />Ajude-nos, Mantenha o Adblock desativado.</div>'));
+    $(".ad-video").after($('<div id="setagear" class="arrow bounce"></div>'));
+    
+    $(".proximo").hover(function() {
+        $(".proximo span").stop().animate({ width: "95px" }, 500);
+        $(".proximo img").stop().animate({ opacity: "1"},1000); 
+        $(".proximo span").html('Próximo Episódio!');             
+    }, function() {
+        $(".proximo span").html('>>');
+        $(".proximo span").stop().animate({ width: "30px" }, 500);
+        $(".proximo img").stop().animate({ opacity: "0"},1000);
+    });
+    
+
+    player.addEventListener("timeupdate", salvarTempo);
+    player.addEventListener("play", continuar);
+    
+    if ( localStorage.retorno ){
+        console.log('retorno '+localStorage.retorno);
+    }else {
+        localStorage['retorno'] = 1;
+    }
+    
+    localStorage['retorno'] = parseInt(localStorage.retorno)+1;
+    
+            
+    function continuar(){
+        var avisoAtivo = false;
+        if ($('#aviso').is(":visible") && localStorage.retorno < 5 && avisoAtivo == true){
+            $("#aviso").delay(7000).fadeTo("slow", 0);
+            for(i=0;i<7;i++) {
+                $(".ad-gear").fadeTo('slow', 0.5).fadeTo('slow', 1.0);
+            }
+            
+            for(i=0;i<4;i++) {
+                $("#setagear").fadeTo('slow', 0.3).fadeTo('slow', 0.8);
+            }
+            $("#setagear").hide("slow");
+        } else {
+            $("#setagear").hide();
+            $("#aviso").hide();
+        }
+        var player = document.getElementById("advideox");
+        console.log('play'); 
+        
+        // Continua de onde parou
+        if (localStorage.t1f551984542531bad && player.currentTime == 0) {
+            console.log(localStorage.t1f551984542531bad); 
+            player.currentTime = localStorage.t1f551984542531bad;
+            
+        }
+
+    };
+    function salvarTempo(){
+        var player = document.getElementById("advideox");
+        
+        var tempoAtual = player.currentTime;
+        var tempoAtual = Math.round(tempoAtual);                
+
+        var duracao = player.duration;
+        var duracao = Math.round(duracao);
+        
+        var quaseFim = duracao - duracao * 10 / 100;
+        var quaseFim = Math.round(quaseFim);
+
+        
+        if ( localStorage.t1f551984542531bad == false ||  tempoAtual != localStorage.t1f551984542531bad &&  tempoAtual > 1 ) {
+            console.log(localStorage.t1f551984542531bad);
+            
+            localStorage['t1f551984542531bad'] = tempoAtual;
+
+            // Exibir próximo episódio
+            if (tempoAtual > quaseFim && proximo == false){
+                console.log('perto do fim');
+                proximo = true;
+                $(".proximo").show();
+                $(".proximo span").stop().animate({ width: "95px" }, 500);
+                $(".proximo span").html('Próximo Episódio!');
+                $(".proximo img").stop().animate({ opacity: "1"},1000);     
+                
+                setTimeout(function(){
+                    $(".proximo span").html('>>');
+                    $(".proximo span").stop().animate({ width: "30px" }, 500);
+                    $(".proximo img").stop().animate({ opacity: "0"},1000);
+                }, 5000);
+
+                console.log(quaseFim);
+            }
+            
+
+            
+         }
+    }
+});
+    
+
+$(mudancaQualidade);
+
+
+</script><div class="ad-layer-logo" style="display: block; width: 64px; height: 64px; position: absolute; z-index: 1280; cursor: pointer; background-image: url(&quot;http://i.imgur.com/ABkBALo.png&quot;); top: 16px; right: 16px;"></div></body>

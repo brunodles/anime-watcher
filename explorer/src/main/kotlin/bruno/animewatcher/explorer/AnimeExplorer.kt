@@ -4,5 +4,5 @@ interface AnimeExplorer {
 
     fun currentEpisode(): CurrentEpisode
 
-    fun nextEpisodes(): List<NextEpisode>
+    fun nextEpisodes(): List<EpisodeLink>
 }

@@ -2,7 +2,7 @@ package brunodles.animacurse;
 
 import bruno.animewatcher.explorer.AnimeExplorer
 import bruno.animewatcher.explorer.CurrentEpisode
-import bruno.animewatcher.explorer.NextEpisode
+import bruno.animewatcher.explorer.EpisodeLink
 import bruno.animewatcher.explorer.UrlFetcher.Companion.fetchUrl
 
 class AnimaCurseExplorer(private val url: String) : AnimeExplorer {
@@ -15,12 +15,12 @@ class AnimaCurseExplorer(private val url: String) : AnimeExplorer {
         return CurrentEpisode(src, text)
     }
 
-    override fun nextEpisodes(): List<NextEpisode> {
+    override fun nextEpisodes(): List<EpisodeLink> {
         return doc.select(".thumbnail").map {
             val src = it.select(".holder img").first().attr("src")
             val text = it.select(".text span").first().text()
             val link = it.select(".text a").first().attr("href")
-            NextEpisode(link, text, src)
+            EpisodeLink(link, text, src)
         }.toList()
     }
 }
