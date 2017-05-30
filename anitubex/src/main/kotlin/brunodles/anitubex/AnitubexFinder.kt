@@ -1,14 +1,9 @@
 package brunodles.anitubex
 
 import bruno.animewatcher.explorer.*
-import java.net.URLEncoder
 import java.util.*
 
 class AnitubexFinder : AnimeFinder {
-
-    companion object {
-        private val UTF8 = "UTF-8"
-    }
 
     override fun search(keywork: String): List<Anime> {
         val doc = UrlFetcher.fetchUrl(searchUrl(keywork))
@@ -33,6 +28,6 @@ class AnitubexFinder : AnimeFinder {
         }.toList().reversed()
     }
 
-    private fun searchUrl(keywork: String) = "http://www.anitubex.com/buscar/" + URLEncoder.encode(keywork, UTF8)
+    private fun searchUrl(keywork: String) = "http://www.anitubex.com/buscar/" + keywork.encodeUTF8()
 
 }
