@@ -48,6 +48,7 @@ class UrlFetcher(private val url: String) {
         private val USER_AGENT = "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"
         private val REFERRER = "http://www.google.com"
         private val INVALID_TEXT_PATTERN = Regex("[^\\d\\w]+")
+        private val MAX_FILENAME_SIZE = 100
 
         var useCache = false
         var useLog = false
@@ -63,13 +64,18 @@ class UrlFetcher(private val url: String) {
 
         private fun isPageCached(key: String): Boolean = file(key).exists()
 
-        private fun savePage(key: String, page: String) =
-                file(key).outputStream().bufferedWriter().use { it.write(page) }
+        private fun savePage(key: String, page: String) {
+            logger { "savePage $key" }
+            file(key).outputStream().bufferedWriter().use { it.write(page) }
+        }
 
-        private fun loadPage(key: String): String =
-                file(key).inputStream().bufferedReader().use { it.readText() }
+        private fun loadPage(key: String): String {
+            logger { "loadPage $key" }
+            return file(key).inputStream().bufferedReader().use { it.readText() }
+        }
 
-        private fun urlToKey(url: String): String = url.replace(INVALID_TEXT_PATTERN, "").max(30)
+        private fun urlToKey(url: String): String = url.replace(INVALID_TEXT_PATTERN, "")
+                .max(MAX_FILENAME_SIZE)
 
         private fun file(key: String): File {
             val dir = File("./cache")
