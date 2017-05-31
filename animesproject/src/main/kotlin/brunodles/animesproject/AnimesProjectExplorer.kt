@@ -23,7 +23,7 @@ class AnimesProjectExplorer(private val url: String) : AnimeExplorer {
 
     override fun nextEpisodes(): List<EpisodeLink> {
         return doc.select(".exibir-pagina-listagem a").map {
-            EpisodeLink(it.attr("href"), it.text(), null)
+            EpisodeLink(AnimesProjectFinder.HOST + it.attr("href"), it.text(), null)
         }.toList().subList(3, 5)
     }
 }
