@@ -10,8 +10,11 @@ class AnitubexExplorer(private val url: String) : AnimeExplorer {
     }
 
     private val doc = UrlFetcher.fetchUrl(url)
+    private val currentEpisode = findCurrentEpisode()
 
-    override fun currentEpisode(): CurrentEpisode {
+    override fun currentEpisode(): CurrentEpisode = currentEpisode
+
+    private fun findCurrentEpisode(): CurrentEpisode {
         val text = doc.select(".panel-heading h1").text()
         var iframeLink = doc.select(".tab-pane iframe").src()
         var iframe = UrlFetcher.fetchUrl(iframeLink)
