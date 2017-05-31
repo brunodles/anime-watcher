@@ -19,6 +19,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:minHeight="80dp"
+                android:scaleType="centerCrop"
                 tools:ignore="ContentDescription" />
 
             <LinearLayout

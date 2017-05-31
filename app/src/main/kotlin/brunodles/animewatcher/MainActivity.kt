@@ -1,11 +1,13 @@
 package brunodles.animewatcher
 
+import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
+import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
@@ -46,7 +48,10 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         createPlayer()
+        setupRecyclerView()
+    }
 
+    private fun setupRecyclerView() {
         val manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding?.nextEpisodes?.layoutManager = manager
         adapter = GenericAdapter<EpisodeLink, ItemEpisodeBinding>(R.layout.item_episode) { viewHolder, item, index ->
@@ -73,13 +78,13 @@ class MainActivity : AppCompatActivity() {
         val videoTrackSelectionFactory = AdaptiveTrackSelection.Factory(bandwidthMeter)
         val trackSelector = DefaultTrackSelector(videoTrackSelectionFactory)
 
-        val player = ExoPlayerFactory.newSimpleInstance(this, trackSelector)
+        player = ExoPlayerFactory.newSimpleInstance(this, trackSelector)
         binding?.player?.player = player
     }
 
     override fun onResume() {
         super.onResume()
-        CheckUrl(intent) {
+        CheckUrl(intent, this) {
             val currentEpisode = it.currentEpisode()
             prepareVideo(currentEpisode.video)
             binding?.title?.text = currentEpisode.description
@@ -106,13 +111,15 @@ class MainActivity : AppCompatActivity() {
         val videoSource = ExtractorMediaSource(Uri.parse(url),
                 dataSourceFactory, extractorsFactory, null, null)
         // Prepare the player with the source.
-        player?.prepare(videoSource)
+        player?.prepare(videoSource, true, true)
+        player?.playWhenReady
     }
 
-    private class CheckUrl(private val intent: Intent, private val function: (AnimeExplorer) -> Unit) :
+    private class CheckUrl(private val intent: Intent, private val context: Context, private val function: (AnimeExplorer) -> Unit) :
             AsyncTask<Void, Void, AnimeExplorer?>() {
 
         val factories by lazy { Arrays.asList(AnitubexFactory, AnimaCurseFactory, AnimesProjectFactory) }
+        val preference by lazy { PreferenceManager.getDefaultSharedPreferences(context) }
 
         override fun doInBackground(vararg params: Void?): AnimeExplorer? {
             val url = findUrl()
@@ -120,14 +127,19 @@ class MainActivity : AppCompatActivity() {
                 this.cancel(true)
                 return null
             }
+            preference.edit()
+                    .putString("URL", url)
+                    .apply()
             return findVideoUrl(url)
         }
 
         fun findUrl(): String? {
             if (intent.data != null)
                 return intent.data.toString()
-            else if (intent.hasExtra(Intent.EXTRA_TEXT))
+            if (intent.hasExtra(Intent.EXTRA_TEXT))
                 return intent.getStringExtra(Intent.EXTRA_TEXT)
+            if (preference.contains("URL"))
+                return preference.getString("URL", null)
             return null
         }
 

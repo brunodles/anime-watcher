@@ -15,7 +15,9 @@
             <com.google.android.exoplayer2.ui.SimpleExoPlayerView
                 android:id="@+id/player"
                 android:layout_width="match_parent"
-                android:layout_height="240dp" />
+                android:layout_height="wrap_content"
+                android:background="#000"
+                android:minHeight="240dp" />
 
             <TextView
                 android:id="@+id/title"
@@ -27,16 +29,6 @@
                 android:layout_marginTop="8dp"
                 android:textIsSelectable="true"
                 tools:text="One Piece" />
-
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="8dp"
-                android:textIsSelectable="true"
-                tools:text="Here comes the episode description, it should be able to wrap content if needed." />
 
             <TextView
                 android:layout_width="match_parent"
