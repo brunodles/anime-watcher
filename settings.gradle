@@ -1,1 +1,1 @@
-include ':app', ':explorer', ':animacurse', ':animesproject', ':testcacher', ':anitubex'
+include ':app', ':explorer', ':animacurse', ':animesproject', ':testcacher', ':anitubex', ':cli'

@@ -1,0 +1,26 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "brunodles.animewatcher.cli.Main"
+
+run {
+    if (project.hasProperty("args")) {
+        args project.property("args")
+    }
+}
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
+dependencies {
+    compile project(':animacurse')
+    compile project(':animesproject')
+    compile project(':anitubex')
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
