@@ -13,8 +13,11 @@ class AnimesProjectExplorer(private val url: String) : AnimeExplorer {
         val u = URL(url)
         "${u.protocol}://${u.host}"
     }
+    private val currentEpisode = findCurrentEpisode()
 
-    override fun currentEpisode(): CurrentEpisode {
+    override fun currentEpisode(): CurrentEpisode = currentEpisode
+
+    private fun findCurrentEpisode(): CurrentEpisode {
         val iframe = doc.select(".video-placeholder iframe").attr("src")
         val src = fetchUrl(host + iframe).select(".video-js").attr("src")
         val title = doc.select(".serie-pagina-subheader span").text()
