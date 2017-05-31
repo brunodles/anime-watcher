@@ -28,6 +28,7 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
+import com.google.android.gms.cast.framework.CastContext
 import com.squareup.picasso.Picasso
 import java.util.*
 
@@ -49,6 +50,8 @@ class MainActivity : AppCompatActivity() {
 
         createPlayer()
         setupRecyclerView()
+
+        val castContext = CastContext.getSharedInstance(this)
     }
 
     private fun setupRecyclerView() {

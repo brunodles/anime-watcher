@@ -16,8 +16,8 @@ class GenericAdapter<ITEM, BINDER : ViewDataBinding>(
 
     var list: List<ITEM> = Collections.emptyList()
         set(value) {
-            notifyDataSetChanged()
             field = value
+            notifyDataSetChanged()
         }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup?, index: Int): ViewHolder<BINDER> {
