@@ -11,7 +11,6 @@ internal class CastOptionsProvider : OptionsProvider {
 
     override fun getCastOptions(appContext: Context): CastOptions? {
         val castOptions = CastOptions.Builder()
-//                .setReceiverApplicationId(appContext.getString(R.string.app_id))
                 .setReceiverApplicationId(CastMediaControlIntent.DEFAULT_MEDIA_RECEIVER_APPLICATION_ID)
                 .build()
         return castOptions

@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.ImageView
 import bruno.animewatcher.explorer.AnimeExplorer
+import bruno.animewatcher.explorer.CurrentEpisode
 import bruno.animewatcher.explorer.EpisodeLink
 import brunodles.animacurse.AnimaCurseFactory
 import brunodles.animesproject.AnimesProjectFactory
@@ -28,7 +29,12 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
+import com.google.android.gms.cast.MediaInfo
+import com.google.android.gms.cast.MediaMetadata
+import com.google.android.gms.cast.framework.CastButtonFactory
 import com.google.android.gms.cast.framework.CastContext
+import com.google.android.gms.cast.framework.CastSession
+import com.google.android.gms.cast.framework.SessionManager
 import com.squareup.picasso.Picasso
 import java.util.*
 
@@ -40,9 +46,15 @@ class MainActivity : AppCompatActivity() {
         val USER_AGENT = "AnimeWatcher"
     }
 
-    var binding: ActivityMainBinding? = null
-    var player: SimpleExoPlayer? = null
-    var adapter: GenericAdapter<EpisodeLink, ItemEpisodeBinding>? = null
+    private var binding: ActivityMainBinding? = null
+    private var player: SimpleExoPlayer? = null
+    private var adapter: GenericAdapter<EpisodeLink, ItemEpisodeBinding>? = null
+    private var currentEpisode: CurrentEpisode? = null
+
+
+    var mCastSession: CastSession? = null
+    var mSessionManager: SessionManager? = null
+//    val mSessionManagerListener: SessionManagerListener = SessionManagerListenerImpl()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +63,30 @@ class MainActivity : AppCompatActivity() {
         createPlayer()
         setupRecyclerView()
 
+        CastButtonFactory.setUpMediaRouteButton(this, binding?.mediaRouteButton)
         val castContext = CastContext.getSharedInstance(this)
+
+        mSessionManager = castContext.sessionManager
+        binding?.playRemote?.setOnClickListener {
+            val movieMetadata = MediaMetadata(MediaMetadata.MEDIA_TYPE_MOVIE)
+
+            movieMetadata.putString(MediaMetadata.KEY_TITLE, currentEpisode?.description)
+//            movieMetadata.putString(MediaMetadata.KEY_SUBTITLE, mSelectedMedia.getStudio());
+//            movieMetadata.addImage(WebImage(Uri.parse(currentEpisode?.)));
+//            movieMetadata.addImage(WebImage(Uri.parse(mSelectedMedia.getImage(1))));
+
+            Log.d(TAG, "onCreate: currentEpisode.video = ${currentEpisode?.video}")
+            val mediaInfo = MediaInfo.Builder(currentEpisode?.video)
+                    .setStreamType(MediaInfo.STREAM_TYPE_BUFFERED)
+                    .setContentType("videos/mp4")
+                    .setMetadata(movieMetadata)
+//                    .setStreamDuration(mSelectedMedia.getDuration() * 1000)
+                    .build()
+            val remoteMediaClient = mCastSession?.remoteMediaClient
+            val position = player?.currentPosition ?: 0
+            remoteMediaClient?.load(mediaInfo, true, position)
+            remoteMediaClient?.play()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -60,6 +95,11 @@ class MainActivity : AppCompatActivity() {
         adapter = GenericAdapter<EpisodeLink, ItemEpisodeBinding>(R.layout.item_episode) { viewHolder, item, index ->
             viewHolder.binder.description.text = item.description
             loadImageInto(item.image, viewHolder.binder.image)
+            viewHolder.binder.root.setOnClickListener {
+                val intent = Intent(this, MainActivity::class.java)
+                        .setData(Uri.parse(item.link))
+                startActivity(intent)
+            }
         }
         binding?.nextEpisodes?.adapter = adapter
     }
@@ -87,12 +127,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        mCastSession = mSessionManager?.currentCastSession
         CheckUrl(intent, this) {
-            val currentEpisode = it.currentEpisode()
-            prepareVideo(currentEpisode.video)
-            binding?.title?.text = currentEpisode.description
-
+            val episode = it.currentEpisode()
+            prepareVideo(episode.video)
+            binding?.title?.text = episode.description
             adapter?.list = it.nextEpisodes()
+            currentEpisode = episode
 
 //            binding?.text?.text = it
             // share to another player
@@ -100,6 +141,11 @@ class MainActivity : AppCompatActivity() {
 //            intent.setData(Uri.parse(it))
 //            startActivity(intent)
         }.execute()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mCastSession = null
     }
 
     fun prepareVideo(url: String) {
@@ -146,14 +192,9 @@ class MainActivity : AppCompatActivity() {
             return null
         }
 
-
         fun findVideoUrl(url: String): AnimeExplorer? {
             Log.d(TAG, "findVideoUrl " + url)
-            for (factory in factories) {
-                if (factory.isEpisode(url))
-                    return factory.episode(url)
-            }
-            return null
+            return factories.firstOrNull { it.isEpisode(url) }?.episode(url)
         }
 
         override fun onPostExecute(result: AnimeExplorer?) {
