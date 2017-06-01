@@ -21,51 +21,59 @@
                 app:resize_mode="fixed_width"/>
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:id="@+id/otherContent"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <android.support.v7.app.MediaRouteButton
-                    android:id="@+id/mediaRouteButton"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:mediaRouteTypes="user"
-                    />
+                    android:orientation="horizontal">
 
-                <Button
-                    android:text="Play"
-                    android:id="@+id/playRemote"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    <android.support.v7.app.MediaRouteButton
+                        android:id="@+id/mediaRouteButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:mediaRouteTypes="user"
+                        />
+
+                    <Button
+                        android:id="@+id/playRemote"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Play"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="8dp"
+                    android:textIsSelectable="true"
+                    tools:text="One Piece"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Next Episodes"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/nextEpisodes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="8dp"/>
+
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/title"
-                style="@style/TextAppearance.AppCompat.Title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="8dp"
-                android:textIsSelectable="true"
-                tools:text="One Piece"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
-                android:text="Next Episodes"/>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/nextEpisodes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="8dp"/>
-
         </LinearLayout>
+
     </android.support.v4.widget.NestedScrollView>
 </layout>

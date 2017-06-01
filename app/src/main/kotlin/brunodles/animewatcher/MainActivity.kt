@@ -2,6 +2,7 @@ package brunodles.animewatcher
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.AsyncTask
@@ -11,6 +12,8 @@ import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import bruno.animewatcher.explorer.AnimeExplorer
 import bruno.animewatcher.explorer.CurrentEpisode
@@ -26,6 +29,7 @@ import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
 import com.google.android.exoplayer2.source.ExtractorMediaSource
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
@@ -141,6 +145,25 @@ class MainActivity : AppCompatActivity() {
 //            intent.setData(Uri.parse(it))
 //            startActivity(intent)
         }.execute()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        val landscape = newConfig?.orientation == Configuration.ORIENTATION_LANDSCAPE
+        binding?.otherContent?.visibility = if (landscape) View.GONE else View.VISIBLE
+        if (landscape) {
+            binding?.player?.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIXED_HEIGHT)
+            val params = binding?.player?.layoutParams
+            params?.height = ViewGroup.LayoutParams.MATCH_PARENT
+            params?.width = ViewGroup.LayoutParams.MATCH_PARENT
+            binding?.player?.layoutParams = params
+        } else {
+            binding?.player?.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIXED_WIDTH)
+            val params = binding?.player?.layoutParams
+            params?.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            params?.width = ViewGroup.LayoutParams.MATCH_PARENT
+            binding?.player?.layoutParams = params
+        }
+        super.onConfigurationChanged(newConfig)
     }
 
     override fun onPause() {
