@@ -149,19 +149,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
         val landscape = newConfig?.orientation == Configuration.ORIENTATION_LANDSCAPE
-        binding?.otherContent?.visibility = if (landscape) View.GONE else View.VISIBLE
         if (landscape) {
-            binding?.player?.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIXED_HEIGHT)
+            binding?.otherContent?.visibility = View.GONE
             val params = binding?.player?.layoutParams
             params?.height = ViewGroup.LayoutParams.MATCH_PARENT
             params?.width = ViewGroup.LayoutParams.MATCH_PARENT
             binding?.player?.layoutParams = params
+            binding?.player?.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIXED_HEIGHT)
         } else {
-            binding?.player?.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIXED_WIDTH)
+            binding?.otherContent?.visibility = View.VISIBLE
             val params = binding?.player?.layoutParams
             params?.height = ViewGroup.LayoutParams.WRAP_CONTENT
             params?.width = ViewGroup.LayoutParams.MATCH_PARENT
             binding?.player?.layoutParams = params
+            binding?.player?.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIXED_WIDTH)
         }
         super.onConfigurationChanged(newConfig)
     }
@@ -169,6 +170,7 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         mCastSession = null
+        player?.stop()
     }
 
     fun prepareVideo(url: String) {
