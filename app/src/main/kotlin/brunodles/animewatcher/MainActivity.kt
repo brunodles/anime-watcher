@@ -14,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ImageView
 import bruno.animewatcher.explorer.AnimeExplorer
 import bruno.animewatcher.explorer.CurrentEpisode
@@ -156,6 +157,8 @@ class MainActivity : AppCompatActivity() {
             params?.width = ViewGroup.LayoutParams.MATCH_PARENT
             binding?.player?.layoutParams = params
             binding?.player?.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIXED_HEIGHT)
+            window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+            window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         } else {
             binding?.otherContent?.visibility = View.VISIBLE
             val params = binding?.player?.layoutParams
@@ -163,6 +166,8 @@ class MainActivity : AppCompatActivity() {
             params?.width = ViewGroup.LayoutParams.MATCH_PARENT
             binding?.player?.layoutParams = params
             binding?.player?.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIXED_WIDTH)
+            window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+            window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
         }
         super.onConfigurationChanged(newConfig)
     }
