@@ -148,9 +148,14 @@ class MainActivity : AppCompatActivity() {
             params?.height = ViewGroup.LayoutParams.MATCH_PARENT
             params?.width = ViewGroup.LayoutParams.MATCH_PARENT
             binding?.player?.layoutParams = params
-            binding?.player?.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIXED_HEIGHT)
+            binding?.player?.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL)
             window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
             window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
+            val decorView = window.decorView
+            val uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+            decorView.systemUiVisibility = uiOptions
+
         } else {
             binding?.otherContent?.visibility = View.VISIBLE
             val params = binding?.player?.layoutParams
@@ -160,6 +165,9 @@ class MainActivity : AppCompatActivity() {
             binding?.player?.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIXED_WIDTH)
             window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
             window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+
+            val decorView = window.decorView
+            decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
         }
         super.onConfigurationChanged(newConfig)
     }
