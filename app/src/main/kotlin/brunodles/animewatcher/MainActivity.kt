@@ -1,13 +1,10 @@
 package brunodles.animewatcher
 
-import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.databinding.DataBindingUtil
 import android.net.Uri
-import android.os.AsyncTask
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
@@ -15,14 +12,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageView
-import bruno.animewatcher.explorer.AnimeExplorer
 import bruno.animewatcher.explorer.CurrentEpisode
 import bruno.animewatcher.explorer.EpisodeLink
-import brunodles.animacurse.AnimaCurseFactory
-import brunodles.animesproject.AnimesProjectFactory
 import brunodles.animewatcher.databinding.ActivityMainBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
-import brunodles.anitubex.AnitubexFactory
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
@@ -40,7 +33,6 @@ import com.google.android.gms.cast.framework.CastContext
 import com.google.android.gms.cast.framework.CastSession
 import com.google.android.gms.cast.framework.SessionManager
 import com.squareup.picasso.Picasso
-import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -194,44 +186,4 @@ class MainActivity : AppCompatActivity() {
         player?.playWhenReady
     }
 
-    private class CheckUrl(private val intent: Intent, private val context: Context, private val function: (AnimeExplorer) -> Unit) :
-            AsyncTask<Void, Void, AnimeExplorer?>() {
-
-        val factories by lazy { Arrays.asList(AnitubexFactory, AnimaCurseFactory, AnimesProjectFactory) }
-        val preference by lazy { PreferenceManager.getDefaultSharedPreferences(context) }
-
-        override fun doInBackground(vararg params: Void?): AnimeExplorer? {
-            val url = findUrl()
-            if (url == null) {
-                this.cancel(true)
-                return null
-            }
-            preference.edit()
-                    .putString("URL", url)
-                    .apply()
-            return findVideoUrl(url)
-        }
-
-        fun findUrl(): String? {
-            if (intent.data != null)
-                return intent.data.toString()
-            if (intent.hasExtra(Intent.EXTRA_TEXT))
-                return intent.getStringExtra(Intent.EXTRA_TEXT)
-            if (preference.contains("URL"))
-                return preference.getString("URL", null)
-            return null
-        }
-
-        fun findVideoUrl(url: String): AnimeExplorer? {
-            Log.d(TAG, "findVideoUrl " + url)
-            return factories.firstOrNull { it.isEpisode(url) }?.episode(url)
-        }
-
-        override fun onPostExecute(result: AnimeExplorer?) {
-            super.onPostExecute(result)
-            Log.d(TAG, "onPostExecute " + result)
-            if (result != null)
-                function(result)
-        }
-    }
 }
