@@ -7,7 +7,6 @@ import android.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
-import android.os.Handler
 import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -121,7 +120,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createPlayer() {
-        val mainHandler = Handler()
         val bandwidthMeter = DefaultBandwidthMeter()
         val videoTrackSelectionFactory = AdaptiveTrackSelection.Factory(bandwidthMeter)
         val trackSelector = DefaultTrackSelector(videoTrackSelectionFactory)
@@ -139,12 +137,6 @@ class MainActivity : AppCompatActivity() {
             binding?.title?.text = episode.description
             adapter?.list = it.nextEpisodes()
             currentEpisode = episode
-
-//            binding?.text?.text = it
-            // share to another player
-//            val intent = Intent(Intent.ACTION_VIEW)
-//            intent.setData(Uri.parse(it))
-//            startActivity(intent)
         }.execute()
     }
 
