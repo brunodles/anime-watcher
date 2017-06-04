@@ -46,9 +46,13 @@ dependencies {
     compile "com.android.support:mediarouter-v7:25.3.1"
     // compile "com.android.support:support-vector-drawable:25.3.1"
     // compile "com.android.support:animated-vector-drawable:25.3.1"
-    compile 'com.google.android.gms:play-services-cast-framework:10.2.6'
+    compile "com.google.android.gms:play-services-cast-framework:$playservices_version"
     compile 'com.google.android.exoplayer:exoplayer:r2.4.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile "com.google.firebase:firebase-core:$playservices_version"
+    compile "com.google.firebase:firebase-database:$playservices_version"
+    compile "io.reactivex.rxjava2:rxjava:2.1.0"
+    compile 'io.reactivex.rxjava2:rxkotlin:2.0.0'
 
     testCompile 'junit:junit:4.12'
 
@@ -56,3 +60,5 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 }
+
+apply plugin: 'com.google.gms.google-services'
