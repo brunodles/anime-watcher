@@ -5,16 +5,23 @@ import android.content.res.Configuration
 import android.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import bruno.animewatcher.explorer.CurrentEpisode
 import bruno.animewatcher.explorer.EpisodeLink
 import brunodles.animewatcher.databinding.ActivityMainBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity() {
 
@@ -60,14 +67,24 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         cast?.onResume()
-        CheckUrl(intent, this) {
-            val episode = it.currentEpisode()
-            player?.prepareVideo(episode.video)
-            binding?.title?.text = episode.description
-            adapter?.list = it.nextEpisodes()
-            currentEpisode = episode
-        }.execute()
+        Observable.just(intent)
+                .map(CheckUrl::findUrl)
+                .onErrorReturn { PreferenceManager.getDefaultSharedPreferences(this).getString("URL", null) }
+                .map { CheckUrl.videoInfo(it!!)!! }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeBy(onNext = {
+                    val episode = it.currentEpisode()
+                    player?.prepareVideo(episode.video)
+                    binding?.title?.text = episode.description
+                    adapter?.list = it.nextEpisodes()
+                    currentEpisode = episode
+                }, onError = {
+                    Toast.makeText(this, "Não funcionou", Toast.LENGTH_SHORT).show()
+                    Log.e(TAG, "onResume.FindUrl: ", it)
+                })
     }
+
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
         val landscape = newConfig?.orientation == Configuration.ORIENTATION_LANDSCAPE
