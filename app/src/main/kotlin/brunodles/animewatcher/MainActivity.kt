@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -15,70 +14,31 @@ import bruno.animewatcher.explorer.CurrentEpisode
 import bruno.animewatcher.explorer.EpisodeLink
 import brunodles.animewatcher.databinding.ActivityMainBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
-import com.google.android.exoplayer2.ExoPlayerFactory
-import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
-import com.google.android.exoplayer2.source.ExtractorMediaSource
-import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
-import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
-import com.google.android.exoplayer2.util.Util
-import com.google.android.gms.cast.MediaInfo
-import com.google.android.gms.cast.MediaMetadata
-import com.google.android.gms.cast.framework.CastButtonFactory
-import com.google.android.gms.cast.framework.CastContext
-import com.google.android.gms.cast.framework.CastSession
-import com.google.android.gms.cast.framework.SessionManager
 
 class MainActivity : AppCompatActivity() {
 
     companion object {
         val TAG = "MainActivity"
-        val USER_AGENT = "AnimeWatcher"
     }
 
     private var binding: ActivityMainBinding? = null
-    private var player: SimpleExoPlayer? = null
     private var adapter: GenericAdapter<EpisodeLink, ItemEpisodeBinding>? = null
     private var currentEpisode: CurrentEpisode? = null
-
-
-    var mCastSession: CastSession? = null
-    var mSessionManager: SessionManager? = null
-//    val mSessionManagerListener: SessionManagerListener = SessionManagerListenerImpl()
+    private var player: Player? = null
+    private var cast: Cast? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        createPlayer()
+        player = Player(this, binding?.player)
         setupRecyclerView()
 
-        CastButtonFactory.setUpMediaRouteButton(this, binding?.mediaRouteButton)
-        val castContext = CastContext.getSharedInstance(this)
+        cast = Cast(this, binding?.mediaRouteButton)
 
-        mSessionManager = castContext.sessionManager
         binding?.playRemote?.setOnClickListener {
-            val movieMetadata = MediaMetadata(MediaMetadata.MEDIA_TYPE_MOVIE)
-
-            movieMetadata.putString(MediaMetadata.KEY_TITLE, currentEpisode?.description)
-//            movieMetadata.putString(MediaMetadata.KEY_SUBTITLE, mSelectedMedia.getStudio());
-//            movieMetadata.addImage(WebImage(Uri.parse(currentEpisode?.)));
-//            movieMetadata.addImage(WebImage(Uri.parse(mSelectedMedia.getImage(1))));
-
-            Log.d(TAG, "onCreate: currentEpisode.video = ${currentEpisode?.video}")
-            val mediaInfo = MediaInfo.Builder(currentEpisode?.video)
-                    .setStreamType(MediaInfo.STREAM_TYPE_BUFFERED)
-                    .setContentType("videos/mp4")
-                    .setMetadata(movieMetadata)
-//                    .setStreamDuration(mSelectedMedia.getDuration() * 1000)
-                    .build()
-            val remoteMediaClient = mCastSession?.remoteMediaClient
-            val position = player?.currentPosition ?: 0
-            remoteMediaClient?.load(mediaInfo, true, position)
-            remoteMediaClient?.play()
+            cast?.playRemove(currentEpisode, player?.getCurrentPosition() ?: 0)
         }
     }
 
@@ -97,21 +57,12 @@ class MainActivity : AppCompatActivity() {
         binding?.nextEpisodes?.adapter = adapter
     }
 
-    private fun createPlayer() {
-        val bandwidthMeter = DefaultBandwidthMeter()
-        val videoTrackSelectionFactory = AdaptiveTrackSelection.Factory(bandwidthMeter)
-        val trackSelector = DefaultTrackSelector(videoTrackSelectionFactory)
-
-        player = ExoPlayerFactory.newSimpleInstance(this, trackSelector)
-        binding?.player?.player = player
-    }
-
     override fun onResume() {
         super.onResume()
-        mCastSession = mSessionManager?.currentCastSession
+        cast?.onResume()
         CheckUrl(intent, this) {
             val episode = it.currentEpisode()
-            prepareVideo(episode.video)
+            player?.prepareVideo(episode.video)
             binding?.title?.text = episode.description
             adapter?.list = it.nextEpisodes()
             currentEpisode = episode
@@ -152,24 +103,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        mCastSession = null
+        cast?.onPause()
         player?.stop()
-    }
-
-    fun prepareVideo(url: String) {
-        // Measures bandwidth during playback. Can be null if not required.
-        val bandwidthMeter = DefaultBandwidthMeter()
-        // Produces DataSource instances through which media data is loaded.
-        val dataSourceFactory = DefaultDataSourceFactory(this,
-                Util.getUserAgent(this, USER_AGENT), bandwidthMeter)
-        // Produces Extractor instances for parsing the media data.
-        val extractorsFactory = DefaultExtractorsFactory()
-        // This is the MediaSource representing the media to be played.
-        val videoSource = ExtractorMediaSource(Uri.parse(url),
-                dataSourceFactory, extractorsFactory, null, null)
-        // Prepare the player with the source.
-        player?.prepare(videoSource, true, true)
-        player?.playWhenReady
     }
 
 }
