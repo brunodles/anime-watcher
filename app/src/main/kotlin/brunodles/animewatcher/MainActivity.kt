@@ -11,7 +11,6 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.ImageView
 import bruno.animewatcher.explorer.CurrentEpisode
 import bruno.animewatcher.explorer.EpisodeLink
 import brunodles.animewatcher.databinding.ActivityMainBinding
@@ -32,8 +31,6 @@ import com.google.android.gms.cast.framework.CastButtonFactory
 import com.google.android.gms.cast.framework.CastContext
 import com.google.android.gms.cast.framework.CastSession
 import com.google.android.gms.cast.framework.SessionManager
-import com.squareup.picasso.Picasso
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -98,17 +95,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding?.nextEpisodes?.adapter = adapter
-    }
-
-    private fun loadImageInto(url: String?, image: ImageView) {
-        if (url == null) return
-        Picasso.Builder(this).indicatorsEnabled(true)
-                .loggingEnabled(true)
-                .build()
-                .load(url)
-                .placeholder(R.drawable.loading)
-                .error(R.drawable.error)
-                .into(image)
     }
 
     private fun createPlayer() {
