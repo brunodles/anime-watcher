@@ -6,18 +6,20 @@ import android.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.Toast
 import bruno.animewatcher.explorer.CurrentEpisode
 import bruno.animewatcher.explorer.EpisodeLink
 import brunodles.animewatcher.databinding.ActivityMainBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
+import brunodles.rxfirebase.singleObservable
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
+import com.google.firebase.database.FirebaseDatabase
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -64,13 +66,22 @@ class MainActivity : AppCompatActivity() {
         binding?.nextEpisodes?.adapter = adapter
     }
 
-    override fun onResume() {
-        super.onResume()
-        cast?.onResume()
-        Observable.just(intent)
-                .map(CheckUrl::findUrl)
-                .onErrorReturn { PreferenceManager.getDefaultSharedPreferences(this).getString("URL", null) }
-                .map { CheckUrl.videoInfo(it!!)!! }
+    override fun onStart() {
+        super.onStart()
+        val url = CheckUrl.findUrl(intent)
+                ?: PreferenceManager.getDefaultSharedPreferences(this).getString("URL", null)
+        Log.d(TAG, "onStart: url $url")
+        val ref = FirebaseDatabase.getInstance().getReference("video").child(fixUrlToFirebase(url))
+        ref.singleObservable(FirebaseAnimeExplorer::class.java)
+                .onErrorResumeNext(
+                        Observable.just(url)
+                                .observeOn(Schedulers.io())
+                                .map { CheckUrl.videoInfo(url) }
+                                .map { it ?: throw RuntimeException("Can't find video info") }
+                                .map { FirebaseAnimeExplorer(it.currentEpisode(), it.nextEpisodes()) }
+                                .doOnNext { ref.setValue(it) }
+                )
+                .map { it ?: throw RuntimeException("Can't find video info") }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(onNext = {
@@ -80,9 +91,18 @@ class MainActivity : AppCompatActivity() {
                     adapter?.list = it.nextEpisodes()
                     currentEpisode = episode
                 }, onError = {
-                    Toast.makeText(this, "Não funcionou", Toast.LENGTH_SHORT).show()
+                    if (binding?.root != null) {
+                        val snackbar = Snackbar.make(binding!!.root, "Failed to process the url, ${it.message}", Snackbar.LENGTH_INDEFINITE)
+                        snackbar.setAction("Ok") { snackbar.dismiss() }
+                        snackbar.show()
+                    }
                     Log.e(TAG, "onResume.FindUrl: ", it)
                 })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        cast?.onResume()
     }
 
 
