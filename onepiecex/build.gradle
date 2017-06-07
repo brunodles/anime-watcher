@@ -1,0 +1,14 @@
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':explorer')
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'com.greghaskins:spectrum:1.1.1'
+    testCompile "com.github.tomakehurst:wiremock-standalone:2.6.0"
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
