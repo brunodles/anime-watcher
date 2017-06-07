@@ -1,8 +1,8 @@
 package bruno.animewatcher.explorer
 
-interface AnimeExplorer {
+import brunodles.kotlin.annotation.NoArgs
+import java.util.*
 
-    fun currentEpisode(): CurrentEpisode
-
-    fun nextEpisodes(): List<EpisodeLink>
-}
+@NoArgs data class AnimeExplorer(
+        val currentEpisode: CurrentEpisode,
+        val nextEpisodes: List<EpisodeLink> = Collections.emptyList())

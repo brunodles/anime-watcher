@@ -20,10 +20,10 @@ class AnimaCurseExplorerTest {
         UrlFetcher.useCache = true
 
         describe("The AnimaCurse Explorer") {
-            val explorer = AnimaCurseExplorer("https://animacurse.moe/?p=713")
+            val explorer = AnimaCurseFactory.episode("https://animacurse.moe/?p=713")
 
             describe("#currentEpisode") {
-                val episode = explorer.currentEpisode()
+                val episode = explorer.currentEpisode
 
                 it("should return the episode title") {
                     assertEquals(EPISODE_DESCRIPTION, episode.description)
@@ -36,7 +36,7 @@ class AnimaCurseExplorerTest {
 
             describe("#nextEpisodes") {
 
-                val episodes = explorer.nextEpisodes()
+                val episodes = explorer.nextEpisodes
 
                 it("should find 4 episodes") {
                     assertEquals(4, episodes.size)

@@ -1,12 +1,11 @@
 package brunodles.animesproject
 
-import bruno.animewatcher.explorer.AnimeExplorer
 import bruno.animewatcher.explorer.CurrentEpisode
 import bruno.animewatcher.explorer.EpisodeLink
 import bruno.animewatcher.explorer.UrlFetcher.Companion.fetchUrl
 import java.net.URL
 
-class AnimesProjectExplorer(private val url: String) : AnimeExplorer {
+class AnimesProjectExplorer(private val url: String) {
 
     private val doc = fetchUrl(url)
     private val host by lazy {
@@ -15,7 +14,7 @@ class AnimesProjectExplorer(private val url: String) : AnimeExplorer {
     }
     private val currentEpisode = findCurrentEpisode()
 
-    override fun currentEpisode(): CurrentEpisode = currentEpisode
+    fun currentEpisode(): CurrentEpisode = currentEpisode
 
     private fun findCurrentEpisode(): CurrentEpisode {
         val iframe = doc.select(".video-placeholder iframe").attr("src")
@@ -24,7 +23,7 @@ class AnimesProjectExplorer(private val url: String) : AnimeExplorer {
         return CurrentEpisode(src, title)
     }
 
-    override fun nextEpisodes(): List<EpisodeLink> {
+    fun nextEpisodes(): List<EpisodeLink> {
         return doc.select(".exibir-pagina-listagem a").map {
             EpisodeLink(AnimesProjectFinder.HOST + it.attr("href"), it.text(), null)
         }.toList().subList(3, 5)

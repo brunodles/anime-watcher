@@ -19,10 +19,10 @@ class AnitubexExplorerTest {
         UrlFetcher.useLog = true
 
         describe("The AnitubeX Explorer") {
-            val explorer = AnitubexExplorer("http://www.anitubex.com/one-piece-785")
+            val explorer = AnitubexFactory.episode("http://www.anitubex.com/one-piece-785")
 
             describe("#currentEpisode") {
-                val episode = explorer.currentEpisode()
+                val episode = explorer.currentEpisode
 
                 it("should return the episode title") {
                     assertEquals("One Piece 785", episode.description)
@@ -35,7 +35,7 @@ class AnitubexExplorerTest {
 
             describe("#nextEpisodes") {
 
-                val episodes = explorer.nextEpisodes()
+                val episodes = explorer.nextEpisodes
 
                 it("should find 1 episodes") {
                     assertEquals(1, episodes.size)

@@ -9,6 +9,8 @@ object AnimesProjectFactory : AnimeFactory {
 
     override fun isEpisode(url: String): Boolean = url.contains(EPISODE_URL_REGEX)
 
-    override fun episode(url: String): AnimeExplorer =
-            AnimesProjectExplorer(url)
+    override fun episode(url: String): AnimeExplorer {
+        val explorer = AnimesProjectExplorer(url)
+        return AnimeExplorer(explorer.currentEpisode(), explorer.nextEpisodes())
+    }
 }
