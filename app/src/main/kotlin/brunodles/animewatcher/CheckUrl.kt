@@ -6,11 +6,11 @@ import bruno.animewatcher.explorer.AnimeExplorer
 import brunodles.animacurse.AnimaCurseFactory
 import brunodles.animesproject.AnimesProjectFactory
 import brunodles.anitubex.AnitubexFactory
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.rxkotlin.toObservable
 import java.util.*
 
 object CheckUrl {
+
+    val TAG = "CheckUrl"
     val factories by lazy { Arrays.asList(AnitubexFactory, AnimaCurseFactory, AnimesProjectFactory) }
 
     fun findUrl(intent: Intent): String? {
@@ -22,8 +22,7 @@ object CheckUrl {
     }
 
     fun videoInfo(url: String): AnimeExplorer? {
-        factories.toObservable().subscribeBy { }
-        Log.d(MainActivity.TAG, "videoInfo " + url)
+        Log.d(TAG, "videoInfo " + url)
         return factories.firstOrNull { it.isEpisode(url) }?.episode(url)
     }
 }
