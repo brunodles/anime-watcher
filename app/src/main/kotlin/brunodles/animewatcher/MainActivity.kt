@@ -5,7 +5,6 @@ import android.content.res.Configuration
 import android.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -17,10 +16,7 @@ import bruno.animewatcher.explorer.CurrentEpisode
 import bruno.animewatcher.explorer.EpisodeLink
 import brunodles.animewatcher.databinding.ActivityMainBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
-import brunodles.rxfirebase.singleObservable
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
-import com.google.firebase.database.FirebaseDatabase
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
@@ -36,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private var currentEpisode: CurrentEpisode? = null
     private var player: Player? = null
     private var cast: Cast? = null
+    private val episodeController by lazy { EpisodeController(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,20 +65,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val url = CheckUrl.findUrl(intent)
-                ?: PreferenceManager.getDefaultSharedPreferences(this).getString("URL", null)
-        Log.d(TAG, "onStart: url $url")
-        val ref = FirebaseDatabase.getInstance().getReference("video").child(fixUrlToFirebase(url))
-        ref.singleObservable(FirebaseAnimeExplorer::class.java)
-                .onErrorResumeNext(
-                        Observable.just(url)
-                                .observeOn(Schedulers.io())
-                                .map { CheckUrl.videoInfo(url) }
-                                .map { it ?: throw RuntimeException("Can't find video info") }
-                                .map { FirebaseAnimeExplorer(it.currentEpisode(), it.nextEpisodes()) }
-                                .doOnNext { ref.setValue(it) }
-                )
-                .map { it ?: throw RuntimeException("Can't find video info") }
+        episodeController.findVideo(intent)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(onNext = {
@@ -104,7 +88,6 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         cast?.onResume()
     }
-
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
         val landscape = newConfig?.orientation == Configuration.ORIENTATION_LANDSCAPE
