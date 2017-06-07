@@ -22,7 +22,7 @@ class AnitubexFactoryTest {
             val factory = AnitubexFactory
 
             VALID_URLS.forEach { url ->
-                it("should be able to decode de url \"$url\"") {
+                it("should be able to decode the url \"$url\"") {
                     Assert.assertTrue(factory.isEpisode(url))
                 }
             }
