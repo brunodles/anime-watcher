@@ -38,6 +38,7 @@
                 <data android:host="animacurse.moe"/>
                 <data android:host="www.anitubex.com"/>
                 <data android:host="animes.zlx.com.br"/>
+                <data android:host="one-piece-x.com.br"/>
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND"/>

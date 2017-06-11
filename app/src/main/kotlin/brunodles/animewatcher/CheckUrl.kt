@@ -6,12 +6,17 @@ import bruno.animewatcher.explorer.AnimeExplorer
 import brunodles.animacurse.AnimaCurseFactory
 import brunodles.animesproject.AnimesProjectFactory
 import brunodles.anitubex.AnitubexFactory
+import brunodles.onepiecex.OnePieceXFactory
 import java.util.*
 
 object CheckUrl {
 
     val TAG = "CheckUrl"
-    val factories by lazy { Arrays.asList(AnitubexFactory, AnimaCurseFactory, AnimesProjectFactory) }
+    val factories by lazy {
+        Arrays.asList(
+                AnitubexFactory, AnimaCurseFactory, AnimesProjectFactory, OnePieceXFactory
+        )
+    }
 
     fun findUrl(intent: Intent): String? {
         if (intent.data != null)
