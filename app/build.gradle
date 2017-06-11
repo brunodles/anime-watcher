@@ -32,6 +32,7 @@ dependencies {
     compile project(":animacurse")
     compile project(":animesproject")
     compile project(":anitubex")
+    compile project(":onepiecex")
 
     kapt "com.android.databinding:compiler:$plugin_version"
 
