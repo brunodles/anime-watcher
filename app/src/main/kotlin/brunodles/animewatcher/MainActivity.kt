@@ -69,10 +69,10 @@ class MainActivity : AppCompatActivity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(onNext = {
-                    val episode = it.currentEpisode()
+                    val episode = it.currentEpisode
                     player?.prepareVideo(episode.video)
                     binding?.title?.text = episode.description
-                    adapter?.list = it.nextEpisodes()
+                    adapter?.list = it.nextEpisodes
                     currentEpisode = episode
                 }, onError = {
                     if (binding?.root != null) {

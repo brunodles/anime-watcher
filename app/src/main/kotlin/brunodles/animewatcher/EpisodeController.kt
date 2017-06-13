@@ -37,25 +37,24 @@ class EpisodeController(val context: Context) {
     private fun findVideoInfo(url: String): Observable<AnimeExplorer> {
         Log.d(TAG, "findVideoInfo: find video on '$url'")
         val ref = FirebaseDatabase.getInstance().getReference("video").child(fixUrlToFirebase(url))
-        return ref.singleObservable(FirebaseAnimeExplorer::class.java)
+        return ref.singleObservable(AnimeExplorer::class.java)
                 .onErrorResumeNext(
                         Observable.just(url)
                                 .observeOn(Schedulers.io())
                                 .map { CheckUrl.videoInfo(url) }
                                 .map { it ?: throw RuntimeException("Can't find video info") }
-                                .map { FirebaseAnimeExplorer(it.currentEpisode(), it.nextEpisodes()) }
                                 .doOnNext { ref.setValue(it) }
                 )
                 .map { it ?: throw RuntimeException("Can't find video info") }
     }
 
     private fun fetchNextEpisodes(it: AnimeExplorer) {
-        Observable.fromIterable(it.nextEpisodes())
+        Observable.fromIterable(it.nextEpisodes)
                 .map { it.link }
                 .flatMap(this::findVideoInfo)
                 .subscribeBy(
                         onNext = {
-                            Log.d(TAG, "fetchNextEpisodes: fetched episode ${it.currentEpisode()}")
+                            Log.d(TAG, "fetchNextEpisodes: fetched episode ${it.currentEpisode}")
                         },
                         onError = {
                             Log.e(TAG, "fetchNextEpisodes: failed to fetch next episodes", it)
