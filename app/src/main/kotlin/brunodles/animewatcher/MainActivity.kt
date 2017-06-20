@@ -46,25 +46,7 @@ class MainActivity : AppCompatActivity() {
         binding?.playRemote?.setOnClickListener {
             cast?.playRemove(currentEpisode, player?.getCurrentPosition() ?: 0)
         }
-    }
 
-    private fun setupRecyclerView() {
-        val manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding?.nextEpisodes?.layoutManager = manager
-        adapter = GenericAdapter<EpisodeLink, ItemEpisodeBinding>(R.layout.item_episode) { viewHolder, item, index ->
-            viewHolder.binder.description.text = item.description
-            loadImageInto(item.image, viewHolder.binder.image)
-            viewHolder.binder.root.setOnClickListener {
-                val intent = Intent(this, MainActivity::class.java)
-                        .setData(Uri.parse(item.link))
-                startActivity(intent)
-            }
-        }
-        binding?.nextEpisodes?.adapter = adapter
-    }
-
-    override fun onStart() {
-        super.onStart()
         episodeController.findVideo(intent)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -82,6 +64,21 @@ class MainActivity : AppCompatActivity() {
                     }
                     Log.e(TAG, "onResume.FindUrl: ", it)
                 })
+    }
+
+    private fun setupRecyclerView() {
+        val manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding?.nextEpisodes?.layoutManager = manager
+        adapter = GenericAdapter<EpisodeLink, ItemEpisodeBinding>(R.layout.item_episode) { viewHolder, item, index ->
+            viewHolder.binder.description.text = item.description
+            loadImageInto(item.image, viewHolder.binder.image)
+            viewHolder.binder.root.setOnClickListener {
+                val intent = Intent(this, MainActivity::class.java)
+                        .setData(Uri.parse(item.link))
+                startActivity(intent)
+            }
+        }
+        binding?.nextEpisodes?.adapter = adapter
     }
 
     override fun onResume() {
