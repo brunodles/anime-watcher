@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import bruno.animewatcher.explorer.AnimeExplorer
 import bruno.animewatcher.explorer.CurrentEpisode
 import bruno.animewatcher.explorer.EpisodeLink
 import brunodles.animewatcher.databinding.ActivityMainBinding
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null
     private var adapter: GenericAdapter<EpisodeLink, ItemEpisodeBinding>? = null
-    private var currentEpisode: CurrentEpisode? = null
+    private var explorer: AnimeExplorer? = null
     private var player: Player? = null
     private var cast: Cast? = null
     private val episodeController by lazy { EpisodeController(this) }
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         cast = Cast(this, binding?.mediaRouteButton)
 
         binding?.playRemote?.setOnClickListener {
-            cast?.playRemove(currentEpisode, player?.getCurrentPosition() ?: 0)
+            cast?.playRemove(explorer?.currentEpisode, player?.getCurrentPosition() ?: 0)
         }
 
         episodeController.findVideo(intent)
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                     player?.prepareVideo(episode.video)
                     binding?.title?.text = episode.description
                     adapter?.list = it.nextEpisodes
-                    currentEpisode = episode
+                    explorer = it
                 }, onError = {
                     if (binding?.root != null) {
                         val snackbar = Snackbar.make(binding!!.root, "Failed to process the url, ${it.message}", Snackbar.LENGTH_INDEFINITE)
@@ -84,6 +85,19 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         cast?.onResume()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if (explorer != null)
+            outState.putSerializable("explorer", explorer)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        if (savedInstanceState == null)
+            return
+        explorer = savedInstanceState.getSerializable("explorer") as AnimeExplorer?
     }
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
