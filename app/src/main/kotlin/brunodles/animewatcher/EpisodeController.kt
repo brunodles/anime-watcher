@@ -41,8 +41,10 @@ class EpisodeController(val context: Context) {
                 .onErrorResumeNext(
                         Observable.just(url)
                                 .observeOn(Schedulers.io())
-                                .map { CheckUrl.videoInfo(url) }
-                                .map { it ?: throw RuntimeException("Can't find video info") }
+                                .map {
+                                    CheckUrl.videoInfo(url)
+                                            ?: throw RuntimeException("Can't find video info")
+                                }
                                 .doOnNext { ref.setValue(it) }
                 )
                 .map { it ?: throw RuntimeException("Can't find video info") }
