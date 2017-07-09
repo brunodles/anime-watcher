@@ -28,20 +28,51 @@ class OnePieceXFactoryTest {
         describe("The OnePieceX Factory") {
             val factory = OnePieceXFactory
 
-            VALID_URLS.forEach { url ->
-                it("should be able to decode the url \"$url\"") {
-                    assertTrue(factory.isEpisode(url))
+            describe("when decode") {
+
+                VALID_URLS.forEach { url ->
+                    it("should be able to decode the url \"$url\"") {
+                        assertTrue(factory.isEpisode(url))
+                    }
+                }
+
+                INVALID_URLS.forEach { url ->
+                    it("should not decode the invalid url \"$url\"") {
+                        assertFalse(factory.isEpisode(url))
+                    }
+                }
+
+                it("should return a Explorer") {
+                    assertTrue(factory.episode(VALID_URLS[0]) is AnimeExplorer)
                 }
             }
 
-            INVALID_URLS.forEach { url ->
-                it("should not decode the invalid url \"$url\"") {
-                    Assert.assertFalse(factory.isEpisode(url))
+            describe("when get current episode") {
+                val episode = factory.episode(VALID_URLS[0]).currentEpisode
+
+                it("should return video url") {
+                    assertEquals("http://klahadorv2.onepieceex.com.br/episodios/online/OpEx_208_online.webm?st=xNdWjVPClaciG4li0VmWIg&e=1499617180", episode.video)
                 }
+
+                it("should return video description") {
+                    assertEquals("Episódio 208: Os piratas do Foxy!! A Davy Back!", episode.description)
+                }
+
             }
 
-            it("should return a Explorer") {
-                Assert.assertTrue(factory.episode(VALID_URLS[0]) is AnimeExplorer)
+            describe("when get next episodes") {
+                val episodes = factory.episode(VALID_URLS[0]).nextEpisodes
+
+                it("should return a list containing 700 episodes") {
+                    assertEquals(797, episodes.size)
+                }
+
+                it("should return episodes with a link") {
+                    for (episode in episodes) {
+                        assertTrue(!episode.link.isNullOrEmpty())
+                    }
+                }
+
             }
 
         }
