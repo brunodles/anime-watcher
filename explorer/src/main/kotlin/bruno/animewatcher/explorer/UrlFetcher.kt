@@ -54,6 +54,7 @@ class UrlFetcher(private val url: String) {
         var useLog = false
 
         fun fetchUrl(url: String): Document {
+            logger { "url: $url" }
             return UrlFetcher(url).get()
         }
 
@@ -87,8 +88,10 @@ class UrlFetcher(private val url: String) {
     }
 }
 
-fun Elements.src() = this.attr("src")
-fun Element.src() = this.attr("src")
+fun Elements.src() = this.attr("src").trim()
+fun Element.src() = this.attr("src").trim()
+fun Element.alt() = this.attr("alt")
+fun Elements.alt() = this.attr("alt")
 fun Elements.href() = this.attr("href")
 fun Element.href() = this.attr("href")
 fun String.max(max: Int) = this.substring(0, if (length < max) length else max)
