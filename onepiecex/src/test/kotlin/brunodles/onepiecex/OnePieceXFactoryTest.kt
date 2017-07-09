@@ -24,6 +24,7 @@ class OnePieceXFactoryTest {
     }
 
     init {
+        UrlFetcher.useCache = true
         describe("The OnePieceX Factory") {
             val factory = OnePieceXFactory
 
