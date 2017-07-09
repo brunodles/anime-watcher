@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         val TAG = "MainActivity"
+        val STATE_KEY = "explorer"
     }
 
     private var binding: ActivityMainBinding? = null
@@ -90,14 +91,14 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         if (explorer != null)
-            outState.putSerializable("explorer", explorer)
+            outState.putSerializable(STATE_KEY, explorer)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         if (savedInstanceState == null)
             return
-        explorer = savedInstanceState.getSerializable("explorer") as AnimeExplorer?
+        explorer = savedInstanceState.getSerializable(STATE_KEY) as AnimeExplorer?
     }
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
