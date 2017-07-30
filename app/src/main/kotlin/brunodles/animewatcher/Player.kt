@@ -39,7 +39,7 @@ class Player(val context: Context, val playerView: SimpleExoPlayerView) {
         val videoSource = ExtractorMediaSource(Uri.parse(url),
                 dataSourceFactory, extractorsFactory, null, null)
         exoPlayer.prepare(videoSource, true, true)
-        exoPlayer.playWhenReady
+        exoPlayer.playWhenReady = true
     }
 
     fun getCurrentPosition() = exoPlayer.currentPosition
