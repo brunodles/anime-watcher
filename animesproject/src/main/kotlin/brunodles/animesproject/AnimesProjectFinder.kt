@@ -1,6 +1,6 @@
 package brunodles.animesproject
 
-import bruno.animewatcher.explorer.*
+import brunodles.animewatcher.explorer.*
 import java.util.*
 import java.util.regex.Pattern
 import kotlin.collections.HashMap

@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.preference.PreferenceManager
 import android.util.Log
-import bruno.animewatcher.explorer.AnimeExplorer
+import brunodles.animewatcher.explorer.AnimeExplorer
 import brunodles.rxfirebase.singleObservable
 import com.google.firebase.database.FirebaseDatabase
 import io.reactivex.Observable
@@ -41,8 +41,10 @@ class EpisodeController(val context: Context) {
                 .onErrorResumeNext(
                         Observable.just(url)
                                 .observeOn(Schedulers.io())
-                                .map { CheckUrl.videoInfo(url) }
-                                .map { it ?: throw RuntimeException("Can't find video info") }
+                                .map {
+                                    CheckUrl.videoInfo(url)
+                                            ?: throw RuntimeException("Can't find video info")
+                                }
                                 .doOnNext { ref.setValue(it) }
                 )
                 .map { it ?: throw RuntimeException("Can't find video info") }

@@ -1,6 +1,6 @@
 package brunodles.animesproject
 
-import bruno.animewatcher.explorer.UrlFetcher
+import brunodles.animewatcher.explorer.UrlFetcher
 import com.greghaskins.spectrum.Spectrum
 import com.greghaskins.spectrum.Spectrum.describe
 import com.greghaskins.spectrum.Spectrum.it

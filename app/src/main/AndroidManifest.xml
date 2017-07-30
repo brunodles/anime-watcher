@@ -39,6 +39,7 @@
                 <data android:host="www.anitubex.com"/>
                 <data android:host="animes.zlx.com.br"/>
                 <data android:host="one-piece-x.com.br"/>
+                <data android:host="animakai.info"/>
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND"/>

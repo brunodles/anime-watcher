@@ -22,12 +22,13 @@ fun DatabaseReference.singleObservable(): Observable<DataSnapshot> {
 
 private class SingleEventListener(val emitter: ObservableEmitter<DataSnapshot>) : ValueEventListener {
 
-    override fun onCancelled(p0: DatabaseError?) {
-        emitter.onError(p0?.toException())
+    override fun onCancelled(p0: DatabaseError) {
+        emitter.onError(p0.toException())
     }
 
     override fun onDataChange(p0: DataSnapshot?) {
-        emitter.onNext(p0)
+        if (p0 != null)
+            emitter.onNext(p0)
         emitter.onComplete()
     }
 
@@ -35,8 +36,8 @@ private class SingleEventListener(val emitter: ObservableEmitter<DataSnapshot>) 
 
 private class SingleEventParseListener<T>(val emitter: ObservableEmitter<T?>, val valueClass: Class<T>) : ValueEventListener {
 
-    override fun onCancelled(p0: DatabaseError?) {
-        emitter.onError(p0?.toException())
+    override fun onCancelled(p0: DatabaseError) {
+        emitter.onError(p0.toException())
     }
 
     override fun onDataChange(p0: DataSnapshot?) {
@@ -44,7 +45,9 @@ private class SingleEventParseListener<T>(val emitter: ObservableEmitter<T?>, va
             emitter.onError(IllegalArgumentException("Value not found on requested reference."))
             return
         }
-        emitter.onNext(p0.getValue(valueClass))
+        val value = p0.getValue(valueClass)
+        if (value != null)
+            emitter.onNext(value)
         emitter.onComplete()
     }
 }

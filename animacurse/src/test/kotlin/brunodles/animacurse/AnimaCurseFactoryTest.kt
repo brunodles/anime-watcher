@@ -1,6 +1,6 @@
 package brunodles.animacurse
 
-import bruno.animewatcher.explorer.AnimeExplorer
+import brunodles.animewatcher.explorer.AnimeExplorer
 import com.greghaskins.spectrum.Spectrum
 import com.greghaskins.spectrum.Spectrum.describe
 import com.greghaskins.spectrum.Spectrum.it

@@ -12,8 +12,8 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import bruno.animewatcher.explorer.CurrentEpisode
-import bruno.animewatcher.explorer.EpisodeLink
+import brunodles.animewatcher.explorer.AnimeExplorer
+import brunodles.animewatcher.explorer.EpisodeLink
 import brunodles.animewatcher.databinding.ActivityMainBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
@@ -25,26 +25,27 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         val TAG = "MainActivity"
+        val STATE_KEY = "explorer"
     }
 
-    private var binding: ActivityMainBinding? = null
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var player: Player
+    private lateinit var cast: Cast
     private var adapter: GenericAdapter<EpisodeLink, ItemEpisodeBinding>? = null
-    private var currentEpisode: CurrentEpisode? = null
-    private var player: Player? = null
-    private var cast: Cast? = null
+    private var explorer: AnimeExplorer? = null
     private val episodeController by lazy { EpisodeController(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        player = Player(this, binding?.player)
+        player = Player(this, binding.player)
         setupRecyclerView()
 
-        cast = Cast(this, binding?.mediaRouteButton)
+        cast = Cast(this, binding.mediaRouteButton)
 
-        binding?.playRemote?.setOnClickListener {
-            cast?.playRemove(currentEpisode, player?.getCurrentPosition() ?: 0)
+        binding.playRemote.setOnClickListener {
+            cast.playRemove(explorer?.currentEpisode, player.getCurrentPosition())
         }
 
         episodeController.findVideo(intent)
@@ -52,13 +53,13 @@ class MainActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(onNext = {
                     val episode = it.currentEpisode
-                    player?.prepareVideo(episode.video)
-                    binding?.title?.text = episode.description
+                    player.prepareVideo(episode.video)
+                    binding.title.text = episode.description
                     adapter?.list = it.nextEpisodes
-                    currentEpisode = episode
+                    explorer = it
                 }, onError = {
-                    if (binding?.root != null) {
-                        val snackbar = Snackbar.make(binding!!.root, "Failed to process the url, ${it.message}", Snackbar.LENGTH_INDEFINITE)
+                    if (binding.root != null) {
+                        val snackbar = Snackbar.make(binding.root, "Failed to process the url, ${it.message}", Snackbar.LENGTH_INDEFINITE)
                         snackbar.setAction("Ok") { snackbar.dismiss() }
                         snackbar.show()
                     }
@@ -68,7 +69,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         val manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding?.nextEpisodes?.layoutManager = manager
+        binding.nextEpisodes.layoutManager = manager
         adapter = GenericAdapter<EpisodeLink, ItemEpisodeBinding>(R.layout.item_episode) { viewHolder, item, index ->
             viewHolder.binder.description.text = item.description
             loadImageInto(item.image, viewHolder.binder.image)
@@ -78,23 +79,36 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-        binding?.nextEpisodes?.adapter = adapter
+        binding.nextEpisodes.adapter = adapter
     }
 
     override fun onResume() {
         super.onResume()
-        cast?.onResume()
+        cast.onResume()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if (explorer != null)
+            outState.putSerializable(STATE_KEY, explorer)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        if (savedInstanceState == null)
+            return
+        explorer = savedInstanceState.getSerializable(STATE_KEY) as AnimeExplorer?
     }
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
         val landscape = newConfig?.orientation == Configuration.ORIENTATION_LANDSCAPE
         if (landscape) {
-            binding?.otherContent?.visibility = View.GONE
-            val params = binding?.player?.layoutParams
+            binding.otherContent.visibility = View.GONE
+            val params = binding.player.layoutParams
             params?.height = ViewGroup.LayoutParams.MATCH_PARENT
             params?.width = ViewGroup.LayoutParams.MATCH_PARENT
-            binding?.player?.layoutParams = params
-            binding?.player?.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL)
+            binding.player.layoutParams = params
+            binding.player.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL)
             window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
             window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
@@ -103,12 +117,12 @@ class MainActivity : AppCompatActivity() {
             decorView.systemUiVisibility = uiOptions
 
         } else {
-            binding?.otherContent?.visibility = View.VISIBLE
-            val params = binding?.player?.layoutParams
+            binding.otherContent.visibility = View.VISIBLE
+            val params = binding.player.layoutParams
             params?.height = ViewGroup.LayoutParams.WRAP_CONTENT
             params?.width = ViewGroup.LayoutParams.MATCH_PARENT
-            binding?.player?.layoutParams = params
-            binding?.player?.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIXED_WIDTH)
+            binding.player.layoutParams = params
+            binding.player.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIXED_WIDTH)
             window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
             window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
 
@@ -120,8 +134,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        cast?.onPause()
-        player?.stop()
+        cast.onPause()
+        player.stop()
     }
 
 }
