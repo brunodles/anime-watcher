@@ -1,8 +1,8 @@
 package brunodles.animesproject
 
-import bruno.animewatcher.explorer.CurrentEpisode
-import bruno.animewatcher.explorer.EpisodeLink
-import bruno.animewatcher.explorer.UrlFetcher.Companion.fetchUrl
+import brunodles.animewatcher.explorer.CurrentEpisode
+import brunodles.animewatcher.explorer.EpisodeLink
+import brunodles.animewatcher.explorer.UrlFetcher.Companion.fetchUrl
 import java.net.URL
 
 class AnimesProjectExplorer(private val url: String) {

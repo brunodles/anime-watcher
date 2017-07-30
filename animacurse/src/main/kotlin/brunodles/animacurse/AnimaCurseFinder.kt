@@ -1,6 +1,6 @@
 package brunodles.animacurse
 
-import bruno.animewatcher.explorer.*
+import brunodles.animewatcher.explorer.*
 import org.jsoup.Jsoup
 import java.util.*
 import java.util.regex.Pattern

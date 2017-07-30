@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.preference.PreferenceManager
 import android.util.Log
-import bruno.animewatcher.explorer.AnimeExplorer
+import brunodles.animewatcher.explorer.AnimeExplorer
 import brunodles.rxfirebase.singleObservable
 import com.google.firebase.database.FirebaseDatabase
 import io.reactivex.Observable

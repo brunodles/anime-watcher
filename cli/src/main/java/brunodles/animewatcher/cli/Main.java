@@ -1,8 +1,8 @@
 package brunodles.animewatcher.cli;
 
-import bruno.animewatcher.explorer.AnimeExplorer;
-import bruno.animewatcher.explorer.AnimeFactory;
-import bruno.animewatcher.explorer.EpisodeLink;
+import brunodles.animewatcher.explorer.AnimeExplorer;
+import brunodles.animewatcher.explorer.AnimeFactory;
+import brunodles.animewatcher.explorer.EpisodeLink;
 import brunodles.animacurse.AnimaCurseFactory;
 import brunodles.animesproject.AnimesProjectFactory;
 import brunodles.anitubex.AnitubexFactory;
@@ -19,10 +19,10 @@ public class Main {
 
         System.out.println("\n ");
         AnimeExplorer explorer = findVideoUrl(args[0]);
-        System.out.println(explorer.currentEpisode().getVideo());
+        System.out.println(explorer.getCurrentEpisode().getVideo());
 
         System.out.println("\n next episodes: ");
-        for (EpisodeLink episodeLink : explorer.nextEpisodes()) {
+        for (EpisodeLink episodeLink : explorer.getNextEpisodes()) {
             System.out.print("* ");
             System.out.println(episodeLink.getDescription());
 

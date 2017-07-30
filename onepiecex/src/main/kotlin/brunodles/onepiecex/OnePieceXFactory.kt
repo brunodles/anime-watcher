@@ -1,6 +1,6 @@
 package brunodles.onepiecex
 
-import bruno.animewatcher.explorer.*
+import brunodles.animewatcher.explorer.*
 import org.jsoup.nodes.Document
 import java.util.regex.Pattern
 

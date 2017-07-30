@@ -2,11 +2,11 @@ package brunodles.animewatcher
 
 import android.content.Intent
 import android.util.Log
-import bruno.animewatcher.explorer.AnimeExplorer
+import brunodles.animewatcher.explorer.AnimeExplorer
 import brunodles.animacurse.AnimaCurseFactory
 import brunodles.animesproject.AnimesProjectFactory
 import brunodles.anitubex.AnitubexFactory
-import brunodles.onepiecex.AnimaKaiFactory
+//import brunodles.onepiecex.AnimaKaiFactory
 import brunodles.onepiecex.OnePieceXFactory
 import java.util.*
 
@@ -15,8 +15,8 @@ object CheckUrl {
     val TAG = "CheckUrl"
     val factories by lazy {
         Arrays.asList(
-                AnitubexFactory, AnimaCurseFactory, AnimesProjectFactory, OnePieceXFactory,
-                AnimaKaiFactory
+                AnitubexFactory, AnimaCurseFactory, AnimesProjectFactory, OnePieceXFactory
+//                AnimaKaiFactory
         )
     }
 

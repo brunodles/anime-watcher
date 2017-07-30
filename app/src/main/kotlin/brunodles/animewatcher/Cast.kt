@@ -3,7 +3,7 @@ package brunodles.animewatcher
 import android.content.Context
 import android.support.v7.app.MediaRouteButton
 import android.util.Log
-import bruno.animewatcher.explorer.CurrentEpisode
+import brunodles.animewatcher.explorer.CurrentEpisode
 import com.google.android.gms.cast.MediaInfo
 import com.google.android.gms.cast.MediaMetadata
 import com.google.android.gms.cast.framework.CastButtonFactory
@@ -47,7 +47,7 @@ class Cast(val context: Context, mediaRouteButton: MediaRouteButton?) {
                 .setMetadata(movieMetadata)
 //                    .setStreamDuration(mSelectedMedia.getDuration() * 1000)
                 .build()
-        val remoteMediaClient = mCastSession?.remoteMediaClient
+        val remoteMediaClient = mCastSession.remoteMediaClient
         remoteMediaClient?.load(mediaInfo, true, position)
         remoteMediaClient?.play()
     }

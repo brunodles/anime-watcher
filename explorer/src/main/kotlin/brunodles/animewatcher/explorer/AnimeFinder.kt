@@ -1,4 +1,4 @@
-package bruno.animewatcher.explorer
+package brunodles.animewatcher.explorer
 
 interface AnimeFinder {
 

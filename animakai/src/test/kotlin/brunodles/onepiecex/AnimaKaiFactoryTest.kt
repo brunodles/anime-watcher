@@ -1,6 +1,7 @@
 package brunodles.onepiecex
 
-import bruno.animewatcher.explorer.*
+import brunodles.animewatcher.explorer.AnimeExplorer
+import brunodles.animewatcher.explorer.UrlFetcher
 import com.greghaskins.spectrum.Spectrum
 import com.greghaskins.spectrum.Spectrum.*
 import org.junit.Assert

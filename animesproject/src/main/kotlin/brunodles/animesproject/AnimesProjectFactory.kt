@@ -1,7 +1,7 @@
 package brunodles.animesproject
 
-import bruno.animewatcher.explorer.AnimeExplorer
-import bruno.animewatcher.explorer.AnimeFactory
+import brunodles.animewatcher.explorer.AnimeExplorer
+import brunodles.animewatcher.explorer.AnimeFactory
 
 object AnimesProjectFactory : AnimeFactory {
 

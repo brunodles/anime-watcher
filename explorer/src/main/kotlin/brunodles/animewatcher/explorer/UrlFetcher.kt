@@ -1,4 +1,4 @@
-package bruno.animewatcher.explorer
+package brunodles.animewatcher.explorer
 
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document

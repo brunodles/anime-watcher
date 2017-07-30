@@ -33,7 +33,7 @@ dependencies {
     compile project(":animesproject")
     compile project(":anitubex")
     compile project(":onepiecex")
-    compile project(":animakai")
+//    compile project(":animakai")
 
     kapt "com.android.databinding:compiler:$plugin_version"
 

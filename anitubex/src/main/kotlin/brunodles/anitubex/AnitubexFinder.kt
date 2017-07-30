@@ -1,6 +1,6 @@
 package brunodles.anitubex
 
-import bruno.animewatcher.explorer.*
+import brunodles.animewatcher.explorer.*
 import java.util.*
 
 class AnitubexFinder : AnimeFinder {

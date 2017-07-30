@@ -45,7 +45,9 @@ private class SingleEventParseListener<T>(val emitter: ObservableEmitter<T?>, va
             emitter.onError(IllegalArgumentException("Value not found on requested reference."))
             return
         }
-        emitter.onNext(p0.getValue(valueClass))
+        val value = p0.getValue(valueClass)
+        if (value != null)
+            emitter.onNext(value)
         emitter.onComplete()
     }
 }
