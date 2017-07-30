@@ -29,10 +29,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var player: Player
+    private lateinit var cast: Cast
     private var adapter: GenericAdapter<EpisodeLink, ItemEpisodeBinding>? = null
     private var explorer: AnimeExplorer? = null
-    private var player: Player? = null
-    private var cast: Cast? = null
     private val episodeController by lazy { EpisodeController(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         cast = Cast(this, binding.mediaRouteButton)
 
         binding.playRemote.setOnClickListener {
-            cast?.playRemove(explorer?.currentEpisode, player?.getCurrentPosition() ?: 0)
+            cast.playRemove(explorer?.currentEpisode, player.getCurrentPosition())
         }
 
         episodeController.findVideo(intent)
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(onNext = {
                     val episode = it.currentEpisode
-                    player?.prepareVideo(episode.video)
+                    player.prepareVideo(episode.video)
                     binding.title.text = episode.description
                     adapter?.list = it.nextEpisodes
                     explorer = it
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        cast?.onResume()
+        cast.onResume()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -134,8 +134,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        cast?.onPause()
-        player?.stop()
+        cast.onPause()
+        player.stop()
     }
 
 }
