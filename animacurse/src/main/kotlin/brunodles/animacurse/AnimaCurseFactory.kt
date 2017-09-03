@@ -17,15 +17,15 @@ object AnimaCurseFactory : AnimeFactory {
 
     private fun currentEpisode(doc: Document): CurrentEpisode {
         val src = doc.select("video source").first().attr("src")
-        val text = doc.select(".anime-info h2").first().text()
+        val text = doc.select(".episodename h1").first().text()
         return CurrentEpisode(src, text)
     }
 
     private fun nextEpisodes(doc: Document): List<EpisodeLink> {
-        return doc.select(".thumbnail").map {
-            val src = it.select(".holder img").first().attr("src")
-            val text = it.select(".text span").first().text()
-            val link = it.select(".text a").first().attr("href")
+        return doc.select(".episode").map {
+            val src = it.select("#epimg img").first().attr("src")
+            val text = it.select("#epnum").first().text()
+            val link = it.select("a").first().attr("href")
             EpisodeLink(link, text, src)
         }.toList()
     }

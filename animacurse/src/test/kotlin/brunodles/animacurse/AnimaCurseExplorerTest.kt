@@ -1,5 +1,6 @@
 package brunodles.animacurse
 
+import brunodles.animewatcher.explorer.EpisodeLink
 import brunodles.animewatcher.explorer.UrlFetcher
 import com.greghaskins.spectrum.Spectrum
 import com.greghaskins.spectrum.Spectrum.describe
@@ -63,8 +64,43 @@ class AnimaCurseExplorerTest {
                         assertNotEquals("", it.link)
                     }
                 }
+
+                episodeShould(episodes, 0,
+                        "Episódio 163 – Sempre Misteriosa! Provação das cordas e provação do amor!?",
+                        "https://animacurse.moe/imgs/one-piece-episodio-163.webp",
+                        "https://animacurse.moe/?p=714")
+                episodeShould(episodes, 1,
+                        "Episódio 164 – Acendam a chama da sabedoria! Wiper, o Guerreiro",
+                        "https://animacurse.moe/imgs/one-piece-episodio-164.webp",
+                        "https://animacurse.moe/?p=715")
+                episodeShould(episodes, 2,
+                        "Episódio 165 – Terra Flutuante de Ouro, Jaya! Para o Santuário de Deus!",
+                        "https://animacurse.moe/imgs/one-piece-episodio-165.webp",
+                        "https://animacurse.moe/?p=716")
+                episodeShould(episodes, 3,
+                        "Episódio 166 – Véspera do Festival do Ouro! Afeta a Vearth",
+                        "https://animacurse.moe/imgs/one-piece-episodio-166.webp",
+                        "https://animacurse.moe/?p=717")
             }
 
+        }
+    }
+
+    private fun episodeShould(episodes: List<EpisodeLink>, index: Int, title: String, imageUrl: String, link: String) {
+        describe("when get episode at index [$index]") {
+            val episode = episodes[index]
+
+            it("should return the correct title") {
+                assertEquals(title, episode.description)
+            }
+
+            it("should return the correct image") {
+                assertEquals(imageUrl, episode.image)
+            }
+
+            it("should return the link") {
+                assertEquals(link, episode.link)
+            }
         }
     }
 }

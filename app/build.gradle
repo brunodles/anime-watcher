@@ -61,6 +61,7 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
         transitive = true;
     }
+    compile 'cat.ereza:customactivityoncrash:2.1.0'
 
     testCompile 'junit:junit:4.12'
 

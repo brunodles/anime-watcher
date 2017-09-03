@@ -4,7 +4,7 @@ import android.widget.ImageView
 import com.squareup.picasso.Picasso
 
 fun loadImageInto(url: String?, image: ImageView) {
-    if (url == null) return
+    if (url.isNullOrEmpty()) return
     Picasso.Builder(image.context).indicatorsEnabled(true)
             .loggingEnabled(true)
             .build()
