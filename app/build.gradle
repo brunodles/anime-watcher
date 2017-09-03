@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: "kotlin-kapt"
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 26
@@ -53,9 +54,13 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile "com.google.firebase:firebase-core:$playservices_version"
     compile "com.google.firebase:firebase-database:$playservices_version"
+    compile "com.google.firebase:firebase-crash:$playservices_version"
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile "io.reactivex.rxjava2:rxjava:2.1.0"
     compile 'io.reactivex.rxjava2:rxkotlin:2.0.3'
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+        transitive = true;
+    }
 
     testCompile 'junit:junit:4.12'
 
