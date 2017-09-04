@@ -1,0 +1,6 @@
+repositories {
+    mavenCentral()
+    jcenter()
+}
+dependencies {
+}

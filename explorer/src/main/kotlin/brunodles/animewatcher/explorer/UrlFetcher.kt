@@ -79,7 +79,7 @@ class UrlFetcher(private val url: String) {
                 .max(MAX_FILENAME_SIZE)
 
         private fun file(key: String): File {
-            val dir = File("./cache")
+            val dir = File(BuildConfig.ROOT_DIR, "cache")
             if (!dir.exists())
                 dir.mkdirs()
             return File(dir, key)
