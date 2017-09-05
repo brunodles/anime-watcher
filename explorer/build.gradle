@@ -7,8 +7,10 @@ noArg {
     annotation("brunodles.kotlin.annotation.NoArgs")
 }
 
-sourceSets {
-    main.java.srcDir 'build/build-config'
+buildconfig {
+    properties = [
+            ROOT_DIR: project.rootDir
+    ]
 }
 
 dependencies {

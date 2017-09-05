@@ -7,6 +7,7 @@ class BuildConfigPlugin implements Plugin<Project> {
 
     @SuppressWarnings("GroovyUnusedDeclaration")
     public static final String VERSION = "0.1"
+    private BuildConfigExtension extension
 
     @Override
     void apply(Project project) {
@@ -15,5 +16,7 @@ class BuildConfigPlugin implements Plugin<Project> {
         }
         def task = project.tasks.create("generateBuildConfigClasses", BuildConfigTask.class)
         project.tasks.getByName("assemble").dependsOn.add(task)
+
+        extension = project.extensions.create("buildconfig", BuildConfigExtension)
     }
 }
