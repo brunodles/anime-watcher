@@ -1,6 +1,5 @@
 package brunodles.animacurse
 
-import brunodles.animewatcher.explorer.AnimeExplorer
 import com.greghaskins.spectrum.Spectrum
 import com.greghaskins.spectrum.Spectrum.describe
 import com.greghaskins.spectrum.Spectrum.it
@@ -30,10 +29,6 @@ class AnimaCurseFactoryTest {
 
             it("should not decode the category url") {
                 assertFalse(factory.isEpisode("animacurse.moe/?cat=123"))
-            }
-
-            it("should return a Explorer") {
-                assertTrue(factory.episode("https://animacurse.moe/?p=713") is AnimeExplorer)
             }
         }
     }

@@ -31,10 +31,6 @@ class AnimesProjectFactoryTest {
             it("should not decode invalid url") {
                 Assert.assertFalse(factory.isEpisode("animes.zlx.com.br"))
             }
-
-            it("should return a Explorer") {
-                Assert.assertTrue(factory.episode(VALID_URLS[0]) is AnimeExplorer)
-            }
         }
     }
 

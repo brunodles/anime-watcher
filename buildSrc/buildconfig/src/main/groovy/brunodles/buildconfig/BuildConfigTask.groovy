@@ -1,18 +1,17 @@
 package brunodles.buildconfig
 
+import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.SourceTask
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.incremental.IncrementalTaskInputs
 
-class BuildConfigTask extends SourceTask {
+class BuildConfigTask extends DefaultTask {
 
     String group = "buildConfig"
     String description = "Generate BuildConfig class."
 
     BuildConfigTask() {
         outputs.upToDateWhen { false }
-        source("src")
-        include("**${File.separatorChar}buildconfig.properties")
         finalizedBy("assemble")
     }
 
@@ -30,7 +29,7 @@ class BuildConfigTask extends SourceTask {
             content.append("\tpublic static final String ${f.key.toUpperCase()} = \"${f.value}\";\n")
         }
 
-        getInputs().files.forEach { file ->
+        project.fileTree(dir: "src", include: "**${File.separatorChar}buildconfig.properties").forEach { file ->
             println "BuildConfig file -> ${file.getAbsolutePath()}"
             def properties = new Properties()
             if (file.exists())

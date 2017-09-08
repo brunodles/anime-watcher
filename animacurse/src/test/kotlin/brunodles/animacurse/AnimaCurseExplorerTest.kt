@@ -23,7 +23,7 @@ class AnimaCurseExplorerTest {
         describe("The AnimaCurse Explorer") {
             val explorer = AnimaCurseFactory.episode("https://animacurse.moe/?p=713")
 
-            describe("#currentEpisode") {
+            describe("when currentEpisode") {
                 val episode = explorer.currentEpisode
 
                 it("should return the episode title") {
@@ -35,7 +35,7 @@ class AnimaCurseExplorerTest {
                 }
             }
 
-            describe("#nextEpisodes") {
+            describe("when nextEpisodes") {
 
                 val episodes = explorer.nextEpisodes
 

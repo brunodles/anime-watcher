@@ -30,10 +30,6 @@ class AnitubexFactoryTest {
             it("should not decode invalid url") {
                 Assert.assertFalse(factory.isEpisode("anitube.jp/episode"))
             }
-
-            it("should return a Explorer") {
-                Assert.assertTrue(factory.episode(VALID_URLS[0]) is AnimeExplorer)
-            }
         }
     }
 

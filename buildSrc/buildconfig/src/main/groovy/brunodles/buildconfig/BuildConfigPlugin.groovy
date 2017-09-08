@@ -15,7 +15,11 @@ class BuildConfigPlugin implements Plugin<Project> {
             main.java.srcDir 'build/build-config'
         }
         def task = project.tasks.create("generateBuildConfigClasses", BuildConfigTask.class)
-        project.tasks.getByName("assemble").dependsOn.add(task)
+        def compileKotlin = project.tasks.getByName("compileKotlin")
+        if (compileKotlin != null)
+            compileKotlin.dependsOn.add(task)
+        else
+            project.tasks.getByName("compileJava").dependsOn.add(task)
 
         extension = project.extensions.create("buildconfig", BuildConfigExtension)
     }

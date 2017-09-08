@@ -42,10 +42,6 @@ class AnimaKaiFactoryTest {
                     }
                 }
 
-                it("should return a Explorer") {
-                    Assert.assertTrue(factory.episode(VALID_URLS[0]) is AnimeExplorer)
-                }
-
             }
 
             describe("when get current episode") {

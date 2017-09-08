@@ -23,7 +23,7 @@ class AnimesProjectExplorerTest {
         describe("The AnimesProject Explorer") {
             val explorer = AnimesProjectExplorer("https://animes.zlx.com.br/exibir/117/3440/one-piece-166")
 
-            describe("#currentEpisode") {
+            describe("when currentEpisode") {
                 val currentEpisode = explorer.currentEpisode()
 
                 it("should return the episode title") {
@@ -35,7 +35,7 @@ class AnimesProjectExplorerTest {
                 }
             }
 
-            describe("#nextEpisodes") {
+            describe("when nextEpisodes") {
                 val episodes = explorer.nextEpisodes()
 
                 it("should find 2 episodes") {

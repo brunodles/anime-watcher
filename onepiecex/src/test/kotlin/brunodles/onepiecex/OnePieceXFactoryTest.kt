@@ -40,10 +40,6 @@ class OnePieceXFactoryTest {
                         assertFalse(factory.isEpisode(url))
                     }
                 }
-
-                it("should return a Explorer") {
-                    assertTrue(factory.episode(VALID_URLS[0]) is AnimeExplorer)
-                }
             }
 
             describe("when get current episode") {

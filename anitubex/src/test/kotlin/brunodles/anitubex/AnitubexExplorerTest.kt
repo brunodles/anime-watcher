@@ -21,7 +21,7 @@ class AnitubexExplorerTest {
         describe("The AnitubeX Explorer") {
             val explorer = AnitubexFactory.episode("http://www.anitubex.com/one-piece-785")
 
-            describe("#currentEpisode") {
+            describe("when currentEpisode") {
                 val episode = explorer.currentEpisode
 
                 it("should return the episode title") {
@@ -33,7 +33,7 @@ class AnitubexExplorerTest {
                 }
             }
 
-            describe("#nextEpisodes") {
+            describe("when nextEpisodes") {
 
                 val episodes = explorer.nextEpisodes
 
