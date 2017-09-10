@@ -1,6 +1,10 @@
 package brunodles.animacurse
 
-import brunodles.animewatcher.explorer.*
+import brunodles.animewatcher.explorer.AnimeExplorer
+import brunodles.animewatcher.explorer.AnimeFactory
+import brunodles.animewatcher.explorer.CurrentEpisode
+import brunodles.animewatcher.explorer.EpisodeLink
+import brunodles.animewatcher.explorer.UrlFetcher
 import org.jsoup.nodes.Document
 
 object AnimaCurseFactory : AnimeFactory {

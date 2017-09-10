@@ -2,7 +2,7 @@
 
 buildscript {
     ext.kotlin_version = '1.1.4-3'
-    ext.plugin_version = '3.0.0-beta4'
+    ext.plugin_version = '3.0.0-beta5'
     ext.playservices_version = '11.2.2'
     ext.support_libs_version = '26.0.2'
 
@@ -31,26 +31,16 @@ allprojects {
         mavenCentral()
         maven { url 'https://maven.fabric.io/public' }
     }
+}
 
-    if (plugins.hasPlugin("java")) {
-        test {
-            ignoreFailures = properties.get("ignoreFailures", false)
-            reports {
-                junitXml.enabled = true
-                html.enabled = true
-            }
+subprojects { project ->
+    afterEvaluate {
+        if (project.plugins.hasPlugin("java")) {
+            project.apply from: "${project.rootDir}/gradle/jacoco.gradle"
+            project.apply plugin: 'checkstyle'
         }
-
-        apply plugin: "jacoco"
-        jacoco {
-            toolVersion = "0.7.6.201602180812"
-        }
-        jacocoTestReport {
-            reports {
-                xml.enabled true
-                csv.enabled true
-                html.enabled true
-            }
+        if (project.plugins.hasPlugin("kotlin")) {
+            project.apply from: "${project.rootDir}/gradle/ktlint.gradle"
         }
     }
 }

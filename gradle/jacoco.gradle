@@ -1,0 +1,21 @@
+apply plugin: "jacoco"
+
+jacoco {
+    toolVersion = "0.7.6.201602180812"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled true
+        html.enabled true
+    }
+}
+
+test {
+    ignoreFailures = properties.get("ignoreFailures", false)
+    reports {
+        junitXml.enabled = true
+        html.enabled = true
+    }
+}

@@ -6,7 +6,7 @@ import com.greghaskins.spectrum.Spectrum.it
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.runner.RunWith
-import java.util.*
+import java.util.Arrays
 
 @RunWith(Spectrum::class)
 class AnimaCurseFactoryTest {
