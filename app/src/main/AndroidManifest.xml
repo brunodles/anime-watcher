@@ -22,7 +22,7 @@
             android:value="brunodles.animewatcher.CastOptionsProvider"/>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".VideoActivity"
             android:configChanges="orientation|screenLayout|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

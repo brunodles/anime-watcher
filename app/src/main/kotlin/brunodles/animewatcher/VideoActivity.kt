@@ -21,10 +21,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
-class MainActivity : AppCompatActivity() {
+class VideoActivity : AppCompatActivity() {
 
     companion object {
-        val TAG = "MainActivity"
+        val TAG = "VideoActivity"
         val STATE_KEY = "explorer"
     }
 
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_video)
 
         player = Player(this, binding.player)
         setupRecyclerView()
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
             viewHolder.binder.description.text = item.description
             loadImageInto(item.image, viewHolder.binder.image)
             viewHolder.binder.root.setOnClickListener {
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, VideoActivity::class.java)
                         .setData(Uri.parse(item.link))
                 startActivity(intent)
             }

@@ -13,7 +13,12 @@ import com.google.android.gms.cast.framework.SessionManager
 
 class Cast(val context: Context, mediaRouteButton: MediaRouteButton?) {
 
+    companion object {
+        val TAG = "Cast"
+    }
+
     val mSessionManager: SessionManager
+
     //    val mSessionManagerListener: SessionManagerListener = SessionManagerListenerImpl()
     init {
         val castContext = CastContext.getSharedInstance(context)
@@ -21,6 +26,7 @@ class Cast(val context: Context, mediaRouteButton: MediaRouteButton?) {
         CastButtonFactory.setUpMediaRouteButton(context, mediaRouteButton)
         mSessionManager.currentCastSession
     }
+
     val mCastSession: CastSession by lazy { mSessionManager.currentCastSession }
 
     fun onResume() {
@@ -40,7 +46,7 @@ class Cast(val context: Context, mediaRouteButton: MediaRouteButton?) {
 //            movieMetadata.addImage(WebImage(Uri.parse(currentEpisode?.)));
 //            movieMetadata.addImage(WebImage(Uri.parse(mSelectedMedia.getImage(1))));
 
-        Log.d(MainActivity.TAG, "onCreate: currentEpisode.video = ${currentEpisode?.video}")
+        Log.d(TAG, "onCreate: currentEpisode.video = ${currentEpisode?.video}")
         val mediaInfo = MediaInfo.Builder(currentEpisode?.video)
                 .setStreamType(MediaInfo.STREAM_TYPE_BUFFERED)
                 .setContentType("videos/mp4")
