@@ -16,13 +16,13 @@ object AnimaCurseFactory : AnimeFactory {
 
     override fun episode(url: String): AnimeExplorer {
         val doc = UrlFetcher.fetchUrl(url)
-        return AnimeExplorer(currentEpisode(doc), nextEpisodes(doc))
+        return AnimeExplorer(currentEpisode(doc, url), nextEpisodes(doc))
     }
 
-    private fun currentEpisode(doc: Document): CurrentEpisode {
+    private fun currentEpisode(doc: Document, url: String): CurrentEpisode {
         val src = doc.select("video source").first().attr("src")
         val text = doc.select(".episodename h1").first().text()
-        return CurrentEpisode(src, text)
+        return CurrentEpisode(src, text, url)
     }
 
     private fun nextEpisodes(doc: Document): List<EpisodeLink> {

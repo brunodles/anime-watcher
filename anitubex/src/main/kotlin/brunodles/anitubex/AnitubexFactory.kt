@@ -13,12 +13,12 @@ object AnitubexFactory : AnimeFactory {
 
     override fun episode(url: String): AnimeExplorer {
         val doc = UrlFetcher.fetchUrl(url)
-        val currentEpisode = findCurrentEpisode(doc)
+        val currentEpisode = findCurrentEpisode(doc, url)
         val nextEpisodes = findNextEpisodes(doc)
         return AnimeExplorer(currentEpisode, nextEpisodes)
     }
 
-    private fun findCurrentEpisode(doc: Document): CurrentEpisode {
+    private fun findCurrentEpisode(doc: Document, url: String): CurrentEpisode {
         val text = doc.select(".panel-heading h1").text()
         var iframeLink = doc.select(".tab-pane iframe").src()
         var iframe = UrlFetcher.fetchUrl(iframeLink)
@@ -27,13 +27,13 @@ object AnitubexFactory : AnimeFactory {
             if (iframeLink.isNullOrEmpty()) {
                 val matcher = HREF_REGEX.matcher(iframe.html())
                 if (matcher.find())
-                    return CurrentEpisode(matcher.group(1), text)
+                    return CurrentEpisode(matcher.group(1), text, url)
                 break
             }
             iframe = UrlFetcher.fetchUrl(iframeLink)
         } while (iframeLink != null)
         val link = iframe.select("#advideox").src()
-        return CurrentEpisode(link, text)
+        return CurrentEpisode(link, text, url)
     }
 
     private fun findNextEpisodes(doc: Document): List<EpisodeLink> {

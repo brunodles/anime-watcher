@@ -21,10 +21,10 @@ class AnimesProjectExplorerTest {
         UrlFetcher.useCache = true
 
         describe("The AnimesProject Explorer") {
-            val explorer = AnimesProjectExplorer("https://animes.zlx.com.br/exibir/117/3440/one-piece-166")
+            val explorer = AnimesProjectFactory.episode("https://animes.zlx.com.br/exibir/117/3440/one-piece-166")
 
             describe("when currentEpisode") {
-                val currentEpisode = explorer.currentEpisode()
+                val currentEpisode = explorer.currentEpisode
 
                 it("should return the episode title") {
                     assertEquals("One Piece : Episódio 166", currentEpisode.description)
@@ -36,7 +36,7 @@ class AnimesProjectExplorerTest {
             }
 
             describe("when nextEpisodes") {
-                val episodes = explorer.nextEpisodes()
+                val episodes = explorer.nextEpisodes
 
                 it("should find 2 episodes") {
                     assertEquals(2, episodes.size)
