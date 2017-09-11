@@ -12,10 +12,10 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import brunodles.animewatcher.databinding.ActivityVideoBinding
+import brunodles.animewatcher.databinding.ItemEpisodeBinding
 import brunodles.animewatcher.explorer.AnimeExplorer
 import brunodles.animewatcher.explorer.EpisodeLink
-import brunodles.animewatcher.databinding.ActivityMainBinding
-import brunodles.animewatcher.databinding.ItemEpisodeBinding
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -28,7 +28,7 @@ class VideoActivity : AppCompatActivity() {
         val STATE_KEY = "explorer"
     }
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityVideoBinding
     private lateinit var player: Player
     private lateinit var cast: Cast
     private var adapter: GenericAdapter<EpisodeLink, ItemEpisodeBinding>? = null
