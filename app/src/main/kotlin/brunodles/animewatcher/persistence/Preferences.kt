@@ -3,7 +3,7 @@ package brunodles.animewatcher.persistence
 import android.content.Context
 import android.preference.PreferenceManager
 
-class Preferences(val context: Context) {
+class Preferences(private val context: Context) {
 
     companion object {
         private val KEY_URL = "URL"

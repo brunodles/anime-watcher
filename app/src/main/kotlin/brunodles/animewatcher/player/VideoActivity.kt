@@ -1,5 +1,6 @@
 package brunodles.animewatcher.player
 
+import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.databinding.DataBindingUtil
@@ -28,8 +29,16 @@ import io.reactivex.schedulers.Schedulers
 class VideoActivity : AppCompatActivity() {
 
     companion object {
+
         val TAG = "VideoActivity"
         val STATE_KEY = "explorer"
+        val EXTRA_EPISODE = "episode"
+
+        fun newIntent(context: Context, episode: AnimeExplorer): Intent
+                = Intent(context, VideoActivity::class.java).putExtra(EXTRA_EPISODE, episode)
+
+        fun newIntent(context: Context, link: String): Intent
+                = Intent(context, VideoActivity::class.java).setData(Uri.parse(link))
     }
 
     private lateinit var binding: ActivityVideoBinding

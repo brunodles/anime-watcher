@@ -6,6 +6,7 @@ import com.google.android.gms.cast.framework.CastOptions
 import com.google.android.gms.cast.framework.OptionsProvider
 import com.google.android.gms.cast.framework.SessionProvider
 
+@Suppress("unused") // This class is used on `AndroidManifest.xml`
 internal class CastOptionsProvider : OptionsProvider {
 
     override fun getCastOptions(appContext: Context): CastOptions? {

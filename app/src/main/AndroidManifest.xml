@@ -19,7 +19,16 @@
             />
         <meta-data
             android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
-            android:value="brunodles.animewatcher.CastOptionsProvider"/>
+            android:value="brunodles.animewatcher.cast.CastOptionsProvider"/>
+
+        <activity android:name=".home.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".player.VideoActivity"
