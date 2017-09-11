@@ -67,10 +67,10 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             layoutInflater = LayoutInflater.from(context)
 
         return when (viewType) {
-            TYPE_LOGIN -> LoginHolder(ItemLoginBinding.inflate(layoutInflater!!))
-            TYPE_EPISODE -> EpisodeHolder(ItemEpisodeBinding.inflate(layoutInflater!!))
-            TYPE_LINK -> LinkHolder(ItemUnknownBinding.inflate(layoutInflater!!))
-            else -> UnknownHolder(ItemUnknownBinding.inflate(layoutInflater!!))
+            TYPE_LOGIN -> LoginHolder(ItemLoginBinding.inflate(layoutInflater!!, parent, false))
+            TYPE_EPISODE -> EpisodeHolder(ItemEpisodeBinding.inflate(layoutInflater!!, parent, false))
+            TYPE_LINK -> LinkHolder(ItemUnknownBinding.inflate(layoutInflater!!, parent, false))
+            else -> UnknownHolder(ItemUnknownBinding.inflate(layoutInflater!!, parent, false))
         }
     }
 
