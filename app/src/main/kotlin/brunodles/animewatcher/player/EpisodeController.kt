@@ -1,10 +1,11 @@
-package brunodles.animewatcher
+package brunodles.animewatcher.player
 
 import android.content.Context
 import android.content.Intent
 import android.preference.PreferenceManager
 import android.util.Log
 import brunodles.animewatcher.explorer.AnimeExplorer
+import brunodles.animewatcher.fixUrlToFirebase
 import brunodles.rxfirebase.singleObservable
 import com.google.firebase.database.FirebaseDatabase
 import io.reactivex.Observable

@@ -1,8 +1,7 @@
-package brunodles.animewatcher
+package brunodles.animewatcher.player
 
 import android.content.Context
 import android.net.Uri
-import brunodles.animewatcher.explorer.EpisodeLink
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory

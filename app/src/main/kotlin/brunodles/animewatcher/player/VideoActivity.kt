@@ -1,4 +1,4 @@
-package brunodles.animewatcher
+package brunodles.animewatcher.player
 
 import android.content.Intent
 import android.content.res.Configuration
@@ -12,10 +12,14 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import brunodles.animewatcher.cast.Cast
+import brunodles.animewatcher.GenericAdapter
+import brunodles.animewatcher.R
 import brunodles.animewatcher.databinding.ActivityVideoBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
 import brunodles.animewatcher.explorer.AnimeExplorer
 import brunodles.animewatcher.explorer.EpisodeLink
+import brunodles.animewatcher.loadImageInto
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy

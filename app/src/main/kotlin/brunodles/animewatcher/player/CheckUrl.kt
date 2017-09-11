@@ -1,4 +1,4 @@
-package brunodles.animewatcher
+package brunodles.animewatcher.player
 
 import android.content.Intent
 import android.util.Log
