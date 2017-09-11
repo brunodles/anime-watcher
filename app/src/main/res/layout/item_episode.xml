@@ -20,6 +20,7 @@
                 android:layout_height="wrap_content"
                 android:minHeight="80dp"
                 android:scaleType="centerCrop"
+                tools:src="@color/colorPrimaryDark"
                 tools:ignore="ContentDescription"/>
 
             <TextView
