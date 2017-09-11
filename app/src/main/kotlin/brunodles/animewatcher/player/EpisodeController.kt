@@ -2,10 +2,10 @@ package brunodles.animewatcher.player
 
 import android.content.Context
 import android.content.Intent
-import android.preference.PreferenceManager
 import android.util.Log
 import brunodles.animewatcher.explorer.AnimeExplorer
 import brunodles.animewatcher.fixUrlToFirebase
+import brunodles.animewatcher.persistence.Preferences
 import brunodles.rxfirebase.singleObservable
 import com.google.firebase.database.FirebaseDatabase
 import io.reactivex.Observable
@@ -24,16 +24,11 @@ class EpisodeController(val context: Context) {
 
         return findVideoInfo(url)
                 .doOnNext(this::fetchNextEpisodes)
-                .doOnNext {
-                    PreferenceManager.getDefaultSharedPreferences(context)
-                            .edit()
-                            .putString("URL", url)
-                            .apply()
-                }
+                .doOnNext { Preferences(context).setUrl(url) }
     }
 
     private fun getUrl(intent: Intent): String? = CheckUrl.findUrl(intent)
-            ?: PreferenceManager.getDefaultSharedPreferences(context).getString("URL", null)
+            ?: Preferences(context).getUrl()
 
     private fun findVideoInfo(url: String): Observable<AnimeExplorer> {
         Log.d(TAG, "findVideoInfo: find video on '$url'")
