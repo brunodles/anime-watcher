@@ -10,13 +10,9 @@
         app:cardCornerRadius="6dp"
         app:elevation="2dp">
 
-        <TextView
+        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
-            android:padding="16dp"
-            android:gravity="center"
-            android:background="#ccc">
-        </TextView>
+            android:text="Login Google"/>
     </android.support.v7.widget.CardView>
 </layout>
