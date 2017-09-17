@@ -25,6 +25,7 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var layoutInflater: LayoutInflater? = null
     var onAnimeExplorerClickListener: OnItemClick<AnimeExplorer>? = null
     var onLinkClickListener: OnItemClick<String>? = null
+    var onLoginClickListener: OnItemClick<LoginRequest>? = null
 
     override fun getItemCount(): Int = list.size
 
@@ -52,11 +53,14 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 ////            holder.onBind(list[position])
 //        }
         when (getItemViewType(position)) {
-            TYPE_LOGIN -> (holder as LoginHolder).onBind(list[position] as LoginRequest)
+            TYPE_LOGIN -> (holder as LoginHolder).let {
+                it.onBind(list[position] as LoginRequest)
+                it.clickListener = onLoginClickListener
+            }
             TYPE_EPISODE -> (holder as EpisodeHolder).onBind(list[position] as AnimeExplorer)
             TYPE_LINK -> (holder as LinkHolder).let {
-                holder.onBind(list[position] as String)
-                holder.clickListener = onLinkClickListener
+                it.onBind(list[position] as String)
+                it.clickListener = onLinkClickListener
             }
         }
     }
@@ -93,6 +97,14 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             super.onBind(item)
             binder.text.text = item
             binder.text.setOnClickListener { clickListener?.invoke(item) }
+        }
+    }
+
+    fun removeLogin() {
+        list.filter { it is LoginRequest }.forEach {
+            val index = list.indexOf(it)
+            if (list.remove(it))
+                notifyItemRemoved(index)
         }
     }
 
