@@ -25,6 +25,7 @@ class EpisodeController(val context: Context) {
         return findVideoInfo(url)
                 .doOnNext(this::fetchNextEpisodes)
                 .doOnNext { Preferences(context).setUrl(url) }
+                .doOnNext { Firebase.addToHistory(url) }
     }
 
     private fun getUrl(intent: Intent): String? = CheckUrl.findUrl(intent)
