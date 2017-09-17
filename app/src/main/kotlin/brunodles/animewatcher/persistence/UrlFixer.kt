@@ -1,4 +1,4 @@
-package brunodles.animewatcher
+package brunodles.animewatcher.persistence
 
 private val INVALID_TEXT_PATTERN = Regex("[^\\d\\w]+")
 
