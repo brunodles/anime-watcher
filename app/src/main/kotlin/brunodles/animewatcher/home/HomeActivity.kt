@@ -11,10 +11,14 @@ import brunodles.animewatcher.databinding.ActivityHomeBinding
 import brunodles.animewatcher.persistence.Preferences
 import brunodles.animewatcher.player.PlayerActivity
 import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInResult
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 
 
 class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
@@ -28,6 +32,7 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
     private lateinit var homeAdapter: HomeAdapter
 
     private lateinit var mGoogleApiClient: GoogleApiClient
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,12 +53,21 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
         binding.recyclerView.adapter = homeAdapter
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build()
         mGoogleApiClient = GoogleApiClient.Builder(this)
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build()
+
+        auth = FirebaseAuth.getInstance()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        updateUI(currentUser)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -71,12 +85,41 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
         if (result.isSuccess) {
             // Signed in successfully, show authenticated UI.
             val acct = result.signInAccount
-            homeAdapter.removeLogin()
+            firebaseAuthWithGoogle(acct!!)
         } else {
 //            homeAdapter.addLoginRequest()
             // Signed out, show unauthenticated UI.
-//            updateUI(false)
+            updateUI(null)
         }
+    }
+
+    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
+        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.id!!)
+
+        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
+        auth.signInWithCredential(credential)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithCredential:success")
+                        val user = auth.getCurrentUser()
+                        updateUI(user)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInWithCredential:failure", task.getException())
+                        //                            Toast.makeText(this@GoogleSignInActivity, "Authentication failed.",
+                        //                                    Toast.LENGTH_SHORT).show()
+                        updateUI(null)
+                    }
+                }
+    }
+
+    private fun updateUI(user: FirebaseUser?) {
+        if (user == null) {
+//            homeAdapter.addLoginRequest
+            return
+        }
+        homeAdapter.removeLogin()
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
