@@ -7,17 +7,18 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="6dp"
-        app:elevation="2dp">
+        android:layout_margin="@dimen/card_margin"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:elevation="@dimen/card_elevation">
 
         <TextView
             android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="=( Unknown Item"
-            android:padding="16dp"
+            android:background="#ccc"
             android:gravity="center"
-            android:background="#ccc">
+            android:padding="16dp"
+            android:text="=( Unknown Item">
         </TextView>
     </android.support.v7.widget.CardView>
 </layout>
