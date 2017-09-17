@@ -26,19 +26,19 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
-class VideoActivity : AppCompatActivity() {
+class PlayerActivity : AppCompatActivity() {
 
     companion object {
 
-        val TAG = "VideoActivity"
+        val TAG = "PlayerActivity"
         val STATE_KEY = "explorer"
         val EXTRA_EPISODE = "episode"
 
         fun newIntent(context: Context, episode: AnimeExplorer): Intent
-                = Intent(context, VideoActivity::class.java).putExtra(EXTRA_EPISODE, episode)
+                = Intent(context, PlayerActivity::class.java).putExtra(EXTRA_EPISODE, episode)
 
         fun newIntent(context: Context, link: String): Intent
-                = Intent(context, VideoActivity::class.java).setData(Uri.parse(link))
+                = Intent(context, PlayerActivity::class.java).setData(Uri.parse(link))
     }
 
     private lateinit var binding: ActivityVideoBinding
@@ -87,7 +87,7 @@ class VideoActivity : AppCompatActivity() {
             viewHolder.binder.description.text = item.description
             loadImageInto(item.image, viewHolder.binder.image)
             viewHolder.binder.root.setOnClickListener {
-                val intent = Intent(this, VideoActivity::class.java)
+                val intent = Intent(this, PlayerActivity::class.java)
                         .setData(Uri.parse(item.link))
                 startActivity(intent)
             }

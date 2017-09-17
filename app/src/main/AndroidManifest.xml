@@ -31,7 +31,7 @@
         </activity>
 
         <activity
-            android:name=".player.VideoActivity"
+            android:name=".player.PlayerActivity"
             android:configChanges="orientation|screenLayout|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

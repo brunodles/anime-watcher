@@ -9,7 +9,7 @@ import android.util.Log
 import brunodles.animewatcher.R
 import brunodles.animewatcher.databinding.ActivityHomeBinding
 import brunodles.animewatcher.persistence.Preferences
-import brunodles.animewatcher.player.VideoActivity
+import brunodles.animewatcher.player.PlayerActivity
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInResult
@@ -35,10 +35,10 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         homeAdapter = HomeAdapter()
         homeAdapter.onAnimeExplorerClickListener = { episode ->
-            startActivity(VideoActivity.newIntent(this, episode))
+            startActivity(PlayerActivity.newIntent(this, episode))
         }
         homeAdapter.onLinkClickListener = { link ->
-            startActivity(VideoActivity.newIntent(this, link))
+            startActivity(PlayerActivity.newIntent(this, link))
         }
         homeAdapter.onLoginClickListener = {
             startActivityForResult(Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient), RC_SIGN_IN)
