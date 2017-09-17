@@ -3,11 +3,11 @@ package brunodles.animewatcher.player
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import brunodles.animewatcher.BuildConfig
 import brunodles.animewatcher.explorer.AnimeExplorer
-import brunodles.animewatcher.fixUrlToFirebase
+import brunodles.animewatcher.persistence.Firebase
 import brunodles.animewatcher.persistence.Preferences
 import brunodles.rxfirebase.singleObservable
-import com.google.firebase.database.FirebaseDatabase
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
@@ -32,7 +32,7 @@ class EpisodeController(val context: Context) {
 
     private fun findVideoInfo(url: String): Observable<AnimeExplorer> {
         Log.d(TAG, "findVideoInfo: find video on '$url'")
-        val ref = FirebaseDatabase.getInstance().getReference("video").child(fixUrlToFirebase(url))
+        val ref = Firebase.video(url)
         return ref.singleObservable(AnimeExplorer::class.java)
                 .onErrorResumeNext(
                         Observable.just(url)
@@ -52,7 +52,8 @@ class EpisodeController(val context: Context) {
                 .flatMap(this::findVideoInfo)
                 .subscribeBy(
                         onNext = {
-                            Log.d(TAG, "fetchNextEpisodes: fetched episode ${it.currentEpisode}")
+                            if (BuildConfig.DEBUG)
+                                Log.d(TAG, "fetchNextEpisodes: fetched episode ${it.currentEpisode}")
                         },
                         onError = {
                             Log.e(TAG, "fetchNextEpisodes: failed to fetch next episodes", it)
