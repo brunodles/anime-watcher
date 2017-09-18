@@ -57,6 +57,8 @@ dependencies {
     compile "com.google.firebase:firebase-crash:$playservices_version"
     compile "com.google.firebase:firebase-auth:$playservices_version"
 
+    compile "com.firebaseui:firebase-ui-database:2.3.0"
+
     compile "com.google.android.gms:play-services-auth:$playservices_version"
     compile "com.google.android.gms:play-services-cast-framework:$playservices_version"
     compile 'com.google.android.exoplayer:exoplayer:r2.4.1'

@@ -1,6 +1,7 @@
 package brunodles.animewatcher.persistence
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 
 object Firebase {
@@ -15,7 +16,10 @@ object Firebase {
     fun addToHistory(url: String) {
         val currentUser = FirebaseAuth.getInstance().currentUser ?: return
 
-        FirebaseDatabase.getInstance().getReference(REF_USERS).child(currentUser.uid)
-                .child(REF_HISTORY).push().setValue(url)
+        history(currentUser).push().setValue(url)
     }
+
+    fun history(currentUser: FirebaseUser) =
+            FirebaseDatabase.getInstance().getReference(REF_USERS).child(currentUser.uid)
+                    .child(REF_HISTORY)
 }
