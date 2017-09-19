@@ -1,13 +1,13 @@
 package brunodles.animacurse
 
-import brunodles.animewatcher.explorer.AnimeExplorer
-import brunodles.animewatcher.explorer.AnimeFactory
+import brunodles.animewatcher.explorer.PageExplorer
+import brunodles.animewatcher.explorer.PageParser
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.FACTORIES
 import brunodles.animewatcher.explorer.UrlFetcher
 import org.jsoup.nodes.Document
 
-object AnimaCurseFactory : AnimeFactory {
+object AnimaCurseFactory : PageParser {
 
     private val URL_REGEX = Regex("animacurse\\.moe/?\\?p=")
 
@@ -18,9 +18,9 @@ object AnimaCurseFactory : AnimeFactory {
     override fun isEpisode(url: String): Boolean =
             url.contains(URL_REGEX)
 
-    override fun episode(url: String): AnimeExplorer {
+    override fun episode(url: String): PageExplorer {
         val doc = UrlFetcher.fetchUrl(url)
-        return AnimeExplorer(currentEpisode(doc, url), nextEpisodes(doc))
+        return PageExplorer(currentEpisode(doc, url), nextEpisodes(doc))
     }
 
     private fun currentEpisode(doc: Document, url: String): Episode {

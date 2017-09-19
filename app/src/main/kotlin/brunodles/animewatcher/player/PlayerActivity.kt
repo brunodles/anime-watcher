@@ -18,7 +18,7 @@ import brunodles.animewatcher.R
 import brunodles.animewatcher.cast.Cast
 import brunodles.animewatcher.databinding.ActivityVideoBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
-import brunodles.animewatcher.explorer.AnimeExplorer
+import brunodles.animewatcher.explorer.PageExplorer
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.loadImageInto
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
@@ -34,7 +34,7 @@ class PlayerActivity : AppCompatActivity() {
         val STATE_KEY = "explorer"
         val EXTRA_EPISODE = "episode"
 
-        fun newIntent(context: Context, episode: AnimeExplorer): Intent
+        fun newIntent(context: Context, episode: PageExplorer): Intent
                 = Intent(context, PlayerActivity::class.java).putExtra(EXTRA_EPISODE, episode)
 
         fun newIntent(context: Context, link: String): Intent
@@ -45,7 +45,7 @@ class PlayerActivity : AppCompatActivity() {
     private lateinit var player: Player
     private lateinit var cast: Cast
     private var adapter: GenericAdapter<Episode, ItemEpisodeBinding>? = null
-    private var explorer: AnimeExplorer? = null
+    private var explorer: PageExplorer? = null
     private val episodeController by lazy { EpisodeController(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,7 +110,7 @@ class PlayerActivity : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState)
         if (savedInstanceState == null)
             return
-        explorer = savedInstanceState.getSerializable(STATE_KEY) as AnimeExplorer?
+        explorer = savedInstanceState.getSerializable(STATE_KEY) as PageExplorer?
     }
 
     override fun onConfigurationChanged(newConfig: Configuration?) {

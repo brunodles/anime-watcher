@@ -4,8 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import brunodles.animewatcher.BuildConfig
-import brunodles.animewatcher.explorer.AnimeExplorer
-import brunodles.animewatcher.player.CheckUrl
+import brunodles.animewatcher.explorer.PageExplorer
 import brunodles.animewatcher.persistence.Firebase
 import brunodles.animewatcher.persistence.Preferences
 import brunodles.rxfirebase.singleObservable
@@ -19,7 +18,7 @@ class EpisodeController(val context: Context) {
         val TAG = "EpisodeController"
     }
 
-    fun findVideo(intent: Intent): Observable<AnimeExplorer> {
+    fun findVideo(intent: Intent): Observable<PageExplorer> {
         val url = getUrl(intent)
         if (url == null) return Observable.empty()
 
@@ -32,10 +31,10 @@ class EpisodeController(val context: Context) {
     private fun getUrl(intent: Intent): String? = CheckUrl.findUrl(intent)
             ?: Preferences(context).getUrl()
 
-    private fun findVideoInfo(url: String): Observable<AnimeExplorer> {
+    private fun findVideoInfo(url: String): Observable<PageExplorer> {
         Log.d(TAG, "findVideoInfo: find video on '$url'")
         val ref = Firebase.video(url)
-        return ref.singleObservable(AnimeExplorer::class.java)
+        return ref.singleObservable(PageExplorer::class.java)
                 .onErrorResumeNext(
                         Observable.just(url)
                                 .observeOn(Schedulers.io())
@@ -48,7 +47,7 @@ class EpisodeController(val context: Context) {
                 .map { it ?: throw RuntimeException("Can't find video info") }
     }
 
-    private fun fetchNextEpisodes(it: AnimeExplorer) {
+    private fun fetchNextEpisodes(it: PageExplorer) {
         Observable.fromIterable(it.nextEpisodes)
                 .map { it.link }
                 .flatMap(this::findVideoInfo)

@@ -43,7 +43,7 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
         binding.history.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, true)
         homeAdapter = HomeAdapter()
-        homeAdapter.onAnimeExplorerClickListener = { episode ->
+        homeAdapter.onPageExplorerClickListener = { episode ->
             startActivity(PlayerActivity.newIntent(this, episode))
         }
         homeAdapter.onLinkClickListener = { link ->

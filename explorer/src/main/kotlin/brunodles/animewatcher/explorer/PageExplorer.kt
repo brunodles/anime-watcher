@@ -4,7 +4,7 @@ import brunodles.kotlin.annotation.NoArgs
 import java.io.Serializable
 import java.util.*
 
-@NoArgs data class AnimeExplorer(
+@NoArgs data class PageExplorer(
         val currentEpisode: Episode,
         val nextEpisodes: List<Episode> = Collections.emptyList()) : Serializable {
 

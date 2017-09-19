@@ -2,7 +2,7 @@ package brunodles.animewatcher.player
 
 import android.content.Intent
 import android.util.Log
-import brunodles.animewatcher.explorer.AnimeExplorer
+import brunodles.animewatcher.explorer.PageExplorer
 import brunodles.animewatcher.explorer.FACTORIES
 
 object CheckUrl {
@@ -17,7 +17,7 @@ object CheckUrl {
         return null
     }
 
-    fun videoInfo(url: String): AnimeExplorer? {
+    fun videoInfo(url: String): PageExplorer? {
         Log.d(TAG, "videoInfo " + url)
         return FACTORIES.firstOrNull { it.isEpisode(url) }?.episode(url)
     }
