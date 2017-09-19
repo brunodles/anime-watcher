@@ -1,6 +1,6 @@
 package brunodles.animacurse
 
-import brunodles.animewatcher.explorer.EpisodeLink
+import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.UrlFetcher
 import com.greghaskins.spectrum.Spectrum
 import com.greghaskins.spectrum.Spectrum.describe
@@ -89,7 +89,7 @@ class AnimaCurseExplorerTest {
         }
     }
 
-    private fun episodeShould(episodes: List<EpisodeLink>, index: Int, title: String, imageUrl: String, link: String) {
+    private fun episodeShould(episodes: List<Episode>, index: Int, title: String, imageUrl: String, link: String) {
         describe("when get episode at index [$index]") {
             val episode = episodes[index]
 

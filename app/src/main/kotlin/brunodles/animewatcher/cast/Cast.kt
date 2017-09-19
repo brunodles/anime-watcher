@@ -3,7 +3,7 @@ package brunodles.animewatcher.cast
 import android.content.Context
 import android.support.v7.app.MediaRouteButton
 import android.util.Log
-import brunodles.animewatcher.explorer.CurrentEpisode
+import brunodles.animewatcher.explorer.Episode
 import com.google.android.gms.cast.MediaInfo
 import com.google.android.gms.cast.MediaMetadata
 import com.google.android.gms.cast.framework.CastButtonFactory
@@ -38,7 +38,7 @@ class Cast(val context: Context, mediaRouteButton: MediaRouteButton?) {
 //        mCastSession = null
     }
 
-    fun playRemove(currentEpisode: CurrentEpisode?, position: Long) {
+    fun playRemove(currentEpisode: Episode?, position: Long) {
         val movieMetadata = MediaMetadata(MediaMetadata.MEDIA_TYPE_MOVIE)
 
         movieMetadata.putString(MediaMetadata.KEY_TITLE, currentEpisode?.description)

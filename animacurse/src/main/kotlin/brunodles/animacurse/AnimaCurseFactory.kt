@@ -2,8 +2,7 @@ package brunodles.animacurse
 
 import brunodles.animewatcher.explorer.AnimeExplorer
 import brunodles.animewatcher.explorer.AnimeFactory
-import brunodles.animewatcher.explorer.CurrentEpisode
-import brunodles.animewatcher.explorer.EpisodeLink
+import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.FACTORIES
 import brunodles.animewatcher.explorer.UrlFetcher
 import org.jsoup.nodes.Document
@@ -24,18 +23,18 @@ object AnimaCurseFactory : AnimeFactory {
         return AnimeExplorer(currentEpisode(doc, url), nextEpisodes(doc))
     }
 
-    private fun currentEpisode(doc: Document, url: String): CurrentEpisode {
+    private fun currentEpisode(doc: Document, url: String): Episode {
         val src = doc.select("video source").first().attr("src")
         val text = doc.select(".episodename h1").first().text()
-        return CurrentEpisode(src, text, url)
+        return Episode(link = url, video = src, description = text)
     }
 
-    private fun nextEpisodes(doc: Document): List<EpisodeLink> {
+    private fun nextEpisodes(doc: Document): List<Episode> {
         return doc.select(".episode").map {
             val src = it.select("#epimg img").first().attr("src")
             val text = it.select("#epnum").first().text()
             val link = it.select("a").first().attr("href")
-            EpisodeLink(link, text, src)
+            Episode(link = link, description = text, image = src)
         }.toList()
     }
 

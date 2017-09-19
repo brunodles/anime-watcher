@@ -13,13 +13,13 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import brunodles.animewatcher.cast.Cast
 import brunodles.animewatcher.GenericAdapter
 import brunodles.animewatcher.R
+import brunodles.animewatcher.cast.Cast
 import brunodles.animewatcher.databinding.ActivityVideoBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
 import brunodles.animewatcher.explorer.AnimeExplorer
-import brunodles.animewatcher.explorer.EpisodeLink
+import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.loadImageInto
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -44,7 +44,7 @@ class PlayerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityVideoBinding
     private lateinit var player: Player
     private lateinit var cast: Cast
-    private var adapter: GenericAdapter<EpisodeLink, ItemEpisodeBinding>? = null
+    private var adapter: GenericAdapter<Episode, ItemEpisodeBinding>? = null
     private var explorer: AnimeExplorer? = null
     private val episodeController by lazy { EpisodeController(this) }
 
@@ -66,7 +66,7 @@ class PlayerActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(onNext = {
                     val episode = it.currentEpisode
-                    player.prepareVideo(episode.video)
+                    episode.video?.let { player.prepareVideo(it) }
                     binding.title.text = episode.description
                     adapter?.list = it.nextEpisodes
                     explorer = it
@@ -83,7 +83,7 @@ class PlayerActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         val manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.nextEpisodes.layoutManager = manager
-        adapter = GenericAdapter<EpisodeLink, ItemEpisodeBinding>(R.layout.item_episode) { viewHolder, item, index ->
+        adapter = GenericAdapter<Episode, ItemEpisodeBinding>(R.layout.item_episode) { viewHolder, item, index ->
             viewHolder.binder.description.text = item.description
             loadImageInto(item.image, viewHolder.binder.image)
             viewHolder.binder.root.setOnClickListener {
