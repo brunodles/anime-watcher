@@ -4,12 +4,17 @@ import brunodles.animewatcher.explorer.AnimeExplorer
 import brunodles.animewatcher.explorer.AnimeFactory
 import brunodles.animewatcher.explorer.CurrentEpisode
 import brunodles.animewatcher.explorer.EpisodeLink
+import brunodles.animewatcher.explorer.FACTORIES
 import brunodles.animewatcher.explorer.UrlFetcher
 import org.jsoup.nodes.Document
 
 object AnimaCurseFactory : AnimeFactory {
 
     private val URL_REGEX = Regex("animacurse\\.moe/?\\?p=")
+
+    init {
+        FACTORIES.add(this)
+    }
 
     override fun isEpisode(url: String): Boolean =
             url.contains(URL_REGEX)
@@ -35,3 +40,4 @@ object AnimaCurseFactory : AnimeFactory {
     }
 
 }
+

@@ -6,3 +6,5 @@ interface AnimeFactory {
 
     fun episode(url: String): AnimeExplorer
 }
+
+val FACTORIES = ArrayList<AnimeFactory>()

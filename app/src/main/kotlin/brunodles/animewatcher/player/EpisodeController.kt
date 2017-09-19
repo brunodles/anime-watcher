@@ -5,6 +5,7 @@ import android.content.Intent
 import android.util.Log
 import brunodles.animewatcher.BuildConfig
 import brunodles.animewatcher.explorer.AnimeExplorer
+import brunodles.animewatcher.player.CheckUrl
 import brunodles.animewatcher.persistence.Firebase
 import brunodles.animewatcher.persistence.Preferences
 import brunodles.rxfirebase.singleObservable
