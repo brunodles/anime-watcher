@@ -5,11 +5,13 @@ import brunodles.animewatcher.explorer.UrlFetcher
 import com.greghaskins.spectrum.Spectrum
 import com.greghaskins.spectrum.Spectrum.describe
 import com.greghaskins.spectrum.Spectrum.it
+import org.junit.Assert
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNotNull
 import org.junit.runner.RunWith
+import java.util.Arrays
 import java.util.regex.Pattern
 
 @RunWith(Spectrum::class)
@@ -18,10 +20,25 @@ class AnimaCurseExplorerTest {
     companion object {
         val EPISODE_DESCRIPTION = "Episódio 162 – Chopper em perigo! Antigo Deus x Sacerdote Shura!"
         val EPISODE_VIDEO_URL = "https://www.blogger.com/video-play.mp4?contentId=82d054d63f793095"
+        val VALID_URLS = Arrays.asList("https://animacurse.moe/?p=713", "animacurse.moe?p=123",
+                "http://animacurse.moe?p=321")
     }
 
     init {
         UrlFetcher.useCache = true
+
+        describe("AnimaCurseFactory") {
+
+            VALID_URLS.forEach { url ->
+                it("should be able to decode de url \"$url\"") {
+                    Assert.assertTrue(AnimaCurseFactory.isEpisode(url))
+                }
+            }
+
+            it("should not decode other urls") {
+                Assert.assertFalse(AnimaCurseFactory.isEpisode("animacurse.moe/?cat=123"))
+            }
+        }
 
         describe("The AnimaCurse Explorer") {
             val explorer = AnimaCurseFactory.episode("https://animacurse.moe/?p=713")

