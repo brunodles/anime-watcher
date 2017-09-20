@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
 import brunodles.animewatcher.databinding.ItemLoginBinding
 import brunodles.animewatcher.databinding.ItemUnknownBinding
-import brunodles.animewatcher.explorer.PageExplorer
+import brunodles.animewatcher.explorer.Episode
 
 typealias OnItemClick<ITEM_TYPE> = (ITEM_TYPE) -> Unit
 
@@ -23,7 +23,7 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val list: ArrayList<Any> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
-    var onPageExplorerClickListener: OnItemClick<PageExplorer>? = null
+    var onPageExplorerClickListener: OnItemClick<Episode>? = null
     var onLinkClickListener: OnItemClick<String>? = null
     var onLoginClickListener: OnItemClick<LoginRequest>? = null
 
@@ -42,7 +42,7 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int = when (list[position]) {
         is LoginRequest -> TYPE_LOGIN
-        is PageExplorer -> TYPE_EPISODE
+        is Episode -> TYPE_EPISODE
         is String -> TYPE_LINK
         else -> TYPE_UNKNOWN
     }
@@ -57,7 +57,7 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 it.onBind(list[position] as LoginRequest)
                 it.clickListener = onLoginClickListener
             }
-            TYPE_EPISODE -> (holder as EpisodeHolder).onBind(list[position] as PageExplorer)
+            TYPE_EPISODE -> (holder as EpisodeHolder).onBind(list[position] as Episode)
             TYPE_LINK -> (holder as LinkHolder).let {
                 it.onBind(list[position] as String)
                 it.clickListener = onLinkClickListener
@@ -90,7 +90,7 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class UnknownHolder(binder: ItemUnknownBinding) : ViewHolder<ItemUnknownBinding, Any>(binder)
     class LoginHolder(binder: ItemLoginBinding) : ViewHolder<ItemLoginBinding, LoginRequest>(binder)
-    class EpisodeHolder(binder: ItemEpisodeBinding) : ViewHolder<ItemEpisodeBinding, PageExplorer>(binder)
+    class EpisodeHolder(binder: ItemEpisodeBinding) : ViewHolder<ItemEpisodeBinding, Episode>(binder)
 
     class LinkHolder(binder: ItemUnknownBinding) : ViewHolder<ItemUnknownBinding, String>(binder) {
         override fun onBind(item: String) {

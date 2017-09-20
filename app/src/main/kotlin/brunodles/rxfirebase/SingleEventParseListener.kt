@@ -3,6 +3,7 @@ package brunodles.rxfirebase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
@@ -17,6 +18,12 @@ fun <T> DatabaseReference.singleObservable(valueClass: Class<T>): Observable<T?>
 fun DatabaseReference.singleObservable(): Observable<DataSnapshot> {
     return Observable.create { emitter ->
         this.addListenerForSingleValueEvent(SingleEventListener(emitter))
+    }
+}
+
+fun <T> Query.singleObservable(valueClass: Class<T>): Observable<T?> {
+    return Observable.create { emitter ->
+        this.addListenerForSingleValueEvent(SingleEventParseListener(emitter, valueClass))
     }
 }
 

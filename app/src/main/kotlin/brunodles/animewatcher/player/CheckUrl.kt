@@ -2,12 +2,17 @@ package brunodles.animewatcher.player
 
 import android.content.Intent
 import android.util.Log
-import brunodles.animewatcher.explorer.PageExplorer
-import brunodles.animewatcher.explorer.FACTORIES
+import brunodles.animacurse.AnimaCurseFactory
+import brunodles.animewatcher.explorer.Episode
+import brunodles.animewatcher.explorer.PageParserFactory
 
 object CheckUrl {
 
     val TAG = "CheckUrl"
+
+    init {
+        PageParserFactory.factories.add(AnimaCurseFactory)
+    }
 
     fun findUrl(intent: Intent): String? {
         if (intent.data != null)
@@ -17,8 +22,8 @@ object CheckUrl {
         return null
     }
 
-    fun videoInfo(url: String): PageExplorer? {
-        Log.d(TAG, "videoInfo " + url)
-        return FACTORIES.firstOrNull { it.isEpisode(url) }?.episode(url)
+    fun videoInfo(url: String): Episode? {
+        Log.d(TAG, "videoInfo $url\n Factories count = ${PageParserFactory.factories.size}")
+        return PageParserFactory.factories.firstOrNull { it.isEpisode(url) }?.episode(url)
     }
 }
