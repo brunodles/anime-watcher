@@ -6,20 +6,14 @@ import com.greghaskins.spectrum.Spectrum
 import com.greghaskins.spectrum.Spectrum.describe
 import com.greghaskins.spectrum.Spectrum.it
 import org.junit.Assert
-import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotEquals
-import org.junit.Assert.assertNotNull
 import org.junit.runner.RunWith
 import java.util.Arrays
-import java.util.regex.Pattern
 
 @RunWith(Spectrum::class)
 class AnimaCurseExplorerTest {
 
     companion object {
-        val EPISODE_DESCRIPTION = "Episódio 162 – Chopper em perigo! Antigo Deus x Sacerdote Shura!"
-        val EPISODE_VIDEO_URL = "https://www.blogger.com/video-play.mp4?contentId=82d054d63f793095"
         val VALID_URLS = Arrays.asList("https://animacurse.moe/?p=713", "animacurse.moe?p=123",
                 "http://animacurse.moe?p=321")
     }
@@ -29,98 +23,103 @@ class AnimaCurseExplorerTest {
 
         describe("AnimaCurseFactory") {
 
-            VALID_URLS.forEach { url ->
-                it("should be able to decode de url \"$url\"") {
-                    Assert.assertTrue(AnimaCurseFactory.isEpisode(url))
-                }
-            }
+            describe("when check isEpisode") {
 
-            it("should not decode other urls") {
-                Assert.assertFalse(AnimaCurseFactory.isEpisode("animacurse.moe/?cat=123"))
-            }
-        }
-
-        describe("The AnimaCurse Explorer") {
-            val explorer = AnimaCurseFactory.episode("https://animacurse.moe/?p=713")
-
-            describe("when currentEpisode") {
-                val episode = explorer.currentEpisode
-
-                it("should return the episode title") {
-                    assertEquals(EPISODE_DESCRIPTION, episode.description)
-                }
-
-                it("should return the  episode video url") {
-                    assertEquals(EPISODE_VIDEO_URL, episode.video)
-                }
-            }
-
-            describe("when nextEpisodes") {
-
-                val episodes = explorer.nextEpisodes
-
-                it("should find 4 episodes") {
-                    assertEquals(4, episodes.size)
-                }
-
-                it("should return the episodes in the right order") {
-                    val numberPattern = Pattern.compile("\\d+")
-                    val expectedOrder: IntArray = intArrayOf(163, 164, 165, 166)
-                    val order = episodes
-                            .map {
-                                val matcher = numberPattern.matcher(it.description)
-                                if (matcher.find())
-                                    Integer.valueOf(matcher.group())
-                                else
-                                    0
-                            }
-                            .toIntArray()
-                    assertArrayEquals(expectedOrder, order)
-                }
-
-                it("should return links for all episodes") {
-                    episodes.forEach {
-                        assertNotNull(it.link)
-                        assertNotEquals("", it.link)
+                VALID_URLS.forEach { url ->
+                    it("should be able to decode de url \"$url\"") {
+                        Assert.assertTrue(AnimaCurseFactory.isEpisode(url))
                     }
                 }
 
-                episodeShould(episodes, 0,
-                        "Episódio 163 – Sempre Misteriosa! Provação das cordas e provação do amor!?",
-                        "https://animacurse.moe/imgs/one-piece-episodio-163.webp",
-                        "https://animacurse.moe/?p=714")
-                episodeShould(episodes, 1,
-                        "Episódio 164 – Acendam a chama da sabedoria! Wiper, o Guerreiro",
-                        "https://animacurse.moe/imgs/one-piece-episodio-164.webp",
-                        "https://animacurse.moe/?p=715")
-                episodeShould(episodes, 2,
-                        "Episódio 165 – Terra Flutuante de Ouro, Jaya! Para o Santuário de Deus!",
-                        "https://animacurse.moe/imgs/one-piece-episodio-165.webp",
-                        "https://animacurse.moe/?p=716")
-                episodeShould(episodes, 3,
-                        "Episódio 166 – Véspera do Festival do Ouro! Afeta a Vearth",
-                        "https://animacurse.moe/imgs/one-piece-episodio-166.webp",
-                        "https://animacurse.moe/?p=717")
+                it("should not decode other urls") {
+                    Assert.assertFalse(AnimaCurseFactory.isEpisode("animacurse.moe/?cat=123"))
+                }
             }
 
+            describe("when episode") {
+                val currentEpisode = AnimaCurseFactory.episode("https://animacurse.moe/?p=713")
+
+                describe("when get currentEpisode") {
+
+                    checkEpisode(currentEpisode, Episode(
+                            number = 162,
+                            description = "Chopper em perigo! Antigo Deus x Sacerdote Shura!",
+                            animeName = "One Piece",
+                            //                            image = "https://animacurse.moe/imgs/one-piece-episodio-162.webp",
+                            link = "https://animacurse.moe/?p=713",
+                            video = "https://www.blogger.com/video-play.mp4?contentId=82d054d63f793095"))
+                }
+
+                describe("when get nextEpisodes") {
+
+                    val episodes = currentEpisode.nextEpisodes
+
+                    it("should find 4 episodes") {
+                        assertEquals(4, episodes.size)
+                    }
+
+                    episodeShould(episodes, 0, Episode(
+                            number = 163,
+                            description = "Sempre Misteriosa! Provação das cordas e provação do amor!?",
+                            animeName = "One Piece",
+                            image = "https://animacurse.moe/imgs/one-piece-episodio-163.webp",
+                            link = "https://animacurse.moe/?p=714"))
+                    episodeShould(episodes, 1, Episode(
+                            number = 164,
+                            description = "Acendam a chama da sabedoria! Wiper, o Guerreiro",
+                            animeName = "One Piece",
+                            image = "https://animacurse.moe/imgs/one-piece-episodio-164.webp",
+                            link = "https://animacurse.moe/?p=715"))
+                    episodeShould(episodes, 2, Episode(
+                            number = 165,
+                            description = "Terra Flutuante de Ouro, Jaya! Para o Santuário de Deus!",
+                            animeName = "One Piece",
+                            image = "https://animacurse.moe/imgs/one-piece-episodio-165.webp",
+                            link = "https://animacurse.moe/?p=716"))
+                    episodeShould(episodes, 3, Episode(
+                            number = 166,
+                            description = "Véspera do Festival do Ouro! Afeta a Vearth",
+                            animeName = "One Piece",
+                            image = "https://animacurse.moe/imgs/one-piece-episodio-166.webp",
+                            link = "https://animacurse.moe/?p=717"))
+                }
+
+            }
         }
     }
 
-    private fun episodeShould(episodes: List<Episode>, index: Int, title: String, imageUrl: String, link: String) {
+    private fun episodeShould(episodes: List<Episode>, index: Int, expected: Episode) {
         describe("when get episode at index [$index]") {
             val episode = episodes[index]
+            checkEpisode(episode, expected)
+        }
+    }
 
-            it("should return the correct title") {
-                assertEquals(title, episode.description)
-            }
+    private fun checkEpisode(episode: Episode, expected: Episode) {
+        it("should return the correct number") {
+            assertEquals(expected.number, episode.number)
+        }
 
+        it("should return the correct title") {
+            assertEquals(expected.description, episode.description)
+        }
+
+        if (expected.image != null)
             it("should return the correct image") {
-                assertEquals(imageUrl, episode.image)
+                assertEquals(expected.image, episode.image)
             }
 
-            it("should return the link") {
-                assertEquals(link, episode.link)
+        if (expected.video != null)
+            it("should return the correct video") {
+                assertEquals(expected.video, episode.video)
             }
+
+        it("should return the correct animeName") {
+            assertEquals(expected.animeName, episode.animeName)
+        }
+
+        it("should return the link") {
+            assertEquals(expected.link, episode.link)
         }
     }
 }
