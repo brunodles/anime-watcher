@@ -10,6 +10,9 @@ jacocoTestReport {
         csv.enabled true
         html.enabled true
     }
+    additionalSourceDirs = files(sourceSets.main.allSource.srcDirs)
+    sourceDirectories = files(sourceSets.main.allSource.srcDirs)
+    classDirectories =  files(sourceSets.main.output)
 }
 
 test {
@@ -17,5 +20,9 @@ test {
     reports {
         junitXml.enabled = true
         html.enabled = true
+    }
+    jacoco {
+        append = false
+        destinationFile = file("$buildDir/jacoco/**.exec")
     }
 }
