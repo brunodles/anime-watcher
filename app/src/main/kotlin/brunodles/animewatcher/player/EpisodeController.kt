@@ -49,7 +49,8 @@ class EpisodeController(val context: Context) {
 
     private fun fetchNextEpisodes(it: PageExplorer) {
         Observable.fromIterable(it.nextEpisodes)
-                .map { it.link }
+                .filter { it.link != null }
+                .map { it.link!! }
                 .flatMap(this::findVideoInfo)
                 .subscribeBy(
                         onNext = {
