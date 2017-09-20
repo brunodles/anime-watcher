@@ -4,7 +4,10 @@ interface PageParser {
 
     fun isEpisode(url: String): Boolean
 
-    fun episode(url: String): PageExplorer
+    fun episode(url: String): Episode
 }
 
-val FACTORIES = ArrayList<PageParser>()
+object PageParserFactory {
+    val factories = ArrayList<PageParser>()
+
+}
