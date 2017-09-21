@@ -52,13 +52,15 @@ class EpisodeController(val context: Context) {
         Log.d(TAG, "fetchNextEpisodes: $episode")
         if (episode.nextEpisodes == null) return
         Observable.fromIterable(episode.nextEpisodes)
+                .doOnNext(Firebase::addVideo)
                 .filter { it.link != null }
                 .map { it.link!! }
                 .flatMap(this::findVideoInfo)
                 .subscribeBy(
                         onNext = {
                             if (BuildConfig.DEBUG)
-                                Log.d(TAG, "fetchNextEpisodes: fetched episode $it")
+                                Log.d(TAG, "fetchNextEpisodes: fetched episode ${it.number}")
+
                         },
                         onError = {
                             Log.e(TAG, "fetchNextEpisodes: failed to fetch next episodes", it)

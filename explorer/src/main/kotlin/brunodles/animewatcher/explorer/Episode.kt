@@ -24,6 +24,6 @@ data class Episode(
             "image" to image,
             "video" to video,
             "link" to link,
-            "nextEpisodes" to nextEpisodes//?.map { it.link }?.toList()
+            "nextEpisodes" to nextEpisodes
     ).filterValues { it != null }
 }

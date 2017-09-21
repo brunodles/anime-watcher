@@ -9,7 +9,7 @@ import io.fabric.sdk.android.Fabric;
 class Application : Application() {
     override fun onCreate() {
         super.onCreate()
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+        FirebaseDatabase.getInstance().setPersistenceEnabled(!BuildConfig.DEBUG)
         Fabric.with(this, Crashlytics())
 
         CaocConfig.Builder.create()

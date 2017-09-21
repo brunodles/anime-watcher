@@ -1,5 +1,6 @@
 package brunodles.animewatcher.persistence
 
+import brunodles.animewatcher.BuildConfig
 import brunodles.animewatcher.explorer.Episode
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -12,12 +13,12 @@ object Firebase {
     private val REF_HISTORY = "history"
     private val REF_NUMBER = "number"
 
-    fun videoRef(url: String) = FirebaseDatabase.getInstance().getReference(REF_VIDEO)
+    fun videoRef(url: String) = firebaseRef().child(REF_VIDEO)
             .child(fixUrlToFirebase(url))
             .orderByChild(REF_NUMBER)
 
     fun addVideo(episode: Episode) {
-        FirebaseDatabase.getInstance().getReference(REF_VIDEO)
+        firebaseRef().child(REF_VIDEO)
                 .child(fixUrlToFirebase(episode.link!!)).updateChildren(episode.toMap())
 //        episode.nextEpisodes?.forEach { addVideo(it) }
     }
@@ -28,6 +29,8 @@ object Firebase {
     }
 
     fun history(currentUser: FirebaseUser) =
-            FirebaseDatabase.getInstance().getReference(REF_USERS).child(currentUser.uid)
+            firebaseRef().child(REF_USERS).child(currentUser.uid)
                     .child(REF_HISTORY)
+
+    private fun firebaseRef() = FirebaseDatabase.getInstance().getReference(BuildConfig.BUILD_TYPE)
 }
