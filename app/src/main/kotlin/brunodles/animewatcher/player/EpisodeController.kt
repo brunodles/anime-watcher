@@ -43,8 +43,7 @@ class EpisodeController(val context: Context) {
                                     CheckUrl.videoInfo(url)
                                             ?: throw RuntimeException("Can't find video info")
                                 }
-//                                .doOnNext { ref.setValue(it) }
-                                .doOnNext { Firebase.addVideo(it) }
+                                .doOnNext(Firebase::addVideo)
                 )
                 .map { it ?: throw RuntimeException("Can't find video info") }
     }

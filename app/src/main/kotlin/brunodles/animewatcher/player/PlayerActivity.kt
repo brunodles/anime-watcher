@@ -65,8 +65,8 @@ class PlayerActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(onNext = {
                     it.video?.let { player.prepareVideo(it) }
-                    binding.title.text = it.description
-                    adapter?.list = it.nextEpisodes
+                    binding.title.text = "${it.number} - ${it.description}"
+                    adapter?.list = it.nextEpisodes ?: listOf()
                     explorer = it
                 }, onError = {
                     if (binding.root != null) {
@@ -82,7 +82,7 @@ class PlayerActivity : AppCompatActivity() {
         val manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.nextEpisodes.layoutManager = manager
         adapter = GenericAdapter<Episode, ItemEpisodeBinding>(R.layout.item_episode) { viewHolder, item, index ->
-            viewHolder.binder.description.text = item.description
+            viewHolder.binder.description.text = "${item.number} - ${item.description}"
             loadImageInto(item.image, viewHolder.binder.image)
             viewHolder.binder.root.setOnClickListener {
                 val intent = Intent(this, PlayerActivity::class.java)

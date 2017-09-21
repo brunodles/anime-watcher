@@ -7,20 +7,23 @@ import com.google.firebase.database.FirebaseDatabase
 
 object Firebase {
 
-    private val REF_VIDEO = "video"
+    private val REF_VIDEO = "videos"
     private val REF_USERS = "users"
     private val REF_HISTORY = "history"
+    private val REF_NUMBER = "number"
 
     fun videoRef(url: String) = FirebaseDatabase.getInstance().getReference(REF_VIDEO)
             .child(fixUrlToFirebase(url))
-            .orderByChild("number")
+            .orderByChild(REF_NUMBER)
 
-    fun addVideo(episode: Episode) = FirebaseDatabase.getInstance().getReference(REF_VIDEO)
-            .child(fixUrlToFirebase(episode.link!!)).setValue(episode)
+    fun addVideo(episode: Episode) {
+        FirebaseDatabase.getInstance().getReference(REF_VIDEO)
+                .child(fixUrlToFirebase(episode.link!!)).updateChildren(episode.toMap())
+//        episode.nextEpisodes?.forEach { addVideo(it) }
+    }
 
     fun addToHistory(url: String) {
         val currentUser = FirebaseAuth.getInstance().currentUser ?: return
-
         history(currentUser).push().setValue(url)
     }
 
