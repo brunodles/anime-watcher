@@ -45,7 +45,7 @@ class AnimaCurseExplorerTest {
                             number = 162,
                             description = "Chopper em perigo! Antigo Deus x Sacerdote Shura!",
                             animeName = "One Piece",
-                            //                            image = "https://animacurse.moe/imgs/one-piece-episodio-162.webp",
+                            image = "https://animacurse.moe/imgs/one-piece-episodio-162.webp",
                             link = "https://animacurse.moe/?p=713",
                             video = "https://www.blogger.com/video-play.mp4?contentId=82d054d63f793095"))
                 }

@@ -11,6 +11,7 @@ object AnimaCurseFactory : PageParser {
 
     private val URL_REGEX = Regex("animacurse\\.moe/?\\?p=")
     private val TITLE_REGEX = Pattern.compile(".*?(\\d+)\\s.\\s(.+)")
+    private const val IMAGE_URL_FORMAT = "https://animacurse.moe/imgs/one-piece-episodio-%s.webp"
 
     init {
         PageParserFactory.factories.add(this)
@@ -27,15 +28,16 @@ object AnimaCurseFactory : PageParser {
 
     private fun currentEpisode(doc: Document, url: String, nextEpisodes: List<Episode>): Episode {
         val src = doc.select("video source").first().attr("src")
-        val text = doc.select(".episodename h1").first().text()
-        val animeName = doc.select(".animename h1").first().text()
+        val text = doc.select(".details h2").first().text()
+        val animeName = doc.select(".details h1").first().text()
         val (number, description) = splitNumberDescription(text)
         return Episode(number = number,
                 description = description,
                 animeName = animeName,
                 link = url,
                 video = src,
-                nextEpisodes = nextEpisodes
+                nextEpisodes = nextEpisodes,
+                image = String.format(IMAGE_URL_FORMAT, number)
         )
     }
 
@@ -48,17 +50,17 @@ object AnimaCurseFactory : PageParser {
     }
 
     private fun nextEpisodes(doc: Document): List<Episode> {
-        return doc.select(".episode").map {
-            val src = it.select("#epimg img").first().attr("src")
-            val text = it.select("#epnum").first().text()
-            val animeName = it.select("#epseries").first().text()
-            val link = it.select("a").first().attr("href")
+        return doc.select(".thumbnail").map {
+            val img = it.select("img").first().attr("src")
+            val text = it.select(".text a.title span.episode").first().text()
+            val animeName = it.select(".text a.title div.limit").first().text()
+            val link = it.select(".overlay a.play").first().attr("href")
             val (number, description) = splitNumberDescription(text)
             Episode(number = number,
                     description = description,
                     animeName = animeName,
                     link = link,
-                    image = src
+                    image = img
             )
         }.toList()
     }
