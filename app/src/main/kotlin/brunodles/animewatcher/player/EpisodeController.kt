@@ -43,7 +43,7 @@ class EpisodeController(val context: Context) {
                                     CheckUrl.videoInfo(url)
                                             ?: throw RuntimeException("Can't find video info")
                                 }
-                                .doOnNext(Firebase::addVideo)
+                                .doOnNext { Firebase.addVideo(it) }
                 )
                 .map { it ?: throw RuntimeException("Can't find video info") }
     }
@@ -52,7 +52,7 @@ class EpisodeController(val context: Context) {
         Log.d(TAG, "fetchNextEpisodes: $episode")
         if (episode.nextEpisodes == null) return
         Observable.fromIterable(episode.nextEpisodes)
-                .doOnNext(Firebase::addVideo)
+                .doOnNext { Firebase.addVideo(it) }
                 .filter { it.link != null }
                 .map { it.link!! }
                 .flatMap(this::findVideoInfo)
