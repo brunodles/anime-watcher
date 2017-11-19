@@ -13,15 +13,16 @@ object Firebase {
     private val REF_HISTORY = "history"
     private val REF_NUMBER = "number"
 
-    fun videoRef(url: String) = firebaseRef().child(REF_VIDEO)
+    /** Return the reference to all videos mapped by the firebase **/
+    fun videosRef() = firebaseRef().child(REF_VIDEO)
+
+    /** Return the reference to a single video **/
+    fun videoRef(url: String) = videosRef()
             .child(fixUrlToFirebase(url))
             .orderByChild(REF_NUMBER)
 
-    fun addVideo(episode: Episode) {
-        firebaseRef().child(REF_VIDEO)
-                .child(fixUrlToFirebase(episode.link!!)).updateChildren(episode.toMap())
-//        episode.nextEpisodes?.forEach { addVideo(it) }
-    }
+    fun addVideo(episode: Episode) =
+            videosRef().child(fixUrlToFirebase(episode.link!!)).updateChildren(episode.toMap())
 
     fun addToHistory(url: String) {
         val currentUser = FirebaseAuth.getInstance().currentUser ?: return
