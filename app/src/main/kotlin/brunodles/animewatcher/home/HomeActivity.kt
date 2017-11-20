@@ -9,11 +9,7 @@ import android.util.Log
 import android.view.View
 import brunodles.animewatcher.R
 import brunodles.animewatcher.databinding.ActivityHomeBinding
-import brunodles.animewatcher.explorer.Episode
-import brunodles.animewatcher.persistence.Firebase
 import brunodles.animewatcher.player.PlayerActivity
-import brunodles.rxfirebase.observableChild
-import brunodles.rxfirebase.singleObservable
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -23,7 +19,6 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import io.reactivex.rxkotlin.subscribeBy
 
 
 class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
@@ -122,7 +117,7 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
 
         homeAdapter.setUser(user)
 //        homeAdapter.clear()
-//        Firebase.history(user).observableChild()
+//        Firebase.history(user).observableChildAdded()
 //                .map { it.getValue(String::class.java)!! }
 //                .doOnNext { Log.d(TAG, "updateUI: ${it}") }
 //                .flatMap { Firebase.videoRef(it).singleObservable(Episode::class.java) }

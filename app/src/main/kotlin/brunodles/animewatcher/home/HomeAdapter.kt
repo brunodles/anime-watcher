@@ -12,11 +12,15 @@ import brunodles.animewatcher.databinding.ItemUnknownBinding
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.loadImageInto
 import brunodles.animewatcher.persistence.Firebase
+import brunodles.rxfirebase.EventType
+import brunodles.rxfirebase.TypedEvent
+import brunodles.rxfirebase.singleObservable
+import brunodles.rxfirebase.typedChildObserver
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import java.lang.ref.WeakReference
 
 typealias OnItemClick<ITEM_TYPE> = (ITEM_TYPE) -> Unit
@@ -145,68 +149,42 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     fun setUser(user: FirebaseUser) {
         Firebase.history(user)
                 .limitToLast(100)
-                .addChildEventListener(object : ChildEventListener {
-                    override fun onCancelled(p0: DatabaseError?) {
-                        //                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                    }
-
-                    override fun onChildMoved(p0: DataSnapshot?, p1: String?) {
-                        //                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                    }
-
-                    override fun onChildChanged(linkData: DataSnapshot?, p1: String?) {
-                        linkData?.getValue(String::class.java)?.let { link ->
-                            Firebase.videoRef(link).addListenerForSingleValueEvent(object :
-                                    ValueEventListener {
-                                override fun onCancelled(p0: DatabaseError?) {
-                                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                .typedChildObserver(String::class.java)
+                .subscribeOn(Schedulers.io())
+                .flatMap { link ->
+                    Firebase.videoRef(link.element)
+                            .singleObservable(Episode::class.java)
+                            .map { TypedEvent(link.event, it, link.key) }
+                }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                        onNext = {
+                            when (it.event) {
+                                EventType.CHANGED -> {
+                                    val index = list.replace(it.element, it.key)
+                                    if (index >= 0) notifyItemChanged(index)
                                 }
-
-                                override fun onDataChange(episodeData: DataSnapshot?) {
-                                    episodeData?.getValue(Episode::class.java)?.let {
-                                        val index = list.replace(it, linkData.key)
-                                        if (index >= 0)
-                                            notifyItemChanged(index)
-                                    }
+                                EventType.MOVED -> TODO()
+                                EventType.ADDED -> {
+                                    val previousSize = list.size
+                                    val index = list.add(it.element, it.key)
+                                    if (index >= 0 && previousSize == 0)
+                                        notifyItemChanged(index)
+                                    else
+                                        notifyItemInserted(index)
                                 }
-
-                            })
+                                EventType.REMOVED -> {
+                                    val index = list.removeByKey(it.key)
+                                    if (list.isEmpty())
+                                        notifyItemChanged(0)
+                                    else
+                                        notifyItemRemoved(index)
+                                }
+                            }
+                        },
+                        onError = {
+                            Log.e(TAG, "setUser: ", it)
                         }
-                    }
-
-                    override fun onChildAdded(linkData: DataSnapshot?, p1: String?) {
-                        Log.d(TAG, "onChildAdded: key = ${linkData?.key}")
-                        linkData?.getValue(String::class.java)?.let { link ->
-                            Firebase.videoRef(link).addListenerForSingleValueEvent(object :
-                                    ValueEventListener {
-                                override fun onCancelled(p0: DatabaseError?) {
-                                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                                }
-
-                                override fun onDataChange(episodeData: DataSnapshot?) {
-                                    episodeData?.getValue(Episode::class.java)?.let {
-                                        val previousSize = list.size
-                                        val index = list.add(it, linkData.key)
-                                        if (index >= 0 && previousSize == 0)
-                                            notifyItemChanged(index)
-                                        else
-                                            notifyItemInserted(index)
-                                    }
-                                }
-
-                            })
-                        }
-                    }
-
-                    override fun onChildRemoved(p0: DataSnapshot?) {
-                        //                        p0?.getValue(String::class.java)?.let { link ->
-                        p0?.key?.let {
-                            val index = list.removeByKey(it)
-                            Log.d(TAG, "onChildRemoved: key = $it at $index")
-                            notifyItemRemoved(index)
-                        }
-                    }
-
-                })
+                )
     }
 }
