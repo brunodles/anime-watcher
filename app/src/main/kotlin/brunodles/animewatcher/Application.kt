@@ -1,6 +1,7 @@
 package brunodles.animewatcher
 
 import android.app.Application
+import android.os.StrictMode
 import cat.ereza.customactivityoncrash.config.CaocConfig
 import com.google.firebase.database.FirebaseDatabase
 import com.crashlytics.android.Crashlytics;
@@ -24,5 +25,14 @@ class Application : Application() {
 //                .errorActivity(YourCustomErrorActivity::class.java) //default: null (default error activity)
 //                .eventListener(YourCustomEventListener()) //default: null
                 .apply()
+
+        if (BuildConfig.DEBUG) {
+            StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
+                    .detectAll()
+                    .penaltyLog()
+                    .penaltyFlashScreen()
+                    .penaltyDeath()
+                    .build())
+        }
     }
 }
