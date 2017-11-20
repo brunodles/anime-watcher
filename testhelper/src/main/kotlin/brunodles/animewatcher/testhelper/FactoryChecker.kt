@@ -2,31 +2,30 @@ package brunodles.animewatcher.testhelper
 
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.PageParser
-import brunodles.animewatcher.explorer.UrlFetcher
-import com.greghaskins.spectrum.Spectrum
 import com.greghaskins.spectrum.Spectrum.describe
 import com.greghaskins.spectrum.Spectrum.it
 import org.junit.Assert
 import org.junit.Assert.assertEquals
-import org.junit.runner.RunWith
-import java.util.Arrays
 
 object FactoryChecker {
 
-    fun checkFactory(pageParser: PageParser, VALID_URLS:Array<String>,
-                     INVALID_URLS:Array<String>, currentEpisode: Episode,
-                     nextEpisodes: Array<Episode>) {
+    fun checkFactory(pageParser: PageParser, testData: TestData) =
+            checkFactory(pageParser, testData.validUrls, testData.invalidUrls,
+                    testData.currentEpisode)
+
+    fun checkFactory(pageParser: PageParser, validUrls: Array<String>,
+                     invalidUrls: Array<String>, currentEpisode: Episode) {
         describe(pageParser::class.java.simpleName) {
 
             describe("when check isEpisode") {
 
-                VALID_URLS.forEach { url ->
+                validUrls.forEach { url ->
                     it("should be able to decode the url \"$url\"") {
                         Assert.assertTrue(pageParser.isEpisode(url))
                     }
                 }
 
-                INVALID_URLS.forEach { url ->
+                invalidUrls.forEach { url ->
                     it("should not decode other the url \"$url\"") {
                         Assert.assertFalse(pageParser.isEpisode(url))
                     }
@@ -34,7 +33,7 @@ object FactoryChecker {
             }
 
             describe("when episode") {
-                val episode = pageParser.episode(VALID_URLS[0])
+                val episode = pageParser.episode(validUrls[0])
 
                 describe("when get currentEpisode") {
 
@@ -44,13 +43,14 @@ object FactoryChecker {
                 describe("when get nextEpisodes") {
 
                     val episodes = episode.nextEpisodes
+                    val expectedNextEpisodes = currentEpisode.nextEpisodes
 
-                    it("should find ${nextEpisodes.size} episodes") {
-                        assertEquals(nextEpisodes.size, episodes.size)
+                    it("should find ${expectedNextEpisodes.size} episodes") {
+                        assertEquals(expectedNextEpisodes.size, episodes.size)
                     }
 
-                    for (i in 0 until nextEpisodes.size)
-                        episodeShould(episodes, i, nextEpisodes[i])
+                    for (i in 0 until expectedNextEpisodes.size)
+                        episodeShould(episodes, i, expectedNextEpisodes[i])
                 }
 
             }
