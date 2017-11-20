@@ -1,4 +1,4 @@
-include ':explorer'
+include ':explorer', ':testhelper'
 //include ':testcacher'
 include ':animacurse'
 //include ':animesproject', ':anitubex', ':onepiecex', ':animakai'
