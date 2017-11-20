@@ -58,6 +58,7 @@ dependencies {
     compile "com.google.firebase:firebase-auth:$playservices_version"
 
     compile "com.firebaseui:firebase-ui-database:2.3.0"
+//    compile "com.androidhuman.rxfirebase2:firebase-database-kotlin:${playservices_version}.0"
 
     compile "com.google.android.gms:play-services-auth:$playservices_version"
     compile "com.google.android.gms:play-services-cast-framework:$playservices_version"
