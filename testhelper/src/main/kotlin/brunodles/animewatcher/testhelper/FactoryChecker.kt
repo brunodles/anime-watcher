@@ -14,7 +14,7 @@ object FactoryChecker {
                     testData.currentEpisode)
 
     fun checkFactory(pageParser: PageParser, validUrls: Array<String>,
-                     invalidUrls: Array<String>, currentEpisode: Episode) {
+                     invalidUrls: Array<String>, expectedEpisode: Episode) {
         describe(pageParser::class.java.simpleName) {
 
             describe("when check isEpisode") {
@@ -36,35 +36,29 @@ object FactoryChecker {
                 val episode = pageParser.episode(validUrls[0])
 
                 describe("when get currentEpisode") {
-
-                    checkEpisode(currentEpisode, episode)
+                    checkEpisode(expectedEpisode, episode)
                 }
 
                 describe("when get nextEpisodes") {
 
                     val episodes = episode.nextEpisodes
-                    val expectedNextEpisodes = currentEpisode.nextEpisodes
+                    val expectedNextEpisodes = expectedEpisode.nextEpisodes
 
                     it("should find ${expectedNextEpisodes.size} episodes") {
                         assertEquals(expectedNextEpisodes.size, episodes.size)
                     }
 
-                    for (i in 0 until expectedNextEpisodes.size)
-                        episodeShould(episodes, i, expectedNextEpisodes[i])
+                    for (index in 0 until expectedNextEpisodes.size)
+                        describe("when get episode at index [$index]") {
+                            checkEpisode(expectedNextEpisodes[index], episodes[index])
+                        }
                 }
 
             }
         }
     }
 
-    private fun episodeShould(episodes: List<Episode>, index: Int, expected: Episode) {
-        describe("when get episode at index [$index]") {
-            val episode = episodes[index]
-            checkEpisode(episode, expected)
-        }
-    }
-
-    private fun checkEpisode(episode: Episode, expected: Episode) {
+    private fun checkEpisode(expected: Episode, episode: Episode) {
         it("should return the correct number") {
             assertEquals(expected.number, episode.number)
         }
