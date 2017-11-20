@@ -9,7 +9,7 @@ import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import java.lang.IllegalArgumentException
 
-fun <T> DatabaseReference.singleObservable(valueClass: Class<T>): Observable<T?> {
+fun <T> DatabaseReference.singleObservable(valueClass: Class<T>): Observable<T> {
     return Observable.create { emitter ->
         this.addListenerForSingleValueEvent(SingleEventParseListener(emitter, valueClass))
     }
@@ -21,7 +21,7 @@ fun DatabaseReference.singleObservable(): Observable<DataSnapshot> {
     }
 }
 
-fun <T> Query.singleObservable(valueClass: Class<T>): Observable<T?> {
+fun <T> Query.singleObservable(valueClass: Class<T>): Observable<T> {
     return Observable.create { emitter ->
         this.addListenerForSingleValueEvent(SingleEventParseListener(emitter, valueClass))
     }
