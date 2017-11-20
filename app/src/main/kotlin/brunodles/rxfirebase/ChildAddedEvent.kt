@@ -5,30 +5,29 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.Query
-import com.google.firebase.database.ValueEventListener
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import java.lang.IllegalArgumentException
 
-fun DatabaseReference.observableChild(): Observable<DataSnapshot> {
+fun DatabaseReference.observableChildAdded(): Observable<DataSnapshot> {
     return Observable.create { emitter ->
-        this.addChildEventListener(EventListener(emitter))
+        this.addChildEventListener(ChildAddedListener(emitter))
     }
 }
 
-fun <T> DatabaseReference.observableChild(valueClass: Class<T>): Observable<T?> {
+fun <T> DatabaseReference.observableChildAdded(valueClass: Class<T>): Observable<T?> {
     return Observable.create { emitter ->
-        this.addChildEventListener(EventParseListener(emitter, valueClass))
+        this.addChildEventListener(ChildAddedParseListener(emitter, valueClass))
     }
 }
 
-fun <T> Query.observableChild(valueClass: Class<T>): Observable<T?> {
+fun <T> Query.observableChildAdded(valueClass: Class<T>): Observable<T?> {
     return Observable.create { emitter ->
-        this.addChildEventListener(EventParseListener(emitter, valueClass))
+        this.addChildEventListener(ChildAddedParseListener(emitter, valueClass))
     }
 }
 
-private class EventListener(val emitter: ObservableEmitter<DataSnapshot>) : ChildEventListener {
+private class ChildAddedListener(val emitter: ObservableEmitter<DataSnapshot>) : ChildEventListener {
     override fun onChildMoved(p0: DataSnapshot?, p1: String?) {
     }
 
@@ -49,7 +48,7 @@ private class EventListener(val emitter: ObservableEmitter<DataSnapshot>) : Chil
 
 }
 
-private class EventParseListener<T>(val emitter: ObservableEmitter<T?>, val valueClass: Class<T>) :
+private class ChildAddedParseListener<T>(val emitter: ObservableEmitter<T?>, val valueClass: Class<T>) :
         ChildEventListener {
     override fun onChildMoved(p0: DataSnapshot?, p1: String?) {
     }
