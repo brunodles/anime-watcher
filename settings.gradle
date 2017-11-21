@@ -3,6 +3,7 @@ include ':explorer', ':testhelper'
 include ':animacurse'
 //include ':animakai' // changed to new site
 include ':animesproject'
-//include ':anitubex', ':onepiecex',
+include ':anitubex'
+//include ':onepiecex'
 include ':app'
 //include ':cli'
