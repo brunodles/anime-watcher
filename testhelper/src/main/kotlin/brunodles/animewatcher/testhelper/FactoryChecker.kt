@@ -63,7 +63,7 @@ object FactoryChecker {
             assertEquals(expected.number, episode.number)
         }
 
-        it("should return the correct title") {
+        it("should return the correct description") {
             assertEquals(expected.description, episode.description)
         }
 
