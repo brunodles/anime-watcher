@@ -92,13 +92,13 @@
     }
 </script> 
   <!-- Theme --> 
-  <link href="http://www.anitubex.com/cdn/assets/css/theme.min.css?1" rel="stylesheet"> 
+  <link href="http://www.anitubex.com/cdn/assets/css/theme.min.css?2785" rel="stylesheet"> 
   <!-- Skin --> 
-  <link href="http://www.anitubex.com/cdn/assets/css/themes/bootstrap.css?1" rel="stylesheet"> 
-  <link href="http://www.anitubex.com/cdn/assets/css/custom.css?5" rel="stylesheet"> 
+  <link href="http://www.anitubex.com/cdn/assets/css/themes/bootstrap.css?2785" rel="stylesheet"> 
+  <link href="http://www.anitubex.com/cdn/assets/css/custom.css?177789" rel="stylesheet"> 
   <!-- Bootstrap --> 
-  <link href="http://www.anitubex.com/cdn/assets/css/bootstrap.min.css?2" rel="stylesheet"> 
-  <link href="http://www.anitubex.com/cdn/assets/css/themes/theme.min.css?1" rel="stylesheet"> 
+  <link href="http://www.anitubex.com/cdn/assets/css/bootstrap.min.css?2785" rel="stylesheet"> 
+  <link href="http://www.anitubex.com/cdn/assets/css/themes/theme.min.css?27851" rel="stylesheet"> 
   <!-- Others --> 
   <link href="http://www.anitubex.com/cdn/assets/img/favicon.ico" rel="shortcut icon" type="image/x-icon"> 
   <link href="http://www.anitubex.com/cdn/assets/img/logo.png" rel="image_src" type="image/jpeg"> 
@@ -107,35 +107,6 @@
  </head> 
  <body>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script> 
-  <style type="text/css">
-#fbox-background{display:none;background:rgba(0,0,0,0.8);width:100%;height:100%;position:fixed;top:0;left:0;z-index:99999}#fbox-close{width:100%;height:100%}#fbox-display{background:#eaeaea;border:5px solid #828282;width:340px;height:230px;position:absolute;top:32%;left:37%;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px}#fbox-button{float:right;cursor:pointer;position:absolute;right:0;top:0}#fbox-button:before{content:"Fechar";padding:5px 8px;background:#828282;color:#eaeaea;font-weight:700;font-size:10px;font-family:Tahoma}#fbox-link,#fbox-link a.visited,#fbox-link a,#fbox-link a:hover{color:#aaa;font-size:9px;text-decoration:none;text-align:center;padding:5px}
-</style> 
-  <script type="text/javascript">
-//<![CDATA[
-jQuery.cookie=function(a,b,c){if(arguments.length>1&&"[object Object]"!==String(b)){if(c=jQuery.extend({},c),null!==b&&void 0!==b||(c.expires=-1),"number"==typeof c.expires){var d=c.expires,e=c.expires=new Date;e.setDate(e.getDate()+d)}return b=String(b),document.cookie=[encodeURIComponent(a),"=",c.raw?b:encodeURIComponent(b),c.expires?"; expires="+c.expires.toUTCString():"",c.path?"; path="+c.path:"",c.domain?"; domain="+c.domain:"",c.secure?"; secure":""].join("")}c=b||{};var f,g=c.raw?function(a){return a}:decodeURIComponent;return(f=new RegExp("(?:^|; )"+encodeURIComponent(a)+"=([^;]*)").exec(document.cookie))?g(f[1]):null};
-//]]>
-</script> 
-  <script type="text/javascript">
-jQuery(document).ready(function($){
-if($.cookie('popup_facebook_box') != 'yes'){
-$('#fbox-background').delay(5000).fadeIn('medium');
-$('#fbox-button, #fbox-close').click(function(){
-$('#fbox-background').stop().fadeOut('medium');
-});
-}
-$.cookie('popup_facebook_box', 'yes', { path: '/', expires: 7 });
-});
-</script> 
-  <div id="fbox-background"> 
-   <div id="fbox-close"> 
-   </div> 
-   <div id="fbox-display"> 
-    <div id="fbox-button"> 
-    </div> 
-    <iframe allowtransparency="true" frameborder="0" scrolling="no" src="//www.facebook.com/plugins/likebox.php?
-href=https://www.facebook.com/Anitube-X-1130982463679087&amp;width=320&amp;height=255&amp;colorscheme=light&amp;show_faces=true&amp;show_border=false&amp;stream=false&amp;header=false" style="border: none; overflow: hidden; background: #fff; width: 320px; height: 200px;"></iframe> 
-   </div> 
-  </div> 
   <div id="fb-root"></div> 
   <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -219,13 +190,18 @@ href=https://www.facebook.com/Anitube-X-1130982463679087&amp;width=320&amp;heigh
         <button type="submit" class="btn btn-success"><em class="icon-ok"></em> Entrar</button> 
         <a class="btn btn-warning" href="http://www.anitubex.com/registro/"><em class="icon-user"></em> Criar Conta</a> 
        </form> 
-      </div> 
+      </div>
+      <script language="JavaScript">
+function RWS(str){
+  return str.replace(/^\s+/,"").replace(/\s+$/,"").replace(/\s+/g," ");
+}
+</script> 
       <div class="infobar-collapse collapse"> 
        <div class="infobar-right"> 
         <div class="searchbar radius-3"> 
          <form action="/buscar/" method="post" id="b"> 
-          <input type="hidden" name="busqueda" value=""> 
-          <input type="text" id="q" name="busqueda" value="" class="searchbar-input radius-3" placeholder="Anime a buscar..."> 
+          <input type="hidden" name="busqueda" onchange="this.value=RWS(this.value)"> 
+          <input type="text" id="q" name="busqueda" onchange="this.value=RWS(this.value)" class="searchbar-input radius-3" placeholder="Anime a buscar..."> 
           <button class="searchbar-btn" type="submit" title="Pesquisar"> <i class="fa fa-search"></i> </button> 
          </form> 
         </div> 
@@ -239,7 +215,14 @@ href=https://www.facebook.com/Anitube-X-1130982463679087&amp;width=320&amp;heigh
   <div id="main-container" class="main-container container" style="position: relative;top: 10px;"> 
    <div class="row ng-scope"> 
    </div> 
-   <div class="col-md-8">
+   <div class="panel panel-success"> 
+    <div class="panel-body"> 
+     <div class="timeline-panel"> 
+      <a href="http://www.enigmu.com/site.php" target="_blank"><img src="https://i.imgur.com/5zeZ3th.jpg" width="100%" height="100" alt=""></a>
+     </div>
+    </div>
+   </div>
+   <div class="col-md-8"> 
     <div class="panel panel-success">
      <div class="panel-heading"> 
       <h1 style="
@@ -264,61 +247,52 @@ href=https://www.facebook.com/Anitube-X-1130982463679087&amp;width=320&amp;heigh
         </div> 
         <link href="http://www.anitubex.com/css/style.css?2" rel="stylesheet">
         <div class="tab-tr" id="t1"> 
-         <div class="like-btn 0">
-          Like
-         </div> 
-         <div class="dislike-btn 0"></div> 
-         <div class="stat-cnt"> 
-          <div class="rate-count">
-           9 Votos
-          </div> 
-          <div class="stat-bar"> 
-           <div class="bg-green" style="width: 100%;"></div> 
-           <div class="bg-red" style="width: 0%"></div> 
-          </div>
-          <!-- stat-bar --> 
-          <div class="dislike-count">
-           0
-          </div> 
-          <div class="like-count">
-           9
-          </div> 
-         </div>
-         <!-- /stat-cnt --> 
+         <a href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=http://www.anitubex.com/one-piece-1&amp;p[images][0]=http://www.4icdn.com/img/animes/RSKV-large.jpg&amp;p[title]=One Piece 1 - AniTube! Animes Online&amp;p[summary]=" target="_blank"><button class="btn btn-icon btn-facebook margen-right-6"><em class="icon-facebook"></em> Facebook</button></a> 
+         <p id="breadcrumbs" style=" width: auto; height: 30px; padding: 0 15px 0 30px; float: right; margin-right: 10px; margin-top: 15px; cursor: pointer; color: #333333; line-height: 30px; border: #000 1px solid; border-radius: 2px; font-size: 13px; "> <span xmlns:v="http://rdf.data-vocabulary.org/#"> <span typeof="v:Breadcrumb"> <a href="http://www.anitubex.com/" rel="v:url" property="v:title">Anitube</a> » <span rel="v:child" typeof="v:Breadcrumb"> <a href="http://www.anitubex.com/anime/one-piece.html" rel="v:url" property="v:title">One Piece</a> » <span class="breadcrumb_last">One Piece 1</span></span></span></span></p> 
         </div>
         <!-- /tab-tr --> 
         <br> Houve um homem que conquistou tudo aquilo que o mundo tinha a oferecer, o lendário Rei dos Piratas, Gold Roger. 
        </div>
-       <table class="table table-striped" style="border-radius: 4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;border: 1px solid #222426;"> 
-        <thead> 
-         <tr style=" background: #222426;     color: #c62242;"> 
-          <th>ASSISTA LEGALMENTE (DISPONIBILIDADE NÃO GARANTIDA)</th> 
-          <th>OPÇÕES</th> 
-         </tr> 
-        </thead> 
-        <tbody> 
-         <tr> 
-          <td style="
-    background: #151719;
-">ASSISTA PELO CRUNCHYROLL</td> 
-          <td style="
-    background: #151719;
-"><p><a href="http://www.crunchyroll.com/search?from=&amp;q=One Piece 1" target="_BLANK">Crunchyroll</a></p></td> 
-         </tr> 
-         <tr> 
-          <td style="
-    background-color: #151719;
-">ASSISTA PELO DAISUKI</td> 
-          <td style="
-    background-color: #151719;
-"><p class="text-left"><a href="http://www.daisuki.net/br/en/search.html?keyword=One Piece" target="_BLANK"> Daisuki</a></p></td> 
-         </tr> 
-         <tr> 
-         </tr>
-        </tbody> 
-       </table> 
+       <div class="panel-footer gradiente-negro sin-bordes" style="color: #ef7321;"> 
+        <img src="https://i.imgur.com/aqWnha6.png" width="30" height="30" class=""> ASSISTA pelo
+        <a data-toggle="modal" href="http://www.crunchyroll.com/search?from=&amp;q=One Piece 1" class="" target="_blank"><strong> Crunchyroll</strong></a> - Não há garantia da disponibilidade. 
+       </div> 
       </div> 
       <div class="text-center margen-top-15"></div> 
+     </div> 
+    </div> 
+    <div id="reportar-video" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="reportarLabel" aria-hidden="true"> 
+     <div class="modal-dialog"> 
+      <div class="modal-content"> 
+       <div class="modal-header"> 
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> 
+        <h3 class="modal-title mi-naranja" id="reportarLabel">Reportar video</h3> 
+       </div> 
+       <div class="modal-body padding-bottom-10"> 
+        <form class="margen-bottom-50" name="reporte" action="http://www.anitubex.com/reportar_capitulo.php?id=66818&amp;uid=" method="post"> 
+         <div class="form-group"> 
+          <label for="razon" class="control-label negro">Qual o problema você enfrenta?</label> 
+          <div> 
+           <select name="razon" id="" class="form-control"> <option value="1">Um ou mais players não funciona</option> <option value="2">Erros na legenda, ou audio.</option> <option value="3">Outro problema (especifique)</option> </select> 
+          </div> 
+         </div> 
+         <div class="form-group"> 
+          <label for="comentario" class="control-label negro">Você pode optar por comentar sobre o erro aqui se quiser.</label> 
+          <div> 
+           <textarea class="form-control counted" name="comentario" placeholder="Escreva seu comentario... em 300 caracteres. " rows="3" maxlength="300"></textarea> 
+          </div> 
+         </div> 
+         <div class="form-group pull-right"> 
+          <div> 
+           <button type="submit" class="btn btn-danger"><em class="icon-ok"></em> Reportar</button> 
+          </div> 
+         </div> 
+        </form> 
+       </div> 
+       <div class="modal-footer"> 
+        <button type="button" class="btn btn-info" data-dismiss="modal"><em class="icon-remove-sign"></em> Fechar</button> 
+       </div> 
+      </div> 
      </div> 
     </div> 
     <div class="panel panel-info sin-bordes"> 
@@ -326,11 +300,14 @@ href=https://www.facebook.com/Anitube-X-1130982463679087&amp;width=320&amp;heigh
       <p class="lead"><img src="http://www.anitubex.com/cdn/assets/img/comment.png" width="25" height="25" class="margen-top-1"> <b>Comentarios</b></p> 
      </div>
      <div class="panel-body padding-bottom-0"> 
-      <div class="fb-comments" data-href="http://www.anitubex.com/one-piece-1" data-width="680" data-numposts="10" data-colorscheme="dark"></div> 
+      <div class="fb-comments" data-href="http://www.anitubex.com/one-piece-1" data-width="680" data-numposts="10" data-colorscheme="light"></div> 
      </div> 
     </div> 
+    <div class="panel panel-success"> 
+     <h2 style=" font-size: 15px; font-size: 15px; color: black; ">Assistir One Piece Episódio 1, One Piece 1 Online, Ver One Piece 1</h2> 
+    </div> 
    </div> 
-   <div class="col-lg-3"> 
+   <div class="col-md-3"> 
     <div class="panel panel-success"> 
      <div class="panel-heading" itemprop="name" id="nomedaserie">
        Capa
@@ -342,6 +319,10 @@ href=https://www.facebook.com/Anitube-X-1130982463679087&amp;width=320&amp;heigh
         </div></a>
       </div>
      </div>
+    </div> 
+    <div class="panel-footer gradiente-negro sin-bordes" style="margin-bottom: 20px; border-radius: 5px !important;"> 
+     <a data-toggle="modal" href="#reportar-video" class=""><strong> Reportar video</strong></a> 
+     <img src="http://www.anitubex.com/cdn/assets/img/icono-reportar.png" width="30" height="30" class=""> 
     </div> 
     <div class="panel panel-success">
      <div class="panel-heading">
@@ -355,20 +336,6 @@ href=https://www.facebook.com/Anitube-X-1130982463679087&amp;width=320&amp;heigh
       <a href="http://www.anitubex.com/one-piece-2" title="Próximo Episódio" class="btn-nav-episodios next right" style=" width: 110px; "> Próximo <span class="hidden-md">Episódio</span> </a> 
      </div> 
     </div> 
-    <table class="table table-striped" style="border-radius: 4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;border: 1px solid #222426;"> 
-     <thead> 
-      <tr style=" background: #151719;     color: #c62242;"> 
-       <th>Aviso:</th> 
-      </tr> 
-     </thead> 
-     <tbody> 
-      <tr> 
-       <td style="
-    background-color: #151719;
-">Nenhum player e de nossa responsabilidade, não upamos/hospedamos, apenas indexamos de maneira organizada players de terceiros. players de terceiros podem ser encontrados na web por qualquer pessoa, e como definindo nos termos de uso, não somos responsáveis por conteúdos em sites terceiros.<br> Porem mesmo que o conteudo esteja apenas organizado aqui, O Dono da obra / Responsável poderá solicitar a remoção de toda a página caso queira, conforme especificado na página DMCA, saiba mais na guia <a href="http://www.anitubex.com/DMCA.html" target="_blank">DMCA</a>.</td> 
-      </tr>
-     </tbody> 
-    </table> 
    </div> 
   </div> 
   <script type="text/javascript">
@@ -377,41 +344,55 @@ dynPageObj.setTargetId('pageContainer');
 dynPageObj.setUrl('http://www.anitubex.com/obtener_pagina.php?pageNo=0&eid=66818');
 dynPageObj.setScrollSpeed(120);
 dynPageObj.loadPage();
-</script>      
-  <h2 style=" font-size: 15px; font-size: 15px; color: white; ">Assistir One Piece Episódio 1, One Piece 1 Online, Ver One Piece 1</h2> 
+</script>       
   <div style="width:0; height:0; background-image:url(http://whos.amung.us/widget/kyanimex.gif);"></div> 
-  <div class="text-center" id="footer">
-   <a href="http://www.anitubex.com/DMCA.html" target="_blank" style="font-size: 15px;">DMCA</a> | 
-   <a href="http://www.anitubex.com/politica-de-privacidade.html" target="_blank" style="font-size: 15px;">TERMOS DE USO DO SITE / PRIVACIDADE</a> 
-   <div>
-    <b>IMPORTANTE:</b> O ANITUBEX, SE REVERSA AO DIREITO DE REMOVER OU ADICIONAR QUAISQUER CONTEÚDOS CASO A PRODUTORA SOLICITE. 
-    <br>QUALQUER CONTEÚDO AQUI PRESENTE SERÁ REMOVIDO CASO A PRODUTORA OU ALGUM DETENTOR DE DIREITOS AUTORAIS SOLICITE SUA REMOÇÃO. 
-    <br>NOSSO SITE E UM SITE DE FÃS PARA FÃS, SENDO ASSIM NÃO TEMOS O INTUITO DE ATRAPALHAR NA VENDA DE BLU-RAYS OU CONTEÚDO ORIGINAL, POR ISSO NÃO PUBLICAMOS CONTEÚDO EM HD OU FULLHD. 
-    <br>PARA PEDIR ADIÇÃO OU REMOÇÃO DE CONTEÚDO, ENTRE EM CONTATO COM O SITE, UTILIZANDO O EMAIL: 
-    <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5332373e3a3d13323d3a272631362b7d303c3e">[email&nbsp;protected]</a>
-    <script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> / 
-    <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b2d6dfd1d3f2d3dcdbc6c7d0d7ca9cd1dddf9c">[email&nbsp;protected]</a>
-    <script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> 
-    <br> 
-    <b> NENHUM VÍDEO ESTÁ HOSPEDADO EM NOSSOS SERVIDORES, TODOS OS LINKS FORAM RETIRADOS DE DIFERENTES SERVIDORES GRATUITOS, OS ANIMES PODERÃO SER ENCONTRADOS DUBLADO OU LEGENDADO.</b>
+  <footer class="footer"> 
+   <style>
+        .footer {
+            display: block;
+            float: left;
+            width: 100%;
+            min-height: 300px;
+            background: #222933 !important;
+            border-top: 1px solid #2f416e;
+            box-shadow: 0 20px 20px #222933 inset;
+            padding-top: 15px !important;    text-align: center;    font-size: 12px;
+        }
+        .Footer span, .Footer a {
+    color: #fb1010;
+}
+    </style> 
+   <div class="container"> 
+    <div class="col-md-12 panel panel-success">
+     <div style="color: #000;">
+      <b>Parceiros: </b>
+      <a href="http://www.animesorion.org/" target="_blank">Animes Orion</a>, 
+      <a href="http://www.animesonlineq.com/" target="_blank">Animes Online Q</a>, 
+      <a href="http://ultracine.org/" target="_blank">Filmes Online</a>, 
+      <a href="http://www.seriesonlinex.com/" target="_blank">Séries Online</a>, 
+      <a href="http://www.assistirfilmeshd.org/" target="_blank">Filmes Online Grátis</a>, 
+      <a href="http://www.anituba.com/" target="_blank">Assistir Animes Online</a>, 
+      <a href="http://filmesonline10.net/" target="_blank">Filmes Online 10</a> 
+     </div>
+    </div>
+    <div class="col-md-12 panel panel-success">
+     Todos links e arquivos publicados no site Anitubex estão hospedados na própria Internet, somente indicamos onde se encontra, não hospedamos nenhum arquivo.
+     <br>Caso queira solicitar uma remoção leia a guia DMCA.
+     <div></div>
+    </div> 
+    <div class="col-md-12 panel panel-success">
+     <a href="http://www.anitubex.com/DMCA.html" target="_blank" style="font-size: 15px;">DMCA</a> | 
+     <a href="http://www.anitubex.com/politica-de-privacidade.html" target="_blank" style="font-size: 15px;">TERMOS DE USO DO SITE / PRIVACIDADE</a> 
+     <br> Copyright © 2017 
+     <a href="http://www.anitubex.com/">AniTube! Animes Online</a> Dublados ou Legendados. 
+     <br> 
+    </div> 
+    <div class="panel panel-success col-md-12"> 
+     <a href="http://whos.amung.us/stats/xwi52mvtwy0w/"> <img src="http://whos.amung.us/widget/xwi52mvtwy0w.png" width="81" height="29" border="0" title="Click to see how many people are online"> </a> 
+     <br> 
+    </div> 
    </div> 
-   <div>
-    <b>Parceiros:</b> 
-    <a href="http://smoanimes.com/" target="_blank">SMO Animes</a> , 
-    <a href="http://www.animesorion.com/" target="_blank">Animes Orion</a> , 
-    <a href="http://www.animesonlineq.com/" target="_blank">Animes Online Q</a> , 
-    <a href="http://www.bakaanimes.com.br/" target="_blank">Baka Animes</a>, 
-    <a href="http://www.r7filmesonlinehd.net/" target="_blank">Filmes Online</a>, 
-    <a href="http://www.seriesonlinex.com/" target="_blank">Séries Online</a>, 
-    <a href="http://www.assistirfilmeshd.org/" target="_blank">Filmes Online Grátis</a>, 
-    <a href="http://www.anituba.com/" target="_blank">Assistir Animes Online</a>, 
-    <a href="http://www.downloadsmusicagratis.com/" target="_blank">Baixar CDs</a>, 
-    <a href="http://filmesonline10.net/" target="_blank">Filmes Online 10</a>
-   </div> Copyright © 2017 
-   <a href="http://www.anitubex.com/">AniTube! Animes Online</a> - Todos os direitos reservados. 
-   <br> 
-   <a href="http://whos.amung.us/stats/xwi52mvtwy0w/"> <img src="http://whos.amung.us/widget/xwi52mvtwy0w.png" width="81" height="29" border="0" title="Click to see how many people are online"> </a> 
-  </div> 
+  </footer> 
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -434,6 +415,49 @@ dynPageObj.loadPage();
   <script type="text/javascript">
     window.cookieconsent_options = {"message":"ESTE SITE USA COOKIES PARA GARANTIR QUE VOCÊ OBTENHA A MELHOR EXPERIÊNCIA EM NOSSO SITE / THIS WEBSITE USES COOKIES TO ENSURE YOU GET THE BEST EXPERIENCE ON OUR WEBSITE.","dismiss":"Got it! / Entendido!","learnMore":"More info / Mais informações","link":"http://www.anitubex.com/politica-de-privacidade.html","theme":"light-bottom"};
 </script> 
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script> 
+  <script>var OneSignal = OneSignal || [];
+OneSignal.push(["init", {
+    appId: 'e56ba3aa-16d2-435c-a5ce-d146f36752f1',
+    safari_web_id: 'web.onesignal.auto.5136aa20-d33c-4de6-8d7f-c3f8c4b264dc',
+    subdomainName: 'anitubex',
+    autoRegister: true, 
+    notifyButton: {
+        enable: true,
+        size: 'medium',
+        theme: 'default',
+        position: 'bottom-right',
+        offset: {
+            bottom: '300px'
+        },
+        prenotify: true,
+        showCredit: false,
+        text: {
+            'tip.state.unsubscribed': 'Subscrever notificações',
+            'tip.state.subscribed': "Notificações ativas",
+            'tip.state.blocked': "Notificações inativas",
+            'message.prenotify': 'Clique para subscrever as notificações',
+            'message.action.subscribed': "Obrigado por subscrever!",
+            'message.action.resubscribed': "Notificações ativas",
+            'message.action.unsubscribed': "Notificações inativas",
+            'dialog.main.title': 'Gerir notificações',
+            'dialog.main.button.subscribe': 'SUBSCREVER',
+            'dialog.main.button.unsubscribe': 'CANCELAR',
+            'dialog.blocked.title': 'Desbloquear Notificações',
+            'dialog.blocked.message': "Instruções para activar notificações:"
+        }
+    },
+    promptOptions: {
+        actionMessage: 'Receba notificações sempre que um novo episódio for adicionado.',
+        exampleNotificationTitleDesktop: 'Exemplo de notificação',
+        exampleNotificationMessageDesktop: 'Título do artigo',
+        exampleNotificationTitleMobile: ' Exemplo de notificação',
+        exampleNotificationMessageMobile: 'Título do artigo',
+        exampleNotificationCaption: '(pode cancelar a qualquer momento)',
+        acceptButtonText: 'Continuar'.toUpperCase(),
+        cancelButtonText: 'Não obrigado'.toUpperCase()
+    }
+}]);</script> 
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script> 
   <!-- End Cookie Consent plugin -->  
  </body>
