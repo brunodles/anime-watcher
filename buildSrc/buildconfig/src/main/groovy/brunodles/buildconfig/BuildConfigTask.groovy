@@ -26,7 +26,7 @@ class BuildConfigTask extends DefaultTask {
         StringBuilder content = new StringBuilder("public final class BuildConfig {\n")
 
         project.buildconfig.properties.each { f ->
-            content.append("\tpublic static final String ${f.key.toUpperCase()} = \"${f.value}\";\n")
+            content.append("  public static final String ${f.key.toUpperCase()} = \"${f.value}\";\n")
         }
 
         project.fileTree(dir: "src", include: "**${File.separatorChar}buildconfig.properties").forEach { file ->
@@ -36,7 +36,7 @@ class BuildConfigTask extends DefaultTask {
                 properties.load(file.newReader())
 
             properties.each { property ->
-                content.append("\tpublic static final String ${property.key.toUpperCase()} = \"${property.value}\";\n")
+                content.append("  public static final String ${property.key.toUpperCase()} = \"${property.value}\";\n")
             }
 
         }
