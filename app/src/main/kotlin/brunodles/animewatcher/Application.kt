@@ -1,13 +1,13 @@
 package brunodles.animewatcher
 
-import android.app.Application
 import android.os.StrictMode
+import android.support.multidex.MultiDexApplication
 import cat.ereza.customactivityoncrash.config.CaocConfig
+import com.crashlytics.android.Crashlytics
 import com.google.firebase.database.FirebaseDatabase
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
+import io.fabric.sdk.android.Fabric
 
-class Application : Application() {
+class Application : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         FirebaseDatabase.getInstance().setPersistenceEnabled(!BuildConfig.DEBUG)
