@@ -1,4 +1,4 @@
-package brunodles.animewatcher
+package brunodles.animewatcher.collection
 
 import android.support.v4.util.ArrayMap
 
