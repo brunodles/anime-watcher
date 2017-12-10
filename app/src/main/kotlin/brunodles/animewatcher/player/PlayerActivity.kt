@@ -20,6 +20,8 @@ import brunodles.animewatcher.databinding.ActivityVideoBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.loadImageInto
+import brunodles.animewatcher.parcelable.EpisodeParcel
+import brunodles.animewatcher.parcelable.EpisodeParceler
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -30,21 +32,23 @@ class PlayerActivity : AppCompatActivity() {
     companion object {
 
         val TAG = "PlayerActivity"
-        val STATE_KEY = "explorer"
+        val STATE_KEY = "episode"
         val EXTRA_EPISODE = "episode"
 
         fun newIntent(context: Context, episode: Episode): Intent
-                = Intent(context, PlayerActivity::class.java).putExtra(EXTRA_EPISODE, episode)
+                = Intent(context, PlayerActivity::class.java)
+                .putExtra(EXTRA_EPISODE, EpisodeParceler.toParcel(episode))
 
         fun newIntent(context: Context, link: String): Intent
-                = Intent(context, PlayerActivity::class.java).setData(Uri.parse(link))
+                = Intent(context, PlayerActivity::class.java)
+                .setData(Uri.parse(link))
     }
 
     private lateinit var binding: ActivityVideoBinding
     private lateinit var player: Player
     private lateinit var cast: Cast
     private var adapter: GenericAdapter<Episode, ItemEpisodeBinding>? = null
-    private var explorer: Episode? = null
+    private var episode: Episode? = null
     private val episodeController by lazy { EpisodeController(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,25 +61,34 @@ class PlayerActivity : AppCompatActivity() {
         cast = Cast(this, binding.mediaRouteButton)
 
         binding.playRemote.setOnClickListener {
-            cast.playRemove(explorer, player.getCurrentPosition())
+            cast.playRemove(episode, player.getCurrentPosition())
         }
 
-        episodeController.findVideo(intent)
-                .observeOn(AndroidSchedulers.mainThread())
+        val observable = if (intent.hasExtra(EXTRA_EPISODE))
+            episodeController.findVideo(intent.getParcelableExtra<EpisodeParcel>(EXTRA_EPISODE))
+        else
+            episodeController.findVideo(CheckUrl.findUrl(intent))
+        observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribeBy(onNext = {
-                    it.video?.let { player.prepareVideo(it) }
-                    binding.title.text = "${it.number} - ${it.description}"
-                    adapter?.list = it.nextEpisodes ?: listOf()
-                    explorer = it
-                }, onError = {
-                    if (binding.root != null) {
-                        val snackbar = Snackbar.make(binding.root, "Failed to process the url, ${it.message}", Snackbar.LENGTH_INDEFINITE)
-                        snackbar.setAction("Ok") { snackbar.dismiss() }
-                        snackbar.show()
-                    }
-                    Log.e(TAG, "onResume.FindUrl: ", it)
-                })
+                .subscribeBy(onNext = this::onFetchEpisode,
+                        onError = this::onError)
+    }
+
+    private fun onError(error: Throwable) {
+        if (binding.root != null) {
+            val snackbar = Snackbar.make(binding.root, "Failed to process the url, ${error.message}", Snackbar.LENGTH_INDEFINITE)
+            snackbar.setAction("Ok") { snackbar.dismiss() }
+            snackbar.show()
+        }
+        Log.e(TAG, "onResume.FindUrl: ", error)
+    }
+
+    private fun onFetchEpisode(episode: Episode) {
+        Log.d(TAG, "onFetchEpisode: ")
+        episode.video?.let { player.prepareVideo(it) }
+        binding.title.text = "${episode.number} - ${episode.description}"
+        adapter?.list = episode.nextEpisodes ?: listOf()
+        this.episode = episode
     }
 
     private fun setupRecyclerView() {
@@ -85,8 +98,7 @@ class PlayerActivity : AppCompatActivity() {
             viewHolder.binder.description.text = "${item.number} - ${item.description}"
             loadImageInto(item.image, viewHolder.binder.image)
             viewHolder.binder.root.setOnClickListener {
-                val intent = Intent(this, PlayerActivity::class.java)
-                        .setData(Uri.parse(item.link))
+                val intent = newIntent(this, item.link!!)
                 startActivity(intent)
             }
         }
@@ -100,15 +112,15 @@ class PlayerActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        if (explorer != null)
-            outState.putSerializable(STATE_KEY, explorer)
+        if (episode != null)
+            outState.putSerializable(STATE_KEY, episode)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         if (savedInstanceState == null)
             return
-        explorer = savedInstanceState.getSerializable(STATE_KEY) as Episode?
+        episode = savedInstanceState.getSerializable(STATE_KEY) as Episode?
     }
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
