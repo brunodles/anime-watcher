@@ -41,8 +41,8 @@ object FactoryChecker {
 
                 describe("when get nextEpisodes") {
 
-                    val episodes = episode.nextEpisodes
-                    val expectedNextEpisodes = expectedEpisode.nextEpisodes
+                    val episodes = episode.nextEpisodes!!
+                    val expectedNextEpisodes = expectedEpisode.nextEpisodes!!
 
                     it("should find ${expectedNextEpisodes.size} episodes") {
                         assertEquals(expectedNextEpisodes.size, episodes.size)
