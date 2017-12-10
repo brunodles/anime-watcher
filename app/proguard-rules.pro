@@ -27,6 +27,6 @@
 
 # Firebase
 -keepattributes Signature
--keepclassmembers class bruno.animewatcher.explorer.** {
+-keepclassmembers class bruno.animewatcher.episode.** {
   *;
 }
