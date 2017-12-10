@@ -96,6 +96,7 @@ class PlayerActivity : AppCompatActivity() {
         binding.nextEpisodes.layoutManager = manager
         adapter = GenericAdapter<Episode, ItemEpisodeBinding>(R.layout.item_episode) { viewHolder, item, index ->
             viewHolder.binder.description.text = "${item.number} - ${item.description}"
+            viewHolder.binder.title.text = item.animeName
             loadImageInto(item.image, viewHolder.binder.image)
             viewHolder.binder.root.setOnClickListener {
                 val intent = newIntent(this, item.link!!)
