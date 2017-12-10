@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import brunodles.animewatcher.ArrayWithKeys
+import brunodles.animewatcher.collection.ArrayWithKeys
 import brunodles.animewatcher.databinding.ItemEmptyBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
 import brunodles.animewatcher.databinding.ItemUnknownBinding
@@ -17,11 +17,10 @@ import brunodles.rxfirebase.TypedEvent
 import brunodles.rxfirebase.singleObservable
 import brunodles.rxfirebase.typedChildObserver
 import com.google.firebase.auth.FirebaseUser
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import java.lang.ref.WeakReference
 
 typealias OnItemClick<ITEM_TYPE> = (ITEM_TYPE) -> Unit
 
@@ -36,67 +35,30 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         const val TAG = "HomeAdapter"
     }
 
-    private val list = ArrayWithKeys<String, Any>()
+    private var updatesDisposable: Disposable? = null
+    private val list = ArrayWithKeys<String, Episode>()
     private var layoutInflater: LayoutInflater? = null
-    private var onEpisodeClickListener: WeakReference<OnItemClick<Episode>>? = null
-    private var onLinkClickListener: WeakReference<OnItemClick<String>>? = null
-
-    fun setEpisodeClickListener(listener: OnItemClick<Episode>) {
-        onEpisodeClickListener = WeakReference(listener)
+    private var onEpisodeClickListener: OnItemClick<Episode>? = null
+    private var internalEpisodeClickListener: OnItemClick<Episode> = {
+        onEpisodeClickListener?.invoke(it)
     }
 
-    fun setLinkClickListener(listener: OnItemClick<String>) {
-        onLinkClickListener = WeakReference(listener)
+    fun setEpisodeClickListener(listener: OnItemClick<Episode>) {
+        onEpisodeClickListener = listener
     }
 
     override fun getItemCount(): Int = if (list.isEmpty()) 1 else list.size
 
-    //    fun clear() {
-    //        list.clear()
-    //        notifyDataSetChanged()
-    //    }
-    //
-    //    fun setItems(items: List<Any>) {
-    //        list.clear()
-    //        list.addAll(items)
-    //        notifyDataSetChanged()
-    //    }
-    //
-    //    fun add(item: Any) {
-    //        list.add(item)
-    //        notifyItemInserted(list.size)
-    //    }
-    //
-    //    fun remove(item: Any) {
-    //        val index = list.indexOf(item)
-    //        list.remove(index)
-    //        notifyItemRemoved(index)
-    //    }
-    //
-    //    fun addAll(items: List<Any>) {
-    //        val startIndex = list.size + 1
-    //        list.addAll(items)
-    //        notifyItemRangeInserted(startIndex, items.size)
-    //    }
-
     override fun getItemViewType(position: Int): Int {
         if (list.isEmpty()) return TYPE_EMPTY
-        return when (list[position]) {
-            is Episode -> TYPE_EPISODE
-            is String -> TYPE_LINK
-            else -> TYPE_UNKNOWN
-        }
+        return TYPE_EPISODE
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         when (getItemViewType(position)) {
             TYPE_EPISODE -> (holder as EpisodeHolder).let {
                 it.onBind(list[position] as Episode)
-                it.clickListener = onEpisodeClickListener
-            }
-            TYPE_LINK -> (holder as LinkHolder).let {
-                it.onBind(list[position] as String)
-                it.clickListener = onLinkClickListener
+                it.clickListener = internalEpisodeClickListener
             }
         }
     }
@@ -109,7 +71,6 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return when (viewType) {
             TYPE_EMPTY -> EmptyHolder(ItemEmptyBinding.inflate(layoutInflater!!, parent, false))
             TYPE_EPISODE -> EpisodeHolder(ItemEpisodeBinding.inflate(layoutInflater!!, parent, false))
-            TYPE_LINK -> LinkHolder(ItemUnknownBinding.inflate(layoutInflater!!, parent, false))
             else -> UnknownHolder(ItemUnknownBinding.inflate(layoutInflater!!, parent, false))
         }
     }
@@ -117,13 +78,10 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     open class ViewHolder<out BINDER : ViewDataBinding, ITEM : Any>(protected val binder: BINDER)
         : RecyclerView.ViewHolder(binder.root) {
 
-        var clickListener: WeakReference<OnItemClick<ITEM>>? = null
+        var clickListener: OnItemClick<ITEM>? = null
 
         open fun onBind(item: ITEM) {
-            binder.root.setOnClickListener {
-                Log.d(TAG, "onBind: ${clickListener?.get()}")
-                clickListener?.get()?.invoke(item)
-            }
+            binder.root.setOnClickListener { clickListener?.invoke(item) }
         }
     }
 
@@ -134,22 +92,18 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         override fun onBind(item: Episode) {
             super.onBind(item)
             binder.description.text = "${item.number} - ${item.description}"
+            binder.title.text = item.animeName
             loadImageInto(item.image, binder.image)
         }
     }
 
-    class LinkHolder(binder: ItemUnknownBinding) : ViewHolder<ItemUnknownBinding, String>(binder) {
-        override fun onBind(item: String) {
-            super.onBind(item)
-            binder.text.text = item
-            binder.text.setOnClickListener { clickListener?.get()?.invoke(item) }
-        }
-    }
-
     fun setUser(user: FirebaseUser) {
-        Firebase.history(user)
+        updatesDisposable?.dispose()
+        updatesDisposable = Firebase.history(user)
                 .limitToLast(100)
+                .orderByKey()
                 .typedChildObserver(String::class.java)
+                .doOnNext { Log.d(TAG, "history: ${it.key} - ${it.element}") }
                 .subscribeOn(Schedulers.io())
                 .flatMap { link ->
                     Firebase.videoRef(link.element)
@@ -159,6 +113,7 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                         onNext = {
+                            Log.d(TAG, "onNext: ${it.key} - ${it.element.link}")
                             when (it.event) {
                                 EventType.CHANGED -> {
                                     val index = list.replace(it.element, it.key)
@@ -186,5 +141,11 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                             Log.e(TAG, "setUser: ", it)
                         }
                 )
+    }
+
+    fun disconnect() {
+        updatesDisposable?.dispose()
+        list.clear()
+        notifyDataSetChanged()
     }
 }
