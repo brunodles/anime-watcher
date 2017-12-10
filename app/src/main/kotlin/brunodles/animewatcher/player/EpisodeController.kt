@@ -5,6 +5,8 @@ import android.content.Intent
 import android.util.Log
 import brunodles.animewatcher.BuildConfig
 import brunodles.animewatcher.explorer.Episode
+import brunodles.animewatcher.parcelable.EpisodeParcel
+import brunodles.animewatcher.parcelable.EpisodeParceler
 import brunodles.animewatcher.persistence.Firebase
 import brunodles.animewatcher.persistence.Preferences
 import brunodles.rxfirebase.singleObservable
@@ -18,53 +20,69 @@ class EpisodeController(val context: Context) {
         val TAG = "EpisodeController"
     }
 
-    fun findVideo(intent: Intent): Observable<Episode> {
-        val url = getUrl(intent)
-        if (url == null) return Observable.empty()
+    fun findVideo(url: String?): Observable<Episode> {
+        if (url == null) return Observable.error(NullPointerException("Empty Url"))
 
         return findVideoInfo(url)
-                .doOnNext(this::fetchNextEpisodes)
-                .doOnNext { Preferences(context).setUrl(url) }
-                .doOnNext { Firebase.addToHistory(url) }
+                .doOnNext(this::preFetchNextEpisodes)
+                .doOnNext {
+                    Preferences(context).setUrl(url)
+                    Firebase.addToHistory(url)
+                }
     }
 
-    private fun getUrl(intent: Intent): String? = CheckUrl.findUrl(intent)
-            ?: Preferences(context).getUrl()
+    fun findVideo(episode: EpisodeParcel): Observable<Episode> {
+        if (episode.video == null || episode.nextEpisodes == null || episode.nextEpisodes.isEmpty())
+            return findVideo(episode.link!!)
+        return Observable.just(episode)
+                .map(EpisodeParceler::fromParcel)
+                .doOnNext {
+                    if (episode.link != null) {
+                        Preferences(context).setUrl(episode.link)
+                        Firebase.addToHistory(episode.link)
+                    }
+                }
+    }
 
     private fun findVideoInfo(url: String): Observable<Episode> {
         Log.d(TAG, "findVideoInfo: find video on '$url'")
         val ref = Firebase.videoRef(url)
         return ref.singleObservable(Episode::class.java)
+                .map {
+                    if (it.isPlayable()) it
+                    else throw RuntimeException("Episode is not playable!")
+                }
                 .doOnNext { Log.d(TAG, "findVideoInfo: found episode ${it.number}") }
-                .onErrorResumeNext(
-                        Observable.just(url)
-                                .observeOn(Schedulers.io())
-                                .map {
-                                    CheckUrl.videoInfo(url)
-                                            ?: throw RuntimeException("Can't find video info")
-                                }
-                                .doOnNext { Firebase.addVideo(it) }
-                )
+                .onErrorResumeNext(fetchVideo(url))
                 .map { it ?: throw RuntimeException("Can't find video info") }
     }
 
-    private fun fetchNextEpisodes(episode: Episode) {
-        Log.d(TAG, "fetchNextEpisodes: $episode")
-        if (episode.nextEpisodes == null) return
+    private fun fetchVideo(url: String): Observable<Episode> {
+        return Observable.just(url)
+                .observeOn(Schedulers.io())
+                .map {
+                    CheckUrl.videoInfo(url)
+                            ?: throw RuntimeException("Can't find video info")
+                }
+                .doOnNext { Firebase.addVideo(it) }
+    }
+
+    private fun preFetchNextEpisodes(episode: Episode) {
+        Log.d(TAG, "preFetchNextEpisodes: $episode")
+        if (!episode.containsNextEpisodes()) {
+            Log.d(TAG, "preFetchNextEpisodes: nextEpisodes is empty")
+            return
+        }
         Observable.fromIterable(episode.nextEpisodes)
                 .doOnNext { Firebase.addVideo(it) }
                 .filter { it.link != null }
                 .map { it.link!! }
                 .flatMap(this::findVideoInfo)
-                .subscribeBy(
-                        onNext = {
-                            if (BuildConfig.DEBUG)
-                                Log.d(TAG, "fetchNextEpisodes: fetched episode ${it.number}")
-
-                        },
-                        onError = {
-                            Log.e(TAG, "fetchNextEpisodes: failed to fetch next episodes", it)
-                        })
+                .subscribeBy(onNext = {
+                    Log.d(TAG, "preFetchNextEpisodes: fetched episode ${it.number}")
+                }, onError = {
+                    Log.e(TAG, "preFetchNextEpisodes: failed to fetch next episodes", it)
+                })
     }
 
 }
