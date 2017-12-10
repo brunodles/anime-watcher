@@ -56,15 +56,16 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
         auth = FirebaseAuth.getInstance()
     }
 
-    override fun onStart() {
-        super.onStart()
-        homeAdapter.setEpisodeClickListener { startActivity(PlayerActivity.newIntent(this, it)) }
-    }
-
     override fun onResume() {
         super.onResume()
         val currentUser = auth.currentUser
         updateUI(currentUser)
+        homeAdapter.setEpisodeClickListener { startActivity(PlayerActivity.newIntent(this, it)) }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        homeAdapter.disconnect()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -116,21 +117,6 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
         binding.signInButton.visibility = View.GONE
 
         homeAdapter.setUser(user)
-//        homeAdapter.clear()
-//        Firebase.history(user).observableChildAdded()
-//                .map { it.getValue(String::class.java)!! }
-//                .doOnNext { Log.d(TAG, "updateUI: ${it}") }
-//                .flatMap { Firebase.videoRef(it).singleObservable(Episode::class.java) }
-//                .filter { it != null }
-//                .map { it!! }
-//                .subscribeBy(
-//                        onNext = {
-//                            homeAdapter.add(it)
-//                        },
-//                        onError = { error ->
-//                            Log.e(TAG, "updateUI: ", error)
-//                        }
-//                )
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
