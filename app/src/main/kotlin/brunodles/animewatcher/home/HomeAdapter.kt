@@ -103,17 +103,16 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 .limitToLast(100)
                 .orderByKey()
                 .typedChildObserver(String::class.java)
-                .doOnNext { Log.d(TAG, "history: ${it.key} - ${it.element}") }
                 .subscribeOn(Schedulers.io())
                 .flatMap { link ->
                     Firebase.videoRef(link.element)
                             .singleObservable(Episode::class.java)
+                            .subscribeOn(Schedulers.io())
                             .map { TypedEvent(link.event, it, link.key) }
                 }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                         onNext = {
-                            Log.d(TAG, "onNext: ${it.key} - ${it.element.link}")
                             when (it.event) {
                                 EventType.CHANGED -> {
                                     val index = list.replace(it.element, it.key)
