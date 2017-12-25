@@ -15,7 +15,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import brunodles.animewatcher.GenericAdapter
 import brunodles.animewatcher.R
-import brunodles.animewatcher.cast.Cast
+import brunodles.animewatcher.cast.Caster
 import brunodles.animewatcher.databinding.ActivityVideoBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
 import brunodles.animewatcher.explorer.Episode
@@ -46,7 +46,7 @@ class PlayerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityVideoBinding
     private lateinit var player: Player
-    private lateinit var cast: Cast
+    private lateinit var cast: Caster
     private var adapter: GenericAdapter<Episode, ItemEpisodeBinding>? = null
     private var episode: Episode? = null
     private val episodeController by lazy { EpisodeController(this) }
@@ -58,7 +58,7 @@ class PlayerActivity : AppCompatActivity() {
         player = Player(this, binding.player)
         setupRecyclerView()
 
-        cast = Cast(this, binding.chromeCastButton)
+        cast = Caster.Factory.googleCaster(this, binding.chromeCastButton)
 
         binding.playRemote.setOnClickListener {
             episode?.let { cast.playRemote(it, player.getCurrentPosition()) }
