@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
-    
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,68 +14,93 @@
             android:id="@+id/player"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="240dp"
             android:keepScreenOn="true"
-            app:resize_mode="fixed_width"/>
+            android:minHeight="240dp"
+            app:resize_mode="fixed_width" />
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/otherContent"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:columnCount="2"
+                android:orientation="horizontal">
 
-                <LinearLayout
+                <android.support.v7.app.MediaRouteButton
+                    android:id="@+id/chromeCastButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:mediaRouteTypes="user"
+                    android:minHeight="48dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp" />
+
+                <ImageButton
+                    android:id="@+id/othersCastButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="Connect to Device"
+                    android:minHeight="48dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:src="@drawable/ic_cast_black_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="ChromeCast" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Others" />
+
+                <Button
+                    android:id="@+id/playRemote"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <android.support.v7.app.MediaRouteButton
-                        android:id="@+id/mediaRouteButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:mediaRouteTypes="user"
-                        />
-
-                    <Button
-                        android:id="@+id/playRemote"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Play"/>
-                </LinearLayout>
+                    android:layout_columnSpan="2"
+                    android:text="Play" />
 
                 <TextView
                     android:id="@+id/title"
                     style="@style/TextAppearance.AppCompat.Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_columnSpan="2"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
                     android:textIsSelectable="true"
-                    tools:text="One Piece"/>
+                    tools:text="One Piece" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_columnSpan="2"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="Next Episodes"/>
+                    android:text="Next Episodes" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/nextEpisodes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_columnSpan="2"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
                     app:nestedScrollingEnabled="@{false}" />
 
-            </LinearLayout>
+            </GridLayout>
         </android.support.v4.widget.NestedScrollView>
     </LinearLayout>
 

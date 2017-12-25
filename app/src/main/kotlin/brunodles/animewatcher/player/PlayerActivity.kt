@@ -58,7 +58,7 @@ class PlayerActivity : AppCompatActivity() {
         player = Player(this, binding.player)
         setupRecyclerView()
 
-        cast = Cast(this, binding.mediaRouteButton)
+        cast = Cast(this, binding.chromeCastButton)
 
         binding.playRemote.setOnClickListener {
             episode?.let { cast.playRemote(it, player.getCurrentPosition()) }
