@@ -106,11 +106,6 @@ class PlayerActivity : AppCompatActivity() {
         binding.nextEpisodes.adapter = adapter
     }
 
-    override fun onResume() {
-        super.onResume()
-        cast.onResume()
-    }
-
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         if (episode != null)
@@ -158,7 +153,6 @@ class PlayerActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        cast.onPause()
         player.stop()
     }
 

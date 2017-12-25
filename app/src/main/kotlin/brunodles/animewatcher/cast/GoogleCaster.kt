@@ -11,11 +11,11 @@ import com.google.android.gms.cast.MediaMetadata
 import com.google.android.gms.cast.framework.*
 import com.google.android.gms.common.images.WebImage
 
-class Cast(val context: Context, mediaRouteButton: MediaRouteButton?,
-           val listener: DeviceConnectedListener? = null) : Caster{
+class GoogleCaster(val context: Context, mediaRouteButton: MediaRouteButton?,
+                   val listener: DeviceConnectedListener? = null) : Caster{
 
     companion object {
-        val TAG = "Cast"
+        val TAG = "GoogleCaster"
     }
 
     val mSessionManager: SessionManager

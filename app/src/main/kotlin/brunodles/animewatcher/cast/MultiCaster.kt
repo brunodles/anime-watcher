@@ -9,7 +9,7 @@ internal class MultiCaster(activity: Activity, mediaRouteButton: MediaRouteButto
         Caster {
 
     val connectSdk = ConnectSdkCaster(activity, imageButton) { current = it }
-    val google = Cast(activity, mediaRouteButton) { current = it }
+    val google = GoogleCaster(activity, mediaRouteButton) { current = it }
     var current: Caster = google
 
     override fun playRemote(currentEpisode: Episode, position: Long)

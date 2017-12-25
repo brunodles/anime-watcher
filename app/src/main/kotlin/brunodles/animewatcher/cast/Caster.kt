@@ -14,7 +14,7 @@ interface Caster {
                 = ConnectSdkCaster(activity, button)
 
         fun googleCaster(activity: Activity, mediaRouterButton: MediaRouteButton): Caster
-                = Cast(activity, mediaRouterButton)
+                = GoogleCaster(activity, mediaRouterButton)
 
         fun multiCaster(activity: Activity, mediaRouterButton: MediaRouteButton, imageButton: ImageButton): Caster
                 = MultiCaster(activity, mediaRouterButton, imageButton)
