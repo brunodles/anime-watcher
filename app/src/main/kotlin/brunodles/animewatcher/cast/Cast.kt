@@ -8,38 +8,26 @@ import brunodles.animewatcher.explorer.Episode
 import com.google.android.gms.cast.MediaInfo
 import com.google.android.gms.cast.MediaLoadOptions
 import com.google.android.gms.cast.MediaMetadata
-import com.google.android.gms.cast.framework.CastButtonFactory
-import com.google.android.gms.cast.framework.CastContext
-import com.google.android.gms.cast.framework.CastSession
-import com.google.android.gms.cast.framework.SessionManager
+import com.google.android.gms.cast.framework.*
 import com.google.android.gms.common.images.WebImage
 
-class Cast(val context: Context, mediaRouteButton: MediaRouteButton?) : Caster{
+class Cast(val context: Context, mediaRouteButton: MediaRouteButton?,
+           val listener: DeviceConnectedListener? = null) : Caster{
 
     companion object {
         val TAG = "Cast"
     }
 
     val mSessionManager: SessionManager
-
     //    val mSessionManagerListener: SessionManagerListener = SessionManagerListenerImpl()
     init {
         val castContext = CastContext.getSharedInstance(context)
         mSessionManager = castContext.sessionManager
         CastButtonFactory.setUpMediaRouteButton(context, mediaRouteButton)
-        mSessionManager.currentCastSession
+        castContext.addCastStateListener { if (it == CastState.CONNECTED) listener?.invoke(this) }
     }
 
-    val mCastSession: CastSession by lazy { mSessionManager.currentCastSession }
-
-    override fun onResume() {
-        //        mCastSession = mSessionManager.currentCastSession
-    }
-
-    override fun onPause() {
-        // todo clean cast session on app pause.
-        //        mCastSession = null
-    }
+    fun castSession() : CastSession? = mSessionManager.currentCastSession
 
     override fun playRemote(currentEpisode: Episode, position: Long) {
         val movieMetadata = MediaMetadata(MediaMetadata.MEDIA_TYPE_MOVIE)
@@ -55,7 +43,7 @@ class Cast(val context: Context, mediaRouteButton: MediaRouteButton?) : Caster{
                 .setMetadata(movieMetadata)
                 //                    .setStreamDuration(mSelectedMedia.getDuration() * 1000)
                 .build()
-        val remoteMediaClient = mCastSession.remoteMediaClient
+        val remoteMediaClient = castSession()?.remoteMediaClient
         val mediaLoadOptions = MediaLoadOptions.Builder()
                 .setAutoplay(true)
                 .setPlayPosition(position)
