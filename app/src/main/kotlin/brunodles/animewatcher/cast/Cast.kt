@@ -14,7 +14,7 @@ import com.google.android.gms.cast.framework.CastSession
 import com.google.android.gms.cast.framework.SessionManager
 import com.google.android.gms.common.images.WebImage
 
-class Cast(val context: Context, mediaRouteButton: MediaRouteButton?) {
+class Cast(val context: Context, mediaRouteButton: MediaRouteButton?) : Caster{
 
     companion object {
         val TAG = "Cast"
@@ -32,16 +32,16 @@ class Cast(val context: Context, mediaRouteButton: MediaRouteButton?) {
 
     val mCastSession: CastSession by lazy { mSessionManager.currentCastSession }
 
-    fun onResume() {
+    override fun onResume() {
         //        mCastSession = mSessionManager.currentCastSession
     }
 
-    fun onPause() {
+    override fun onPause() {
         // todo clean cast session on app pause.
         //        mCastSession = null
     }
 
-    fun playRemote(currentEpisode: Episode, position: Long) {
+    override fun playRemote(currentEpisode: Episode, position: Long) {
         val movieMetadata = MediaMetadata(MediaMetadata.MEDIA_TYPE_MOVIE)
 
         movieMetadata.putString(MediaMetadata.KEY_TITLE, currentEpisode.description)
