@@ -41,7 +41,7 @@ class Cast(val context: Context, mediaRouteButton: MediaRouteButton?) {
         //        mCastSession = null
     }
 
-    fun playRemove(currentEpisode: Episode, position: Long) {
+    fun playRemote(currentEpisode: Episode, position: Long) {
         val movieMetadata = MediaMetadata(MediaMetadata.MEDIA_TYPE_MOVIE)
 
         movieMetadata.putString(MediaMetadata.KEY_TITLE, currentEpisode.description)

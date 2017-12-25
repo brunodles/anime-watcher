@@ -61,7 +61,7 @@ class PlayerActivity : AppCompatActivity() {
         cast = Cast(this, binding.mediaRouteButton)
 
         binding.playRemote.setOnClickListener {
-            episode?.let { cast.playRemove(it, player.getCurrentPosition()) }
+            episode?.let { cast.playRemote(it, player.getCurrentPosition()) }
         }
 
         val observable = if (intent.hasExtra(EXTRA_EPISODE))
