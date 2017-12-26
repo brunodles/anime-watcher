@@ -16,7 +16,7 @@ import android.view.WindowManager
 import brunodles.animewatcher.GenericAdapter
 import brunodles.animewatcher.R
 import brunodles.animewatcher.cast.Caster
-import brunodles.animewatcher.databinding.ActivityVideoBinding
+import brunodles.animewatcher.databinding.ActivityPlayerBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.loadImageInto
@@ -44,7 +44,7 @@ class PlayerActivity : AppCompatActivity() {
                 .setData(Uri.parse(link))
     }
 
-    private lateinit var binding: ActivityVideoBinding
+    private lateinit var binding: ActivityPlayerBinding
     private lateinit var player: Player
     private lateinit var cast: Caster
     private var adapter: GenericAdapter<Episode, ItemEpisodeBinding>? = null
@@ -53,7 +53,7 @@ class PlayerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_video)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_player)
 
         player = Player(this, binding.player)
         setupRecyclerView()
