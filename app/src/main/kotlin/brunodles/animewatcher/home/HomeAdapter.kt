@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import brunodles.animewatcher.R
 import brunodles.animewatcher.collection.ArrayWithKeys
 import brunodles.animewatcher.databinding.ItemEmptyBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
@@ -86,13 +87,23 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     class EmptyHolder(binder: ItemEmptyBinding) : ViewHolder<ItemEmptyBinding, Any>(binder)
-    class UnknownHolder(binder: ItemUnknownBinding) : ViewHolder<ItemUnknownBinding, Any>(binder)
+    class UnknownHolder(binder: ItemUnknownBinding) : ViewHolder<ItemUnknownBinding, Any>(binder) {
+        override fun onBind(item: Any) {
+            super.onBind(item)
+            binder.text.text = item.toString()
+        }
+    }
+
     class EpisodeHolder(binder: ItemEpisodeBinding) :
             ViewHolder<ItemEpisodeBinding, Episode>(binder) {
         override fun onBind(item: Episode) {
             super.onBind(item)
-            binder.description.text = "${item.number} - ${item.description}"
+            if (item.number > 0)
+                binder.description.text = "${item.number} - ${item.description}"
+            else
+                binder.description.text = item.description
             binder.title.text = item.animeName
+            binder.image.setImageResource(R.drawable.loading)
             loadImageInto(item.image, binder.image)
         }
     }

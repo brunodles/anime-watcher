@@ -51,7 +51,7 @@ dependencies {
     implementation "com.android.support:design:$support_libs_version"
     implementation "com.android.support:cardview-v7:$support_libs_version"
     implementation "com.android.support:mediarouter-v7:$support_libs_version"
-    // implementation "com.android.support:support-vector-drawable:25.3.1"
+     implementation "com.android.support:support-vector-drawable:$support_libs_version"
     // implementation "com.android.support:animated-vector-drawable:25.3.1"
 
     implementation "com.google.firebase:firebase-core:$playservices_version"
@@ -59,7 +59,7 @@ dependencies {
     implementation "com.google.firebase:firebase-crash:$playservices_version"
     implementation "com.google.firebase:firebase-auth:$playservices_version"
 
-    implementation "com.firebaseui:firebase-ui-database:2.3.0"
+    implementation "com.firebaseui:firebase-ui-database:3.1.0"
 //    implementation "com.androidhuman.rxfirebase2:firebase-database-kotlin:${playservices_version}.0"
 
     implementation "com.google.android.gms:play-services-auth:$playservices_version"

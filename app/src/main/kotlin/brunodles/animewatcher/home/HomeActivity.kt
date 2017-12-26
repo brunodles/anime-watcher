@@ -5,12 +5,19 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import brunodles.animewatcher.R
 import brunodles.animewatcher.databinding.ActivityHomeBinding
+import brunodles.animewatcher.databinding.ItemEpisodeBinding
+import brunodles.animewatcher.explorer.Episode
+import brunodles.animewatcher.persistence.Firebase
 import brunodles.animewatcher.player.PlayerActivity
+import brunodles.rxfirebase.singleObservable
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -20,6 +27,9 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 
 
 class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
@@ -27,6 +37,7 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
     companion object {
         val TAG = "HomeActivity"
         val RC_SIGN_IN = 1
+        val UNKNOWN_EPISODE = Episode("", 0, "")
     }
 
     private lateinit var binding: ActivityHomeBinding
@@ -34,13 +45,13 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
     private lateinit var mGoogleApiClient: GoogleApiClient
     private lateinit var auth: FirebaseAuth
 
-    private val homeAdapter = HomeAdapter()
+    private var homeAdapter: FirebaseRecyclerAdapter<String, HomeAdapter.EpisodeHolder>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         binding.history.layoutManager = GridLayoutManager(this, resources.getInteger(R.integer.home_columns))
-        binding.history.adapter = homeAdapter
+        binding.history.adapter = HomeAdapter()
         binding.signInButton.setOnClickListener {
             startActivityForResult(Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient), RC_SIGN_IN)
         }
@@ -57,16 +68,15 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
         auth = FirebaseAuth.getInstance()
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         val currentUser = auth.currentUser
         updateUI(currentUser)
-        homeAdapter.setEpisodeClickListener { startActivity(PlayerActivity.newIntent(this, it)) }
     }
 
-    override fun onPause() {
-        super.onPause()
-        homeAdapter.disconnect()
+    override fun onStop() {
+        super.onStop()
+        homeAdapter?.stopListening()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -117,7 +127,39 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
         }
         binding.signInButton.visibility = View.GONE
 
-        homeAdapter.setUser(user)
+        //        homeAdapter.setUser(user)
+
+        val options = FirebaseRecyclerOptions.Builder<String>()
+                .setQuery(Firebase.history(user)
+                        .limitToLast(100)
+                        .orderByKey(), String::class.java)
+                .build()
+        homeAdapter = object :
+                FirebaseRecyclerAdapter<String, HomeAdapter.EpisodeHolder>(options) {
+            override fun onBindViewHolder(holder: HomeAdapter.EpisodeHolder?, position: Int, model: String?) {
+                holder?.onBind(UNKNOWN_EPISODE)
+                model?.let { link ->
+                    Firebase.videoRef(link)
+                            .singleObservable(Episode::class.java)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribeBy(
+                                    onNext = { holder?.onBind(it) },
+                                    onError = { Log.e(TAG, "onBindViewHolder: ", it) }
+                            )
+                }
+                holder?.clickListener = ::onItemClick
+            }
+
+            override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): HomeAdapter.EpisodeHolder
+                    = HomeAdapter.EpisodeHolder(ItemEpisodeBinding.inflate(LayoutInflater.from(parent?.context), parent, false))
+        }
+        binding.history.adapter = homeAdapter
+        homeAdapter?.startListening()
+    }
+
+    fun onItemClick(episode: Episode) {
+        startActivity(PlayerActivity.newIntent(this, episode))
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
