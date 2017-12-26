@@ -94,20 +94,3 @@ internal class ConnectSdkCaster(val context: Activity, val mediaRouteButton: Ima
     }
 
 }
-
-//internal class ConnectSdkCaster(val context: Activity, val mediaRouteButton: ImageButton?,
-//                                val listener: DeviceConnectedListener? = null) : Caster {
-//    init {
-//        mediaRouteButton?.isEnabled = false
-//    }
-//
-//    override fun playRemote(currentEpisode: Episode, position: Long) {
-//    }
-//
-//    override fun onPause() {
-//    }
-//
-//    override fun onResume() {
-//    }
-//
-//}
