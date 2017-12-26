@@ -1,4 +1,4 @@
-package brunodles.animewatcher
+package brunodles.adapter
 
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
@@ -8,10 +8,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import java.util.*
 
-class GenericAdapter<ITEM, BINDER : ViewDataBinding>(
+class ViewDataBindingAdapter<ITEM, BINDER : ViewDataBinding>(
         @LayoutRes private val layoutId: Int,
         private val onBind: (ViewHolder<BINDER>, ITEM, Int) -> Unit) :
-        RecyclerView.Adapter<GenericAdapter.ViewHolder<BINDER>>() {
+        RecyclerView.Adapter<ViewDataBindingAdapter.ViewHolder<BINDER>>() {
     var layoutInflater: LayoutInflater? = null
 
     var list: List<ITEM> = Collections.emptyList()

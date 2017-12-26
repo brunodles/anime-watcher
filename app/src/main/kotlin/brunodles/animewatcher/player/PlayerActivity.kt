@@ -13,7 +13,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import brunodles.animewatcher.GenericAdapter
+import brunodles.adapter.ViewDataBindingAdapter
 import brunodles.animewatcher.R
 import brunodles.animewatcher.cast.Caster
 import brunodles.animewatcher.databinding.ActivityPlayerBinding
@@ -47,7 +47,7 @@ class PlayerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPlayerBinding
     private lateinit var player: Player
     private lateinit var cast: Caster
-    private var adapter: GenericAdapter<Episode, ItemEpisodeBinding>? = null
+    private var adapter: ViewDataBindingAdapter<Episode, ItemEpisodeBinding>? = null
     private var episode: Episode? = null
     private val episodeController by lazy { EpisodeController(this) }
 
@@ -94,7 +94,7 @@ class PlayerActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         val manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.nextEpisodes.layoutManager = manager
-        adapter = GenericAdapter<Episode, ItemEpisodeBinding>(R.layout.item_episode) { viewHolder, item, index ->
+        adapter = ViewDataBindingAdapter<Episode, ItemEpisodeBinding>(R.layout.item_episode) { viewHolder, item, index ->
             viewHolder.binder.description.text = "${item.number} - ${item.description}"
             viewHolder.binder.title.text = item.animeName
             loadImageInto(item.image, viewHolder.binder.image)
