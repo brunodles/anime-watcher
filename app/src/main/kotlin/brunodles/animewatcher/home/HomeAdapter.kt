@@ -5,13 +5,13 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import brunodles.animewatcher.ImageLoader
 import brunodles.animewatcher.R
 import brunodles.animewatcher.collection.ArrayWithKeys
 import brunodles.animewatcher.databinding.ItemEmptyBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
 import brunodles.animewatcher.databinding.ItemUnknownBinding
 import brunodles.animewatcher.explorer.Episode
-import brunodles.animewatcher.loadImageInto
 import brunodles.animewatcher.persistence.Firebase
 import brunodles.rxfirebase.EventType
 import brunodles.rxfirebase.TypedEvent
@@ -103,8 +103,8 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             else
                 binder.description.text = item.description
             binder.title.text = item.animeName
-            binder.image.setImageResource(R.drawable.loading)
-            loadImageInto(item.image, binder.image)
+            binder.image.setImageResource(R.drawable.img_loading)
+            ImageLoader.loadImageInto(item.image, binder.image)
         }
     }
 
