@@ -4,13 +4,17 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import brunodles.adapter.EmptyAdapter
+import brunodles.adapter.EmptyStateAdapterDecorator
 import brunodles.animewatcher.R
 import brunodles.animewatcher.databinding.ActivityHomeBinding
+import brunodles.animewatcher.databinding.ItemEmptyBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.persistence.Firebase
@@ -50,8 +54,11 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
-        binding.history.layoutManager = GridLayoutManager(this, resources.getInteger(R.integer.home_columns))
-        binding.history.adapter = HomeAdapter()
+        //        val layoutManager = GridLayoutManager(this, resources.getInteger(R.integer.home_columns), GridLayoutManager.VERTICAL, true)
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
+        layoutManager.stackFromEnd = true
+        binding.history.layoutManager = layoutManager
+        binding.history.adapter = EmptyAdapter()
         binding.signInButton.setOnClickListener {
             startActivityForResult(Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient), RC_SIGN_IN)
         }
@@ -152,9 +159,19 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
             }
 
             override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): HomeAdapter.EpisodeHolder
-                    = HomeAdapter.EpisodeHolder(ItemEpisodeBinding.inflate(LayoutInflater.from(parent?.context), parent, false))
+                    = HomeAdapter.EpisodeHolder(ItemEpisodeBinding.inflate(
+                    LayoutInflater.from(parent?.context), parent, false))
         }
-        binding.history.adapter = homeAdapter
+        binding.history.adapter = EmptyStateAdapterDecorator(homeAdapter, object :
+                EmptyStateAdapterDecorator.BindingProvider<HomeAdapter.EmptyHolder> {
+            override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): HomeAdapter.EmptyHolder
+                    = HomeAdapter.EmptyHolder(ItemEmptyBinding.inflate(
+                    LayoutInflater.from(parent?.context), parent, false))
+
+            override fun onBindViewHolder(holder: HomeAdapter.EmptyHolder?, position: Int) {
+            }
+
+        })
         homeAdapter?.startListening()
     }
 
