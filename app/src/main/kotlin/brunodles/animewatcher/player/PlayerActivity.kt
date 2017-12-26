@@ -14,12 +14,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import brunodles.adapter.ViewDataBindingAdapter
+import brunodles.animewatcher.ImageLoader
 import brunodles.animewatcher.R
 import brunodles.animewatcher.cast.Caster
 import brunodles.animewatcher.databinding.ActivityPlayerBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
 import brunodles.animewatcher.explorer.Episode
-import brunodles.animewatcher.loadImageInto
 import brunodles.animewatcher.parcelable.EpisodeParcel
 import brunodles.animewatcher.parcelable.EpisodeParceler
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
@@ -97,7 +97,7 @@ class PlayerActivity : AppCompatActivity() {
         adapter = ViewDataBindingAdapter<Episode, ItemEpisodeBinding>(R.layout.item_episode) { viewHolder, item, index ->
             viewHolder.binder.description.text = "${item.number} - ${item.description}"
             viewHolder.binder.title.text = item.animeName
-            loadImageInto(item.image, viewHolder.binder.image)
+            ImageLoader.loadImageInto(item.image, viewHolder.binder.image)
             viewHolder.binder.root.setOnClickListener {
                 val intent = newIntent(this, item.link!!)
                 startActivity(intent)
