@@ -4,8 +4,8 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -162,16 +162,16 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
                     = HomeAdapter.EpisodeHolder(ItemEpisodeBinding.inflate(
                     LayoutInflater.from(parent?.context), parent, false))
         }
-        binding.history.adapter = EmptyStateAdapterDecorator(homeAdapter, object :
-                EmptyStateAdapterDecorator.BindingProvider<HomeAdapter.EmptyHolder> {
-            override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): HomeAdapter.EmptyHolder
-                    = HomeAdapter.EmptyHolder(ItemEmptyBinding.inflate(
-                    LayoutInflater.from(parent?.context), parent, false))
-
-            override fun onBindViewHolder(holder: HomeAdapter.EmptyHolder?, position: Int) {
-            }
-
-        })
+        binding.history.adapter = homeAdapter
+        //        binding.history.adapter = EmptyStateAdapterDecorator(homeAdapter, object :
+        //                EmptyStateAdapterDecorator.BindingProvider<HomeAdapter.EmptyHolder> {
+        //            override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): HomeAdapter.EmptyHolder
+        //                    = HomeAdapter.EmptyHolder(ItemEmptyBinding.inflate(
+        //                    LayoutInflater.from(parent?.context), parent, false))
+        //
+        //            override fun onBindViewHolder(holder: HomeAdapter.EmptyHolder?, position: Int) {
+        //            }
+        //        })
         homeAdapter?.startListening()
     }
 
