@@ -36,7 +36,7 @@ public class EmptyStateAdapterDecorator extends RecyclerView.Adapter<RecyclerVie
 
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
-                if (positionStart == 0 || lastItemCount == 0) {
+                if (lastItemCount == 0) {
                     notifyItemChanged(0);
                     notifyItemRangeInserted(1, itemCount - 1);
                 } else {
@@ -104,6 +104,7 @@ public class EmptyStateAdapterDecorator extends RecyclerView.Adapter<RecyclerVie
 //    }
     @Override
     public void setHasStableIds(boolean hasStableIds) {
+        super.setHasStableIds(hasStableIds);
         inner.setHasStableIds(hasStableIds);
     }
 
