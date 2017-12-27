@@ -11,7 +11,7 @@ object AnimaCurseFactory : PageParser {
 
     private val URL_REGEX = Regex("animacurse\\.moe/?\\?p=")
     private val TITLE_REGEX = Pattern.compile(".*?(\\d+)\\s.\\s(.+)")
-    private const val IMAGE_URL_FORMAT = "https://animacurse.moe/imgs/one-piece-episodio-%s.webp"
+    private const val IMAGE_URL_FORMAT = "https://animacurse.moe/imgs/%s-episodio-%s.webp"
 
     init {
         PageParserFactory.factories.add(this)
@@ -37,7 +37,8 @@ object AnimaCurseFactory : PageParser {
                 link = url,
                 video = src,
                 nextEpisodes = nextEpisodes,
-                image = String.format(IMAGE_URL_FORMAT, number)
+                image = String.format(IMAGE_URL_FORMAT, animeName.toLowerCase().replace(Regex("\\s"), "-")
+                        , number)
         )
     }
 
