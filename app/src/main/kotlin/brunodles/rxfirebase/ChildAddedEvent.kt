@@ -21,7 +21,7 @@ fun <T> DatabaseReference.observableChildAdded(valueClass: Class<T>): Observable
     }
 }
 
-fun <T> Query.observableChildAdded(valueClass: Class<T>): Observable<T?> {
+fun <T> Query.observableChildAdded(valueClass: Class<T>): Observable<T> {
     return Observable.create { emitter ->
         this.addChildEventListener(ChildAddedParseListener(emitter, valueClass))
     }
