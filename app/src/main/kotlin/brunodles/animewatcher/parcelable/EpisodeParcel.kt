@@ -3,8 +3,6 @@ package brunodles.animewatcher.parcelable
 import android.os.Parcel
 import android.os.Parcelable
 import brunodles.animewatcher.explorer.Episode
-import brunodles.kotlin.annotation.NoArgs
-import java.io.Serializable
 
 data class EpisodeParcel(
         val description: String,
@@ -24,7 +22,7 @@ data class EpisodeParcel(
             parcel.readString(),
             parcel.createTypedArrayList(CREATOR))
 
-    constructor(episode: Episode): this(
+    constructor(episode: Episode) : this(
             episode.description,
             episode.number,
             episode.animeName,
@@ -56,5 +54,9 @@ data class EpisodeParcel(
         override fun newArray(size: Int): Array<EpisodeParcel?> {
             return arrayOfNulls(size)
         }
+    }
+
+    fun isInfoMissing(): Boolean {
+        return video == null || nextEpisodes == null || nextEpisodes.isEmpty()
     }
 }

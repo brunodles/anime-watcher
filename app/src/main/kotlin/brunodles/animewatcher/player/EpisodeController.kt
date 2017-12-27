@@ -1,9 +1,7 @@
 package brunodles.animewatcher.player
 
 import android.content.Context
-import android.content.Intent
 import android.util.Log
-import brunodles.animewatcher.BuildConfig
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.parcelable.EpisodeParcel
 import brunodles.animewatcher.parcelable.EpisodeParceler
@@ -32,7 +30,7 @@ class EpisodeController(val context: Context) {
     }
 
     fun findVideo(episode: EpisodeParcel): Observable<Episode> {
-        if (episode.video == null || episode.nextEpisodes == null || episode.nextEpisodes.isEmpty())
+        if (episode.isInfoMissing())
             return findVideo(episode.link!!)
         return Observable.just(episode)
                 .map(EpisodeParceler::fromParcel)
