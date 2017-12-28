@@ -2,6 +2,7 @@ package brunodles.animewatcher.cast
 
 
 import android.app.Activity
+import android.os.Build
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -31,7 +32,8 @@ internal class ConnectSdkCaster(val context: Activity, val mediaRouteButton: Ima
         DiscoveryManager.init(context.applicationContext)
         // This step could even happen in your app's delegate
         mDiscoveryManager = DiscoveryManager.getInstance()
-        mDiscoveryManager.start()
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M)
+            mDiscoveryManager.start()
 
         mediaRouteButton?.setOnClickListener {
             pickDevice()
