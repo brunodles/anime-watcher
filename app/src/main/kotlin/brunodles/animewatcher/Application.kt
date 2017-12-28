@@ -1,15 +1,16 @@
 package brunodles.animewatcher
 
-import android.app.Application
+import android.os.StrictMode
+import android.support.multidex.MultiDexApplication
 import cat.ereza.customactivityoncrash.config.CaocConfig
+import com.crashlytics.android.Crashlytics
 import com.google.firebase.database.FirebaseDatabase
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
+import io.fabric.sdk.android.Fabric
 
-class Application : Application() {
+class Application : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+        FirebaseDatabase.getInstance().setPersistenceEnabled(!BuildConfig.DEBUG)
         Fabric.with(this, Crashlytics())
 
         CaocConfig.Builder.create()
@@ -24,5 +25,14 @@ class Application : Application() {
 //                .errorActivity(YourCustomErrorActivity::class.java) //default: null (default error activity)
 //                .eventListener(YourCustomEventListener()) //default: null
                 .apply()
+
+        if (BuildConfig.DEBUG) {
+            StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
+                    .detectAll()
+                    .penaltyLog()
+                    .penaltyFlashScreen()
+                    .penaltyDeath()
+                    .build())
+        }
     }
 }

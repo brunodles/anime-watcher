@@ -12,14 +12,14 @@ object AnimaKaiFactory : AnimeFactory {
 
     override fun episode(url: String): AnimeExplorer {
         val doc = UrlFetcher.fetchUrl(url)
-        return AnimeExplorer(findCurrentEpisode(doc), findNextEpisodes(doc))
+        return AnimeExplorer(findCurrentEpisode(doc, url), findNextEpisodes(doc))
     }
 
-    private fun findCurrentEpisode(doc: Document): CurrentEpisode {
+    private fun findCurrentEpisode(doc: Document, url: String): CurrentEpisode {
         val video = doc.select(".box-video video")
         val text = video.alt()
         val src = video.select("source").src()
-        return CurrentEpisode(src, text)
+        return CurrentEpisode(src, text, url)
     }
 
     private fun findNextEpisodes(doc: Document): List<EpisodeLink> {

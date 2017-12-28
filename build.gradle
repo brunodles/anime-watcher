@@ -1,10 +1,10 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.1.4-3'
-    ext.plugin_version = '3.0.0-beta5'
-    ext.playservices_version = '11.2.2'
-    ext.support_libs_version = '26.0.2'
+    ext.kotlin_version = '1.2.0'
+    ext.plugin_version = '3.0.1'
+    ext.playservices_version = '11.6.2'
+    ext.support_libs_version = '26.1.0'
 
     repositories {
         maven { url 'https://maven.google.com' }
@@ -37,7 +37,7 @@ subprojects { project ->
     afterEvaluate {
         if (project.plugins.hasPlugin("java")) {
             project.apply from: "${project.rootDir}/gradle/jacoco.gradle"
-            project.apply plugin: 'checkstyle'
+            project.apply from: "${project.rootDir}/gradle/checkstyle.gradle"
         }
         if (project.plugins.hasPlugin("kotlin")) {
             project.apply from: "${project.rootDir}/gradle/ktlint.gradle"

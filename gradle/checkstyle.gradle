@@ -2,5 +2,11 @@ apply plugin: 'checkstyle'
 
 checkstyle {
     toolVersion "7.6.1"
+    sourceSets = [ project.sourceSets.main ]
+}
+
+checkstyleMain {
+    source 'src/main/'
+    exclude '**/build/**'
     configFile rootProject.file('checkstyle.xml')
 }

@@ -14,14 +14,14 @@ object OnePieceXFactory : AnimeFactory {
 
     override fun episode(url: String): AnimeExplorer {
         val doc = UrlFetcher.fetchUrl(url)
-        return AnimeExplorer(findCurrentEpisode(doc), findNextEpisodes(doc))
+        return AnimeExplorer(findCurrentEpisode(doc, url), findNextEpisodes(doc))
     }
 
-    private fun findCurrentEpisode(doc: Document): CurrentEpisode {
+    private fun findCurrentEpisode(doc: Document, url: String): CurrentEpisode {
         val text = doc.select("option[selected]").text()
         val iframeLink = "http:" + doc.select("#bannerVideoOnline iframe").src()
         val src = findBestVideoUrl(iframeLink)
-        return CurrentEpisode(src, text)
+        return CurrentEpisode(src, text, url)
     }
 
     private fun findBestVideoUrl(iframeLink: String): String {

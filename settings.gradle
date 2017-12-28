@@ -1,6 +1,9 @@
-include ':explorer'
+include ':explorer', ':testhelper'
 //include ':testcacher'
 include ':animacurse'
-include ':animesproject', ':anitubex', ':onepiecex', ':animakai'
+//include ':animakai' // changed to new site
+include ':animesproject'
+include ':anitubex'
+//include ':onepiecex'
 include ':app'
-include ':cli'
+//include ':cli'

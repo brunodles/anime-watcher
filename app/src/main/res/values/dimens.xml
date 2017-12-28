@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_corner_radius">4dp</dimen>
+    <dimen name="card_margin">8dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="episode_image_width">80dp</dimen>
+</resources>
