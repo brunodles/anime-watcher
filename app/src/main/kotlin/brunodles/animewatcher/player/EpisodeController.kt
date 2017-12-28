@@ -8,14 +8,38 @@ import brunodles.animewatcher.parcelable.EpisodeParceler
 import brunodles.animewatcher.persistence.Firebase
 import brunodles.animewatcher.persistence.Preferences
 import brunodles.rxfirebase.singleObservable
+import com.brunodles.googleimagesapi.ImagesApi
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import okhttp3.OkHttpClient
+import com.brunodles.googleimagesapi.PageFetcher
+import okhttp3.Request
+import java.io.IOException
+
 
 class EpisodeController(val context: Context) {
 
     companion object {
         val TAG = "EpisodeController"
+    }
+
+    object imagesPageFetcher : PageFetcher {
+        override fun fetchPage(url: String): String? {
+            val client = OkHttpClient()
+            val request = Request.Builder()
+                    .url(url)
+                    .get()
+                    .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
+                    .build()
+            return try {
+                val response = client.newCall(request).execute()
+                response.body().string()
+            } catch (e: IOException) {
+                null
+            }
+
+        }
     }
 
     fun findVideo(url: String?): Observable<Episode> {
@@ -61,6 +85,22 @@ class EpisodeController(val context: Context) {
                 .map {
                     CheckUrl.videoInfo(url)
                             ?: throw RuntimeException("Can't find video info")
+                }
+                .map {
+                    if (it.image == null)
+                        Episode(it.description,
+                                it.number,
+                                it.animeName,
+                                ImagesApi.queryBuilder(imagesPageFetcher)
+                                        .query("${it.animeName} ${it.number} ${it.description}")
+                                        .listImageUrls()
+                                        .first(),
+                                it.video,
+                                it.link,
+                                it.nextEpisodes
+                        )
+                    else
+                        it
                 }
                 .doOnNext { Firebase.addVideo(it) }
     }
