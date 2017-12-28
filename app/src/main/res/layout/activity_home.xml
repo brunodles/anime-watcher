@@ -4,29 +4,78 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/sign_in_button"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/mainAppbar"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/mainCollapsing"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleMarginEnd="64dp"
+                app:expandedTitleMarginStart="48dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <ImageView
+                    android:id="@+id/mainBackdrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="centerCrop"
+                    app:layout_collapseMode="parallax"
+                    tools:ignore="ContentDescription" />
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/mainToolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:title="@string/app_name" />
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/card_margin" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="@string/watch_history" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/history"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/item_episode" />
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/sign_in_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/card_margin" />
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/watch_history" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:nestedScrollingEnabled="@{false}"
+                    tools:listitem="@layout/item_episode" />
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
 
 </layout>
