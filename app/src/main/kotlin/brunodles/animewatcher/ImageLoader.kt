@@ -16,7 +16,7 @@ import java.lang.ref.WeakReference
 object ImageLoader {
     private var picassoSingleton: WeakReference<Picasso>? = null
 
-    private fun picasso(context: Context): Picasso {
+    fun picasso(context: Context): Picasso {
         if (picassoSingleton?.get() == null)
             picassoSingleton = WeakReference(Picasso.Builder(context)
                     .indicatorsEnabled(true)
@@ -69,5 +69,8 @@ object ImageLoader {
     fun searchObservable(query: String) =
             Observable.just(query)
                     .subscribeOn(Schedulers.io())
-                    .map { ImagesApi.queryBuilder(imagesPageFetcher) }
+                    .map {
+                        ImagesApi.queryBuilder(imagesPageFetcher)
+                                .query(it)
+                    }
 }
