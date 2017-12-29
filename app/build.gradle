@@ -68,7 +68,8 @@ dependencies {
     implementation "com.google.android.gms:play-services-cast-framework:$playservices_version"
     implementation 'com.google.android.exoplayer:exoplayer:r2.4.1'
 
-    implementation 'com.connectsdk:connect-sdk-android:1.6.0'
+    // Using lite version, since full version does not work on devices API 24+. Also does not support google cast.
+    implementation 'com.connectsdk:connect-sdk-android-lite:1.6.0'
 
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
