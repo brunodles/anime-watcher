@@ -7,10 +7,12 @@ import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
+import io.reactivex.Single
+import io.reactivex.SingleEmitter
 import java.lang.IllegalArgumentException
 
-fun <T> DatabaseReference.singleObservable(valueClass: Class<T>): Observable<T> {
-    return Observable.create { emitter ->
+fun <T> DatabaseReference.singleObservable(valueClass: Class<T>): Single<T> {
+    return Single.create { emitter ->
         this.addListenerForSingleValueEvent(SingleEventParseListener(emitter, valueClass))
     }
 }
@@ -21,13 +23,14 @@ fun DatabaseReference.singleObservable(): Observable<DataSnapshot> {
     }
 }
 
-fun <T> Query.singleObservable(valueClass: Class<T>): Observable<T> {
-    return Observable.create { emitter ->
+fun <T> Query.singleObservable(valueClass: Class<T>): Single<T> {
+    return Single.create { emitter ->
         this.addListenerForSingleValueEvent(SingleEventParseListener(emitter, valueClass))
     }
 }
 
-private class SingleEventListener(val emitter: ObservableEmitter<DataSnapshot>) : ValueEventListener {
+private class SingleEventListener(val emitter: ObservableEmitter<DataSnapshot>) :
+        ValueEventListener {
 
     override fun onCancelled(p0: DatabaseError) {
         emitter.onError(p0.toException())
@@ -41,7 +44,8 @@ private class SingleEventListener(val emitter: ObservableEmitter<DataSnapshot>) 
 
 }
 
-private class SingleEventParseListener<T>(val emitter: ObservableEmitter<T?>, val valueClass: Class<T>) : ValueEventListener {
+private class SingleEventParseListener<T>(val emitter: SingleEmitter<T?>, val valueClass: Class<T>) :
+        ValueEventListener {
 
     override fun onCancelled(p0: DatabaseError) {
         emitter.onError(p0.toException())
@@ -54,7 +58,8 @@ private class SingleEventParseListener<T>(val emitter: ObservableEmitter<T?>, va
         }
         val value = p0.getValue(valueClass)
         if (value != null)
-            emitter.onNext(value)
-        emitter.onComplete()
+            emitter.onSuccess(value)
+        else
+            emitter.onError(NullPointerException())
     }
 }
