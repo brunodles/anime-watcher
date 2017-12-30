@@ -115,7 +115,7 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 .orderByKey()
                 .typedChildObserver(String::class.java)
                 .subscribeOn(Schedulers.io())
-                .flatMap { link ->
+                .flatMapSingle { link ->
                     Firebase.videoRef(link.element)
                             .singleObservable(Episode::class.java)
                             .subscribeOn(Schedulers.io())
