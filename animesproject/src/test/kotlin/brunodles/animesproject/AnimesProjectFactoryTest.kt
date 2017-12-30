@@ -23,8 +23,10 @@ class AnimesProjectFactoryTest {
                 animeName = "One Piece",
                 image = null,
                 link = "https://animes.zlx.com.br/exibir/117/3440/one-piece-166",
-                video = "https://st01hd.animesproject.com.br/download/.*?/O/one-piece/MQ/episodios/166.mp4",
-//                video = "https://st01hd.animesproject.com.br/download/AKfxmXjYdwaDAgpvRdr2SA/1511216870/O/one-piece/MQ/episodios/166.mp4",
+                video = if (BuildConfig.USE_CACHE.toBoolean())
+                    "https://st01hd.animesproject.com.br/download/PIwE-qmHfqilp1P3GyMDOw/1514674597/O/one-piece/MQ/episodios/166.mp4"
+                else
+                    "https://st01hd.animesproject.com.br/download/.*?/O/one-piece/MQ/episodios/166.mp4",
                 nextEpisodes = arrayListOf(
                         Episode(number = 167,
                                 description = "Episódio 167",
@@ -37,7 +39,6 @@ class AnimesProjectFactoryTest {
     }
 
     init {
-        UrlFetcher.useCache = true
         FactoryChecker.checkFactory(AnimesProjectFactory, VALID_URLS, INVALID_URLS, currentEpisode)
     }
 }
