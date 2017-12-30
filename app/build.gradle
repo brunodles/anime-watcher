@@ -24,6 +24,8 @@ android {
     }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
+        debug.java.srcDirs += 'src/debug/kotlin'
+        release.java.srcDirs += 'src/release/kotlin'
     }
     dataBinding {
         enabled = true
@@ -41,6 +43,9 @@ dependencies {
     kapt "com.android.databinding:compiler:$plugin_version"
 
     implementation 'com.brunodles:googleimagesapi:2.0.0'
+    api 'com.brunodles:environmentmods-annotation:0.2.0'
+    annotationProcessor 'com.brunodles:environmentmods-processor:0.2.0'
+    kapt 'com.brunodles:environmentmods-processor:0.2.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
