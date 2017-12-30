@@ -70,7 +70,7 @@ class PlayerActivity : AppCompatActivity() {
             episodeController.findVideo(CheckUrl.findUrl(intent))
         observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribeBy(onNext = this::onFetchEpisode,
+                .subscribeBy(onSuccess = this::onFetchEpisode,
                         onError = this::onError)
     }
 
