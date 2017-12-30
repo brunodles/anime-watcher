@@ -1,9 +1,10 @@
-package brunodles.buildconfig
+class BuildConfigExtension {
+    HashMap<String, String> properties = new HashMap<>()
 
-import org.gradle.api.DefaultTask
-import org.gradle.api.tasks.SourceTask
-import org.gradle.api.tasks.TaskAction
-import org.gradle.api.tasks.incremental.IncrementalTaskInputs
+    void add(String key, String value) {
+        properties.put(key, value)
+    }
+}
 
 class BuildConfigTask extends DefaultTask {
 
@@ -43,5 +44,28 @@ class BuildConfigTask extends DefaultTask {
         content.append("}\n")
         outFile.write(content.toString())
     }
-
 }
+
+class BuildConfigPlugin implements Plugin<Project> {
+
+    @SuppressWarnings("GroovyUnusedDeclaration")
+    public static final String VERSION = "0.1"
+    private BuildConfigExtension extension
+
+    @Override
+    void apply(Project project) {
+        project.sourceSets {
+            main.java.srcDir 'build/build-config'
+        }
+        def task = project.tasks.create("generateBuildConfigClasses", BuildConfigTask.class)
+        def compileKotlin = project.tasks.getByName("compileKotlin")
+        if (compileKotlin != null)
+            compileKotlin.dependsOn.add(task)
+        else
+            project.tasks.getByName("compileJava").dependsOn.add(task)
+
+        extension = project.extensions.create("buildconfig", BuildConfigExtension)
+    }
+}
+
+plugins.apply(BuildConfigPlugin.class)
