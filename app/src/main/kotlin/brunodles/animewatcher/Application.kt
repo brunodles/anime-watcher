@@ -5,6 +5,7 @@ import cat.ereza.customactivityoncrash.config.CaocConfig
 import com.brunodles.environmentmods.annotation.Moddable
 import com.crashlytics.android.Crashlytics
 import com.google.firebase.database.FirebaseDatabase
+import com.squareup.leakcanary.LeakCanary
 import io.fabric.sdk.android.Fabric
 
 @Moddable
@@ -12,6 +13,12 @@ class Application : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return
+        }
+        LeakCanary.install(this)
         FirebaseDatabase.getInstance().setPersistenceEnabled(!BuildConfig.DEBUG)
         Fabric.with(this, Crashlytics())
 
