@@ -87,6 +87,7 @@ dependencies {
     }
     implementation 'cat.ereza:customactivityoncrash:2.1.0'
     debugImplementation 'com.github.anrwatchdog:anrwatchdog:1.3.+'
+    debugImplementation 'me.drakeet.library:crashwoodpecker:2.1.1'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
 
