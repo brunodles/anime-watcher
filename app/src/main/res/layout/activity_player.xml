@@ -100,6 +100,10 @@
                     android:layout_marginTop="8dp"
                     app:nestedScrollingEnabled="@{false}" />
 
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/navigation_margin" />
+
             </GridLayout>
         </android.support.v4.widget.NestedScrollView>
     </LinearLayout>
