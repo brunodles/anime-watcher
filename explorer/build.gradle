@@ -9,7 +9,8 @@ noArg {
 
 buildconfig {
     properties = [
-            ROOT_DIR: project.rootDir
+            ROOT_DIR   : project.rootDir,
+            USE_CACHE: project.properties.get("usecache", "true")
     ]
 }
 
