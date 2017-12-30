@@ -7,9 +7,9 @@ import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.parcelable.EpisodeParcel
 import brunodles.animewatcher.parcelable.EpisodeParceler
 import brunodles.animewatcher.persistence.Firebase
-import brunodles.animewatcher.persistence.Preferences
 import brunodles.rxfirebase.singleObservable
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
@@ -21,32 +21,29 @@ class EpisodeController(val context: Context) {
         val TAG = "EpisodeController"
     }
 
-    fun findVideo(url: String?): Observable<Episode> {
-        if (url == null) return Observable.error(NullPointerException("Empty Url"))
+    fun findVideo(url: String?): Single<Episode> {
+        if (url == null) return Single.error(NullPointerException("Empty Url"))
 
         return findVideoInfo(url)
-                .doOnNext(this::preFetchNextEpisodes)
-                .doOnNext {
-                    Preferences(context).setUrl(url)
+                .doOnSuccess(this::preFetchNextEpisodes)
+                .doOnSuccess {
                     Firebase.addToHistory(url)
                 }
     }
 
-    fun findVideo(episode: EpisodeParcel): Observable<Episode> {
+    fun findVideo(episode: EpisodeParcel): Single<Episode> {
         if (episode.isInfoMissing())
             return findVideo(episode.link!!)
-        return Observable.just(episode)
+        return Single.just(episode)
                 .subscribeOn(Schedulers.io())
                 .map(EpisodeParceler::fromParcel)
-                .doOnNext {
-                    if (episode.link != null) {
-                        Preferences(context).setUrl(episode.link)
+                .doOnSuccess {
+                    if (episode.link != null)
                         Firebase.addToHistory(episode.link)
-                    }
                 }
     }
 
-    private fun findVideoInfo(url: String): Observable<Episode> {
+    private fun findVideoInfo(url: String): Single<Episode> {
         val ref = Firebase.videoRef(url)
         return ref.singleObservable(Episode::class.java)
                 .map {
@@ -57,8 +54,8 @@ class EpisodeController(val context: Context) {
                 .map { it ?: throw RuntimeException("Can't find video info") }
     }
 
-    private fun fetchVideo(url: String): Observable<Episode> {
-        return Observable.just(url)
+    private fun fetchVideo(url: String): Single<Episode> {
+        return Single.just(url)
                 .subscribeOn(Schedulers.io())
                 .map {
                     CheckUrl.videoInfo(url)
@@ -79,7 +76,7 @@ class EpisodeController(val context: Context) {
                         it
                     }
                 }
-                .doOnNext { Firebase.addVideo(it) }
+                .doOnSuccess { Firebase.addVideo(it) }
                 .timeout(1, TimeUnit.MINUTES)
     }
 
@@ -93,7 +90,7 @@ class EpisodeController(val context: Context) {
                 .doOnNext { Firebase.addVideo(it) }
                 .filter { it.link != null }
                 .map { it.link!! }
-                .flatMap(this::findVideoInfo)
+                .flatMapSingle(this::findVideoInfo)
                 .subscribeBy(onNext = {
                     Log.d(TAG, "preFetchNextEpisodes: fetched episode ${it.number}")
                 }, onError = {
