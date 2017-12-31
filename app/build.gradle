@@ -36,7 +36,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(":animacurse")
     implementation project(":animesproject")
-//    implementation project(":anitubex")
+    implementation project(":anitubex")
 //    implementation project(":onepiecex")
 //    implementation project(":animakai")
 
