@@ -3,7 +3,6 @@ package brunodles.onepiecex
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.UrlFetcher
 import brunodles.animewatcher.testhelper.FactoryChecker
-import brunodles.onepiecex.OnePieceXFactory
 import com.greghaskins.spectrum.Spectrum
 import org.junit.runner.RunWith
 

@@ -1,6 +1,5 @@
 package brunodles.animakai
 
-import brunodles.animakai.AnimaKaiFactory
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.testhelper.FactoryChecker
 import com.greghaskins.spectrum.Spectrum
