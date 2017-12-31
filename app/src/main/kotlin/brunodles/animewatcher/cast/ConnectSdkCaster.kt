@@ -32,7 +32,6 @@ internal class ConnectSdkCaster(val context: Activity, val mediaRouteButton: Ima
         // This step could even happen in your app's delegate
         mDiscoveryManager = DiscoveryManager.getInstance()
         mDiscoveryManager.start()
-
         mediaRouteButton?.setOnClickListener {
             pickDevice()
         }

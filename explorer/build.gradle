@@ -1,15 +1,17 @@
 apply plugin: 'java'
 apply plugin: 'kotlin'
 apply plugin: "kotlin-noarg"
-apply plugin: 'buildconfig'
+apply from: rootProject.file('gradle/buildconfig.gradle')
 
 noArg {
     annotation("brunodles.kotlin.annotation.NoArgs")
 }
 
 buildconfig {
+    targetPackage = "brunodles.animewatcher.explorer"
     properties = [
-            ROOT_DIR: project.rootDir
+            ROOT_DIR   : "${project.rootDir.getPath()}",
+            USE_CACHE: project.properties.get("usecache", "true")
     ]
 }
 

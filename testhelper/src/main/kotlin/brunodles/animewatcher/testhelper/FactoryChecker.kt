@@ -6,6 +6,8 @@ import com.greghaskins.spectrum.Spectrum.describe
 import com.greghaskins.spectrum.Spectrum.it
 import org.junit.Assert
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import java.util.regex.Pattern
 
 object FactoryChecker {
 
@@ -74,8 +76,14 @@ object FactoryChecker {
 
         if (expected.video != null)
             it("should return the correct video") {
-                assertEquals(expected.video, episode.video)
+                val matches = Pattern.compile(expected.video).matcher(episode.video).matches()
+                val condition = matches || expected.video == episode.video
+                assertTrue("Expected ${expected.video}\n got ${episode.video}", condition)
             }
+
+        it("should return the correct temporaryVideoUrl") {
+            assertEquals(expected.temporaryVideoUrl, episode.temporaryVideoUrl)
+        }
 
         it("should return the correct animeName") {
             assertEquals(expected.animeName, episode.animeName)

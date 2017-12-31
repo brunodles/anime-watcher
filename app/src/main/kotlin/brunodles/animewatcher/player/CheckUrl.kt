@@ -3,8 +3,10 @@ package brunodles.animewatcher.player
 import android.content.Intent
 import android.util.Log
 import brunodles.animacurse.AnimaCurseFactory
+import brunodles.animesproject.AnimesProjectFactory
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.PageParserFactory
+import brunodles.anitubex.AnitubexFactory
 
 object CheckUrl {
 
@@ -12,6 +14,8 @@ object CheckUrl {
 
     init {
         PageParserFactory.factories.add(AnimaCurseFactory)
+        PageParserFactory.factories.add(AnimesProjectFactory)
+        PageParserFactory.factories.add(AnitubexFactory)
     }
 
     fun findUrl(intent: Intent): String? {

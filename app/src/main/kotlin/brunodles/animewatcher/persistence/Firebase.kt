@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.rxkotlin.subscribeBy
 import java.util.concurrent.TimeUnit
 
@@ -31,23 +32,25 @@ object Firebase {
             videosRef().child(fixUrlToFirebase(episode.link!!)).updateChildren(episode.toMap())
 
     fun addToHistory(url: String) {
-        val currentUser = FirebaseAuth.getInstance().currentUser ?: return
+        val currentUser = FirebaseAuth.getInstance().currentUser!!
+        lastOnHistory(currentUser).subscribeBy(
+                onSuccess = {
+                    if (url != it)
+                        history(currentUser).push().setValue(url)
+                },
+                onError = {
+                    Log.d("Firebase", "addToHistory: failed to add to history", it)
+                }
+        )
+    }
 
-        val history = Firebase.history(currentUser)
-        history.limitToLast(1)
+    fun lastOnHistory(currentUser: FirebaseUser): Single<String> {
+        return Firebase.history(currentUser)
+                .limitToLast(1)
                 .orderByKey()
                 .observableChildAdded(String::class.java)
                 .timeout(5, TimeUnit.SECONDS, Observable.just(EMPTY_URL))
                 .first(EMPTY_URL)
-                .subscribeBy(
-                        onSuccess = {
-                            if (url != it)
-                                history.push().setValue(url)
-                        },
-                        onError = {
-                            Log.d("Firebase", "addToHistory: failed to add to history", it)
-                        }
-                )
     }
 
     fun history(currentUser: FirebaseUser) =

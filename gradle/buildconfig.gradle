@@ -1,0 +1,78 @@
+class BuildConfigExtension {
+    HashMap<String, String> properties = new HashMap<>()
+    String targetPackage = ""
+
+    void add(String key, String value) {
+        properties.put(key, value)
+    }
+}
+
+class BuildConfigTask extends DefaultTask {
+
+    String group = "buildConfig"
+    String description = "Generate BuildConfig class."
+
+    BuildConfigTask() {
+        outputs.upToDateWhen { false }
+        finalizedBy("assemble")
+    }
+
+    @TaskAction
+    def execute(IncrementalTaskInputs inputs) {
+
+        def buildDir = project.getBuildDir()
+        buildDir = new File(buildDir, "build-config")
+        if (!project.buildconfig.targetPackage.isEmpty())
+            buildDir = new File(buildDir, project.buildconfig.targetPackage.replaceAll("\\.", File.separator))
+        buildDir.mkdirs()
+
+        def outFile = new File(buildDir, "BuildConfig.java")
+        outFile.createNewFile()
+        StringBuilder content = new StringBuilder()
+        if (!project.buildconfig.targetPackage.isEmpty())
+            content.append("package ${project.buildconfig.targetPackage};\n")
+        content.append("public final class BuildConfig {\n")
+
+        project.buildconfig.properties.each { f ->
+            content.append("  public static final String ${f.key.toUpperCase()} = \"${f.value}\";\n")
+        }
+
+        project.fileTree(dir: "src", include: "**${File.separatorChar}buildconfig.properties").forEach { file ->
+            println "BuildConfig file -> ${file.getAbsolutePath()}"
+            def properties = new Properties()
+            if (file.exists())
+                properties.load(file.newReader())
+
+            properties.each { property ->
+                content.append("  public static final String ${property.key.toUpperCase()} = \"${property.value}\";\n")
+            }
+
+        }
+        content.append("}\n")
+        outFile.write(content.toString())
+    }
+}
+
+class BuildConfigPlugin implements Plugin<Project> {
+
+    @SuppressWarnings("GroovyUnusedDeclaration")
+    public static final String VERSION = "0.1"
+    private BuildConfigExtension extension
+
+    @Override
+    void apply(Project project) {
+        project.sourceSets {
+            main.java.srcDir 'build/build-config'
+        }
+        def task = project.tasks.create("generateBuildConfigClasses", BuildConfigTask.class)
+        def compileKotlin = project.tasks.getByName("compileKotlin")
+        if (compileKotlin != null)
+            compileKotlin.dependsOn.add(task)
+        else
+            project.tasks.getByName("compileJava").dependsOn.add(task)
+
+        extension = project.extensions.create("buildconfig", BuildConfigExtension)
+    }
+}
+
+plugins.apply(BuildConfigPlugin.class)

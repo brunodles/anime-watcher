@@ -4,6 +4,6 @@ include ':animacurse'
 //include ':animakai' // changed to new site
 include ':animesproject'
 include ':anitubex'
-//include ':onepiecex'
+include ':onepiecex'
 include ':app'
 //include ':cli'
