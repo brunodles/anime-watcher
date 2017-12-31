@@ -25,7 +25,8 @@ object AnimesProjectFactory : PageParser {
                 number = number,
                 video = videoUrl,
                 link = url,
-                nextEpisodes = nextEpisodes(doc))
+                nextEpisodes = nextEpisodes(doc),
+                temporaryVideoUrl = true)
     }
 
     private fun fixLink(link: String?): String? {

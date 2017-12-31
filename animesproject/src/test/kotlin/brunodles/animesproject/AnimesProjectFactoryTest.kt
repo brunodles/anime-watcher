@@ -29,7 +29,8 @@ class AnimesProjectFactoryTest {
                         Episode(number = 168,
                                 description = "Episódio 168",
                                 link = "http://animes.zlx.com.br/exibir/117/3441/one-piece-168")
-                )
+                ),
+                temporaryVideoUrl = true
         )
     }
 
