@@ -1,1 +1,1 @@
-apply from: rootProject.file("gradle/factory_build.gradle")
+apply from: rootProject.file("gradle/decoder_build.gradle")
