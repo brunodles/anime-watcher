@@ -1,4 +1,4 @@
-package brunodles.onepiecex
+package brunodles.animakai
 
 import brunodles.animewatcher.explorer.*
 import org.jsoup.nodes.Document
