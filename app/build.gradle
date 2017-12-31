@@ -37,8 +37,8 @@ dependencies {
     implementation project(":animacurse")
     implementation project(":animesproject")
     implementation project(":anitubex")
-//    implementation project(":onepiecex")
-//    implementation project(":animakai")
+    implementation project(":onepiecex")
+    implementation project(":animakai")
 
     kapt "com.android.databinding:compiler:$plugin_version"
 
