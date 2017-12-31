@@ -13,10 +13,6 @@ object AnimaCurseFactory : PageParser {
     private val TITLE_REGEX = Pattern.compile(".*?(\\d+)\\s.\\s(.+)")
     private const val IMAGE_URL_FORMAT = "https://animacurse.moe/imgs/%s-episodio-%s.webp"
 
-    init {
-        PageParserFactory.factories.add(this)
-    }
-
     override fun isEpisode(url: String): Boolean =
             url.contains(URL_REGEX)
 
