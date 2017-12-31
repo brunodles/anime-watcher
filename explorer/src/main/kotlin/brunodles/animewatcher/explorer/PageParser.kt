@@ -6,8 +6,3 @@ interface PageParser {
 
     fun episode(url: String): Episode
 }
-
-object PageParserFactory {
-    val factories = ArrayList<PageParser>()
-
-}

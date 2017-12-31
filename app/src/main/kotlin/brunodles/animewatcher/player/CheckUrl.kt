@@ -5,17 +5,21 @@ import android.util.Log
 import brunodles.animacurse.AnimaCurseFactory
 import brunodles.animesproject.AnimesProjectFactory
 import brunodles.animewatcher.explorer.Episode
-import brunodles.animewatcher.explorer.PageParserFactory
+import brunodles.animewatcher.explorer.PageParser
 import brunodles.anitubex.AnitubexFactory
+import brunodles.onepiecex.AnimaKaiFactory
+import brunodles.onepiecex.OnePieceXFactory
 
 object CheckUrl {
 
-    val TAG = "CheckUrl"
+    private val factories = ArrayList<PageParser>()
 
     init {
-        PageParserFactory.factories.add(AnimaCurseFactory)
-        PageParserFactory.factories.add(AnimesProjectFactory)
-        PageParserFactory.factories.add(AnitubexFactory)
+        factories.add(AnimaCurseFactory)
+        factories.add(AnimesProjectFactory)
+        factories.add(AnitubexFactory)
+        factories.add(AnimaKaiFactory)
+        factories.add(OnePieceXFactory)
     }
 
     fun findUrl(intent: Intent): String? {
@@ -26,8 +30,5 @@ object CheckUrl {
         return null
     }
 
-    fun videoInfo(url: String): Episode? {
-        Log.d(TAG, "videoInfo $url\n Factories count = ${PageParserFactory.factories.size}")
-        return PageParserFactory.factories.firstOrNull { it.isEpisode(url) }?.episode(url)
-    }
+    fun videoInfo(url: String): Episode? = factories.firstOrNull { it.isEpisode(url) }?.episode(url)
 }
