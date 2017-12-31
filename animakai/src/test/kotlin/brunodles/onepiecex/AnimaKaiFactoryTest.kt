@@ -1,74 +1,35 @@
 package brunodles.onepiecex
 
-import brunodles.animewatcher.explorer.AnimeExplorer
+import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.UrlFetcher
+import brunodles.animewatcher.testhelper.FactoryChecker
 import com.greghaskins.spectrum.Spectrum
-import com.greghaskins.spectrum.Spectrum.*
-import org.junit.Assert
-import org.junit.Assert.*
 import org.junit.runner.RunWith
-import java.util.*
 
 @RunWith(Spectrum::class)
 class AnimaKaiFactoryTest {
 
     companion object {
 
-        val VALID_URLS = Arrays.asList(
-                "https://www.animakai.info/anime/2019/episodio-419",
-                "www.animakai.info/anime/123/episodio-123",
-                "animakai.info/anime/2019/episodio-419")
-        val INVALID_URLS = Arrays.asList(
+        val VALID_URLS = arrayOf(
+                "https://www.animekaionline.com/tsukipro-the-animation/episodio-1")
+        val INVALID_URLS = arrayOf(
                 "www.animakai.info/anime/episodio-419",
                 "www.animakai.info/anime/2019/")
+        val currentEpisode = Episode(
+                number = 1,
+                description = "Tsukipro The Animation 1",
+                animeName = "Tsukipro The Animation",
+                image = "http://www.animekai.info/2017/10/Screenshot_33.jpg",
+                link = "https://www.animekaionline.com/tsukipro-the-animation/episodio-1",
+                //                video = "http://www.blogger.com/video-play.mp4?contentId=1e5c9ab13c70079b",
+                video = "https://www.blogger.com/video-play.mp4?contentId=b186c220e9973f58",
+                nextEpisodes = arrayListOf()
+        )
     }
 
     init {
-        UrlFetcher.useCache = true
-        describe("The AnimaKai Factory") {
-            val factory = AnimaKaiFactory
-
-            describe("when decode") {
-
-                VALID_URLS.forEach { url ->
-                    it("should be able to decode the url \"$url\"") {
-                        assertTrue(factory.isEpisode(url))
-                    }
-                }
-
-                INVALID_URLS.forEach { url ->
-                    it("should not decode the invalid url \"$url\"") {
-                        Assert.assertFalse(factory.isEpisode(url))
-                    }
-                }
-
-            }
-
-            describe("when get current episode") {
-                val episode = factory.episode(VALID_URLS[0]).currentEpisode
-                it("should return video url") {
-                    assertEquals("http://www.blogger.com/video-play.mp4?contentId=1e5c9ab13c70079b",
-                            episode.video)
-                }
-
-                it("should return video description") {
-                    assertEquals("One Piece 419", episode.description)
-                }
-            }
-
-            describe("when get next episodes") {
-                val episodes = factory.episode(VALID_URLS[0]).nextEpisodes
-
-                it("should return a list containing one episode") {
-                    assertEquals(1, episodes.size)
-                }
-
-                it("should return the link to the next episode") {
-                    assertEquals("https://www.animakai.info/anime/2019/episodio-420", episodes[0].link)
-                }
-            }
-
-        }
+        FactoryChecker.checkFactory(AnimaKaiFactory, VALID_URLS, INVALID_URLS, currentEpisode)
     }
 
 }
