@@ -7,6 +7,7 @@ import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.PageParser
 import brunodles.anitubex.AnitubexFactory
 import brunodles.animakai.AnimaKaiFactory
+import brunodles.animesonlinebr.AnimesOnlineBrFactory
 import brunodles.onepiecex.OnePieceXFactory
 
 object UrlChecker {
@@ -15,9 +16,10 @@ object UrlChecker {
 
     init {
         factories.add(AnimaCurseFactory)
+        factories.add(AnimaKaiFactory)
+        factories.add(AnimesOnlineBrFactory)
         factories.add(AnimesProjectFactory)
         factories.add(AnitubexFactory)
-        factories.add(AnimaKaiFactory)
         factories.add(OnePieceXFactory)
     }
 
