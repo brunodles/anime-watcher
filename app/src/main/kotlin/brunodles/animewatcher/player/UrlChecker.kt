@@ -10,7 +10,7 @@ import brunodles.anitubex.AnitubexFactory
 import brunodles.onepiecex.AnimaKaiFactory
 import brunodles.onepiecex.OnePieceXFactory
 
-object CheckUrl {
+object UrlChecker {
 
     private val factories = ArrayList<PageParser>()
 

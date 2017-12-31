@@ -58,7 +58,7 @@ class EpisodeController(val context: Context) {
         return Single.just(url)
                 .subscribeOn(Schedulers.io())
                 .map {
-                    CheckUrl.videoInfo(url)
+                    UrlChecker.videoInfo(url)
                             ?: throw RuntimeException("Can't find video info")
                 }
                 .map {
