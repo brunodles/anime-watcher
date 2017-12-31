@@ -78,7 +78,8 @@ object FactoryChecker {
             it("should return the correct video") {
                 val matches = Pattern.compile(expected.video).matcher(episode.video).matches()
                 val condition = matches || expected.video == episode.video
-                assertTrue("Expected ${expected.video}\n got ${episode.video}", condition)
+                assertTrue("\n Expected \"${expected.video}\"" +
+                        "\n      got \"${episode.video}\"", condition)
             }
 
         it("should return the correct temporaryVideoUrl") {
