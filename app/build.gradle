@@ -34,11 +34,11 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(":animacurse")
-    implementation project(":animesproject")
-    implementation project(":anitubex")
-    implementation project(":onepiecex")
-    implementation project(":animakai")
+    implementation project(":decoders:animacurse")
+    implementation project(":decoders:animesproject")
+    implementation project(":decoders:anitubex")
+    implementation project(":decoders:onepiecex")
+    implementation project(":decoders:animakai")
 
     kapt "com.android.databinding:compiler:$plugin_version"
 
