@@ -1,15 +1,10 @@
 package brunodles.animesproject
 
+import brunodles.animewatcher.explorer.BuildConfig
 import brunodles.animewatcher.explorer.Episode
-import brunodles.animewatcher.explorer.UrlFetcher
 import brunodles.animewatcher.testhelper.FactoryChecker
 import com.greghaskins.spectrum.Spectrum
-import com.greghaskins.spectrum.Spectrum.describe
-import com.greghaskins.spectrum.Spectrum.it
-import org.junit.Assert
-import org.junit.Assert.assertEquals
 import org.junit.runner.RunWith
-import java.util.Arrays
 
 @RunWith(Spectrum::class)
 class AnimesProjectFactoryTest {
