@@ -1,5 +1,6 @@
 class BuildConfigExtension {
     HashMap<String, String> properties = new HashMap<>()
+    String targetPackage = ""
 
     void add(String key, String value) {
         properties.put(key, value)
@@ -19,12 +20,18 @@ class BuildConfigTask extends DefaultTask {
     @TaskAction
     def execute(IncrementalTaskInputs inputs) {
 
-        def buildDir = new File(project.getBuildDir(), "build-config")
+        def buildDir = project.getBuildDir()
+        buildDir = new File(buildDir, "build-config")
+        if (!project.buildconfig.targetPackage.isEmpty())
+            buildDir = new File(buildDir, project.buildconfig.targetPackage.replaceAll("\\.", File.separator))
         buildDir.mkdirs()
 
         def outFile = new File(buildDir, "BuildConfig.java")
         outFile.createNewFile()
-        StringBuilder content = new StringBuilder("public final class BuildConfig {\n")
+        StringBuilder content = new StringBuilder()
+        if (!project.buildconfig.targetPackage.isEmpty())
+            content.append("package ${project.buildconfig.targetPackage};\n")
+        content.append("public final class BuildConfig {\n")
 
         project.buildconfig.properties.each { f ->
             content.append("  public static final String ${f.key.toUpperCase()} = \"${f.value}\";\n")
