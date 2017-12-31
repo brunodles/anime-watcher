@@ -3,30 +3,42 @@ package brunodles.onepiecex
 import brunodles.animewatcher.explorer.*
 import org.jsoup.nodes.Document
 
-object AnimaKaiFactory : AnimeFactory {
+object AnimaKaiFactory : PageParser {
 
-    private val EPISODE_URL_REGEX = Regex("animakai\\.info/anime/\\d+/episodio-\\d+")
-    private val HOST = "https://www.animakai.info"
+    private val EPISODE_URL_REGEX = Regex("https?://www\\.animekaionline\\.com/(.*?)/episodio-\\d+")
+    private val NUMBER_REGEX = Regex("\\d+")
 
-    override fun isEpisode(url: String): Boolean = url.contains(EPISODE_URL_REGEX)
+    override fun isEpisode(url: String): Boolean = url.matches(EPISODE_URL_REGEX)
 
-    override fun episode(url: String): AnimeExplorer {
+    override fun episode(url: String): Episode {
         val doc = UrlFetcher.fetchUrl(url)
-        return AnimeExplorer(findCurrentEpisode(doc, url), findNextEpisodes(doc))
-    }
-
-    private fun findCurrentEpisode(doc: Document, url: String): CurrentEpisode {
         val video = doc.select(".box-video video")
         val text = video.alt()
         val src = video.select("source").src()
-        return CurrentEpisode(src, text, url)
+        return Episode(number = url.split("-").last().toIntOrNull() ?: 0,
+                animeName = animeName(doc),
+                image = imageUrl(doc),
+                description = text,
+                video = src,
+                link = url)
     }
 
-    private fun findNextEpisodes(doc: Document): List<EpisodeLink> {
-        return doc.select("a.btn-nav-episodios.next").map {
-            val text = it.text()
-            val link = HOST + it.href()
-            EpisodeLink(link, text)
-        }.toList()
+    private fun imageUrl(doc: Document): String? {
+        val url = doc.head()
+                .select("meta[property=og:image]")
+                ?.attr("content")
+                ?.split("http")
+                ?.last()
+        if (url != null)
+            return "http$url"
+        return null
     }
+
+    private fun animeName(doc: Document): String? =
+            doc.head()
+                    .select("meta[property=og:description]")
+                    ?.attr("content")
+                    ?.split(" ")
+                    ?.filter { !it.matches(NUMBER_REGEX) }
+                    ?.joinToString(" ")
 }
