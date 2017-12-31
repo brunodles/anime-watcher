@@ -81,6 +81,10 @@ object FactoryChecker {
                 assertTrue("Expected ${expected.video}\n got ${episode.video}", condition)
             }
 
+        it("should return the correct temporaryVideoUrl") {
+            assertEquals(expected.temporaryVideoUrl, episode.temporaryVideoUrl)
+        }
+
         it("should return the correct animeName") {
             assertEquals(expected.animeName, episode.animeName)
         }
