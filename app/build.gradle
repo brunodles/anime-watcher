@@ -35,7 +35,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(":decoders:animacurse")
     implementation project(":decoders:animakai")
     implementation project(":decoders:animesonlinebr")
