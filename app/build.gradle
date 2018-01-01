@@ -70,7 +70,7 @@ dependencies {
     implementation "com.google.firebase:firebase-crash:$playservices_version"
     implementation "com.google.firebase:firebase-auth:$playservices_version"
 
-    implementation "com.firebaseui:firebase-ui-database:3.1.0"
+    implementation "com.firebaseui:firebase-ui-database:3.1.2"
 //    implementation "com.androidhuman.rxfirebase2:firebase-database-kotlin:${playservices_version}.0"
 
     implementation "com.google.android.gms:play-services-auth:$playservices_version"
@@ -90,7 +90,7 @@ dependencies {
         transitive = true
     }
     implementation 'cat.ereza:customactivityoncrash:2.1.0'
-    debugImplementation 'com.github.anrwatchdog:anrwatchdog:1.3.+'
+    debugImplementation 'com.github.anrwatchdog:anrwatchdog:1.3.0'
     debugImplementation 'me.drakeet.library:crashwoodpecker:2.1.1'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
