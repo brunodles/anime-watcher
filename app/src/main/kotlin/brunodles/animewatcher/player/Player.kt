@@ -10,7 +10,8 @@ import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 
 class Player(val context: Context, val playerView: SimpleExoPlayerView) {
@@ -20,6 +21,8 @@ class Player(val context: Context, val playerView: SimpleExoPlayerView) {
     }
 
     private val exoPlayer: SimpleExoPlayer
+
+    private val userAgent: String by lazy { Util.getUserAgent(context, USER_AGENT) }
 
     init {
         val bandwidthMeter = DefaultBandwidthMeter()
@@ -32,8 +35,9 @@ class Player(val context: Context, val playerView: SimpleExoPlayerView) {
 
     fun prepareVideo(url: String) {
         val bandwidthMeter = DefaultBandwidthMeter()
-        val dataSourceFactory = DefaultDataSourceFactory(context,
-                Util.getUserAgent(context, USER_AGENT), bandwidthMeter)
+        val dataSourceFactory = DefaultHttpDataSourceFactory(userAgent, bandwidthMeter,
+                DefaultHttpDataSource.DEFAULT_CONNECT_TIMEOUT_MILLIS,
+                DefaultHttpDataSource.DEFAULT_READ_TIMEOUT_MILLIS, true)
         val extractorsFactory = DefaultExtractorsFactory()
         val videoSource = ExtractorMediaSource(Uri.parse(url),
                 dataSourceFactory, extractorsFactory, null, null)
