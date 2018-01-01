@@ -87,11 +87,8 @@ class EpisodeController(val context: Context) {
         Observable.fromIterable(episode.nextEpisodes)
                 .subscribeOn(Schedulers.io())
                 .doOnNext { Firebase.addVideo(it) }
-                .filter { it.link != null }
-                .map { it.link!! }
-                .flatMapSingle(this::findVideoInfo)
                 .subscribeBy(onNext = {
-                    Log.d(TAG, "preFetchNextEpisodes: fetched episode ${it.number}")
+                    Firebase.addVideo(it)
                 }, onError = {
                     Log.e(TAG, "preFetchNextEpisodes: failed to fetch next episodes", it)
                 })
