@@ -4,7 +4,7 @@ apply plugin: 'kotlin'
 dependencies {
     compile project(':explorer')
 
-    testCompile project(':testhelper')
+    testCompile project(':decodertesthelper')
     testCompile 'junit:junit:4.12'
     testCompile 'com.greghaskins:spectrum:1.1.1'
 }
