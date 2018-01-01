@@ -55,10 +55,10 @@
                 <data android:host="animacurse.moe" />
                 <data android:host="animekaionline.com" />
                 <data android:host="animesonlinebr.com.br" />
+                <data android:host="animesorion.tv/" />
                 <data android:host="animes.zlx.com.br" />
                 <data android:host="anitubex.com" />
                 <data android:host="one-piece-x.com.br" />
-                <data android:host="animesorion.tv" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
