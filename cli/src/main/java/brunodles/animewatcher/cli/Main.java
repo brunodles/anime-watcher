@@ -1,6 +1,6 @@
 package brunodles.animewatcher.cli;
 
-import brunodles.animewatcher.explorer.UrlFetcher;
+import brunodles.urlfetcher.UrlFetcher;
 
 public class Main {
 

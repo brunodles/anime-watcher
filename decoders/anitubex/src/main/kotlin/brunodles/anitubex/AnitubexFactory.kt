@@ -1,6 +1,9 @@
 package brunodles.anitubex
 
 import brunodles.animewatcher.explorer.*
+import brunodles.urlfetcher.UrlFetcher
+import brunodles.urlfetcher.href
+import brunodles.urlfetcher.src
 import org.jsoup.nodes.Document
 import java.util.regex.Pattern
 

@@ -1,7 +1,7 @@
 package brunodles.animewatcher
 
 import android.support.multidex.MultiDexApplication
-import brunodles.animewatcher.explorer.UrlFetcher
+import brunodles.urlfetcher.UrlFetcher
 import cat.ereza.customactivityoncrash.config.CaocConfig
 import com.brunodles.environmentmods.annotation.Moddable
 import com.crashlytics.android.Crashlytics

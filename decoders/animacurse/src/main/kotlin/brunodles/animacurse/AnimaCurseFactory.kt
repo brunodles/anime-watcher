@@ -2,7 +2,7 @@ package brunodles.animacurse
 
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.PageParser
-import brunodles.animewatcher.explorer.UrlFetcher
+import brunodles.urlfetcher.UrlFetcher
 import org.jsoup.nodes.Document
 import java.util.regex.Pattern
 

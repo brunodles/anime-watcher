@@ -1,6 +1,9 @@
 package brunodles.animacurse
 
 import brunodles.animewatcher.explorer.*
+import brunodles.urlfetcher.UrlFetcher
+import brunodles.urlfetcher.href
+import brunodles.urlfetcher.src
 
 object AnimesOrionFactory : PageParser {
 

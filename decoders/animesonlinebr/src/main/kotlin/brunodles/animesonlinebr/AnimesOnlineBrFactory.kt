@@ -1,6 +1,9 @@
 package brunodles.animesonlinebr
 
 import brunodles.animewatcher.explorer.*
+import brunodles.urlfetcher.UrlFetcher
+import brunodles.urlfetcher.href
+import brunodles.urlfetcher.src
 import org.jsoup.nodes.Document
 
 object AnimesOnlineBrFactory : PageParser {

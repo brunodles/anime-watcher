@@ -1,6 +1,9 @@
 package brunodles.animakai
 
 import brunodles.animewatcher.explorer.*
+import brunodles.urlfetcher.UrlFetcher
+import brunodles.urlfetcher.alt
+import brunodles.urlfetcher.src
 import org.jsoup.nodes.Document
 
 object AnimaKaiFactory : PageParser {
