@@ -1,9 +1,13 @@
 class BuildConfigExtension {
-    HashMap<String, String> properties = new HashMap<>()
+    HashMap<String, String> configFields = new HashMap<>()
     String targetPackage = ""
 
-    void add(String key, String value) {
-        properties.put(key, value)
+    void field(String type, String key, def value) {
+        configFields.put(key, "public static final $type ${key.toUpperCase()} = $value;")
+    }
+
+    void mfield(String key, def value) {
+        configFields.put(key, "public static final ${value.getClass().simpleName} ${key.toUpperCase()} = $value;")
     }
 }
 
@@ -33,8 +37,8 @@ class BuildConfigTask extends DefaultTask {
             content.append("package ${project.buildconfig.targetPackage};\n")
         content.append("public final class BuildConfig {\n")
 
-        project.buildconfig.properties.each { f ->
-            content.append("  public static final String ${f.key.toUpperCase()} = \"${f.value}\";\n")
+        project.buildconfig.configFields.each { f ->
+            content.append("  ${f.value}\n")
         }
 
         project.fileTree(dir: "src", include: "**${File.separatorChar}buildconfig.properties").forEach { file ->
@@ -44,7 +48,7 @@ class BuildConfigTask extends DefaultTask {
                 properties.load(file.newReader())
 
             properties.each { property ->
-                content.append("  public static final String ${property.key.toUpperCase()} = \"${property.value}\";\n")
+                content.append("  ${property.value}\n")
             }
 
         }
