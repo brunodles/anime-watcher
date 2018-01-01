@@ -51,7 +51,6 @@ class EpisodeController(val context: Context) {
                     else throw RuntimeException("Episode is not playable!")
                 }
                 .onErrorResumeNext(fetchVideo(url))
-                .map { it ?: throw RuntimeException("Can't find video info") }
     }
 
     private fun fetchVideo(url: String): Single<Episode> {
