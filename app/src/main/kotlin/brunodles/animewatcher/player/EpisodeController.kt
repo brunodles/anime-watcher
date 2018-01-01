@@ -63,14 +63,7 @@ class EpisodeController(val context: Context) {
                 .map {
                     if (it.image == null) {
                         Log.d(TAG, "fetchVideo: invalid image $url")
-                        Episode(it.description,
-                                it.number,
-                                it.animeName,
-                                ImageLoader.first("${it.animeName} ${it.number} ${it.description}"),
-                                it.video,
-                                it.link,
-                                it.nextEpisodes
-                        )
+                        it.copy(image = ImageLoader.first("${it.animeName} ${it.number} ${it.description}"))
                     } else {
                         it
                     }
