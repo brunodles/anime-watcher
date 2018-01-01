@@ -98,7 +98,7 @@ class PlayerActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         val manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.nextEpisodes.layoutManager = manager
-        adapter = ViewDataBindingAdapter<Episode, ItemEpisodeBinding>(R.layout.item_episode) { viewHolder, item, index ->
+        adapter = ViewDataBindingAdapter<Episode, ItemEpisodeBinding>(R.layout.item_episode) { viewHolder, item, _ ->
             viewHolder.binder.description.text = "${item.number} - ${item.description}"
             viewHolder.binder.title.text = item.animeName
             ImageLoader.loadImageInto(item.image, viewHolder.binder.image)
