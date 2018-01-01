@@ -15,6 +15,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+
+        buildConfigField "Boolean", "IMAGE_LOADER_LOGGGIN_ENABLED", project.properties.get("image_log", "false")
     }
     buildTypes {
         release {
