@@ -1,6 +1,6 @@
 include ':explorer', ':testhelper'
 include ':app'
-//include ':cli'
+include ':cli'
 //include ':testcacher'
 include ':decoders:animacurse'
 include ':decoders:animakai'
