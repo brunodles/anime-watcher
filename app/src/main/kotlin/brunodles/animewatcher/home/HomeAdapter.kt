@@ -58,7 +58,7 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         when (getItemViewType(position)) {
             TYPE_EPISODE -> (holder as EpisodeHolder).let {
-                it.onBind(list[position] as Episode)
+                it.onBind(list[position])
                 it.clickListener = internalEpisodeClickListener
             }
         }
