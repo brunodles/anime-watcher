@@ -17,24 +17,50 @@ object AnimesOnlineBrFactory : PageParser {
         val videoSrc = doc.select("video").src()
         val number = texts[1].split(" ").last().toIntOrNull() ?: 0
 
+        val nextEpisodesUrl = doc.select(".infosingle .left-single a")?.href()
+
+        val nextEpisodes: List<Episode> = if (nextEpisodesUrl != null && nextEpisodesUrl.startsWith("http"))
+            try {
+                nextEpisodesFromMainPage(nextEpisodesUrl, texts[0])
+                        .filter { it.number > number }
+            } catch (e:Exception) {
+                singleNextEpisode(doc, number, texts[0])
+            }
+        else
+            singleNextEpisode(doc, number, texts[0])
+
         return Episode(number = number,
                 animeName = texts[0],
                 description = texts[1],
                 video = videoSrc,
                 link = url,
-                nextEpisodes = arrayListOf(
-                        Episode(
-                                number = number + 1,
-                                animeName = texts[0],
-                                description = doc.select("a.seta2")
-                                        .attr("title")
-                                        .split("-")
-                                        .last()
-                                        .trim(),
-                                link = doc.select("a.seta2").href()
-                        )
-                ))
+                nextEpisodes = nextEpisodes)
     }
+
+    private fun nextEpisodesFromMainPage(nextEpisodesUrl: String, animeName: String): List<Episode> =
+            UrlFetcher.fetchUrl(nextEpisodesUrl).select(".lcp_catlist.list li a")
+                    .map {
+                        Episode(
+                                number = NUMBER_REGEX.find(it.text())?.value?.toIntOrNull() ?: 0,
+                                description = it.text().split("-").last().trim(),
+                                link = it.href(),
+                                animeName = animeName
+                        )
+                    }
+
+
+    private fun singleNextEpisode(doc: Document, number: Int, animeName: String): List<Episode> =
+            arrayListOf(Episode(
+                    number = number + 1,
+                    animeName = animeName,
+                    description = doc.select("a.seta2")
+                            .attr("title")
+                            .split("-")
+                            .last()
+                            .trim(),
+                    link = doc.select("a.seta2").href()
+            ))
+
 
     private fun texts(doc: Document): List<String> {
         var title = doc.title()
