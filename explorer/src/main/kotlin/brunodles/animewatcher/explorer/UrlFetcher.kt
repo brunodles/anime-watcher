@@ -50,7 +50,7 @@ class UrlFetcher(private val url: String) {
         private val INVALID_TEXT_PATTERN = Regex("[^\\d\\w]+")
         private val MAX_FILENAME_SIZE = 100
 
-        var useCache: Boolean = BuildConfig.USE_CACHE.toBoolean()
+        var useCache: Boolean = BuildConfig.USE_CACHE
         var useLog = false
 
         fun fetchUrl(url: String): Document {

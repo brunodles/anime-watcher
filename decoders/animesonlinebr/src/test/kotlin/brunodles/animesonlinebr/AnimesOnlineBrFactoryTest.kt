@@ -82,7 +82,8 @@ class AnimesOnlineBrFactoryTest {
 
     init {
         FactoryChecker.checkFactory(AnimesOnlineBrFactory, VALID_URLS, INVALID_URLS, ESPISODE_AND_LIST)
-        if (BuildConfig.USE_CACHE.toBoolean())
+        @Suppress("ConstantConditionIf")
+        if (BuildConfig.USE_CACHE)
             FactoryChecker.checkFactory(AnimesOnlineBrFactory,
                     arrayOf("http://www.animesonlinebr.com.br/video/500342"), emptyArray(),
                     ESPISODE_AND_SINGLE)

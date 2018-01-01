@@ -7,6 +7,7 @@ import com.greghaskins.spectrum.Spectrum
 import org.junit.runner.RunWith
 
 @RunWith(Spectrum::class)
+@Suppress("ConstantConditionIf")
 class AnimesProjectFactoryTest {
 
     companion object {
@@ -18,7 +19,7 @@ class AnimesProjectFactoryTest {
                 animeName = "One Piece",
                 image = null,
                 link = "https://animes.zlx.com.br/exibir/117/3440/one-piece-166",
-                video = if (BuildConfig.USE_CACHE.toBoolean())
+                video = if (BuildConfig.USE_CACHE)
                     "https://st01hd.animesproject.com.br/download/PIwE-qmHfqilp1P3GyMDOw/1514674597/O/one-piece/MQ/episodios/166.mp4"
                 else
                     "https://st01hd.animesproject.com.br/download/.*?/O/one-piece/MQ/episodios/166.mp4",
