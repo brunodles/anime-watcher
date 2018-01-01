@@ -11,10 +11,6 @@ import java.util.regex.Pattern
 
 object FactoryChecker {
 
-    fun checkFactory(pageParser: PageParser, testData: TestData) =
-            checkFactory(pageParser, testData.validUrls, testData.invalidUrls,
-                    testData.currentEpisode)
-
     fun checkFactory(pageParser: PageParser, validUrls: Array<String>,
                      invalidUrls: Array<String>, expectedEpisode: Episode) {
         describe(pageParser::class.java.simpleName) {
