@@ -4,15 +4,15 @@ import brunodles.animewatcher.explorer.*
 
 object AnimesOrionFactory : PageParser {
 
-    private val URL_REGEX = Regex("www.animesorion.tv/\\d+")
+    private val URL_REGEX = Regex("^(:?https?://)?(:?www.)?animesorion.tv/\\d+.*?$")
 
     override fun isEpisode(url: String): Boolean =
-            url.contains(URL_REGEX)
+            url.matches(URL_REGEX)
 
     override fun episode(url: String): Episode {
         val doc = UrlFetcher.fetchUrl(url)
         val texts = doc.title().split("Episódio").map { it.trim() }
-        val number = texts[1].toIntOrNull() ?: 0
+        val number = if (texts.size > 1) texts[1].toIntOrNull() ?: 0 else 0
         val animeName = texts[0].trim()
         return Episode(number = number,
                 description = "Episódio $number",
