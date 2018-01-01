@@ -51,6 +51,7 @@ class UrlFetcher(private val url: String) {
         private val MAX_FILENAME_SIZE = 100
 
         var useCache: Boolean = BuildConfig.USE_CACHE
+        var cacheDir = BuildConfig.ROOT_DIR
         var useLog = false
 
         fun fetchUrl(url: String): Document {
@@ -79,7 +80,7 @@ class UrlFetcher(private val url: String) {
                 .max(MAX_FILENAME_SIZE)
 
         private fun file(key: String): File {
-            val dir = File(BuildConfig.ROOT_DIR, "cache")
+            val dir = File(cacheDir, "cache")
             if (!dir.exists())
                 dir.mkdirs()
             return File(dir, key)
