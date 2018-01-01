@@ -17,9 +17,7 @@ jar {
 }
 
 dependencies {
-    compile project(':animacurse')
-    compile project(':animesproject')
-    compile project(':anitubex')
+    implementation project(':explorer')
 }
 
 sourceCompatibility = "1.7"

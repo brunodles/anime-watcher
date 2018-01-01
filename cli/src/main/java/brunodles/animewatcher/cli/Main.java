@@ -1,41 +1,15 @@
 package brunodles.animewatcher.cli;
 
-import brunodles.animewatcher.explorer.AnimeExplorer;
-import brunodles.animewatcher.explorer.AnimeFactory;
-import brunodles.animewatcher.explorer.EpisodeLink;
-import brunodles.animacurse.AnimaCurseFactory;
-import brunodles.animesproject.AnimesProjectFactory;
-import brunodles.anitubex.AnitubexFactory;
+import brunodles.animewatcher.explorer.UrlFetcher;
 
 public class Main {
 
-    private static AnimeFactory[] factories = {
-            AnitubexFactory.INSTANCE,
-            AnimaCurseFactory.INSTANCE, AnimesProjectFactory.INSTANCE};
-
     public static void main(String[] args) {
-        System.out.print("Find url in: ");
-        System.out.println(args[0]);
-
-        System.out.println("\n ");
-        AnimeExplorer explorer = findVideoUrl(args[0]);
-        System.out.println(explorer.getCurrentEpisode().getVideo());
-
-        System.out.println("\n next episodes: ");
-        for (EpisodeLink episodeLink : explorer.getNextEpisodes()) {
-            System.out.print("* ");
-            System.out.println(episodeLink.getDescription());
-
-            System.out.print("   - ");
-            System.out.println(episodeLink.getLink());
-        }
-    }
-
-    private static AnimeExplorer findVideoUrl(final String url) {
-        for (AnimeFactory factory : factories) {
-            if (factory.isEpisode(url))
-                return factory.episode(url);
-        }
-        return null;
+        String cacheDir = UrlFetcher.Companion.getCacheDir() + "/cli/cache";
+        System.out.println("CacheDir "+cacheDir);
+        UrlFetcher.Companion.setCacheDir(cacheDir);
+        UrlFetcher.Companion.setUseLog(true);
+        System.out.println("\n\n");
+        UrlFetcher.Companion.fetchUrl("https://www.google.com.br/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&ved=0ahUKEwi217zc7LbYAhVDQZAKHV5qBzIQFggwMAE&url=http%3A%2F%2Fwww.animesorion.tv%2F74597&usg=AOvVaw1PqCiwa4IPitNaiRx7luBT");
     }
 }
