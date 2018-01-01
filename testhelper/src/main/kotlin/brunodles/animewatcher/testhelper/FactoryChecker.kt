@@ -35,7 +35,7 @@ object FactoryChecker {
             }
 
             describe("when episode") {
-                val episode = pageParser.episode(validUrls[0])
+                val episode = pageParser.episode(expectedEpisode.link!!)
 
                 describe("when get currentEpisode") {
                     checkEpisode(expectedEpisode, episode)
