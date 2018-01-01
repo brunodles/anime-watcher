@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="brunodles.animewatcher">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="brunodles.animewatcher">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -19,53 +20,58 @@
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="548b9234ed2aeda85a21cf3c1698e2da893049e0"
-            />
+            android:value="548b9234ed2aeda85a21cf3c1698e2da893049e0" />
         <meta-data
             android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
-            android:value="brunodles.animewatcher.cast.CastOptionsProvider"/>
+            android:value="brunodles.animewatcher.cast.CastOptionsProvider" />
 
         <activity android:name=".home.HomeActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
         <activity
             android:name=".player.PlayerActivity"
-            android:configChanges="orientation|screenLayout|screenSize">
+            android:configChanges="orientation|screenLayout|screenSize"
+            android:parentActivityName=".home.HomeActivity"
+            tools:targetApi="jelly_bean">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".home.HomeActivity" />
+
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="http"/>
-                <data android:scheme="https"/>
+                <data android:scheme="http" />
+                <data android:scheme="https" />
 
-                <data android:host="animacurse.moe"/>
-                <data android:host="animekaionline.com"/>
-                <data android:host="animesonlinebr.com.br"/>
-                <data android:host="animes.zlx.com.br"/>
-                <data android:host="anitubex.com"/>
-                <data android:host="one-piece-x.com.br"/>
+                <data android:host="animacurse.moe" />
+                <data android:host="animekaionline.com" />
+                <data android:host="animesonlinebr.com.br" />
+                <data android:host="animes.zlx.com.br" />
+                <data android:host="anitubex.com" />
+                <data android:host="one-piece-x.com.br" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.SEND"/>
+                <action android:name="android.intent.action.SEND" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:mimeType="text/plain"/>
+                <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
 
         <activity
             android:name="cat.ereza.customactivityoncrash.activity.DefaultErrorActivity"
-            android:process=":error_activity"/>
+            android:process=":error_activity" />
     </application>
 
 </manifest>

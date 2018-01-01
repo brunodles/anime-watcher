@@ -38,10 +38,14 @@ class PlayerActivity : AppCompatActivity() {
         fun newIntent(context: Context, episode: Episode): Intent
                 = Intent(context, PlayerActivity::class.java)
                 .putExtra(EXTRA_EPISODE, EpisodeParceler.toParcel(episode))
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         fun newIntent(context: Context, link: String): Intent
                 = Intent(context, PlayerActivity::class.java)
                 .setData(Uri.parse(link))
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     }
 
     private lateinit var binding: ActivityPlayerBinding
