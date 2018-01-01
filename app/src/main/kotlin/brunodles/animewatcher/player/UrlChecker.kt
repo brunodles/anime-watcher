@@ -2,6 +2,7 @@ package brunodles.animewatcher.player
 
 import android.content.Intent
 import brunodles.animacurse.AnimaCurseFactory
+import brunodles.animacurse.AnimesOrionFactory
 import brunodles.animesproject.AnimesProjectFactory
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.PageParser
@@ -18,6 +19,7 @@ object UrlChecker {
         factories.add(AnimaCurseFactory)
         factories.add(AnimaKaiFactory)
         factories.add(AnimesOnlineBrFactory)
+        factories.add(AnimesOrionFactory)
         factories.add(AnimesProjectFactory)
         factories.add(AnitubexFactory)
         factories.add(OnePieceXFactory)
