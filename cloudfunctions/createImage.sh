@@ -1,0 +1,1 @@
+docker image build -t node_firebase .
