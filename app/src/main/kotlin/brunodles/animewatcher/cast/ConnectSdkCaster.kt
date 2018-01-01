@@ -39,7 +39,7 @@ internal class ConnectSdkCaster(val context: Activity, val mediaRouteButton: Ima
 
     private fun pickDevice() {
         val devicePicker = DevicePicker(context)
-        val dialog = devicePicker.getPickerDialog("Cast to") { adapter: AdapterView<*>, parent: View, position: Int, id: Long ->
+        val dialog = devicePicker.getPickerDialog("Cast to") { adapter: AdapterView<*>, _: View, position: Int, _: Long ->
             mDevice = adapter.getItemAtPosition(position) as ConnectableDevice
             mDevice?.let {
                 it.addListener(this)
