@@ -154,19 +154,20 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
                 .build()
         homeAdapter = object :
                 FirebaseRecyclerAdapter<String, HomeAdapter.EpisodeHolder>(options) {
-            override fun onBindViewHolder(holder: HomeAdapter.EpisodeHolder?, position: Int, model: String?) {
-                holder?.onBind(UNKNOWN_EPISODE)
-                model?.let { link ->
+
+            override fun onBindViewHolder(holder: HomeAdapter.EpisodeHolder, position: Int, model: String) {
+                holder.onBind(UNKNOWN_EPISODE)
+                model.let { link ->
                     Firebase.videoRef(link)
                             .singleObservable(Episode::class.java)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribeBy(
-                                    onSuccess = { holder?.onBind(it) },
+                                    onSuccess = { holder.onBind(it) },
                                     onError = { Log.e(TAG, "onBindViewHolder: ", it) }
                             )
                 }
-                holder?.clickListener = ::onItemClick
+                holder.clickListener = ::onItemClick
             }
 
             override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): HomeAdapter.EpisodeHolder

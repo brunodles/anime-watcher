@@ -2,12 +2,14 @@ package brunodles.animewatcher.cast
 
 
 import android.app.Activity
+import android.os.Build
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ImageButton
 import brunodles.animewatcher.R
 import brunodles.animewatcher.explorer.Episode
+import com.connectsdk.core.MediaInfo
 import com.connectsdk.device.ConnectableDevice
 import com.connectsdk.device.ConnectableDeviceListener
 import com.connectsdk.device.DevicePicker
@@ -31,7 +33,8 @@ internal class ConnectSdkCaster(val context: Activity, val mediaRouteButton: Ima
         DiscoveryManager.init(context.applicationContext)
         // This step could even happen in your app's delegate
         mDiscoveryManager = DiscoveryManager.getInstance()
-        mDiscoveryManager.start()
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N)
+            mDiscoveryManager.start()
         mediaRouteButton?.setOnClickListener {
             pickDevice()
         }
@@ -39,7 +42,7 @@ internal class ConnectSdkCaster(val context: Activity, val mediaRouteButton: Ima
 
     private fun pickDevice() {
         val devicePicker = DevicePicker(context)
-        val dialog = devicePicker.getPickerDialog("Cast to") { adapter: AdapterView<*>, parent: View, position: Int, id: Long ->
+        val dialog = devicePicker.getPickerDialog("Cast to") { adapter: AdapterView<*>, _: View, position: Int, _: Long ->
             mDevice = adapter.getItemAtPosition(position) as ConnectableDevice
             mDevice?.let {
                 it.addListener(this)
@@ -75,21 +78,26 @@ internal class ConnectSdkCaster(val context: Activity, val mediaRouteButton: Ima
 
     override fun playRemote(currentEpisode: Episode, position: Long) {
         Log.d(TAG, "playRemote: ")
-        val mediaInfo = com.connectsdk.core.MediaInfo.Builder(currentEpisode.video!!, "video/mp4")
+        val mediaInfo = MediaInfo.Builder(currentEpisode.video!!, "video/mp4")
                 .setTitle(currentEpisode.animeName ?: currentEpisode.description)
                 .setDescription(currentEpisode.description)
                 .setIcon(currentEpisode.image!!)
                 .build()
-        mDevice?.mediaPlayer?.playMedia(mediaInfo, false, object : MediaPlayer.LaunchListener {
-            override fun onSuccess(result: MediaPlayer.MediaLaunchObject?) {
-                Log.d(TAG, "playMedia.onSuccess: ")
-                result?.mediaControl?.seek(position, null)
-            }
-
-            override fun onError(error: ServiceCommandError?) {
-                Log.e(TAG, "playMedia.onError: ", error?.cause)
-            }
-        })
+        val launchListener = SeekOnLaunchListener(position)
+        mDevice?.mediaPlayer?.playMedia(mediaInfo, false, launchListener)
+        mDevice?.mediaPlayer?.playMedia(mediaInfo, false, launchListener)
     }
 
+    private class SeekOnLaunchListener(val position: Long) : MediaPlayer.LaunchListener {
+        override fun onSuccess(result: MediaPlayer.MediaLaunchObject?) {
+            Log.d(TAG, "playMedia.onSuccess: ")
+            result?.mediaControl?.seek(position, null)
+            result?.mediaControl?.seek(position, null)
+            result?.mediaControl?.seek(position, null)
+        }
+
+        override fun onError(error: ServiceCommandError?) {
+            Log.e(TAG, "playMedia.onError: ", error?.cause)
+        }
+    }
 }

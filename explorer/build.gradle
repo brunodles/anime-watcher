@@ -9,17 +9,18 @@ noArg {
 
 buildconfig {
     targetPackage = "brunodles.animewatcher.explorer"
-    properties = [
-            ROOT_DIR   : "${project.rootDir.getPath()}",
-            USE_CACHE: project.properties.get("usecache", "true")
-    ]
+    field "String", "ROOT_DIR", "\"${project.rootDir.getPath()}\""
+    field "Boolean", "USE_CACHE", Boolean.parseBoolean(project.properties.get("usecache", "true"))
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile 'org.jsoup:jsoup:1.8.3'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'com.greghaskins:spectrum:1.1.1'
+    testCompile 'com.github.tomakehurst:wiremock:2.12.0'
+
 }
 
 sourceCompatibility = "1.7"

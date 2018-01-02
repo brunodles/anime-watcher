@@ -98,7 +98,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
-                    app:nestedScrollingEnabled="@{false}" />
+                    android:nestedScrollingEnabled="@{false}" />
 
                 <Space
                     android:layout_width="0dp"

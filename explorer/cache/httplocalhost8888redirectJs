@@ -1,0 +1,11 @@
+<html>
+ <head> 
+  <script>window.googleJavaScriptRedirect=1</script> 
+  <script>var n={navigateTo:function(b,a,d){if(b!=a&&b.google){if(b.google.r){b.google.r=0;b.location.href=d;a.location.replace("about:blank");}}else{a.location.replace(d);}}};n.navigateTo(window.parent,window,"http://localhost:8888/responseJs");</script> 
+  <noscript> 
+   <meta http-equiv="refresh" content="0;URL='http://localhost:8888/responseJs'"> 
+  </noscript> 
+ </head> 
+ <body> 
+ </body>
+</html>

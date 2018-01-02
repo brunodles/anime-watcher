@@ -38,10 +38,14 @@ class PlayerActivity : AppCompatActivity() {
         fun newIntent(context: Context, episode: Episode): Intent
                 = Intent(context, PlayerActivity::class.java)
                 .putExtra(EXTRA_EPISODE, EpisodeParceler.toParcel(episode))
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         fun newIntent(context: Context, link: String): Intent
                 = Intent(context, PlayerActivity::class.java)
                 .setData(Uri.parse(link))
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     }
 
     private lateinit var binding: ActivityPlayerBinding
@@ -67,7 +71,7 @@ class PlayerActivity : AppCompatActivity() {
         val observable = if (intent.hasExtra(EXTRA_EPISODE))
             episodeController.findVideo(intent.getParcelableExtra<EpisodeParcel>(EXTRA_EPISODE))
         else
-            episodeController.findVideo(CheckUrl.findUrl(intent))
+            episodeController.findVideo(UrlChecker.findUrl(intent))
         observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(onSuccess = this::onFetchEpisode,
@@ -94,7 +98,7 @@ class PlayerActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         val manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.nextEpisodes.layoutManager = manager
-        adapter = ViewDataBindingAdapter<Episode, ItemEpisodeBinding>(R.layout.item_episode) { viewHolder, item, index ->
+        adapter = ViewDataBindingAdapter<Episode, ItemEpisodeBinding>(R.layout.item_episode) { viewHolder, item, _ ->
             viewHolder.binder.description.text = "${item.number} - ${item.description}"
             viewHolder.binder.title.text = item.animeName
             ImageLoader.loadImageInto(item.image, viewHolder.binder.image)

@@ -1,6 +1,7 @@
 package brunodles.animewatcher
 
 import android.support.multidex.MultiDexApplication
+import brunodles.urlfetcher.UrlFetcher
 import cat.ereza.customactivityoncrash.config.CaocConfig
 import com.brunodles.environmentmods.annotation.Moddable
 import com.crashlytics.android.Crashlytics
@@ -18,6 +19,7 @@ class Application : MultiDexApplication() {
             // You should not init your app in this process.
             return
         }
+        UrlFetcher.cacheDir = this.cacheDir.path
         LeakCanary.install(this)
         FirebaseDatabase.getInstance().setPersistenceEnabled(!BuildConfig.DEBUG)
         Fabric.with(this, Crashlytics())

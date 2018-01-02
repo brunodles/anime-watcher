@@ -51,27 +51,19 @@ class EpisodeController(val context: Context) {
                     else throw RuntimeException("Episode is not playable!")
                 }
                 .onErrorResumeNext(fetchVideo(url))
-                .map { it ?: throw RuntimeException("Can't find video info") }
     }
 
     private fun fetchVideo(url: String): Single<Episode> {
         return Single.just(url)
                 .subscribeOn(Schedulers.io())
                 .map {
-                    CheckUrl.videoInfo(url)
+                    UrlChecker.videoInfo(url)
                             ?: throw RuntimeException("Can't find video info")
                 }
                 .map {
                     if (it.image == null) {
                         Log.d(TAG, "fetchVideo: invalid image $url")
-                        Episode(it.description,
-                                it.number,
-                                it.animeName,
-                                ImageLoader.first("${it.animeName} ${it.number} ${it.description}"),
-                                it.video,
-                                it.link,
-                                it.nextEpisodes
-                        )
+                        it.copy(image = ImageLoader.first("${it.animeName} ${it.number} ${it.description}"))
                     } else {
                         it
                     }
@@ -88,11 +80,8 @@ class EpisodeController(val context: Context) {
         Observable.fromIterable(episode.nextEpisodes)
                 .subscribeOn(Schedulers.io())
                 .doOnNext { Firebase.addVideo(it) }
-                .filter { it.link != null }
-                .map { it.link!! }
-                .flatMapSingle(this::findVideoInfo)
                 .subscribeBy(onNext = {
-                    Log.d(TAG, "preFetchNextEpisodes: fetched episode ${it.number}")
+                    Firebase.addVideo(it)
                 }, onError = {
                     Log.e(TAG, "preFetchNextEpisodes: failed to fetch next episodes", it)
                 })

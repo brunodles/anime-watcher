@@ -1,0 +1,11 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    api project(':explorer')
+    implementation 'junit:junit:4.12'
+    implementation 'com.greghaskins:spectrum:1.1.1'
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"

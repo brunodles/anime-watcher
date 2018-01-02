@@ -19,8 +19,8 @@ object ImageLoader {
     fun picasso(context: Context): Picasso {
         if (picassoSingleton?.get() == null)
             picassoSingleton = WeakReference(Picasso.Builder(context)
-                    .indicatorsEnabled(true)
-                    .loggingEnabled(true)
+                    .indicatorsEnabled(BuildConfig.DEBUG && BuildConfig.IMAGE_LOADER_LOGGGIN_ENABLED)
+                    .loggingEnabled(BuildConfig.IMAGE_LOADER_LOGGGIN_ENABLED)
                     .defaultBitmapConfig(Bitmap.Config.RGB_565)
                     .build())
         return picassoSingleton?.get()!!
