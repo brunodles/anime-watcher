@@ -17,6 +17,7 @@ interface UrlFetcher {
             var fetcher: UrlFetcher = JsoupFetcher(url)
             if (useCache)
                 fetcher = CacheFetcher(url, fetcher)
+            fetcher = RedirectFetcher(fetcher)
             return fetcher.get()
         }
     }
