@@ -13,12 +13,14 @@ interface UrlFetcher {
         var cacheDir = BuildConfig.ROOT_DIR
         var useLog = false
 
-        fun fetchUrl(url: String): Document {
+        fun fetcher(url: String): UrlFetcher {
             var fetcher: UrlFetcher = JsoupFetcher(url)
             if (useCache)
                 fetcher = CacheFetcher(url, fetcher)
             fetcher = RedirectFetcher(fetcher)
-            return fetcher.get()
+            return fetcher
         }
+
+        fun fetchUrl(url: String): Document = fetcher(url).get()
     }
 }
