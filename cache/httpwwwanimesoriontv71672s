@@ -372,8 +372,7 @@ $(document).on("contextmenu",function(e){
         download
        </div> 
        <!-- BOTÃO PROXIMO / VOLTAR --> 
-       <div id="botaos_center_lista"> 
-        <a href="http://www.animesorion.tv/boku-no-hero-academia-1">VER LISTA</a> 
+       <div id="botaos_center_lista">  
        </div> 
        <div class="botoes_anterior_proximos"> 
         <a href="http://www.animesorion.tv/71506" rel="prev">VOLTAR</a> 
