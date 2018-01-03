@@ -2,7 +2,7 @@ package brunodles.animewatcher.player
 
 import android.content.Intent
 import brunodles.animacurse.AnimaCurseFactory
-import brunodles.animacurse.AnimesOrionFactory
+import brunodles.animesorion.AnimesOrionFactory
 import brunodles.animesproject.AnimesProjectFactory
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.PageParser
