@@ -38,6 +38,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import java.util.*
@@ -59,6 +60,7 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
 
     private var historyAdapter: FirebaseRecyclerAdapter<String, HomeAdapter.EpisodeHolder>? = null
     private var nextAdapter: EpisodeAdapter? = null
+    private val disposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,6 +103,11 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
         super.onStop()
         historyAdapter?.stopListening()
         nextAdapter?.setEpisodeClickListener(null)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable.clear()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -164,14 +171,14 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
             override fun onBindViewHolder(holder: HomeAdapter.EpisodeHolder, position: Int, model: String) {
                 holder.onBind(UNKNOWN_EPISODE)
                 model.let { link ->
-                    Firebase.videoRef(link)
+                    disposable.add(Firebase.videoRef(link)
                             .singleObservable(Episode::class.java)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribeBy(
                                     onSuccess = { holder.onBind(it) },
                                     onError = { Log.e(TAG, "onBindViewHolder: ", it) }
-                            )
+                            ))
                 }
                 holder.clickListener = ::onItemClick
             }
@@ -199,7 +206,7 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
 
     private fun suggestNextEpisode(user: FirebaseUser) {
         nextAdapter?.clear()
-        Firebase.history(user)
+        disposable.add(Firebase.history(user)
                 .limitToLast(30)
                 .orderByKey()
                 .typedChildObserver(String::class.java)
@@ -221,7 +228,7 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
                         onComplete = {
                             Log.d(TAG, "suggestNextEpisode: nextAdapter.count = ${nextAdapter?.itemCount}")
                         }
-                )
+                ))
     }
 
     private fun updateAnimeImage(user: FirebaseUser) {
@@ -249,7 +256,7 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
     }
 
     private fun setImage(single: Single<String>) =
-            single.flatMap {
+            disposable.add(single.flatMap {
                 ImageLoader.picasso(this)
                         .load(it)
                         .asSingle()
@@ -272,7 +279,7 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
                             onError = {
                                 Log.e(TAG, "setImage: setImage", it)
                             }
-                    )
+                    ))
 
     fun onItemClick(episode: Episode) {
         startActivity(PlayerActivity.newIntent(this, episode))
