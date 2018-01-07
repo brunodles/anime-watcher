@@ -96,7 +96,7 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
         super.onStart()
         val currentUser = auth.currentUser
         updateUI(currentUser)
-        nextAdapter?.setEpisodeClickListener { PlayerActivity.newIntent(this, it) }
+        nextAdapter?.setEpisodeClickListener(::onItemClick)
     }
 
     override fun onStop() {
