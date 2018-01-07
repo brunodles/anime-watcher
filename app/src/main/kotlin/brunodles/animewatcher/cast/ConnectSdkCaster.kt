@@ -18,7 +18,7 @@ import com.connectsdk.service.DeviceService
 import com.connectsdk.service.capability.MediaPlayer
 import com.connectsdk.service.command.ServiceCommandError
 
-internal class ConnectSdkCaster(val context: Activity, val mediaRouteButton: ImageButton?,
+internal class ConnectSdkCaster(val activity: Activity, val mediaRouteButton: ImageButton?,
                                 val listener: DeviceConnectedListener? = null) : Caster,
         ConnectableDeviceListener {
 
@@ -30,7 +30,7 @@ internal class ConnectSdkCaster(val context: Activity, val mediaRouteButton: Ima
     var mDevice: ConnectableDevice? = null
 
     init {
-        DiscoveryManager.init(context.applicationContext)
+        DiscoveryManager.init(activity.applicationContext)
         // This step could even happen in your app's delegate
         mDiscoveryManager = DiscoveryManager.getInstance()
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N)
@@ -41,7 +41,7 @@ internal class ConnectSdkCaster(val context: Activity, val mediaRouteButton: Ima
     }
 
     private fun pickDevice() {
-        val devicePicker = DevicePicker(context)
+        val devicePicker = DevicePicker(activity)
         val dialog = devicePicker.getPickerDialog("Cast to") { adapter: AdapterView<*>, _: View, position: Int, _: Long ->
             mDevice = adapter.getItemAtPosition(position) as ConnectableDevice
             mDevice?.let {
