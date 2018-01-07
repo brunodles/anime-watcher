@@ -50,7 +50,7 @@ class PlayerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPlayerBinding
     private lateinit var player: Player
-    private lateinit var cast: Caster
+    private var caster: Caster? = null
     private var adapter: ViewDataBindingAdapter<Episode, ItemEpisodeBinding>? = null
     private var episode: Episode? = null
     private val episodeController by lazy { EpisodeController(this) }
@@ -62,10 +62,8 @@ class PlayerActivity : AppCompatActivity() {
         player = Player(this, binding.player)
         setupRecyclerView()
 
-        cast = Caster.Factory.multiCaster(this, binding.chromeCastButton, binding.othersCastButton)
-
         binding.playRemote.setOnClickListener {
-            episode?.let { cast.playRemote(it, player.getCurrentPosition()) }
+            episode?.let { caster?.playRemote(it, player.getCurrentPosition()) }
         }
 
         val observable = if (intent.hasExtra(EXTRA_EPISODE))
@@ -155,9 +153,14 @@ class PlayerActivity : AppCompatActivity() {
         super.onConfigurationChanged(newConfig)
     }
 
+    override fun onResume() {
+        super.onResume()
+        caster = Caster.Factory.multiCaster(this, binding.chromeCastButton, binding.othersCastButton)
+    }
+
     override fun onPause() {
         super.onPause()
         player.stop()
+        caster = null
     }
-
 }
