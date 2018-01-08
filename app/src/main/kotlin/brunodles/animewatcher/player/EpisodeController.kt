@@ -61,7 +61,7 @@ class EpisodeController(val context: Context) {
                             ?: throw RuntimeException("Can't find video info")
                 }
                 .map {
-                    if (it.image == null) {
+                    if (it.image.isNullOrBlank()) {
                         Log.d(TAG, "fetchVideo: invalid image $url")
                         it.copy(image = ImageLoader.first("${it.animeName} ${it.number} ${it.description}"))
                     } else {
@@ -80,6 +80,7 @@ class EpisodeController(val context: Context) {
         Observable.fromIterable(episode.nextEpisodes)
                 .subscribeOn(Schedulers.io())
                 .doOnNext { Firebase.addVideo(it) }
+                .flatMapSingle { fetchVideo(it.link!!) }
                 .subscribeBy(onNext = {
                     Firebase.addVideo(it)
                 }, onError = {
