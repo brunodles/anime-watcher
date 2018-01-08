@@ -9,7 +9,7 @@ object AnrWatchDogMod {
 
     @JvmStatic
     @ModFor(Application::class)
-    fun initCrashWoodpecker(){
+    fun startAnrWatchDog(){
         ANRWatchDog(TIMEOUT)
                 .setIgnoreDebugger(true)
                 .start()

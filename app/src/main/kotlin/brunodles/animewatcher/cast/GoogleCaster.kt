@@ -11,7 +11,7 @@ import com.google.android.gms.cast.MediaMetadata
 import com.google.android.gms.cast.framework.*
 import com.google.android.gms.common.images.WebImage
 
-class GoogleCaster(val context: Context, mediaRouteButton: MediaRouteButton?,
+class GoogleCaster(context: Context, mediaRouteButton: MediaRouteButton?,
                    val listener: DeviceConnectedListener? = null) : Caster{
 
     companion object {
@@ -21,13 +21,14 @@ class GoogleCaster(val context: Context, mediaRouteButton: MediaRouteButton?,
     val mSessionManager: SessionManager
     //    val mSessionManagerListener: SessionManagerListener = SessionManagerListenerImpl()
     init {
-        val castContext = CastContext.getSharedInstance(context)
+        val applicationContext = context.applicationContext
+        val castContext = CastContext.getSharedInstance(applicationContext)
         mSessionManager = castContext.sessionManager
-        CastButtonFactory.setUpMediaRouteButton(context, mediaRouteButton)
+        CastButtonFactory.setUpMediaRouteButton(applicationContext, mediaRouteButton)
         castContext.addCastStateListener { if (it == CastState.CONNECTED) listener?.invoke(this) }
     }
 
-    fun castSession() : CastSession? = mSessionManager.currentCastSession
+    fun castSession(): CastSession? = mSessionManager.currentCastSession
 
     override fun playRemote(currentEpisode: Episode, position: Long) {
         val movieMetadata = MediaMetadata(MediaMetadata.MEDIA_TYPE_MOVIE)

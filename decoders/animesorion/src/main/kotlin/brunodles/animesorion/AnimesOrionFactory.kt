@@ -58,7 +58,7 @@ object AnimesOrionFactory : PageParser {
             } catch (e: Exception) {
             }
         if (nextEpisodes.isEmpty())
-            nextEpisodes = singNextEpisode(episodeInfo.number, episodeInfo.animeName!!, doc)
+            nextEpisodes = singleNextEpisode(episodeInfo.number, episodeInfo.animeName!!, doc)
 
         return episodeInfo.copy(nextEpisodes = nextEpisodes)
     }
@@ -73,16 +73,21 @@ object AnimesOrionFactory : PageParser {
         )
     }
 
-    private fun singNextEpisode(number: Int, animeName: String, doc: Document): ArrayList<Episode>
-            = arrayListOf(Episode(number = number + 1,
-            animeName = animeName,
-            description = "Episódio ${number + 1}",
-            link = doc.select(".botoes_anterior_proximos a").last().href()
-    ))
+    private fun singleNextEpisode(number: Int, animeName: String, doc: Document): List<Episode> {
+        val url = doc.select(".botoes_anterior_proximos a")?.lastOrNull()
+        return if (url != null && url.text() == "PRÓXIMO")
+            arrayListOf(Episode(number = number + 1,
+                    animeName = animeName,
+                    description = "Episódio ${number + 1}",
+                    link = url.href()
+            ))
+        else
+            emptyList()
+    }
 
     private fun titleInfo(text: String): Pair<Int, String> {
         val texts = text.split("Episódio", "/", ignoreCase = true).map { it.trim() }
-        val number = if (texts.size >= 2) texts[1].toIntOrNull() ?: 999 else 999
+        val number = if (texts.size >= 2) NUMBER_REGEX.find(texts[1])?.groupValues?.get(0)?.toIntOrNull() ?: 999 else 999
         return Pair(number, texts[0])
     }
 }

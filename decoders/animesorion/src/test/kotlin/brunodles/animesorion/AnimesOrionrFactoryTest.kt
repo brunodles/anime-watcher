@@ -26,6 +26,15 @@ class AnimesOrionrFactoryTest {
                                 link = "http://www.animesorion.tv/71808")
                 )
         )
+        val NO_NEXT_EPISODES = Episode(
+                number = 12,
+                description = "Episódio 12",
+                animeName = "Himouto! Umaru-chan",
+                image = null,
+                link = "http://www.animesorion.tv/51555",
+                video = "https://www.blogger.com/video-play.mp4?contentId=e4e3e680e0b6ed74",
+                nextEpisodes = emptyList()
+        )
 
         val ABOUTPAGE_EPISODES = Episode(
                 number = 1,
@@ -66,5 +75,6 @@ class AnimesOrionrFactoryTest {
     init {
         FactoryChecker.checkFactory(AnimesOrionFactory, VALID_URLS, INVALID_URLS, SINGLE_NEXT_EPISODES)
         FactoryChecker.checkFactory(AnimesOrionFactory, expectedEpisode = ABOUTPAGE_EPISODES)
+        FactoryChecker.checkFactory(AnimesOrionFactory, expectedEpisode = NO_NEXT_EPISODES)
     }
 }

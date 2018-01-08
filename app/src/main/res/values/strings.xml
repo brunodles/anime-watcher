@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AnimeWatcher</string>
     <string name="watch_history">Watch History</string>
+    <string name="suggested_next">Suggested Next</string>
 </resources>

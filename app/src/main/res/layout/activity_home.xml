@@ -67,6 +67,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
+                    android:text="@string/suggested_next" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/nextEpisodes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="@{false}"
+                    tools:listitem="@layout/item_episode" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
                     android:text="@string/watch_history" />
 
                 <android.support.v7.widget.RecyclerView
