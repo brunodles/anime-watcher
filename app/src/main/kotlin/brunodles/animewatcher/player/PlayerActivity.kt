@@ -67,9 +67,9 @@ class PlayerActivity : AppCompatActivity() {
         }
 
         val observable = if (intent.hasExtra(EXTRA_EPISODE))
-            episodeController.findVideo(intent.getParcelableExtra<EpisodeParcel>(EXTRA_EPISODE))
+            episodeController.findVideoOn(intent.getParcelableExtra<EpisodeParcel>(EXTRA_EPISODE))
         else
-            episodeController.findVideo(UrlChecker.findUrl(intent))
+            episodeController.findVideoOn(UrlChecker.findUrl(intent))
         observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(onSuccess = this::onFetchEpisode,

@@ -21,31 +21,31 @@ class EpisodeController(val context: Context) {
         val TAG = "EpisodeController"
     }
 
-    fun findVideo(url: String?): Single<Episode> {
+    fun findVideoOn(url: String?): Single<Episode> {
         if (url == null) return Single.error(NullPointerException("Empty Url"))
 
-        return findVideoInfo(url)
+        return checkRemoveVideoInfo(url)
                 .doOnSuccess(this::preFetchNextEpisodes)
                 .doOnSuccess {
                     Firebase.addToHistory(url)
                 }
     }
 
-    fun findVideo(episode: EpisodeParcel): Single<Episode> {
-        if (episode.isInfoMissing())
-            return findVideo(episode.link!!)
-        return Single.just(episode)
-                .subscribeOn(Schedulers.io())
-                .map(EpisodeParceler::fromParcel)
-                .doOnSuccess {
-                    if (episode.link != null)
-                        Firebase.addToHistory(episode.link)
-                }
+    fun findVideoOn(episode: EpisodeParcel): Single<Episode> {
+        return if (episode.isInfoMissing())
+            findVideoOn(episode.link!!)
+        else
+            Single.just(episode)
+                    .subscribeOn(Schedulers.io())
+                    .map(EpisodeParceler::fromParcel)
+                    .doOnSuccess {
+                        if (episode.link != null)
+                            Firebase.addToHistory(episode.link)
+                    }
     }
 
-    private fun findVideoInfo(url: String): Single<Episode> {
-        val ref = Firebase.videoRef(url)
-        return ref.singleObservable(Episode::class.java)
+    private fun checkRemoveVideoInfo(url: String): Single<Episode> {
+        return Firebase.videoRef(url).singleObservable(Episode::class.java)
                 .map {
                     if (it.isPlayable()) it
                     else throw RuntimeException("Episode is not playable!")
