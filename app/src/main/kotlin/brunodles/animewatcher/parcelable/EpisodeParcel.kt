@@ -10,7 +10,7 @@ data class EpisodeParcel(
         val animeName: String? = null,
         val image: String? = null,
         val video: String? = null,
-        val link: String? = null,
+        val link: String,
         val nextEpisodes: List<EpisodeParcel>? = arrayListOf()) : Parcelable {
 
     constructor(parcel: Parcel) : this(

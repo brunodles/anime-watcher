@@ -101,7 +101,7 @@ class PlayerActivity : AppCompatActivity() {
             viewHolder.binder.title.text = item.animeName
             ImageLoader.loadImageInto(item.image, viewHolder.binder.image)
             viewHolder.binder.root.setOnClickListener {
-                val intent = newIntent(this, item.link!!)
+                val intent = newIntent(this, item.link)
                 startActivity(intent)
             }
         }

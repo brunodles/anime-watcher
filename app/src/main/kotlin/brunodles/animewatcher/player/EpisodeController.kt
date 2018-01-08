@@ -33,15 +33,12 @@ class EpisodeController(val context: Context) {
 
     fun findVideoOn(episode: EpisodeParcel): Single<Episode> {
         return if (episode.isInfoMissing())
-            findVideoOn(episode.link!!)
+            findVideoOn(episode.link)
         else
             Single.just(episode)
                     .subscribeOn(Schedulers.io())
                     .map(EpisodeParceler::fromParcel)
-                    .doOnSuccess {
-                        if (episode.link != null)
-                            Firebase.addToHistory(episode.link)
-                    }
+                    .doOnSuccess { Firebase.addToHistory(episode.link) }
     }
 
     private fun checkRemoveVideoInfo(url: String): Single<Episode> {
@@ -80,7 +77,7 @@ class EpisodeController(val context: Context) {
         Observable.fromIterable(episode.nextEpisodes)
                 .subscribeOn(Schedulers.io())
                 .doOnNext { Firebase.addVideo(it) }
-                .flatMapSingle { fetchVideo(it.link!!) }
+                .flatMapSingle { fetchVideo(it.link) }
                 .subscribeBy(onNext = {
                     Firebase.addVideo(it)
                 }, onError = {
