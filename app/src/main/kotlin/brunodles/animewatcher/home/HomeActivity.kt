@@ -50,7 +50,7 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
     companion object {
         val TAG = "HomeActivity"
         val RC_SIGN_IN = 1
-        val UNKNOWN_EPISODE = Episode("", 0, "")
+        val UNKNOWN_EPISODE = Episode("", 0, "", "", "", "")
     }
 
     private lateinit var binding: ActivityHomeBinding

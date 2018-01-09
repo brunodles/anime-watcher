@@ -2,6 +2,8 @@ package brunodles.animewatcher.player
 
 import android.content.Context
 import android.net.Uri
+import android.util.Log
+import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
@@ -14,9 +16,10 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 
-class Player(val context: Context, val playerView: SimpleExoPlayerView) {
+class Player(context: Context, playerView: SimpleExoPlayerView) {
 
     companion object {
+        val TAG = "Player"
         val USER_AGENT = "AnimeWatcher"
     }
 
@@ -25,6 +28,7 @@ class Player(val context: Context, val playerView: SimpleExoPlayerView) {
     private val userAgent: String by lazy { Util.getUserAgent(context, USER_AGENT) }
 
     init {
+        Log.d(TAG, "init: ")
         val bandwidthMeter = DefaultBandwidthMeter()
         val videoTrackSelectionFactory = AdaptiveTrackSelection.Factory(bandwidthMeter)
         val trackSelector = DefaultTrackSelector(videoTrackSelectionFactory)
@@ -34,6 +38,7 @@ class Player(val context: Context, val playerView: SimpleExoPlayerView) {
     }
 
     fun prepareVideo(url: String) {
+        Log.d(TAG, "prepareVideo: $url")
         val bandwidthMeter = DefaultBandwidthMeter()
         val dataSourceFactory = DefaultHttpDataSourceFactory(userAgent, bandwidthMeter,
                 DefaultHttpDataSource.DEFAULT_CONNECT_TIMEOUT_MILLIS,
@@ -41,11 +46,24 @@ class Player(val context: Context, val playerView: SimpleExoPlayerView) {
         val extractorsFactory = DefaultExtractorsFactory()
         val videoSource = ExtractorMediaSource(Uri.parse(url),
                 dataSourceFactory, extractorsFactory, null, null)
-        exoPlayer.prepare(videoSource, true, true)
+        exoPlayer.prepare(videoSource, false, false)
         exoPlayer.playWhenReady = true
     }
 
     fun getCurrentPosition() = exoPlayer.currentPosition
 
-    fun stop() = exoPlayer.stop()
+    fun stopAndRelease() {
+        Log.d(TAG, "stopAndRelease: ")
+        exoPlayer.stop()
+        exoPlayer.release()
+    }
+
+    fun seekTo(position: Long) {
+        Log.d(TAG, "seekTo: $position")
+        exoPlayer.seekTo(position)
+        exoPlayer.playWhenReady = true
+        exoPlayer.playbackState
+    }
 }
+
+fun Player?.getCurrentPosition() = this?.getCurrentPosition() ?: C.TIME_UNSET

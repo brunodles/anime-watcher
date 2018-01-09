@@ -18,6 +18,7 @@ import com.connectsdk.service.DeviceService
 import com.connectsdk.service.capability.MediaPlayer
 import com.connectsdk.service.command.ServiceCommandError
 
+@Suppress("DEPRECATION")
 internal class ConnectSdkCaster(activity: Activity, val mediaRouteButton: ImageButton?,
                                 val listener: DeviceConnectedListener? = null) : Caster,
         ConnectableDeviceListener {

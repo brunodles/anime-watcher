@@ -2,6 +2,7 @@ package brunodles.animewatcher.player
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.databinding.DataBindingUtil
 import android.net.Uri
@@ -22,6 +23,7 @@ import brunodles.animewatcher.databinding.ItemEpisodeBinding
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.parcelable.EpisodeParcel
 import brunodles.animewatcher.parcelable.EpisodeParceler
+import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -32,8 +34,11 @@ class PlayerActivity : AppCompatActivity() {
     companion object {
 
         val TAG = "PlayerActivity"
-        val STATE_KEY = "episode"
+        val STATE_EPISODE = "episode"
+        val STATE_POSITION = "position"
         val EXTRA_EPISODE = "episode"
+        val PREF_VIDEO = "video"
+        val PREF_POSITION = "position"
 
         fun newIntent(context: Context, episode: Episode): Intent
                 = Intent(context, PlayerActivity::class.java)
@@ -49,7 +54,7 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityPlayerBinding
-    private lateinit var player: Player
+    private var player: Player? = null
     private var caster: Caster? = null
     private var adapter: ViewDataBindingAdapter<Episode, ItemEpisodeBinding>? = null
     private var episode: Episode? = null
@@ -58,22 +63,11 @@ class PlayerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_player)
-
-        player = Player(this, binding.player)
         setupRecyclerView()
 
         binding.playRemote.setOnClickListener {
             episode?.let { caster?.playRemote(it, player.getCurrentPosition()) }
         }
-
-        val observable = if (intent.hasExtra(EXTRA_EPISODE))
-            episodeController.findVideo(intent.getParcelableExtra<EpisodeParcel>(EXTRA_EPISODE))
-        else
-            episodeController.findVideo(UrlChecker.findUrl(intent))
-        observable.observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribeBy(onSuccess = this::onFetchEpisode,
-                        onError = this::onError)
     }
 
     private fun onError(error: Throwable) {
@@ -87,7 +81,11 @@ class PlayerActivity : AppCompatActivity() {
 
     private fun onFetchEpisode(episode: Episode) {
         Log.d(TAG, "onFetchEpisode: ")
-        episode.video?.let { player.prepareVideo(it) }
+        episode.video?.let {
+            if (player == null)
+                player = Player(this, binding.player)
+            player?.prepareVideo(it)
+        }
         binding.title.text = "${episode.number} - ${episode.description}"
         adapter?.list = episode.nextEpisodes ?: listOf()
         this.episode = episode
@@ -101,24 +99,62 @@ class PlayerActivity : AppCompatActivity() {
             viewHolder.binder.title.text = item.animeName
             ImageLoader.loadImageInto(item.image, viewHolder.binder.image)
             viewHolder.binder.root.setOnClickListener {
-                val intent = newIntent(this, item.link!!)
+                val intent = newIntent(this, item.link)
                 startActivity(intent)
             }
         }
         binding.nextEpisodes.adapter = adapter
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        if (episode != null)
-            outState.putSerializable(STATE_KEY, episode)
-    }
-
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         if (savedInstanceState == null)
             return
-        episode = savedInstanceState.getSerializable(STATE_KEY) as Episode?
+        episode = savedInstanceState.getSerializable(STATE_EPISODE) as Episode?
+        episode?.video?.let { player?.prepareVideo(it) }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume: isEpisodeNull? ${episode == null}")
+
+        val observable = if (intent.hasExtra(EXTRA_EPISODE))
+            episodeController.findVideoOn(intent.getParcelableExtra<EpisodeParcel>(EXTRA_EPISODE))
+        else
+            episodeController.findVideoOn(UrlChecker.findUrl(intent))
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeBy(onSuccess = this::onFetchEpisode,
+                        onError = this::onError)
+
+        caster = Caster.Factory.multiCaster(this, binding.chromeCastButton, binding.othersCastButton)
+        val preferences = sharedPreferences()
+        preferences.getString(PREF_VIDEO, null)?.also {
+            if (player == null)
+                player = Player(this, binding.player)
+            player?.prepareVideo(it)
+            player?.seekTo(preferences.getLong(PREF_POSITION + it, C.TIME_UNSET))
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sharedPreferences().editAndApply {
+            putString(PREF_VIDEO, episode?.link)
+            putLong(PREF_POSITION + episode?.link, player.getCurrentPosition())
+        }
+        player?.stopAndRelease()
+        player = null
+        caster = null
+    }
+
+    private fun sharedPreferences() = getSharedPreferences("PlayerActivity", Context.MODE_PRIVATE)
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if (episode != null)
+            outState.putSerializable(STATE_EPISODE, episode)
+        outState.putLong(STATE_POSITION, player.getCurrentPosition())
     }
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
@@ -152,15 +188,8 @@ class PlayerActivity : AppCompatActivity() {
         }
         super.onConfigurationChanged(newConfig)
     }
-
-    override fun onResume() {
-        super.onResume()
-        caster = Caster.Factory.multiCaster(this, binding.chromeCastButton, binding.othersCastButton)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        player.stop()
-        caster = null
-    }
 }
+
+private fun SharedPreferences.editAndApply(function: SharedPreferences.Editor.() -> Unit)
+        = this.edit().also { function.invoke(it) }.apply()
+

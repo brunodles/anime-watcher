@@ -29,7 +29,7 @@ object Firebase {
             .orderByChild(REF_NUMBER)
 
     fun addVideo(episode: Episode) =
-            videosRef().child(fixUrlToFirebase(episode.link!!)).updateChildren(episode.toMap())
+            videosRef().child(fixUrlToFirebase(episode.link)).updateChildren(episode.toMap())
 
     fun addToHistory(url: String) {
         val currentUser = FirebaseAuth.getInstance().currentUser!!
