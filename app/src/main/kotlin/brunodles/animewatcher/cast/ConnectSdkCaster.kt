@@ -15,6 +15,7 @@ import com.connectsdk.device.ConnectableDeviceListener
 import com.connectsdk.device.DevicePicker
 import com.connectsdk.discovery.DiscoveryManager
 import com.connectsdk.service.DeviceService
+import com.connectsdk.service.capability.MediaControl
 import com.connectsdk.service.capability.MediaPlayer
 import com.connectsdk.service.command.ServiceCommandError
 
@@ -29,6 +30,7 @@ internal class ConnectSdkCaster(activity: Activity, val mediaRouteButton: ImageB
 
     val mDiscoveryManager: DiscoveryManager
     var mDevice: ConnectableDevice? = null
+    private var endListener: (() -> Unit)? = null
 
     init {
         DiscoveryManager.init(activity.applicationContext)
@@ -85,6 +87,17 @@ internal class ConnectSdkCaster(activity: Activity, val mediaRouteButton: ImageB
         val launchListener = SeekOnLaunchListener(position)
         mDevice?.mediaPlayer?.playMedia(mediaInfo, false, launchListener)
         mDevice?.mediaPlayer?.playMedia(mediaInfo, false, launchListener)
+        mDevice?.mediaControl?.subscribePlayState(object : MediaControl.PlayStateListener {
+            override fun onSuccess(status: MediaControl.PlayStateStatus?) {
+                if (status == MediaControl.PlayStateStatus.Finished)
+                    endListener?.invoke()
+            }
+
+            override fun onError(error: ServiceCommandError?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+        })
     }
 
     private class SeekOnLaunchListener(val position: Long) : MediaPlayer.LaunchListener {
@@ -98,5 +111,9 @@ internal class ConnectSdkCaster(activity: Activity, val mediaRouteButton: ImageB
         override fun onError(error: ServiceCommandError?) {
             Log.e(TAG, "playMedia.onError: ", error?.cause)
         }
+    }
+
+    override fun setOnEndListener(listener: (() -> Unit)?) {
+        this.endListener = listener
     }
 }

@@ -138,6 +138,11 @@ class PlayerActivity : AppCompatActivity() {
                         onError = this::onError)
 
         caster = Caster.Factory.multiCaster(this, binding.chromeCastButton, binding.othersCastButton)
+        caster?.setOnEndListener {
+            episode?.nextEpisodes?.firstOrNull()?.let {
+                startActivity(newIntent(this, it))
+            }
+        }
         val preferences = sharedPreferences()
         preferences.getString(PREF_VIDEO, null)?.also { url ->
             if (player == null)
