@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import android.util.Log
 import com.google.android.exoplayer2.C
+import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
@@ -24,8 +25,8 @@ class Player(context: Context, playerView: SimpleExoPlayerView) {
     }
 
     private val exoPlayer: SimpleExoPlayer
-
     private val userAgent: String by lazy { Util.getUserAgent(context, USER_AGENT) }
+    var onEndListener: (() -> Unit)? = null
 
     init {
         Log.d(TAG, "init: ")
@@ -35,6 +36,12 @@ class Player(context: Context, playerView: SimpleExoPlayerView) {
 
         exoPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector)
         playerView.player = exoPlayer
+        exoPlayer.addListener(PlayerListener(this::onStateChanged))
+    }
+
+    private fun onStateChanged(state: Int) {
+        if (state == ExoPlayer.STATE_ENDED)
+            onEndListener?.invoke()
     }
 
     fun prepareVideo(url: String) {
