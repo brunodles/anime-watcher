@@ -85,17 +85,21 @@ class PlayerActivity : AppCompatActivity() {
         Log.d(TAG, "onFetchEpisode: ")
         episode.video?.let {
             if (player == null)
-                player = Player(this, binding.player)
+                createPlayer(episode)
             player?.prepareVideo(it)
-            player?.onEndListener = {
-                episode.nextEpisodes?.firstOrNull()?.let {
-                    startActivity(newIntent(this, it))
-                }
-            }
         }
         binding.title.text = "${episode.number} - ${episode.description}"
         adapter?.list = episode.nextEpisodes ?: listOf()
         this.episode = episode
+    }
+
+    private fun createPlayer(episode: Episode?) {
+        player = Player(this, binding.player)
+        player?.onEndListener = {
+            episode?.nextEpisodes?.firstOrNull()?.let {
+                startActivity(newIntent(this, it))
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -134,10 +138,15 @@ class PlayerActivity : AppCompatActivity() {
                         onError = this::onError)
 
         caster = Caster.Factory.multiCaster(this, binding.chromeCastButton, binding.othersCastButton)
+        caster?.setOnEndListener {
+            episode?.nextEpisodes?.firstOrNull()?.let {
+                startActivity(newIntent(this, it))
+            }
+        }
         val preferences = sharedPreferences()
         preferences.getString(PREF_VIDEO, null)?.also { url ->
             if (player == null)
-                player = Player(this, binding.player)
+                createPlayer(episode)
             player?.prepareVideo(url)
             player?.seekTo(preferences.getLong(PREF_POSITION, C.TIME_UNSET))
         }
