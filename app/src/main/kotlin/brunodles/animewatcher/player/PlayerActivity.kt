@@ -66,7 +66,7 @@ class PlayerActivity : AppCompatActivity() {
         setupRecyclerView()
 
         binding.playRemote.setOnClickListener {
-            episode?.let { caster?.playRemote(it, player?.getCurrentPosition() ?: C.TIME_UNSET) }
+            episode?.let { caster?.playRemote(it, player.getCurrentPosition()) }
         }
     }
 
@@ -141,7 +141,7 @@ class PlayerActivity : AppCompatActivity() {
         super.onPause()
         sharedPreferences().editAndApply {
             putString(PREF_VIDEO, episode?.link)
-            putLong(PREF_POSITION + episode?.link, player?.getCurrentPosition() ?: C.TIME_UNSET)
+            putLong(PREF_POSITION + episode?.link, player.getCurrentPosition())
         }
         player?.stopAndRelease()
         player = null
@@ -154,7 +154,7 @@ class PlayerActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
         if (episode != null)
             outState.putSerializable(STATE_EPISODE, episode)
-        outState.putLong(STATE_POSITION, player?.getCurrentPosition() ?: C.TIME_UNSET)
+        outState.putLong(STATE_POSITION, player.getCurrentPosition())
     }
 
     override fun onConfigurationChanged(newConfig: Configuration?) {

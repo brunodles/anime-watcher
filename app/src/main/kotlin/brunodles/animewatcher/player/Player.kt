@@ -3,6 +3,7 @@ package brunodles.animewatcher.player
 import android.content.Context
 import android.net.Uri
 import android.util.Log
+import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
@@ -64,3 +65,5 @@ class Player(context: Context, playerView: SimpleExoPlayerView) {
         exoPlayer.playbackState
     }
 }
+
+fun Player?.getCurrentPosition() = this?.getCurrentPosition() ?: C.TIME_UNSET
