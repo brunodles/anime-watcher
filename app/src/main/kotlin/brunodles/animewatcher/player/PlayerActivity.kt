@@ -87,6 +87,11 @@ class PlayerActivity : AppCompatActivity() {
             if (player == null)
                 player = Player(this, binding.player)
             player?.prepareVideo(it)
+            player?.onEndListener = {
+                episode.nextEpisodes?.firstOrNull()?.let {
+                    startActivity(newIntent(this, it))
+                }
+            }
         }
         binding.title.text = "${episode.number} - ${episode.description}"
         adapter?.list = episode.nextEpisodes ?: listOf()
@@ -101,8 +106,7 @@ class PlayerActivity : AppCompatActivity() {
             viewHolder.binder.title.text = item.animeName
             ImageLoader.loadImageInto(item.image, viewHolder.binder.image)
             viewHolder.binder.root.setOnClickListener {
-                val intent = newIntent(this, item.link)
-                startActivity(intent)
+                startActivity(newIntent(this, item.link))
             }
         }
         binding.nextEpisodes.adapter = adapter
