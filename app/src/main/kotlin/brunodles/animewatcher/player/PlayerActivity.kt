@@ -68,6 +68,8 @@ class PlayerActivity : AppCompatActivity() {
         binding.playRemote.setOnClickListener {
             episode?.let { caster?.playRemote(it, player.getCurrentPosition()) }
         }
+
+        sharedPreferences().edit().clear().apply()
     }
 
     private fun onError(error: Throwable) {
@@ -129,11 +131,11 @@ class PlayerActivity : AppCompatActivity() {
 
         caster = Caster.Factory.multiCaster(this, binding.chromeCastButton, binding.othersCastButton)
         val preferences = sharedPreferences()
-        preferences.getString(PREF_VIDEO, null)?.also {
+        preferences.getString(PREF_VIDEO, null)?.also { url ->
             if (player == null)
                 player = Player(this, binding.player)
-            player?.prepareVideo(it)
-            player?.seekTo(preferences.getLong(PREF_POSITION + it, C.TIME_UNSET))
+            player?.prepareVideo(url)
+            player?.seekTo(preferences.getLong(PREF_POSITION, C.TIME_UNSET))
         }
     }
 
@@ -141,7 +143,7 @@ class PlayerActivity : AppCompatActivity() {
         super.onPause()
         sharedPreferences().editAndApply {
             putString(PREF_VIDEO, episode?.link)
-            putLong(PREF_POSITION + episode?.link, player.getCurrentPosition())
+            putLong(PREF_POSITION, player.getCurrentPosition())
         }
         player?.stopAndRelease()
         player = null
