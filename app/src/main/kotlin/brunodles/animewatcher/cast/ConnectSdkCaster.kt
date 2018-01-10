@@ -25,7 +25,7 @@ internal class ConnectSdkCaster(activity: Activity, val mediaRouteButton: ImageB
         ConnectableDeviceListener {
 
     companion object {
-        val TAG = "GoogleCaster"
+        val TAG = "ConnectSdkCaster"
     }
 
     val mDiscoveryManager: DiscoveryManager
@@ -78,7 +78,7 @@ internal class ConnectSdkCaster(activity: Activity, val mediaRouteButton: ImageB
 
 
     override fun playRemote(currentEpisode: Episode, position: Long) {
-        Log.d(TAG, "playRemote: ")
+        Log.d(TAG, "playRemote: ${currentEpisode}")
         val mediaInfo = MediaInfo.Builder(currentEpisode.video!!, "video/mp4")
                 .setTitle(currentEpisode.animeName ?: currentEpisode.description)
                 .setDescription(currentEpisode.description)
@@ -109,11 +109,12 @@ internal class ConnectSdkCaster(activity: Activity, val mediaRouteButton: ImageB
         }
 
         override fun onError(error: ServiceCommandError?) {
-            Log.e(TAG, "playMedia.onError: ", error?.cause)
+            Log.e(TAG, "SeekOnLaunchListener.onError: ", error?.cause)
         }
     }
 
     override fun setOnEndListener(listener: (() -> Unit)?) {
+        Log.d(TAG, "setOnEndListener: ")
         this.endListener = listener
     }
 }
