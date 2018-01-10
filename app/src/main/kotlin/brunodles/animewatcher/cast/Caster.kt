@@ -22,3 +22,5 @@ interface Caster {
                 = MultiCaster(activity, mediaRouterButton, imageButton)
     }
 }
+
+fun Caster?.isConnected(): Boolean = this?.isConnected() ?: false
