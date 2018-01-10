@@ -2,14 +2,19 @@ package brunodles.animewatcher.cast
 
 import android.app.Activity
 import android.support.v7.app.MediaRouteButton
+import android.util.Log
 import android.widget.ImageButton
 import brunodles.animewatcher.explorer.Episode
 
 internal class MultiCaster(activity: Activity, mediaRouteButton: MediaRouteButton, imageButton: ImageButton) :
         Caster {
 
-    val connectSdk = ConnectSdkCaster(activity, imageButton) { current = it }.also { setOnEndListener(this::onEndListener) }
-    val google = GoogleCaster(activity, mediaRouteButton) { current = it }.also { setOnEndListener(this::onEndListener) }
+    companion object {
+        val TAG = "MultiCaster"
+    }
+
+    val connectSdk = ConnectSdkCaster(activity, imageButton) { current = it }.also { it.setOnEndListener(this::onEndListener) }
+    val google = GoogleCaster(activity, mediaRouteButton) { current = it }.also { it.setOnEndListener(this::onEndListener) }
     var current: Caster = google
     var endListener: (() -> Unit)? = null
 
@@ -17,6 +22,7 @@ internal class MultiCaster(activity: Activity, mediaRouteButton: MediaRouteButto
             = current.playRemote(currentEpisode, position)
 
     private fun onEndListener() {
+        Log.d(TAG, "onEndListener: ")
         endListener?.invoke()
     }
 
@@ -24,4 +30,5 @@ internal class MultiCaster(activity: Activity, mediaRouteButton: MediaRouteButto
         endListener = listener
     }
 
+    override fun isConnected(): Boolean = current.isConnected()
 }
