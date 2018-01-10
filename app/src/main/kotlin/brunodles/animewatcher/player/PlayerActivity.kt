@@ -18,6 +18,7 @@ import brunodles.adapter.ViewDataBindingAdapter
 import brunodles.animewatcher.ImageLoader
 import brunodles.animewatcher.R
 import brunodles.animewatcher.cast.Caster
+import brunodles.animewatcher.cast.isConnected
 import brunodles.animewatcher.databinding.ActivityPlayerBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
 import brunodles.animewatcher.explorer.Episode
@@ -142,7 +143,12 @@ class PlayerActivity : AppCompatActivity() {
         episode.video?.let {
             if (player == null)
                 createPlayer(episode)
-            player?.prepareVideo(it)
+            if (caster.isConnected()) {
+                player?.prepareVideo(it, playWhenReady = false)
+                caster?.playRemote(episode, 0L)
+            } else {
+                player?.prepareVideo(it)
+            }
         }
         binding.title.text = "${episode.number} - ${episode.description}"
         adapter?.list = episode.nextEpisodes ?: listOf()
