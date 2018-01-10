@@ -38,6 +38,7 @@
             android:name=".player.PlayerActivity"
             android:configChanges="orientation|screenLayout|screenSize"
             android:parentActivityName=".home.HomeActivity"
+            android:launchMode="singleTop"
             tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
