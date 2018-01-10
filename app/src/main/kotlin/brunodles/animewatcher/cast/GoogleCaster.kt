@@ -83,6 +83,9 @@ class GoogleCaster(context: Context, mediaRouteButton: MediaRouteButton?,
     }
 
     override fun setOnEndListener(listener: (() -> Unit)?) {
+        Log.d(TAG, "setOnEndListener: ")
         this.endListener = listener
     }
+
+    override fun isConnected(): Boolean = castSession()?.isConnected ?: false
 }

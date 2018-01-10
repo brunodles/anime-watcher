@@ -25,7 +25,7 @@ internal class ConnectSdkCaster(activity: Activity, val mediaRouteButton: ImageB
         ConnectableDeviceListener {
 
     companion object {
-        val TAG = "GoogleCaster"
+        val TAG = "ConnectSdkCaster"
     }
 
     val mDiscoveryManager: DiscoveryManager
@@ -78,42 +78,47 @@ internal class ConnectSdkCaster(activity: Activity, val mediaRouteButton: ImageB
 
 
     override fun playRemote(currentEpisode: Episode, position: Long) {
-        Log.d(TAG, "playRemote: ")
+        Log.d(TAG, "playRemote: ${currentEpisode}")
         val mediaInfo = MediaInfo.Builder(currentEpisode.video!!, "video/mp4")
                 .setTitle(currentEpisode.animeName ?: currentEpisode.description)
                 .setDescription(currentEpisode.description)
                 .setIcon(currentEpisode.image!!)
                 .build()
-        val launchListener = SeekOnLaunchListener(position)
+        val launchListener = SeekOnLaunchListener(position) { endListener?.invoke() }
         mDevice?.mediaPlayer?.playMedia(mediaInfo, false, launchListener)
-        mDevice?.mediaPlayer?.playMedia(mediaInfo, false, launchListener)
-        mDevice?.mediaControl?.subscribePlayState(object : MediaControl.PlayStateListener {
-            override fun onSuccess(status: MediaControl.PlayStateStatus?) {
-                if (status == MediaControl.PlayStateStatus.Finished)
-                    endListener?.invoke()
-            }
-
-            override fun onError(error: ServiceCommandError?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-        })
     }
 
-    private class SeekOnLaunchListener(val position: Long) : MediaPlayer.LaunchListener {
+    private class SeekOnLaunchListener(val position: Long, val endListener: () -> Unit) :
+            MediaPlayer.LaunchListener {
         override fun onSuccess(result: MediaPlayer.MediaLaunchObject?) {
-            Log.d(TAG, "playMedia.onSuccess: ")
-            result?.mediaControl?.seek(position, null)
-            result?.mediaControl?.seek(position, null)
-            result?.mediaControl?.seek(position, null)
+            Log.d(TAG, "SeekOnLaunchListener.onSuccess: ")
+            result?.mediaControl?.let {
+                it.seek(position, null)
+                it.subscribePlayState(object : MediaControl.PlayStateListener {
+                    override fun onSuccess(status: MediaControl.PlayStateStatus?) {
+                        Log.d(TAG, "PlayStateListener.onSuccess: state: \"${status?.name}\"")
+                        if (status == MediaControl.PlayStateStatus.Finished) {
+                            endListener.invoke()
+                        }
+                    }
+
+                    override fun onError(error: ServiceCommandError?) {
+                        Log.e(TAG, "PlayStateListener.onError: ", error?.cause)
+                    }
+
+                })
+            }
         }
 
         override fun onError(error: ServiceCommandError?) {
-            Log.e(TAG, "playMedia.onError: ", error?.cause)
+            Log.e(TAG, "SeekOnLaunchListener.onError: ", error?.cause)
         }
     }
 
     override fun setOnEndListener(listener: (() -> Unit)?) {
+        Log.d(TAG, "setOnEndListener: ")
         this.endListener = listener
     }
+
+    override fun isConnected(): Boolean = mDevice?.isConnected ?: false
 }
