@@ -5,7 +5,7 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-27.0.0
+    - build-tools-27.0.2
     - android-27
     - extra-google-google_play_services
     - extra-google-m2repository
@@ -32,13 +32,16 @@ env:
 #  - android-wait-for-emulator
 #  - adb shell input keyevent 82 &
 
+before_install:
+  - yes | sdkmanager "platforms;android-27"
+
 script:
 - echo "Travis branch is $TRAVIS_BRANCH"
-- echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST"
+- echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST  buildNumber $TRAVIS_BUILD_NUMBER"
 - ./gradlew clean app:googleServicesDecrypt assembleDebug -PminSdk=$MIN_SDK
 - ./gradlew lint ktlint checkstyleMain
 - ./gradlew tests
-- ./gradlew app:assembleRelease -PkeyPassword='$KEYPASS' -PstorePassword='$KEYSTOREPASS' -PversionCode=$TRAVIS_BUILD_NUMBER -PversionName=$RELEASE_TAG
+#- ./gradlew app:assembleRelease -PkeyPassword='$KEYPASS' -PstorePassword='$KEYSTOREPASS' -PversionCode=$TRAVIS_BUILD_NUMBER -PversionName=$RELEASE_TAG
 #- ./gradlew connectedAndroidTest -PdisablePreDex --stacktrace -P
 #- ./gradlew jacocoTestReport
 
@@ -51,19 +54,19 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
 
-before_deploy:
-  # Set up git user name and tag this commit
-  - git config --local user.name "TravisCi"
-  #- git config --local user.email "travis@brunodles.com"
-  - git tag "$RELEASE_TAG"
-deploy:
-  provider: releases
-  api_key: "$GITHUBOAUTHTOKEN"
-  file: "app/build/outputs/apk/release/app-release.apk"
-  skip_cleanup: true
-  on:
-    branch: master
-    repo: brunodles/anime-watcher
+#before_deploy:
+#  # Set up git user name and tag this commit
+#  - git config --local user.name "TravisCi"
+#  #- git config --local user.email "travis@brunodles.com"
+#  - git tag "$RELEASE_TAG"
+#deploy:
+#  provider: releases
+#  api_key: "$GITHUBOAUTHTOKEN"
+#  file: "app/build/outputs/apk/release/app-release.apk"
+#  skip_cleanup: true
+#  on:
+#    branch: master
+#    repo: brunodles/anime-watcher
 
 notifications:
   email: false
