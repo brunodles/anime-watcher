@@ -15,8 +15,9 @@ android:
     - tools
 
 env:
-  - RELEASE_TAG=$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)
-  - ANDROID_TARGET=android-$MIN_SDK
+  global:
+    - RELEASE_TAG=$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)
+    - ANDROID_TARGET=android-$MIN_SDK
   matrix:
     - MIN_SDK=15
     - MIN_SDK=27
