@@ -53,7 +53,7 @@ dependencies {
     implementation project(':decoders:onepiecex')
 
     kapt "com.android.databinding:compiler:$plugin_version"
-    
+
     implementation 'com.brunodles:googleimagesapi:2.0.0'
     api 'com.brunodles:environmentmods-annotation:0.2.0'
     annotationProcessor 'com.brunodles:environmentmods-processor:0.2.0'
@@ -115,6 +115,18 @@ configurations.all { config ->
             }
         }
     }
+}
+
+task googleServicesEncrypt(type: Exec) {
+    description "Encrypt 'google-services.json' using 'KEY' environement variable."
+    workingDir project.projectDir
+    commandLine "openssl aes-256-cbc -k \"\$KEY\" -in google-services.json -out google-services.json.enc".split(" ")
+}
+
+task googleServicesDecrypt(type: Exec) {
+    description "Decrypt 'google-services.json' using 'KEY' environement variable."
+    workingDir project.projectDir
+    commandLine "openssl aes-256-cbc -d -k \"\$KEY\" -in google-services.json.enc -out google-services.json".split(" ")
 }
 
 apply plugin: 'com.google.gms.google-services'
