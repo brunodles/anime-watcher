@@ -5,9 +5,11 @@ android:
   components:
     - tools
     - platform-tools
-    - extra
     - build-tools-27.0.0
-    - $ANDROID_TARGET
+    - android-27
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
     - addon-google_apis-google-27
     # emulators. Uncomment to run instrumented tests
     # - sys-img-armeabi-v7a-$ANDROID_TARGET
@@ -17,21 +19,23 @@ android:
 env:
   global:
     - RELEASE_TAG=$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)
-  matrix:
-    - MIN_SDK=15 ANDROID_TARGET=android-15
-    - MIN_SDK=27 ANDROID_TARGET=android-27
+#  matrix:
+#    - MIN_SDK=15 ANDROID_TARGET=android-15
+#    - MIN_SDK=27 ANDROID_TARGET=android-27
+    - MIN_SDK=15
+    - ANDROID_TARGET=android-27
 
 # Emulator Management: Create, Start and Wait
-before_script:
-  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi armeabi-v7a
-  - emulator -avd test -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
+#before_script:
+#  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi armeabi-v7a
+#  - emulator -avd test -no-audio -no-window &
+#  - android-wait-for-emulator
+#  - adb shell input keyevent 82 &
 
 script:
 - echo "Travis branch is $TRAVIS_BRANCH"
 - echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST"
-- ./gradlew clean app:googleServicesDecrypt assembleDebug -PminSdk=$ANDROID_TARGET
+- ./gradlew clean app:googleServicesDecrypt assembleDebug -PminSdk=$MIN_SDK
 - ./gradlew lint ktlint checkstyleMain
 - ./gradlew tests
 - ./gradlew app:assembleRelease -PkeyPassword='$KEYPASS' -PstorePassword='$KEYSTOREPASS' -PversionCode=$TRAVIS_BUILD_NUMBER -PversionName=$RELEASE_TAG
