@@ -15,12 +15,12 @@ android:
     - tools
 
 env:
-  global:
-    - RELEASE_TAG=$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)
-    - ANDROID_TARGET=android-$MIN_SDK
   matrix:
     - MIN_SDK=15
     - MIN_SDK=27
+  global:
+    - RELEASE_TAG=$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)
+    - ANDROID_TARGET=android-$MIN_SDK
 
 # Emulator Management: Create, Start and Wait
 before_script:
