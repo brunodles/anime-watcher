@@ -19,8 +19,8 @@ android {
         applicationId "brunodles.animewatcher"
         minSdkVersion Integer.parseInt(project.properties.get("minSdk", "14"))
         targetSdkVersion 27
-        versionCode Integer.parseInt(project.properties.get("minSdk", "1"))
-        versionName project.properties.get("minSdk", "1.0.0")
+        versionCode Integer.parseInt(project.properties.get("versionCode", "1"))
+        versionName project.properties.get("versionName", "1.0.0")
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
