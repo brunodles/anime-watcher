@@ -21,7 +21,7 @@ object OnePieceXFactory : PageParser {
     override fun isEpisode(url: String): Boolean = url.contains(EPISODE_URL_REGEX)
 
     override fun episode(url: String): Episode {
-        val doc = UrlFetcher.fetchUrl(url)
+        val doc = UrlFetcher.composableFetcher(url).get()
 
         val text = doc.select("option[selected]").text()
         val iframeLink = doc.select("#bannerVideoOnline iframe").src()
@@ -55,7 +55,7 @@ object OnePieceXFactory : PageParser {
     }
 
     private fun findVideoUrl(iframeLink: String): String? {
-        val iFrameHtml = UrlFetcher.fetchUrl(iframeLink).html()
+        val iFrameHtml = UrlFetcher.composableFetcher(iframeLink).get().html()
         val server = findServer(iFrameHtml)
         val jsonText = findData(iFrameHtml, server)
 
@@ -81,7 +81,7 @@ object OnePieceXFactory : PageParser {
         val matcher = DATA_URL_PATTERN.matcher(iframeHtml)
         matcher.find() // should we throw and exception?
         val jsonUrl = "${matcher.group(1)}://$server${matcher.group(2)}"
-        return UrlFetcher.fetchUrl(jsonUrl).text()
+        return UrlFetcher.composableFetcher(jsonUrl).get().text()
     }
 
     private fun findNextEpisodes(doc: Document): List<Episode> {
