@@ -64,6 +64,7 @@ object ImageLoader {
     fun search(query: String) =
             ImagesApi.queryBuilder(imagesPageFetcher)
                     .query(query)
+                    .size(640, 480) // TODO: try to parametrize this with dimens
                     .listImageUrls()
 
     fun searchObservable(query: String) =
