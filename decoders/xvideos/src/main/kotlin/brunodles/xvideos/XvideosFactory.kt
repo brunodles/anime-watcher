@@ -2,17 +2,17 @@ package brunodles.animacurse
 
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.PageParser
+import brunodles.urlfetcher.UrlFetcher
+import brunodles.xvideos.XvideoExplorer
 
 object XvideosFactory : PageParser {
 
-    override fun isEpisode(url: String): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    private val URL_REGEX = Regex("xvideos.com/.*?\\d+")
 
-    override fun episode(url: String): Episode {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun isEpisode(url: String): Boolean = url.contains(URL_REGEX)
 
+    override fun episode(url: String): Episode =
+            XvideoExplorer(UrlFetcher.fetchUrl(url)).currentVideo()
 
 }
 
