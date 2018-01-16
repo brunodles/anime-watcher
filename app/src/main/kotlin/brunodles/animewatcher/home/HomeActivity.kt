@@ -236,15 +236,12 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
                 .subscribeOn(Schedulers.io())
                 .flatMap { Firebase.videoRef(it).singleObservable(Episode::class.java) }
                 .flatMapObservable { ImageLoader.searchObservable("Wallpaper ${it.animeName}") }
-                .map { it.size(800, 600) }
-                .map { it.listImageUrls() }
-                .doOnNext {
-                    Observable.fromIterable(it)
-                            .subscribeOn(Schedulers.io())
-                            .subscribeBy(onNext = { ImageLoader.fetch(this, it) })
+                .map {
+                    it.size(640, 480)
+                            .listImageUrls()
+                            .firsts(5)
+                            .random()
                 }
-                .map { it.firsts(5) }
-                .map { it.random() }
                 .singleOrError()
                 .timeout(30, TimeUnit.SECONDS)
                 .doOnSuccess { Preferences(this).setLastAnimeImage(it) }
