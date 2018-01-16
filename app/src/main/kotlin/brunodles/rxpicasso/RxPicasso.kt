@@ -8,8 +8,8 @@ fun RequestCreator.asSingle(): Single<Bitmap> {
     return Single.create { subject ->
         try {
             subject.onSuccess(this.get())
-        } catch (exception: Exception) {
-            subject.onError(exception)
+        } catch (error: Throwable) {
+            subject.onError(error)
         }
     }
 }
