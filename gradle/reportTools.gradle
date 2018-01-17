@@ -1,34 +1,42 @@
 import groovy.json.JsonBuilder
 
-static Map nested(Node node) {
+static def nested(Node node) {
     def result = node.attributes()
     def children = new LinkedHashMap<String, List<Map>>()
     node.children().each { child ->
-        String name = child.name()
-        String childKeyName = "${name}List"
-        List list = children.get(childKeyName)
-        if (list == null)
-            list = new LinkedList()
-        list.add(nested(child))
-        children.put(childKeyName, list)
+        println " - class: ${child.class}"
+        if (child instanceof Node) {
+            String name = child.name()
+            String childKeyName = "${name}List"
+            List list = children.get(childKeyName)
+            if (list == null)
+                list = new LinkedList()
+            list.add(nested(child))
+            children.put(childKeyName, list)
+        } else {
+            println " - node: ${node.name()} value $child"
+            result = child
+        }
     }
-    result.putAll(children)
+    if (!children.isEmpty())
+        result.putAll(children)
     return result
 }
 
-def xmlAsJson(String name, String filePath) {
-    task(name) {
-        File file = new File(project.buildDir, filePath)
+def xmlAsJson(String... path) {
+    task uploadReports {
         doLast {
-            def xmlRoot = new XmlParser().parse(file)
-            def jsonRoot = nested(xmlRoot)
-            println file.name
-            println new JsonBuilder(jsonRoot)
+            def result = path.collect { fileTree(dir: project.buildDir, includes: [it]).asList() }
+                    .flatten()
+                    .findAll { it.exists() }
+                    .collectEntries { file ->
+                println file.name
+                def jsonRoot = nested(new XmlParser().parse(file))
+                [(file.name): jsonRoot]
+            }
+            println new JsonBuilder(result)
         }
     }
 }
 
-xmlAsJson("checkstyleAsJson", "reports/checkstyle/main.xml")
-xmlAsJson("ktlintAsJson", "ktlint.xml")
-xmlAsJson("testAsJson", "test-results/test/TEST-when#20page#20have#20Js#20redirects.xml")
-xmlAsJson("lintAsJson", "lint-results.xml")
+xmlAsJson("reports/checkstyle/main.xml", "ktlint.xml", "test-results/test/TEST**.xml", "lint-results.xml")
