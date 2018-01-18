@@ -44,6 +44,8 @@ script:
 #- ./gradlew app:assembleRelease -PkeyPassword='$KEYPASS' -PstorePassword='$KEYSTOREPASS' -PversionCode=$TRAVIS_BUILD_NUMBER -PversionName=$RELEASE_TAG
 #- ./gradlew connectedAndroidTest -PdisablePreDex --stacktrace -P
 #- ./gradlew jacocoTestReport
+- ./gradlew explorer:uploadReports -PbuildNumber=$TRAVIS_BUILD_NUMBER
+
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
