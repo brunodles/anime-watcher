@@ -14,11 +14,11 @@ interface UrlFetcher {
         var useLog = false
 
         fun fetcher(url: String): UrlFetcher {
-            var fetcher: UrlFetcher = JsoupFetcher(url)
-            if (useCache)
-                fetcher = CacheFetcher(url, fetcher)
-            fetcher = RedirectFetcher(fetcher)
-            return fetcher
+            val fetcher: UrlFetcher = JsoupFetcher(url)
+            return if (useCache)
+                CacheFetcher(url, fetcher)
+            else
+                RedirectFetcher(fetcher)
         }
 
         fun fetchUrl(url: String): Document = fetcher(url).get()
