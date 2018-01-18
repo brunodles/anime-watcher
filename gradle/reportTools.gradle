@@ -26,12 +26,14 @@ static def nested(Node node) {
 def xmlAsJson(String... path) {
     task uploadReports {
         doLast {
+            def parser = new XmlParser(false, false, false)
             def result = path.collect { fileTree(dir: project.buildDir, includes: [it]).asList() }
                     .flatten()
                     .findAll { it.exists() }
                     .collectEntries { file ->
                 println file.name
-                def jsonRoot = nested(new XmlParser().parse(file))
+                def text = file.text.replaceAll("\\<\\!?DOCTYPE.*?\\>", "")
+                def jsonRoot = nested(parser.parseText(text))
                 [(file.name): jsonRoot]
             }
             println new JsonBuilder(result)
@@ -39,4 +41,5 @@ def xmlAsJson(String... path) {
     }
 }
 
-xmlAsJson("reports/checkstyle/main.xml", "ktlint.xml", "test-results/test/TEST**.xml", "lint-results.xml")
+xmlAsJson("reports/checkstyle/main.xml", "ktlint.xml", "test-results/test/TEST**.xml",
+        "lint-results.xml", "reports/jacoco/test/jacocoTestReport.xml")
