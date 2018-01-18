@@ -6,7 +6,7 @@ static def nested(Node node) {
     node.children().each { child ->
         println " - class: ${child.class}"
         if (child instanceof Node) {
-            String name = child.name()
+            String name = fixKeyIfNeeded(child.name())
             String childKeyName = "${name}List"
             List list = children.get(childKeyName)
             if (list == null)
@@ -21,6 +21,10 @@ static def nested(Node node) {
     if (!children.isEmpty())
         result.putAll(children)
     return result
+}
+
+static String fixKeyIfNeeded(String url) {
+    return url.replaceAll("[^\\d\\w]+", "")
 }
 
 task uploadReports {
