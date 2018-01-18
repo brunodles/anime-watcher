@@ -24,18 +24,25 @@ static def nested(Node node) {
 }
 
 task uploadReports {
-    def path = ["reports/checkstyle/main.xml", "ktlint.xml", "test-results/test/TEST**.xml",
-                "lint-results.xml", "reports/jacoco/test/jacocoTestReport.xml"]
+    def files = [
+            'checkstyle': ['ktlint.xml', 'reports/checkstyle/main.xml'],
+            'jacoco'    : ['reports/jacoco/test/jacocoTestReport.xml'],
+            'lint'      : ['lint-results.xml'],
+            'test'      : ['test-results/test/TEST**.xml']
+    ]
     doLast {
         def parser = new XmlParser(false, false, false)
-        def result = path.collect { fileTree(dir: project.buildDir, includes: [it]).asList() }
-                .flatten()
-                .findAll { it.exists() }
-                .collectEntries { file ->
-            println file.name
-            def text = file.text.replaceAll("\\<\\!?DOCTYPE.*?\\>", "")
-            def jsonRoot = nested(parser.parseText(text))
-            [(file.name): jsonRoot]
+        def result = files.collect { type, path ->
+            def result = path.collect { fileTree(dir: project.buildDir, includes: [it]).asList() }
+                    .flatten()
+                    .findAll { it.exists() }
+                    .collectEntries { file ->
+                println file.name
+                def text = file.text.replaceAll("\\<\\!?DOCTYPE.*?\\>", "")
+                def jsonRoot = nested(parser.parseText(text))
+                [(file.name): jsonRoot]
+            }
+            [(type): result]
         }
         println new JsonBuilder(result)
     }
