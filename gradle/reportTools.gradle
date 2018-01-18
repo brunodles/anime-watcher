@@ -52,5 +52,19 @@ task uploadReports {
         def json = new JsonBuilder(result).toString()
         println "Saving at `reports/uploadReports.json´."
         new File(project.buildDir, "reports/uploadReports.json").write(json)
+
+        def projectName = "testProject"
+        def buildNumber = project.properties.get('buildNumber', 0)
+        def baseUrl = new URL("https://test-artifacts.firebaseio.com/${projectName}/${buildNumber}.json")
+        def connection = baseUrl.openConnection()
+        connection.with {
+            doOutput = true
+            requestMethod = 'PUT'
+            outputStream.withWriter { writer ->
+                writer << json
+            }
+            content.text
+            println "Sent to firebase"
+        }
     }
 }
