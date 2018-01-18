@@ -2,7 +2,6 @@ package brunodles.animacurse
 
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.PageParser
-import brunodles.urlfetcher.UrlFetcher
 import brunodles.xvideos.XvideoExplorer
 
 object XvideosFactory : PageParser {
@@ -12,7 +11,7 @@ object XvideosFactory : PageParser {
     override fun isEpisode(url: String): Boolean = url.contains(URL_REGEX)
 
     override fun episode(url: String): Episode =
-            XvideoExplorer(UrlFetcher.fetchUrl(url)).currentVideo()
+            XvideoExplorer(url).currentVideo()
 
 }
 

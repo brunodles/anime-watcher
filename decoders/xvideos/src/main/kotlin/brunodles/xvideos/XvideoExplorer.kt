@@ -1,15 +1,15 @@
 package brunodles.xvideos
 
 import brunodles.animewatcher.explorer.Episode
+import brunodles.urlfetcher.UrlFetcher
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 
-class XvideoExplorer(val doc: Document) {
+class XvideoExplorer(private val url: String) {
 
-    private val mainDoc: Elements = doc.body().select("#main")
+    private val mainDoc: Elements = UrlFetcher.fetchUrl(url).body().select("#main")
 
     fun currentVideo(): Episode {
 
@@ -20,9 +20,9 @@ class XvideoExplorer(val doc: Document) {
                 animeName = title,
                 video = videoLink,
                 number = 1,
-                link = videoLink,
+                link = url,
                 description = title,
-                image = "",
+                image = null,
                 nextEpisodes = nextVideos
         )
     }
