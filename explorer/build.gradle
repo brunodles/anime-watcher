@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'kotlin'
 apply plugin: "kotlin-noarg"
 apply from: rootProject.file('gradle/buildconfig.gradle')
+apply from: rootProject.file('gradle/reportTools.gradle')
 
 noArg {
     annotation("brunodles.kotlin.annotation.NoArgs")
@@ -20,7 +21,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'com.greghaskins:spectrum:1.1.1'
     testCompile 'com.github.tomakehurst:wiremock:2.12.0'
-
 }
 
 sourceCompatibility = "1.7"
