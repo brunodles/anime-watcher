@@ -36,7 +36,7 @@ task uploadReports {
     ]
     doLast {
         def parser = new XmlParser(false, false, false)
-        def result = files.collect { type, path ->
+        def result = files.collectEntries { type, path ->
             def result = path.collect { fileTree(dir: project.buildDir, includes: [it]).asList() }
                     .flatten()
                     .findAll { it.exists() }
