@@ -39,7 +39,7 @@ subprojects { project ->
             project.apply from: "${project.rootDir}/gradle/jacoco.gradle"
             project.apply from: "${project.rootDir}/gradle/checkstyle.gradle"
         }
-        if (project.plugins.hasPlugin("kotlin")) {
+        if (project.plugins.hasPlugin("kotlin") || project.plugins.hasPlugin("kotlin-android")) {
             project.apply from: "${project.rootDir}/gradle/ktlint.gradle"
         }
     }

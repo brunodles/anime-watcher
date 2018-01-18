@@ -23,6 +23,5 @@ test {
     }
     jacoco {
         append = false
-        destinationFile = file("$buildDir/jacoco/**.exec")
     }
 }

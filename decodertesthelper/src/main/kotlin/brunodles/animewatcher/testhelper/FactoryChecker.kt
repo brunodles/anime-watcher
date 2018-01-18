@@ -12,7 +12,7 @@ import java.util.regex.Pattern
 object FactoryChecker {
 
     fun checkFactory(pageParser: PageParser, validUrls: Array<String> = emptyArray(),
-                     invalidUrls: Array<String> = emptyArray(), expectedEpisode: Episode) {
+                     invalidUrls: Array<String> = emptyArray(), expectedEpisode: Episode?=null) {
         describe(pageParser::class.java.simpleName) {
 
             if (validUrls.isNotEmpty() || invalidUrls.isNotEmpty())
@@ -31,30 +31,37 @@ object FactoryChecker {
                     }
                 }
 
-            describe("when episode") {
-                val resultEpisode = pageParser.episode(expectedEpisode.link!!)
-
-                describe("when get currentEpisode") {
-                    checkEpisode(expectedEpisode, resultEpisode)
-                }
-
-                describe("when get nextEpisodes") {
-
-                    val episodes = resultEpisode.nextEpisodes!!
-                    val expectedNextEpisodes = expectedEpisode.nextEpisodes!!
-
-                    it("should find ${expectedNextEpisodes.size} episodes") {
-                        assertEquals(expectedNextEpisodes.size, episodes.size)
-                    }
-
-                    for (index in 0 until expectedNextEpisodes.size)
-                        describe("when get episode at index [$index]") {
-                            val episode = if (episodes.size > index) episodes[index] else null
-                            checkEpisode(expectedNextEpisodes[index], episode)
-                        }
-                }
-
+            expectedEpisode?.let {
+                whenEpisode(pageParser, expectedEpisode)
             }
+        }
+    }
+
+    private fun whenEpisode(pageParser: PageParser, expectedEpisode: Episode) {
+
+        describe("when episode") {
+            val resultEpisode = pageParser.episode(expectedEpisode.link!!)
+
+            describe("when get currentEpisode") {
+                checkEpisode(expectedEpisode, resultEpisode)
+            }
+
+            describe("when get nextEpisodes") {
+
+                val episodes = resultEpisode.nextEpisodes!!
+                val expectedNextEpisodes = expectedEpisode.nextEpisodes!!
+
+                it("should find ${expectedNextEpisodes.size} episodes") {
+                    assertEquals(expectedNextEpisodes.size, episodes.size)
+                }
+
+                for (index in 0 until expectedNextEpisodes.size)
+                    describe("when get episode at index [$index]") {
+                        val episode = if (episodes.size > index) episodes[index] else null
+                        checkEpisode(expectedNextEpisodes[index], episode)
+                    }
+            }
+
         }
     }
 

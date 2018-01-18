@@ -1,0 +1,70 @@
+import groovy.json.JsonBuilder
+
+static def nested(Node node) {
+    def result = node.attributes()
+    def children = new LinkedHashMap<String, List<Map>>()
+    node.children().each { child ->
+        println " - class: ${child.class}"
+        if (child instanceof Node) {
+            String name = fixKeyIfNeeded(child.name())
+            String childKeyName = "${name}List"
+            List list = children.get(childKeyName)
+            if (list == null)
+                list = new LinkedList()
+            list.add(nested(child))
+            children.put(childKeyName, list)
+        } else {
+            println " - node: ${node.name()} value $child"
+            result = child
+        }
+    }
+    if (!children.isEmpty())
+        result.putAll(children)
+    return result
+}
+
+static String fixKeyIfNeeded(String url) {
+    return url.replaceAll("[^\\d\\w]+", "")
+}
+
+task uploadReports {
+    def files = [
+            'checkstyle': ['ktlint.xml', 'reports/checkstyle/main.xml'],
+            'jacoco'    : ['reports/jacoco/test/jacocoTestReport.xml'],
+            'lint'      : ['lint-results.xml'],
+            'test'      : ['test-results/test/TEST**.xml']
+    ]
+    def projectName = "animeWatcher"
+    def moduleName = "explorer"
+    doLast {
+        def parser = new XmlParser(false, false, false)
+        def result = files.collectEntries { type, path ->
+            def result = path.collect { fileTree(dir: project.buildDir, includes: [it]).asList() }
+                    .flatten()
+                    .findAll { it.exists() }
+                    .collectEntries { file ->
+                println file.name
+                def text = file.text.replaceAll("\\<\\!?DOCTYPE.*?\\>", "")
+                def jsonRoot = nested(parser.parseText(text))
+                [(fixKeyIfNeeded("${moduleName}_${file.name}")): jsonRoot]
+            }
+            [(fixKeyIfNeeded(type)): result]
+        }
+        def json = new JsonBuilder(result).toString()
+        println "Saving at `reports/uploadReports.json´."
+        new File(project.buildDir, "reports/uploadReports.json").write(json)
+
+        def buildNumber = project.properties.get('buildNumber', 0)
+        def baseUrl = new URL("https://test-artifacts.firebaseio.com/${projectName}/${buildNumber}.json")
+        def connection = baseUrl.openConnection()
+        connection.with {
+            doOutput = true
+            requestMethod = 'PUT'
+            outputStream.withWriter { writer ->
+                writer << json
+            }
+            content.text
+            println "Sent to firebase"
+        }
+    }
+}

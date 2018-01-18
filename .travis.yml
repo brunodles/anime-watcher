@@ -1,0 +1,75 @@
+language: android
+jdk: oraclejdk8
+
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-27.0.2
+    - android-27
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - addon-google_apis-google-27
+    # emulators. Uncomment to run instrumented tests
+    # - sys-img-armeabi-v7a-$ANDROID_TARGET
+    # repeated as suggested to get the latest sdk version
+    - tools
+
+env:
+  global:
+    - RELEASE_TAG=$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)
+#  matrix:
+#    - MIN_SDK=15 ANDROID_TARGET=android-15
+#    - MIN_SDK=27 ANDROID_TARGET=android-27
+    - MIN_SDK=15
+    - ANDROID_TARGET=android-27
+
+# Emulator Management: Create, Start and Wait
+#before_script:
+#  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi armeabi-v7a
+#  - emulator -avd test -no-audio -no-window &
+#  - android-wait-for-emulator
+#  - adb shell input keyevent 82 &
+
+before_install:
+  - yes | sdkmanager "platforms;android-27"
+
+script:
+- echo "Travis branch is $TRAVIS_BRANCH"
+- echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST  buildNumber $TRAVIS_BUILD_NUMBER"
+- ./gradlew clean app:googleServicesDecrypt assembleDebug -PminSdk=$MIN_SDK
+- ./gradlew lint ktlint checkstyleMain --continue
+- ./gradlew test
+#- ./gradlew app:assembleRelease -PkeyPassword='$KEYPASS' -PstorePassword='$KEYSTOREPASS' -PversionCode=$TRAVIS_BUILD_NUMBER -PversionName=$RELEASE_TAG
+#- ./gradlew connectedAndroidTest -PdisablePreDex --stacktrace -P
+#- ./gradlew jacocoTestReport
+- ./gradlew explorer:uploadReports -PbuildNumber=$TRAVIS_BUILD_NUMBER
+
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
+
+#before_deploy:
+#  # Set up git user name and tag this commit
+#  - git config --local user.name "TravisCi"
+#  #- git config --local user.email "travis@brunodles.com"
+#  - git tag "$RELEASE_TAG"
+#deploy:
+#  provider: releases
+#  api_key: "$GITHUBOAUTHTOKEN"
+#  file: "app/build/outputs/apk/release/app-release.apk"
+#  skip_cleanup: true
+#  on:
+#    branch: master
+#    repo: brunodles/anime-watcher
+
+notifications:
+  email: false
+  slack: brunodles:UcI2SRdgkY9He1ZwJ8tXrECD

@@ -3,20 +3,15 @@ configurations {
 }
 
 dependencies {
-    ktlint 'com.github.shyiko:ktlint:0.9.0'
+    ktlint 'com.github.shyiko:ktlint:0.14.0'
 }
 
-task ktlint(type: Exec) {
-    commandLine 'java', '-cp', configurations.ktlint.join(System.getProperty('path.separator')),
-            'com.github.shyiko.ktlint.Main', '--reporter=checkstyle', 'src/main/*.kt'
-    standardOutput = new FileOutputStream(new File(buildDir, "ktlint-checkstyle-report.xml"))
-    ignoreExitValue = true
-    doLast {
-        standardOutput.close()
-        if (execResult.exitValue != 0) {
-            throw new GradleException("ktlint finished with non-zero exit value ${execResult.exitValue}")
-        }
-    }
+task ktlint(type: JavaExec) {
+    group "verification"
+    description "Check kotlin code style."
+    classpath configurations.ktlint
+    main 'com.github.shyiko.ktlint.Main'
+    args "--reporter=plain", "--reporter=checkstyle,output=${buildDir}/ktlint.xml", "src/**/*.kt"
 }
 
 check.dependsOn ktlint
