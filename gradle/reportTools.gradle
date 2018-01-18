@@ -34,6 +34,7 @@ task uploadReports {
             'lint'      : ['lint-results.xml'],
             'test'      : ['test-results/test/TEST**.xml']
     ]
+    def moduleName = "explorer"
     doLast {
         def parser = new XmlParser(false, false, false)
         def result = files.collectEntries { type, path ->
@@ -44,10 +45,12 @@ task uploadReports {
                 println file.name
                 def text = file.text.replaceAll("\\<\\!?DOCTYPE.*?\\>", "")
                 def jsonRoot = nested(parser.parseText(text))
-                [(file.name): jsonRoot]
+                [(fixKeyIfNeeded("${moduleName}_${file.name}")): jsonRoot]
             }
-            [(type): result]
+            [(fixKeyIfNeeded(type)): result]
         }
-        println new JsonBuilder(result)
+        def json = new JsonBuilder(result).toString()
+        println "Saving at `reports/uploadReports.json´."
+        new File(project.buildDir, "reports/uploadReports.json").write(json)
     }
 }
