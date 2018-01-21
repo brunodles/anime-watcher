@@ -61,7 +61,7 @@ task uploadReports {
         result.put('buildInfo', [
                 projectName: projectName,
                 buildNumber: buildNumber,
-                moduleName: moduleName
+                moduleName : moduleName
         ])
         def json = new JsonBuilder(result).toString()
         def file = new File(project.buildDir, "reports/uploadReports.json")
@@ -114,23 +114,33 @@ static String underscoreToCamelCase(String underscore) {
     return underscore.replaceAll(/_\w/) { it[1].toUpperCase() }
 }
 
-task temp {
+task totals {
     def file = new File(project.buildDir, "reports/uploadReports.json")
     doLast {
         def slurper = new JsonSlurper()
         def total = [
                 checkstyleErrors: 0,
-                testFailures    : 0
+                test            : [
+                        errors  : 0, // All errors, only junit < 4
+                        tests   : 0, // All tests completed. error, skipped and failures are included
+                        failures: 0, // assertion erros
+                        skipped : 0  // ignored tests
+                ]
         ]
         Map json = slurper.parse(file)
         json.each { type, v ->
             v.each { reportName, data ->
                 if (type == "checkstyle")
                     total.checkstyleErrors += countCheckstyleErrors(data)
-                if (type == 'test')
-                    total.testFailures += countTestFailures(data)
+                if (type == 'test') {
+                    total.test.errors += Integer.valueOf(data.errors)
+                    total.test.failures += Integer.valueOf(data.failures)
+                    total.test.skipped += Integer.valueOf(data.skipped)
+                    total.test.tests += Integer.valueOf(data.tests)
+                }
             }
         }
+        total.test.success = total.test.tests - (total.test.errors + total.test.failures + total.test.skipped)
         println total
     }
 }
@@ -142,17 +152,6 @@ static int countCheckstyleErrors(Map fileData) {
     fileData.get('fileList').each {
         it.each { k, v ->
             if ("errorList" == k)
-                count += v.size
-        }
-    }
-    return count
-}
-
-static int countTestFailures(Map fileData) {
-    int count = 0
-    fileData.get('testcaseList').each {
-        it.each { k, v ->
-            if ("failureList" == k)
                 count += v.size
         }
     }
