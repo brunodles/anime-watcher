@@ -25,6 +25,7 @@ task uploadReports {
     ]
     def projectName = "animeWatcher"
     def moduleName = "explorer"
+    def buildNumber = project.properties.get('buildNumber', 0)
     doLast {
         def parser = new XmlParser(false, false, false)
         def result = files.collectEntries { type, path ->
@@ -35,7 +36,7 @@ task uploadReports {
                 if (FileTypes.valueOf(type).decoder == 'xml') {
                     def text = file.text.replaceAll("\\<\\!?DOCTYPE.*?\\>", "")
                     def jsonRoot = nested(parser.parseText(text))
-                    return [(fixKeyIfNeeded("${moduleName}_${file.name}")): jsonRoot]
+                    return [(fixKeyIfNeeded("${file.name}")): jsonRoot]
                 } else {
                     boolean header = true
                     def fieldNames = []
@@ -57,13 +58,17 @@ task uploadReports {
             }
             [(fixKeyIfNeeded(type)): result]
         }
+        result.put('buildInfo', [
+                projectName: projectName,
+                buildNumber: buildNumber,
+                moduleName: moduleName
+        ])
         def json = new JsonBuilder(result).toString()
         def file = new File(project.buildDir, "reports/uploadReports.json")
         println "Saving at '$file.path'."
         file.write(json)
 
-        def buildNumber = project.properties.get('buildNumber', 0)
-        def baseUrl = new URL("https://test-artifacts.firebaseio.com/${projectName}/${buildNumber}.json")
+        def baseUrl = new URL("https://test-artifacts.firebaseio.com/${projectName}/${buildNumber}/${moduleName}.json")
         def connection = baseUrl.openConnection()
         connection.with {
             doOutput = true
