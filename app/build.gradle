@@ -42,6 +42,7 @@ dependencies {
     implementation project(":decoders:animesproject")
     implementation project(":decoders:anitubex")
     implementation project(":decoders:onepiecex")
+    implementation project(":decoders:xvideos")
 
     kapt "com.android.databinding:compiler:$plugin_version"
 

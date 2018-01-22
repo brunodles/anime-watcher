@@ -2,13 +2,14 @@ package brunodles.animewatcher.player
 
 import android.content.Intent
 import brunodles.animacurse.AnimaCurseFactory
+import brunodles.animacurse.XvideosFactory
+import brunodles.animakai.AnimaKaiFactory
+import brunodles.animesonlinebr.AnimesOnlineBrFactory
 import brunodles.animesorion.AnimesOrionFactory
 import brunodles.animesproject.AnimesProjectFactory
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.PageParser
 import brunodles.anitubex.AnitubexFactory
-import brunodles.animakai.AnimaKaiFactory
-import brunodles.animesonlinebr.AnimesOnlineBrFactory
 import brunodles.onepiecex.OnePieceXFactory
 
 object UrlChecker {
@@ -23,6 +24,7 @@ object UrlChecker {
         factories.add(AnimesProjectFactory)
         factories.add(AnitubexFactory)
         factories.add(OnePieceXFactory)
+        factories.add(XvideosFactory)
     }
 
     fun findUrl(intent: Intent): String? {
