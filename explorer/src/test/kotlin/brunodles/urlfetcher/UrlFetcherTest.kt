@@ -51,6 +51,17 @@ class UrlFetcherTest {
                 shouldFollowRedirectWith("Html") { htmlRedirect(it) }
                 shouldFollowRedirectWith("Js") { jsRedirect(it) }
             }
+            describe("temp") {
+                it("should fail") {
+                    Assert.fail()
+                }
+                xit("ignored") {
+                    Assert.fail()
+                }
+                it("should error") {
+                    throw Throwable("boom")
+                }
+            }
         }
     }
 

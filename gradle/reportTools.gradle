@@ -1,6 +1,8 @@
 import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
 
+import java.text.SimpleDateFormat
+
 enum FileTypes {
     checkstyle('xml'),
     jacoco('xml'),
@@ -61,7 +63,8 @@ task uploadReports {
         result.put('buildInfo', [
                 projectName: projectName,
                 buildNumber: buildNumber,
-                moduleName : moduleName
+                moduleName : moduleName,
+                dateTime   : new SimpleDateFormat("yyyy.MM.dd HH:MM:ss").format(new Date())
         ])
         def json = new JsonBuilder(result).toString()
         def file = new File(project.buildDir, "reports/uploadReports.json")
@@ -133,7 +136,7 @@ task totals {
                 if (type == "checkstyle")
                     total.checkstyleErrors += countCheckstyleErrors(data)
                 if (type == 'test') {
-                    total.test.errors += Integer.valueOf(data.errors)
+                    total.test.errors += Integer.valueOf(data.errors) ?: 0
                     total.test.failures += Integer.valueOf(data.failures)
                     total.test.skipped += Integer.valueOf(data.skipped)
                     total.test.tests += Integer.valueOf(data.tests)
@@ -143,17 +146,4 @@ task totals {
         total.test.success = total.test.tests - (total.test.errors + total.test.failures + total.test.skipped)
         println total
     }
-}
-
-static int countCheckstyleErrors(Map fileData) {
-    if (!fileData.containsKey("fileList"))
-        return 0
-    int count = 0
-    fileData.get('fileList').each {
-        it.each { k, v ->
-            if ("errorList" == k)
-                count += v.size
-        }
-    }
-    return count
 }

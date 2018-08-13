@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'kotlin'
 apply plugin: "kotlin-noarg"
 apply from: rootProject.file('gradle/buildconfig.gradle')
-apply from: rootProject.file('gradle/reportTools.gradle')
+apply plugin: 'testartifacts'
 
 noArg {
     annotation("brunodles.kotlin.annotation.NoArgs")
@@ -21,6 +21,19 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'com.greghaskins:spectrum:1.1.1'
     testCompile 'com.github.tomakehurst:wiremock:2.12.0'
+}
+
+archiver {
+    projectName = "animeWatcher"
+    moduleName = "explorer"
+    buildNumber = project.properties.get('buildNumber', 0)
+    files = [
+            'checkstyle': ['ktlint.xml', 'reports/checkstyle/main.xml'],
+            'jacoco'    : ['reports/jacoco/test/jacocoTestReport.xml'],
+            'jacocoCsv' : ['reports/jacoco/test/jacocoTestReport.csv'],
+            'lint'      : ['lint-results.xml'],
+            'test'      : ['test-results/test/TEST**.xml']
+    ]
 }
 
 sourceCompatibility = "1.7"
