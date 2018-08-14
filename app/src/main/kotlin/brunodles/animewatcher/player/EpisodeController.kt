@@ -3,6 +3,7 @@ package brunodles.animewatcher.player
 import android.content.Context
 import android.util.Log
 import brunodles.animewatcher.ImageLoader
+import brunodles.animewatcher.decoders.UrlChecker
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.parcelable.EpisodeParcel
 import brunodles.animewatcher.parcelable.EpisodeParceler

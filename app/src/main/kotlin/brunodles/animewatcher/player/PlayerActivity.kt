@@ -20,6 +20,7 @@ import brunodles.animewatcher.R
 import brunodles.animewatcher.cast.Caster
 import brunodles.animewatcher.databinding.ActivityPlayerBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
+import brunodles.animewatcher.decoders.UrlChecker
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.parcelable.EpisodeParcel
 import brunodles.animewatcher.parcelable.EpisodeParceler
