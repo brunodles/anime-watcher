@@ -2,7 +2,6 @@ package brunodles.animewatcher.decoders
 
 import android.content.Intent
 import brunodles.animacurse.XvideosFactory
-import brunodles.animesonlinebr.AnimesOnlineBrFactory
 import brunodles.animesorion.AnimesOrionFactory
 import brunodles.animesproject.AnimesProjectFactory
 import brunodles.animewatcher.explorer.Episode

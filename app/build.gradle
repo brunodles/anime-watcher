@@ -34,7 +34,6 @@ android {
 }
 
 dependencies {
-    implementation project(":decoders:animesonlinebr")
     implementation project(":decoders:animesorion")
     implementation project(":decoders:animesproject")
     implementation project(":decoders:anitubex")
