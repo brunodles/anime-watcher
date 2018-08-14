@@ -183,7 +183,7 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
                 holder.clickListener = ::onItemClick
             }
 
-            override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): HomeAdapter.EpisodeHolder
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAdapter.EpisodeHolder
                     = HomeAdapter.EpisodeHolder(ItemEpisodeBinding.inflate(
                     LayoutInflater.from(parent?.context), parent, false))
         }

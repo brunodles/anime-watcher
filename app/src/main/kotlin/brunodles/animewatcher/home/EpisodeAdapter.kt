@@ -23,15 +23,15 @@ class EpisodeAdapter : RecyclerView.Adapter<EpisodeAdapter.EpisodeHolder>() {
 
     override fun getItemCount(): Int = list.count()
 
-    override fun onBindViewHolder(holder: EpisodeAdapter.EpisodeHolder?, position: Int) {
+    override fun onBindViewHolder(holder: EpisodeAdapter.EpisodeHolder, position: Int) {
         holder?.let {
             it.onBind(list[position])
             it.clickListener = internalEpisodeClickListener
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): EpisodeAdapter.EpisodeHolder {
-        val context = parent?.context
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeAdapter.EpisodeHolder {
+        val context = parent.context
         if (layoutInflater == null)
             layoutInflater = LayoutInflater.from(context)
         return EpisodeHolder(ItemEpisodeBinding.inflate(layoutInflater!!, parent, false))
