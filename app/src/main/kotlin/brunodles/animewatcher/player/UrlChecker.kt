@@ -7,6 +7,7 @@ import brunodles.animakai.AnimaKaiFactory
 import brunodles.animesonlinebr.AnimesOnlineBrFactory
 import brunodles.animesorion.AnimesOrionFactory
 import brunodles.animesproject.AnimesProjectFactory
+import brunodles.animewatcher.decoders.TvCurseFactory
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.PageParser
 import brunodles.anitubex.AnitubexFactory
@@ -25,6 +26,7 @@ object UrlChecker {
         factories.add(AnitubexFactory)
         factories.add(OnePieceXFactory)
         factories.add(XvideosFactory)
+        factories.add(TvCurseFactory)
     }
 
     fun findUrl(intent: Intent): String? {
