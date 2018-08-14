@@ -1,7 +1,6 @@
 package brunodles.animewatcher.player
 
 import android.content.Intent
-import brunodles.animacurse.AnimaCurseFactory
 import brunodles.animacurse.XvideosFactory
 import brunodles.animakai.AnimaKaiFactory
 import brunodles.animesonlinebr.AnimesOnlineBrFactory
@@ -18,7 +17,6 @@ object UrlChecker {
     private val factories = ArrayList<PageParser>()
 
     init {
-        factories.add(AnimaCurseFactory)
         factories.add(AnimaKaiFactory)
         factories.add(AnimesOnlineBrFactory)
         factories.add(AnimesOrionFactory)
