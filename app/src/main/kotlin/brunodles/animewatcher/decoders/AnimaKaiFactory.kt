@@ -1,4 +1,4 @@
-package brunodles.animakai
+package brunodles.animewatcher.decoders
 
 import brunodles.animewatcher.explorer.*
 import brunodles.urlfetcher.UrlFetcher
