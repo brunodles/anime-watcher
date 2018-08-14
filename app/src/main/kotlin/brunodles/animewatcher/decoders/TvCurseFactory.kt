@@ -9,7 +9,6 @@ import com.brunodles.alchemist.collectors.TextCollector
 import com.brunodles.alchemist.nested.Nested
 import com.brunodles.alchemist.regex.Regex
 import com.brunodles.alchemist.selector.Selector
-import com.brunodles.alchemist.usevalueof.UseValueOf
 
 object TvCurseFactory : PageParser {
     private val URL_REGEX = kotlin.text.Regex("tvcurse\\.com/?\\?p=")
@@ -27,63 +26,63 @@ object TvCurseFactory : PageParser {
 
     override fun isEpisode(url: String): Boolean =
             url.contains(URL_REGEX)
-}
 
-private fun List<NextEpisode>?.toEpisode(animeName: String?): List<Episode>? {
-    this?.let {
-        return it.map {
-            with(it) {
-                Episode(description(), number(), animeName, image(), null, link())
-            }
-        }.toList()
+    private fun List<NextEpisode>?.toEpisode(animeName: String?): List<Episode>? {
+        this?.let {
+            return it.map {
+                with(it) {
+                    Episode(description(), number(), animeName, image(), null, link())
+                }
+            }.toList()
+        }
+        return emptyList()
     }
-    return emptyList()
-}
 
-interface CurrentEpisode {
+    interface CurrentEpisode {
 
-    @Selector(".episodename")
-    @TextCollector
-    @Regex("^(?:.*?[–-]\\s?)(.*?)\$")
-    fun description(): String
+        @Selector(".episodename")
+        @TextCollector
+        @Regex("^(?:.*?[–-]\\s?)(.*?)\$")
+        fun description(): String
 
-    @Selector(".episodename")
-    @TextCollector
-    @Regex("(?:\\D|^)(\\d+)(?:\\D|\$)")
-    @ToInt
-    fun number(): Int
+        @Selector(".episodename")
+        @TextCollector
+        @Regex("(?:\\D|^)(\\d+)(?:\\D|\$)")
+        @ToInt
+        fun number(): Int
 
-    @Selector(".animename")
-    @TextCollector
-    fun animeName(): String? = null
+        @Selector(".animename")
+        @TextCollector
+        fun animeName(): String? = null
 
-    @Selector("video#video source")
-    @AttrCollector("src")
-    fun video(): String? = null
+        @Selector("video#video source")
+        @AttrCollector("src")
+        fun video(): String? = null
 
-    @Selector(".episode a")
-    @Nested
-    fun nextEpisodes(): ArrayList<NextEpisode>?
-}
+        @Selector(".episode a")
+        @Nested
+        fun nextEpisodes(): ArrayList<NextEpisode>?
+    }
 
-interface NextEpisode {
+    interface NextEpisode {
 
-    @Selector("#epnum")
-    @TextCollector
-    @Regex("^(?:.*?[–-]\\s?)(.*?)\$")
-    fun description(): String
+        @Selector("#epnum")
+        @TextCollector
+        @Regex("^(?:.*?[–-]\\s?)(.*?)\$")
+        fun description(): String
 
-    @Selector("#epnum")
-    @TextCollector
-    @Regex("(?:\\D|^)(\\d+)(?:\\D|\$)")
-    @ToInt
-    fun number(): Int
+        @Selector("#epnum")
+        @TextCollector
+        @Regex("(?:\\D|^)(\\d+)(?:\\D|\$)")
+        @ToInt
+        fun number(): Int
 
-    @Selector("img")
-    @AttrCollector("src")
-    fun image(): String?
+        @Selector("img")
+        @AttrCollector("src")
+        fun image(): String?
 
-    @Selector("a")
-    @AttrCollector("href")
-    fun link(): String
+        @Selector("a")
+        @AttrCollector("href")
+        fun link(): String
+    }
 }
