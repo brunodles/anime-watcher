@@ -4,7 +4,7 @@ buildscript {
     ext.kotlin_version = '1.2.50'
     ext.plugin_version = '3.1.4'
     ext.playservices_version = '11.8.0'
-    ext.support_libs_version = '27.1.1'
+    ext.support_libs_version = '27.0.2'
 
     repositories {
         jcenter()
