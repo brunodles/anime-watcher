@@ -86,11 +86,4 @@ object OnePieceXFactory : PageParser {
         @StringFormat("https://onepiece-ex.com.br%s")
         fun nextEpisode(): String
     }
-
-    interface VideoInfo {
-
-        @Selector("video")
-        @AttrCollector("src")
-        fun url(): String
-    }
 }
