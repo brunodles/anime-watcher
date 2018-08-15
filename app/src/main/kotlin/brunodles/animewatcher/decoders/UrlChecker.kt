@@ -1,11 +1,8 @@
 package brunodles.animewatcher.decoders
 
 import android.content.Intent
-import brunodles.animesorion.AnimesOrionFactory
-import brunodles.animesproject.AnimesProjectFactory
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.PageParser
-import brunodles.anitubex.AnitubexFactory
 
 object UrlChecker {
 
@@ -15,8 +12,6 @@ object UrlChecker {
         factories.add(AnimaKaiFactory)
         factories.add(AnimesOnlineBrFactory)
         factories.add(AnimesOrionFactory)
-        factories.add(AnimesProjectFactory)
-        factories.add(AnitubexFactory)
         factories.add(OnePieceXFactory)
         factories.add(XvideosFactory)
         factories.add(TvCurseFactory)

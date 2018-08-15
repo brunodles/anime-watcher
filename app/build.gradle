@@ -34,10 +34,6 @@ android {
 }
 
 dependencies {
-    implementation project(":decoders:animesorion")
-    implementation project(":decoders:animesproject")
-    implementation project(":decoders:anitubex")
-
     kapt "com.android.databinding:compiler:$plugin_version"
 
     implementation 'com.brunodles:googleimagesapi:2.0.0'
