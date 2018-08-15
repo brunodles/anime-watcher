@@ -1,6 +1,5 @@
 package brunodles.animewatcher.decoders
 
-import brunodles.animacurse.XvideosFactory
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.testhelper.FactoryChecker
 import brunodles.urlfetcher.UrlFetcher
