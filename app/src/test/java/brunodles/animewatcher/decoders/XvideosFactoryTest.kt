@@ -1,4 +1,4 @@
-package brunodles.xvideos
+package brunodles.animewatcher.decoders
 
 import brunodles.animacurse.XvideosFactory
 import brunodles.animewatcher.explorer.Episode
