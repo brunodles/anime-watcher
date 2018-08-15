@@ -9,8 +9,6 @@ import com.brunodles.alchemist.collectors.TextCollector
 import com.brunodles.alchemist.nested.Nested
 import com.brunodles.alchemist.selector.Selector
 
-typealias Regexp = com.brunodles.alchemist.regex.Regex
-
 object AnimesOnlineBrFactory : PageParser {
 
     private val EPISODE_URL_REGEX = Regex("https?://www\\.animesonlinebr\\.com\\.br/video/\\d+")
