@@ -6,7 +6,6 @@ import brunodles.animesproject.AnimesProjectFactory
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.PageParser
 import brunodles.anitubex.AnitubexFactory
-import brunodles.onepiecex.OnePieceXFactory
 
 object UrlChecker {
 
