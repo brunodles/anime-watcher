@@ -34,6 +34,7 @@ android {
 }
 
 dependencies {
+    implementation project(":explorer")
     kapt "com.android.databinding:compiler:$plugin_version"
 
     implementation 'com.brunodles:googleimagesapi:2.0.0'
