@@ -20,5 +20,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
 }
 
+task stage {
+    dependsOn installDist
+}
+
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
