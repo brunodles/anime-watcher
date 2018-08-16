@@ -1,15 +1,25 @@
 package com.brunodles.videowatcher.serverspark
 
 import brunodles.animewatcher.decoders.UrlChecker
+import brunodles.animewatcher.explorer.Episode
+import brunodles.urlfetcher.UrlFetcher
 import com.google.gson.Gson
 import spark.kotlin.port
 import spark.kotlin.post
 
 fun main(args: Array<String>) {
+    UrlFetcher.useCache = false
     val gson = Gson()
-    port(getHerokuAssignedPort());
+    port(getHerokuAssignedPort())
     post("/decoder") {
-        val episode = UrlChecker.videoInfo(request.body())
+        val episode: Episode?
+        try {
+            episode = UrlChecker.videoInfo(request.body())
+        } catch (e: Exception) {
+            e.printStackTrace()
+            this.response.status(500)
+            return@post gson.toJson(e)
+        }
         gson.toJson(episode)
     }
 }
