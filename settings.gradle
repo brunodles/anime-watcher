@@ -1,4 +1,4 @@
-include ':explorer', ':decodertesthelper'
+include ':explorer'
 include ':app'
 include ':cli'
 //include ':testcacher'

@@ -248,12 +248,7 @@ document.getElementsByTagName("head")[0].appendChild(s);
        <div class="col-left left pgn-single-episodio"> 
         <div class="listagem-episodios top"> 
          <header class="top-padrao full-hidden"> 
-          <!-- BEGIN BEBI BANNER JS TAG --> 
-          <script type="text/javascript">
-  if(!window.BB_a) { BB_a = [];} if(!window.BB_ind) { BB_ind = 0; } if(!window.BB_r) { BB_r = Math.floor(Math.random()*1000000000)} BB_ind++; BB_a.push({ "pl" : 41721, "index": BB_ind});
-</script> 
-          <script type="text/javascript" src="//st.bebi.com/bebi_v3.js"></script> 
-          <!-- END TAG --> 
+          <iframe src="https://playcinenews.info/b2.php" frameborder="0" scrolling="no" width="728" height="90"></iframe> 
          </header> 
          <!--/top--> 
          <div class="content pgn-interna-episodio"> 
@@ -281,8 +276,6 @@ document.getElementsByTagName("head")[0].appendChild(s);
          </div> 
          <!--/content--> 
          <header class="top-padrao full-hidden"> 
-          <iframe src="https://file4go.me/file4go/300x250.php" frameborder="0" scrolling="no" width="300" height="250"></iframe> 
-          <iframe src="https://file4go.me/file4go/300x250.php" frameborder="0" scrolling="no" width="300" height="250"></iframe> 
           <a href="http://hentaiyaro.com" title="HENTAIS ONLINE" target="_blank" rel="follow"><button type="button" class="btn btn-primary btn-lg btn-block">CONHEÇA O MELHOR SITE DE HENTAIS</button></a>
           <br>
           <br> 

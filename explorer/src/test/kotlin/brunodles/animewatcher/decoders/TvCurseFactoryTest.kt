@@ -3,7 +3,6 @@ package brunodles.animewatcher.decoders
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.testhelper.FactoryChecker
 import com.greghaskins.spectrum.Spectrum
-import org.junit.Assert.*
 import org.junit.runner.RunWith
 
 @RunWith(Spectrum::class)

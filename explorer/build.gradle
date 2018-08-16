@@ -14,12 +14,13 @@ buildconfig {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile 'com.brunodles:alchemy-alchemist:2.1.0'
-
-    testCompile 'junit:junit:4.12'
-    testCompile 'com.greghaskins:spectrum:1.1.1'
-    testCompile 'com.github.tomakehurst:wiremock:2.18.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'com.brunodles:alchemy-alchemist:2.1.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'com.greghaskins:spectrum:1.1.1'
+    testImplementation 'com.github.tomakehurst:wiremock:2.18.0'
 
 }
 

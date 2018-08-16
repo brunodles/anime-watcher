@@ -18,16 +18,21 @@ object AnitubeSiteFactory : PageParser {
     override fun episode(url: String): Episode {
         val currentEpisode = AlchemistFactory.alchamist.parseUrl(url, CurrentEpisode::class.java)
         with(currentEpisode) {
-            return Episode(description(), number(), animeName(), image(), video(), url,
-                    nextEpisodes()?.let {
-                        listOf(Episode(it.title(), it.number(), animeName(), link = it.link()))
+            val description = description()
+            val number = number()
+            val animeName = animeName()
+            val image = image()
+            val video = video()
+            return Episode(description, number, animeName, image, video, url,
+                    nextEpisode()?.let {
+                        listOf(Episode(it.title(), it.number(), animeName, link = it.link()))
                     })
         }
     }
 
     interface CurrentEpisode {
 
-        @Selector("#descricao p")
+        @Selector("section#descricao p:last-child")
         @TextCollector
         @Regexp("^(?:.*?[–-]+\\s?)+(.*?)\$")
         fun description(): String
@@ -53,7 +58,7 @@ object AnitubeSiteFactory : PageParser {
 
         @Selector("#baixo #right a")
         @Nested
-        fun nextEpisodes(): NextEpisode?
+        fun nextEpisode(): NextEpisode?
     }
 
     interface NextEpisode {

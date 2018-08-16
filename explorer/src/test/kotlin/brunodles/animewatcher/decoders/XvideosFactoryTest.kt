@@ -20,7 +20,7 @@ class XvideosFactoryTest {
                 animeName = "Anita Troca O Peluche Pelo Pau",
                 image = null,
                 link = "https://www.xvideos.com/video12026193/anita_troca_o_peluche_pelo_pau",
-                video = "https://video-hw.xvideos-cdn.com/videos/mp4/3/b/8/xvideos.com_3b868ff7bff12466c8ea1fe7b79623ca-1.mp4?e=1516254528&ri=1024&rs=85&h=bb0332cc71ae04e3301d5e3c23fdbe68",
+                video = "https://vid-egc.xvideos-cdn.com/videos/mp4/3/b/8/xvideos.com_3b868ff7bff12466c8ea1fe7b79623ca-1.mp4?ZO04uwlt2FLlkz8q7Xyxk7L6_5H_XrEOh1fTX2L7t8iODJ0VEevLufUG9nVmjU-6_X-c5Rg9CxT_LzX9_tzrKHm5w3p_T211XVW33AgtbuAY1As4iMkSqlGAr-rsXp1gzAR2Ax0FAtar08Ey7tlGaZ7RHt7LbUE6Fl4qVQho93lcNuGBzk-3YUZJiXHRb2_JRS3f0mcITeeRbw",
                 nextEpisodes = arrayListOf(
                         Episode(number = 2,
                                 animeName = "A Real Slut In Real Estate",
@@ -33,8 +33,10 @@ class XvideosFactoryTest {
     }
 
     init {
+        val useCache = UrlFetcher.useCache
         UrlFetcher.useCache = true
         FactoryChecker.checkFactory(XvideosFactory, VALID_URLS, INVALID_URLS, currentEpisode)
+        UrlFetcher.useCache = useCache
     }
 
 }

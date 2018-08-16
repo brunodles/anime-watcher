@@ -72,7 +72,7 @@ class EpisodeController(val context: Context) {
 
     private fun preFetchNextEpisodes(episode: Episode) {
         if (!episode.containsNextEpisodes()) {
-            Log.d(TAG, "preFetchNextEpisodes: nextEpisodes is empty")
+            Log.d(TAG, "preFetchNextEpisodes: nextEpisode is empty")
             return
         }
         Observable.fromIterable(episode.nextEpisodes)
