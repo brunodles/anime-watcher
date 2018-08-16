@@ -1,4 +1,9 @@
-include ':explorer'
-include ':app'
+include ':explorer', ':server-spark'
 include ':cli'
 //include ':testcacher'
+
+// include android related modules inside this verification
+// This will be used to skip android modules for web server releases.
+if ((System.getenv("INCLUDE_ANDROID") ?: "true").toBoolean()) {
+    include ':app'
+}
