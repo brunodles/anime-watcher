@@ -1,0 +1,1 @@
+web: ./gradlew server-spark:run
