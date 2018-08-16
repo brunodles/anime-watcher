@@ -64,7 +64,7 @@ class PlayerActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_player)
         setupRecyclerView()
 
-        binding.playRemote.setOnClickListener {
+        binding.playRemote.setOnClickListener { it ->
             episode?.let { caster?.playRemote(it, player.getCurrentPosition()) }
         }
 
@@ -72,11 +72,9 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun onError(error: Throwable) {
-        if (binding.root != null) {
-            val snackbar = Snackbar.make(binding.root, "Failed to process the url, ${error.message}", Snackbar.LENGTH_INDEFINITE)
-            snackbar.setAction("Ok") { snackbar.dismiss() }
-            snackbar.show()
-        }
+        val snackbar = Snackbar.make(binding.root, "Failed to process the url, ${error.message}", Snackbar.LENGTH_INDEFINITE)
+        snackbar.setAction("Ok") { snackbar.dismiss() }
+        snackbar.show()
         Log.e(TAG, "onResume.FindUrl: ", error)
     }
 

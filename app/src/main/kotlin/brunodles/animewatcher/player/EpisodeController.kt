@@ -33,7 +33,7 @@ class EpisodeController(val context: Context) {
     }
 
     fun findVideoOn(episode: EpisodeParcel): Single<Episode> {
-        return if (episode.isInfoMissing())
+        return if (episode.isVideoMissing())
             findVideoOn(episode.link)
         else
             Single.just(episode)

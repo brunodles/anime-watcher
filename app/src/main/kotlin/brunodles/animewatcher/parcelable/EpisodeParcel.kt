@@ -56,7 +56,7 @@ data class EpisodeParcel(
         }
     }
 
-    fun isInfoMissing(): Boolean {
-        return video == null || nextEpisodes == null || nextEpisodes.isEmpty()
+    fun isVideoMissing(): Boolean {
+        return video == null
     }
 }
