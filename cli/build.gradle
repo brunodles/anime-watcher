@@ -1,7 +1,8 @@
 apply plugin: 'java'
+apply plugin: 'kotlin'
 apply plugin: 'application'
 
-mainClassName = "brunodles.animewatcher.cli.Main"
+mainClassName = "com.brunodles.animewatcher.cli.MainKt"
 
 run {
     if (project.hasProperty("args")) {
@@ -18,6 +19,7 @@ jar {
 
 dependencies {
     implementation project(':explorer')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
 sourceCompatibility = "1.7"
