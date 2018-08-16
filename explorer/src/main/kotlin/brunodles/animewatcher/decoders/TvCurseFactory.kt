@@ -16,18 +16,22 @@ object TvCurseFactory : PageParser {
     override fun episode(url: String): Episode {
         val currentEpisode = AlchemistFactory.alchamist.parseUrl(url, CurrentEpisode::class.java)
         with(currentEpisode) {
-            return Episode(description(), number(), animeName(), imageUrl(number()), video(), url,
-                    nextEpisodes().toEpisode(animeName()))
+            val nextEpisodes: List<Episode> = try {
+                nextEpisodes().toEpisode(animeName())
+            } catch (e: Exception) {
+                emptyList()
+            }
+            val description = description()
+            val number = number()
+            return Episode(description, number, animeName(), image(), video(), url,
+                    nextEpisodes)
         }
     }
-
-    fun imageUrl(episodeNumber: Int) =
-            "https://tvcurse.com/imgs/one-piece-episodio-$episodeNumber.webp"
 
     override fun isEpisode(url: String): Boolean =
             url.contains(URL_REGEX)
 
-    private fun List<NextEpisode>?.toEpisode(animeName: String?): List<Episode>? {
+    private fun List<NextEpisode>?.toEpisode(animeName: String?): List<Episode> {
         this?.let {
             return it.map {
                 with(it) {
@@ -42,18 +46,21 @@ object TvCurseFactory : PageParser {
 
         @Selector(".episodename")
         @TextCollector
-        @Regex("^(?:.*?[–-]\\s?)(.*?)\$")
         fun description(): String
 
         @Selector(".episodename")
         @TextCollector
-        @Regex("(?:\\D|^)(\\d+)(?:\\D|\$)")
+        @Regex("(\\d+)")
         @ToInt
         fun number(): Int
 
         @Selector(".animename")
         @TextCollector
         fun animeName(): String? = null
+
+        @Selector("[itemprop=thumbnailUrl]")
+        @AttrCollector("content")
+        fun image(): String?
 
         @Selector("video#video source")
         @AttrCollector("src")
@@ -68,12 +75,11 @@ object TvCurseFactory : PageParser {
 
         @Selector("#epnum")
         @TextCollector
-        @Regex("^(?:.*?[–-]\\s?)(.*?)\$")
         fun description(): String
 
         @Selector("#epnum")
         @TextCollector
-        @Regex("(?:\\D|^)(\\d+)(?:\\D|\$)")
+        @Regex("(\\d+)")
         @ToInt
         fun number(): Int
 
