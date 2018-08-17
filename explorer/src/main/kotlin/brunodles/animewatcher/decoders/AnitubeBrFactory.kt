@@ -17,7 +17,7 @@ object AnitubeBrFactory : PageParser {
     override fun isEpisode(url: String): Boolean = url.matches(EPISODE_URL_REGEX)
 
     override fun episode(url: String): Episode {
-        val currentEpisode = AlchemistFactory.alchamist.parseUrl(url, CurrentEpisode::class.java)
+        val currentEpisode = AlchemistFactory.alchemist.parseUrl(url, CurrentEpisode::class.java)
         with(currentEpisode) {
             return Episode(description(), number(), animeName(), image(), null, url,
                     nextEpisodes()?.let {

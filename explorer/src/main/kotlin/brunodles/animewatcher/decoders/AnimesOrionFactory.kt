@@ -38,7 +38,7 @@ object AnimesOrionFactory : PageParser {
     }
 
     fun parsePlayer(html: String, url: String): Episode {
-        val currentEpisode = AlchemistFactory.alchamist.parseHtml(html, CurrentEpisode::class.java)
+        val currentEpisode = AlchemistFactory.alchemist.parseHtml(html, CurrentEpisode::class.java)
         with(currentEpisode) {
             val nextEpisodeLink = nextEpisode()
             val nextEpisodes = if (URL_REGEX.matches(nextEpisodeLink))

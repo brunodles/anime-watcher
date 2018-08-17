@@ -14,7 +14,7 @@ object TvCurseFactory : PageParser {
     private val URL_REGEX = kotlin.text.Regex("tvcurse\\.com/?\\?p=")
 
     override fun episode(url: String): Episode {
-        val currentEpisode = AlchemistFactory.alchamist.parseUrl(url, CurrentEpisode::class.java)
+        val currentEpisode = AlchemistFactory.alchemist.parseUrl(url, CurrentEpisode::class.java)
         with(currentEpisode) {
             val nextEpisodes: List<Episode> = try {
                 nextEpisodes().toEpisode(animeName())

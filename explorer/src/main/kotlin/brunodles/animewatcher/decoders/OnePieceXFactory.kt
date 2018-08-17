@@ -25,7 +25,7 @@ object OnePieceXFactory : PageParser {
     override fun isEpisode(url: String): Boolean = url.contains(EPISODE_URL_REGEX)
 
     override fun episode(url: String): Episode {
-        val episode = AlchemistFactory.alchamist.parseUrl(url, CurrentEpisode::class.java)
+        val episode = AlchemistFactory.alchemist.parseUrl(url, CurrentEpisode::class.java)
         with(episode) {
             val videoUrl = findVideoUrl(video().html())
 
