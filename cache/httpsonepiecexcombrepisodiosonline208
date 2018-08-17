@@ -217,7 +217,7 @@ oneSignal_options['notifyButton']['text']['dialog.blocked.message'] = 'Siga esse
     <header id="topo"> 
      <h1><a href="/" title="Voltar a página inicial"><img class="logo" src="https://onepiece-ex.com.br/wp-content/themes/opex_wano/img/opex.png"></a></h1> 
      <div class="bg-base" id="banner"> 
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5487199667054701" data-ad-slot="4586559309" data-ad-format="auto"></ins> 
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1585462576453676" data-ad-slot="7954056345" data-ad-format="auto"></ins> 
       <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script> 
@@ -231,7 +231,7 @@ oneSignal_options['notifyButton']['text']['dialog.blocked.message'] = 'Siga esse
     </header> 
     <nav id="menu" class="notransition" aria-haspopup="true"> 
      <ul id="adicionais"> 
-      <li class="contador" title="Fãs de One Piece Online" data-toggle="tooltip">2047</li> 
+      <li class="contador" title="Fãs de One Piece Online" data-toggle="tooltip">3178</li> 
       <li class="opex"><a title="Ir para página inicial" href="/">ONE PIECE EX</a></li> 
       <li class="facebook"><a target="_blank" title="Fanpage" href="https://www.facebook.com/onepieceex"><i class="fab fa-facebook-f"></i></a></li> 
       <li class="twitter"><a target="_blank" title="Twitter" href="https://twitter.com/onepieceex"><i class="fab fa-twitter"></i></a></li> 
@@ -274,17 +274,17 @@ oneSignal_options['notifyButton']['text']['dialog.blocked.message'] = 'Siga esse
       <li aria-haspopup="true"><a href="#/" class="item">Mangá <i class="setinha fas fa-chevron-down"></i></a><span class="cola">▌</span> 
        <ul class="hide"> 
         <span class="menu-auxiliar"> <li><a href="https://onepiece-ex.com.br/mangas">Todos os Volumes</a></li> <li><a href="https://onepiece-ex.com.br/sbs">SBS</a></li> <li><a href="https://onepiece-ex.com.br/historias-de-capa/">Histórias de capa</a></li> <li><a href="https://onepiece-ex.com.br/novel/">Novel</a></li> </span> 
-        <li class="destaque-submenu"> <a href="https://onepiece-ex.com.br/sbs-89-traduzido/"> <h2>SBS 89 Traduzido</h2> <h3>Veja Luffy e Ace com 40 e 60 anos</h3> 
-          <div style="background-image:url('https://onepiece-ex.com.br/wp-content/uploads/2018/08/site_sbs_89-1024x535.jpg')" )">
+        <li class="destaque-submenu"> <a href="https://onepiece-ex.com.br/manga-914/"> <h2>Mangá 914</h2> <h3>Okobore, a Cidade das Sobras</h3> 
+          <div style="background-image:url('https://onepiece-ex.com.br/wp-content/uploads/2018/08/Manga-One-Piece-914.jpg')" )">
            <img src="/wp-content/themes/opex_wano/img/wide.png">
           </div> </a> </li> 
         <li class="divisao"></li> 
         <li class="listas"> <h2>ÚLTIMOS</h2> <a class="ver-todos" href="https://onepiece-ex.com.br/categoria/onepiece/">Ver Mais</a> 
          <ol> 
+          <li><a href="https://onepiece-ex.com.br/sbs-89-traduzido/">SBS 89 Traduzido<span>Veja Luffy e Ace com 40 e 60 anos</span></a></li> 
           <li><a href="https://onepiece-ex.com.br/manga-913/">Mangá 913<span>Tsuru Retribui o Favor</span></a></li> 
           <li><a href="https://onepiece-ex.com.br/shokugeki-no-sanji/">Shokugeki No Sanji<span>O Especial do Sanji</span></a></li> 
           <li><a href="https://onepiece-ex.com.br/manga-912/">Mangá 912<span>Vila Amigasa</span></a></li> 
-          <li><a href="https://onepiece-ex.com.br/manga-911/">Mangá 911<span>A Grande Aventura na Terra dos Samurais</span></a></li> 
          </ol> </li>
        </ul> </li> 
       <li aria-haspopup="true"><a href="#/" class="item">Info <i class="setinha fas fa-chevron-down"></i></a><span class="cola">▌</span> 
@@ -329,14 +329,14 @@ oneSignal_options['notifyButton']['text']['dialog.blocked.message'] = 'Siga esse
     </nav> 
     <div id="barra-auxiliar"> 
      <ul id="ultimas-noticias" class="destaques"> 
-      <li class="degra-base-invertido"> <a href="https://onepiece-ex.com.br/haki-da-observacao-capitulo-913/"> <span>Haki da Observação</span> <time itemprop="dateCreated" datetime="15/08/2018">15 de agosto de 2018</time> </a> 
+      <li class="degra-base-invertido"> <a href="https://onepiece-ex.com.br/manga-914/"> <span>Mangá 914</span> <time itemprop="dateCreated" datetime="16/08/2018">16 de agosto de 2018</time> </a> 
+       <div style="background-image: url('https://onepiece-ex.com.br/wp-content/uploads/2018/08/Manga-One-Piece-914-300x180.jpg')"></div> </li> 
+      <li class="degra-base"> <a href="https://onepiece-ex.com.br/haki-da-observacao-capitulo-913/"> <span>Haki da Observação</span> <time itemprop="dateCreated" datetime="15/08/2018">15 de agosto de 2018</time> </a> 
        <div style="background-image: url('https://onepiece-ex.com.br/wp-content/uploads/2018/08/featured_hdo-300x150.jpg')"></div> </li> 
-      <li class="degra-base"> <a href="https://onepiece-ex.com.br/episodio-849/"> <span>Episódio 849</span> <time itemprop="dateCreated" datetime="11/08/2018">11 de agosto de 2018</time> </a> 
+      <li class="degra-base-invertido"> <a href="https://onepiece-ex.com.br/episodio-849/"> <span>Episódio 849</span> <time itemprop="dateCreated" datetime="11/08/2018">11 de agosto de 2018</time> </a> 
        <div style="background-image: url('https://onepiece-ex.com.br/wp-content/uploads/2018/08/One-Piece-849-300x170.jpg')"></div> </li> 
-      <li class="degra-base-invertido"> <a href="https://onepiece-ex.com.br/pauta-secreta-039-capitulo-913/"> <span>Pauta Secreta #039</span> <time itemprop="dateCreated" datetime="10/08/2018">10 de agosto de 2018</time> </a> 
+      <li class="degra-base"> <a href="https://onepiece-ex.com.br/pauta-secreta-039-capitulo-913/"> <span>Pauta Secreta #039</span> <time itemprop="dateCreated" datetime="10/08/2018">10 de agosto de 2018</time> </a> 
        <div style="background-image: url('https://onepiece-ex.com.br/wp-content/uploads/2018/08/featured-300x150.jpg')"></div> </li> 
-      <li class="degra-base"> <a href="https://onepiece-ex.com.br/sbs-89-traduzido/"> <span>SBS 89 Traduzido</span> <time itemprop="dateCreated" datetime="09/08/2018">9 de agosto de 2018</time> </a> 
-       <div style="background-image: url('https://onepiece-ex.com.br/wp-content/uploads/2018/08/site_sbs_89-300x157.jpg')"></div> </li> 
      </ul> 
      <ul id="jetnews" class="sem-animacao"> 
       <li class="jetnew"> <a href="https://onepiece-ex.com.br/concerto-one-piece-oto-utage-estreia-em-agosto/"> <time itemprop="dateCreated" datetime="19/04/2018">19 de abril de 2018</time> <span>Concerto One Piece OTO UTAGE estreia em Agosto</span> </a> </li> 
@@ -352,10 +352,7 @@ oneSignal_options['notifyButton']['text']['dialog.blocked.message'] = 'Siga esse
        </ul> </li> 
      </ul> 
      <div class="bg-base" id="banner-2"> 
-      <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5487199667054701" data-ad-slot="5354159148"></ins> 
-      <script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script> 
+      <iframe src="https://onepiece-ex.com.br/online/panini/?code=336x280" width="336" height="280" frameborder="0" style="border:none;"></iframe> 
      </div> 
      <div class="aviso-principal degra-base text-uppercase sombra-escura" id="aviso"> 
       <i class="fas fa-comment-alt"></i> 
@@ -394,9 +391,9 @@ oneSignal_options['notifyButton']['text']['dialog.blocked.message'] = 'Siga esse
 </script>
       </div>
       <div id="overlaytotal" style="background: rgba(0,0,0,.9);position: fixed; width: 100%; height: 100%; top: 0; left: 0;z-index: 1;display: none;"></div>
-      <div id="playerv2" data-url="https://bf72.onepieceex.com.br/pl/208/1/3244422262" style="z-index: 1000;position: relative;">
+      <div id="playerv2" data-url="https://bf72.onepieceex.com.br/pl/208/1/1543559829" style="z-index: 1000;position: relative;">
        <img src="https://onepiece-ex.com.br/wp-content/themes/opex_wano/img/wide.png" alt="">
-       <iframe id="player" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" seamless allow-scripts style="border: 0; width:100%; height:100%; overflow: hidden; margin:0 auto; display:block" src="https://bf72.onepieceex.com.br/pl/208/1/3244422262"></iframe>
+       <iframe id="player" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" seamless allow-scripts style="border: 0; width:100%; height:100%; overflow: hidden; margin:0 auto; display:block" src="https://bf72.onepieceex.com.br/pl/208/1/1543559829"></iframe>
       </div>
       <div id="sub-menu">
        <a id="anterior" class="player-extra-bnt" href="/episodios/online/207"><i class="fas fa-caret-left"></i> Anterior</a>
@@ -494,10 +491,7 @@ oneSignal_options['notifyButton']['text']['dialog.blocked.message'] = 'Siga esse
      <aside id="extra" class="bg-base"> 
       <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fonepieceex%2F&amp;tabs&amp;width=340&amp;height=214&amp;small_header=false&amp;adapt_container_width=true&amp;hide_cover=false&amp;show_facepile=true&amp;appId=492022107537048" width="340" height="214" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowtransparency="true"></iframe> 
       <div id="banner-side" class="bg-base"> 
-       <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5487199667054701" data-ad-slot="5354159148"></ins> 
-       <script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script> 
+       <iframe src="https://onepiece-ex.com.br/online/panini/?code=336x280" width="336" height="280" frameborder="0" style="border:none;"></iframe> 
       </div> 
      </aside> 
     </main>

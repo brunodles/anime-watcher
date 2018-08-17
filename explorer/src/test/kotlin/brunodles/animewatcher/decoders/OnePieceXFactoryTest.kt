@@ -25,7 +25,7 @@ class OnePieceXFactoryTest {
                 animeName = "One Piece",
                 description = "Os piratas do Foxy!! A Davy Back!",
                 link = "https://one-piece-x.com.br/episodios/online/208/",
-                video = "https://tamanegi.onepieceex.com.br/episodios/lq/OpEx_208_LQ.mp4?st=Nos67aOS6jKXdpB_2IRZlw&e=1534387490",
+                video = "https:\\/\\/\\w+.onepieceex\\.com\\.br\\/episodios\\/lq\\/OpEx_208_LQ.mp4\\?st=.*",
                 nextEpisodes = arrayListOf(
                         Episode(description = "Next",
                                 number = 209,
@@ -37,7 +37,7 @@ class OnePieceXFactoryTest {
 
     init {
         FactoryChecker.describe(OnePieceXFactory) {
-//            whenEpisode(currentEpisode)
+            whenEpisode(currentEpisode)
             whenCheckIsEpisode(VALID_URLS, INVALID_URLS)
         }
     }

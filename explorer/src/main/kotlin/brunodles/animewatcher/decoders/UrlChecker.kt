@@ -14,7 +14,7 @@ object UrlChecker {
         factories.add(AnimeTubeBrasilFactory)
         factories.add(AnitubeBrFactory)
         factories.add(AnitubeSiteFactory)
-//        factories.add(OnePieceXFactory) // this factory is causing stack overflow
+        factories.add(OnePieceXFactory) // this factory is causing stack overflow
         factories.add(TvCurseFactory)
         factories.add(XvideosFactory)
     }
