@@ -64,23 +64,10 @@
   <meta name="twitter:description" content="Assistir Steins;Gate 0 - Episódio 18 online aqui no TV Curse! em HD no seu computador, tablet ou celular, assista mais episódios de Steins;Gate 0 na lista de episódios e também baixar os episódios em HD.">
   <meta name="twitter:title" content="Assistir Steins;Gate 0 - Episódio 18 Online">
   <script type="application/ld+json">{"@context":"https:\/\/schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https:\/\/tvcurse.com\/","name":"In\u00edcio"}},{"@type":"ListItem","position":2,"item":{"@id":"https:\/\/tvcurse.com\/?cat=2291","name":"Steins;Gate 0"}},{"@type":"ListItem","position":3,"item":{"@id":"https:\/\/tvcurse.com\/?p=414764","name":"Steins;Gate 0 &#8211; Epis\u00f3dio 18"}}]}</script>
-  <link rel="stylesheet" id="facebook-login-css" href="https://tvcurse.com/wp-content/plugins/wp-facebook-login/public/css/facebook-login.css?ver=1.2.3" type="text/css" media="all">
-  <link rel="stylesheet" id="simple-favorites-css" href="https://tvcurse.com/wp-content/plugins/favorites/assets/css/favorites.css?ver=2.1.6" type="text/css" media="all">
-  <script type="text/javascript" src="https://tvcurse.com/wp-includes/js/jquery/jquery.js?ver=1.12.4"></script>
-  <script type="text/javascript" src="https://tvcurse.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1"></script>
-  <script type="text/javascript">
-var fbl = {"ajaxurl":"https:\/\/tvcurse.com\/wp-admin\/admin-ajax.php","site_url":"https:\/\/tvcurse.com","scopes":"email,public_profile","appId":"260065271094939","l18n":{"chrome_ios_alert":"Fa\u00e7a o login no Facebook e clique novamente no  bot\u00e3o conectar"}};
-</script>
-  <script type="text/javascript" src="https://tvcurse.com/wp-content/plugins/wp-facebook-login/public/js/facebook-login.js?ver=1.2.3"></script>
-  <script type="text/javascript">
-var favorites_data = {"ajaxurl":"https:\/\/tvcurse.com\/wp-admin\/admin-ajax.php","nonce":"166367bf90","favorite":"Favoritar <i class=\"sf-icon-star-empty\"><\/i>","favorited":"Favoritado <i class=\"sf-icon-star-full\"><\/i>","includecount":"1","indicate_loading":"","loading_text":"Loading","loading_image":"","loading_image_active":"","loading_image_preload":"","cache_enabled":"1","button_options":{"button_type":"custom","custom_colors":false,"box_shadow":false,"include_count":true,"default":{"background_default":false,"border_default":false,"text_default":false,"icon_default":false,"count_default":false},"active":{"background_active":false,"border_active":false,"text_active":false,"icon_active":false,"count_active":false}},"authentication_modal_content":"<p>Please login to add favorites.<\/p><p><a href=\"#\" data-favorites-modal-close>Dismiss this notice<\/a><\/p>","authentication_redirect":"","dev_mode":"","logged_in":"","user_id":"0","authentication_redirect_url":"https:\/\/tvcurse.com\/wp-login.php"};
-</script>
-  <script type="text/javascript" src="https://tvcurse.com/wp-content/plugins/favorites/assets/js/favorites.min.js?ver=2.1.6"></script>
   <link rel="https://api.w.org/" href="https://tvcurse.com/index.php?rest_route=/">
   <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://tvcurse.com/xmlrpc.php?rsd">
   <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://tvcurse.com/wp-includes/wlwmanifest.xml"> 
-  <link rel="shortlink" href="https://tvcurse.com/?p=414764">
-  <link rel="dns-prefetch" href="//connect.facebook.net"> 
+  <link rel="shortlink" href="https://tvcurse.com/?p=414764"> 
   <meta name="onesignal" content="wordpress-plugin"> 
   <link rel="manifest" href="https://tvcurse.com/wp-content/plugins/onesignal-free-web-push-notifications/sdk_files/manifest.json.php?gcm_sender_id="> 
   <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script> 
@@ -105,7 +92,6 @@ oneSignal_elements[i].addEventListener('click', oneSignalLinkClickHandler, false
      <br> 
      <a target="_blank" href="https://tvcurse.com/random"> Anime Aleatório</a> 
      <br> 
-     <a href="https://tvcurse.com/wp-login.php?redirect_to=https%3A%2F%2Ftvcurse.com%2Fuser.php">Entrar/Sair</a> 
     </div> 
    </div>
   </div>
@@ -141,28 +127,18 @@ oneSignal_elements[i].addEventListener('click', oneSignalLinkClickHandler, false
       <a title="Ir em anime aleatório" target="_blank" href="https://tvcurse.com/random"> <i class="material-icons font-18 d-block"></i> </a> 
      </div> 
     </div> 
-    <div class="nav-bg-hover right"> 
-     <div class="nav-link"> 
-      <a title="#" href="https://tvcurse.com/wp-login.php?redirect_to=https%3A%2F%2Ftvcurse.com%2Fuser.php"> <span class="font-11">Entrar</span> </a> 
-     </div> 
-    </div>
    </nav>
   </header>
   <form name="search" class="" action="https://tvcurse.com" method="get"> 
    <input name="s" class="search-all" type="search" placeholder="Pesquise!">
   </form>
-  <center id="theme-body"> 
-   <div class="fixnews">
-    <div style="margin:0 auto!important; display: block!important"> 
-     <center></center>
-    </div>
-   </div>
-  </center>
   <main id="theme-body-single"> 
    <section class="articles-single"> 
     <article class="article-single"> 
-     <div itemprop="video" itemscope itemtype="https://schema.org/VideoObject"> 
-      <h2 style="display:none;"><span itemprop="name">Steins;Gate 0 – Episódio 18</span></h2> 
+     <div itemprop="video" itemscope itemtype="https://schema.org/VideoObject" class="things"> 
+      <div class="widget-title"> 
+       <h2 itemprop="name" class="title">Steins;Gate 0 – Episódio 18</h2> 
+      </div> 
       <meta itemprop="duration" content="T24M00S"> 
       <meta itemprop="thumbnailUrl" content="https://tvcurse.com/imgs/steins-gate-0-episodio-18.jpg"> 
       <meta itemprop="contentURL" content="https://www.blogger.com/video-play.mp4?contentId=a9c8630be43134f3"> 
@@ -177,123 +153,90 @@ oneSignal_elements[i].addEventListener('click', oneSignalLinkClickHandler, false
       <meta itemprop="isFamilyFriendly" content="True"> 
       <meta itemprop="keywords" content="Steins;Gate 0 – Episódio 18,Steins;Gate 0 – Episódio 18 assistir online"> 
       <span itemprop="provider" itemscope itemtype="https://schema.org/Organization"> 
-       <meta itemprop="name" content="AnimaCurse"> 
+       <meta itemprop="name" content="TVcurse"> 
        <meta itemprop="url" content="https://tvcurse.com"> 
        <meta itemprop="logo" content="https://tvcurse.com/mirai.jpg"></span> 
       <div style="display:none">
        <span id="more-414764"></span>
       </div> 
       <div class="video video-wrapper"> 
-       <p id="breadcrumbs"><span><span><a href="https://tvcurse.com/">Início</a> » <span><a href="https://tvcurse.com/?cat=2291">Steins;Gate 0</a> » <span class="breadcrumb_last">Steins;Gate 0 – Episódio 18</span></span></span></span></p> 
        <div class="container" id="tab3C"> 
-        <video id="video" width="100%" height="100%" playsinline controls> 
+        <video id="video" class="video-js" controls preload="auto" width="100%" height="auto" poster="https://tvcurse.com/imgs/steins-gate-0-episodio-18.jpg" data-setup="{}"> 
          <source src="https://tvcurse.com/dd/YTljODYzMGJlNDMxMzRmMw==" type="video/mp4"> 
+         <p class="vjs-no-js"> To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a> </p> 
         </video> 
        </div> 
       </div> 
-      <span id="tabs" class="tabs left" data-target=".widget.hotnew .content"> <span id="tab3" class="tab" data-name="360p">Principal</span> </span> 
-      <div class="right"> 
-       <div class="tab"> 
-        <a href="/?cat=2291" target="_blank"><i class="material-icons optsel"></i></a> 
-       </div> 
-       <div class="tab"> 
-        <a href="https://tvcurse.com/?p=414339"><i class="material-icons optsel"></i></a> 
-       </div> 
-       <div class="tab"> 
-        <a href="https://discord.gg/eR8tmDw" target="_blank"><i class="material-icons optsel"></i></a> 
-       </div> 
-       <div class="tab"> 
-        <a href="https://www.blogger.com/video-play.mp4?contentId=a9c8630be43134f3" download target="_blank"><i class="material-icons optsel"></i></a> 
-       </div> 
-       <div class="tab"> 
-        <div onclick="TogetherJS(this); return false;" style="cursor:pointer">
-         <i class="material-icons optsel"></i>
-        </div> 
-       </div> 
+     </div> 
+     <span id="tabs" class="tabs left" data-target=".widget.hotnew .content"> <span id="tab3" class="tab" data-name="360p">Principal</span> </span> 
+     <div class="right"> 
+      <div class="tab"> 
+       <a href="/?cat=2291" target="_blank"><i class="material-icons optsel"></i></a> 
       </div> 
-      <div class="clear"></div> 
-      <div class="title-and-controls"> 
-       <div class="padding-25-all-bottom-10"> 
-        <div class="animename"> 
-         <h1>Steins;Gate 0 </h1> 
-        </div> 
-        <div class="episodename"> 
-         <h2> Episódio 18</h2> 
-        </div> 
-       </div> 
-       <div class="sinopse" itemprop="description"> 
-        <b>Você está assistindo o anime Steins;Gate 0 – Episódio 18 online de graça aqui no TvCurse! Assista mais episódios de Steins;Gate 0 online indo na lista de episódios! Ou se preferir acesse a lista geral para ver mais animes online no seu pc, tablet ou celular.</b>
-        <br> The dark untold story of Steins;Gate that leads with the eccentric mad scientist Okabe, struggling to recover from a failed attempt at rescuing Kurisu. He decides to give up and abandons his lively scientist alter ego, in pursuit to forget the past. When all seems to be normal, he is seemingly pulled back into the past by meeting an acquaintance of Kurisu, who tells him that they have begun testing a device that stores the memory of a human and creates a simulation of them with their characteristics and personalities. Okabe begins testing and finds out that the simulation of Kurisu has brought back anguish and some new unexpected tragedies. Zero is a side story that explores events from the Beta Attractor Field's future that contribute in making the end of the original story possible. 
-       </div> 
+      <div class="tab"> 
+       <a href="https://tvcurse.com/?p=414339"><i class="material-icons optsel"></i></a> 
       </div> 
-      <div class="fixnews"> 
-       <center> 
-        <div id="playlistholder"> 
-         <div id="cont"></div> 
-         <div id="episodecontainer"> 
-          <div class="episode"> 
-           <div class="berg-announcement"></div>
-           <br> 
-          </div> 
-         </div> 
-         <div style="clear:both;"></div> 
-        </div> 
-        <div style="clear:both;"></div> 
-        <div id="p_1738002"></div> 
-        <script async data-cfasync="false" src="//native.propellerads.com/1?z=1738002&amp;eid=p_1738002"></script> 
-       </center>
+      <div class="tab"> 
+       <a href="https://discord.gg/eR8tmDw" target="_blank"><i class="material-icons optsel"></i></a> 
       </div> 
-      <div class="comments"> 
-       <div class="padding-25">
-         Comentários 
-        <i class="material-icons showcom right arroweffect"></i> 
-        <div id="disqus_thread"></div> 
+      <div class="tab"> 
+       <a href="https://www.blogger.com/video-play.mp4?contentId=a9c8630be43134f3" download target="_blank"><i class="material-icons optsel"></i></a> 
+      </div> 
+      <div class="tab"> 
+       <div onclick="TogetherJS(this); return false;" style="cursor:pointer">
+        <i class="material-icons optsel"></i>
        </div> 
-      </div> 
-      <div class="fixnews"> 
-       <small>Compartilhe o Episódio no seu blog/site:</small> 
-       <textarea>&lt;iframe id="framu" frameborder="0" src="https://tvcurse.com/iframe.php?bu=YTljODYzMGJlNDMxMzRmMw==" scrolling="no"&gt;&lt;/iframe&gt;</textarea> 
       </div> 
      </div> 
+     <div class="clear"></div> 
+     <div class="title-and-controls"> 
+      <div class="sinopse" itemprop="description"> 
+       <b>Você está assistindo o anime Steins;Gate 0 – Episódio 18 online de graça aqui no TvCurse! Assista mais episódios de Steins;Gate 0 online indo na lista de episódios! Ou se preferir acesse a lista geral para ver mais animes online no seu pc, tablet ou celular.</b>
+       <br> The dark untold story of Steins;Gate that leads with the eccentric mad scientist Okabe, struggling to recover from a failed attempt at rescuing Kurisu. He decides to give up and abandons his lively scientist alter ego, in pursuit to forget the past. When all seems to be normal, he is seemingly pulled back into the past by meeting an acquaintance of Kurisu, who tells him that they have begun testing a device that stores the memory of a human and creates a simulation of them with their characteristics and personalities. Okabe begins testing and finds out that the simulation of Kurisu has brought back anguish and some new unexpected tragedies. Zero is a side story that explores events from the Beta Attractor Field's future that contribute in making the end of the original story possible. 
+       <p id="breadcrumbs"><span><span><a href="https://tvcurse.com/">Início</a> » <span><a href="https://tvcurse.com/?cat=2291">Steins;Gate 0</a> » <span class="breadcrumb_last">Steins;Gate 0 – Episódio 18</span></span></span></span></p> 
+      </div>
+     </div>
+     <div class="fixnews"> 
+      <center> 
+       <div id="playlistholder"> 
+        <div id="cont"></div> 
+        <div id="episodecontainer"> 
+         <div class="episode"> 
+          <div class="berg-announcement"></div>
+          <br> 
+         </div>
+        </div>
+        <div style="clear:both;"></div>
+       </div>
+       <div style="clear:both;"></div> 
+       <div id="p_1738002"></div> 
+       <script async data-cfasync="false" src="//native.propellerads.com/1?z=1738002&amp;eid=p_1738002"></script>
+      </center>
+     </div> 
+     <div class="comments"> 
+      <div class="padding-25">
+        Comentários 
+       <i class="material-icons showcom right arroweffect"></i> 
+       <div id="disqus_thread"></div> 
+      </div> 
+     </div> 
+     <div class="fixnews"> 
+      <small>Compartilhe o Episódio no seu blog/site:</small> 
+      <textarea>&lt;iframe id="framu" frameborder="0" src="https://tvcurse.com/iframe.php?bu=YTljODYzMGJlNDMxMzRmMw==" scrolling="no"&gt;&lt;/iframe&gt;</textarea> 
+     </div>  
     </article> 
    </section> 
    <aside class="sidebar"> 
     <div class="things"> 
      <div class="widget-title"> 
-      <h2 class="title">Estamos no Facebook!</h2> 
+      <h2 class="title">Publicidade</h2> 
      </div> 
-     <div class="fb-page" data-href="https://www.facebook.com/animacursemoe/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-      <blockquote cite="https://www.facebook.com/animacursemoe/" class="fb-xfbml-parse-ignore">
-       <a href="https://www.facebook.com/animacursemoe/">AnimaCurse</a>
-      </blockquote>
-     </div> 
-     <div class="widget-title"> 
-      <h2 class="title">Animes Por Gênero</h2> 
-     </div> 
-     <div class="widget-body col10"> 
-      <ul> 
-       <li><a href="https://tvcurse.com/genre.php?type=action" id="tab2">Ação</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=martial arts" id="tab2">Luta</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=adventure" id="tab3">Aventura</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=comedy" id="tab3">Comédia</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=ecchi" id="tab9">Ecchi</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=sports" id="tab9">Esportes</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=fantasy" id="tab9">Fantasia</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=sci-fi" id="tab6">Sci-Fi</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=harem" id="tab8">Harém</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=josei" id="tab8">Josei</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=magic" id="tab7">Magia</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=military" id="tab7">Militar</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=mecha" id="tab7">Mecha</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=romance" id="tab4">Romance</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=shoujo" id="tab4">Shoujo</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=shoujo ai" id="tab4">Shoujo Ai</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=shounen" id="tab4">Shounen</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=shounen ai" id="tab4">Shounen Ai</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=horror" id="tab4">Terror</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=yaoi" id="tab4">Yaoi</a></li> 
-       <li><a href="https://tvcurse.com/genre.php?type=yuri" id="tab4">Yuri</a></li> 
-      </ul> 
+     <div class="auto"> 
+      <center> 
+       <script type="text/javascript">if(!window.BB_a) { BB_a = [];} if(!window.BB_ind) { BB_ind = 0; } if(!window.BB_vrsa) { BB_vrsa = 'v3'; }if(!window.BB_r) { BB_r = Math.floor(Math.random()*1000000000)} BB_ind++; BB_a.push({ "pl" : 43267, "index": BB_ind});</script> 
+       <script type="text/javascript">document.write('<scr'+'ipt async data-cfasync="false" id="BB_SLOT_'+BB_r+'_'+BB_ind+'" src="//st.bebi.com/bebi_'+BB_vrsa+'.js"></scr'+'ipt>');
+</script> 
+      </center> 
      </div> 
     </div> 
     <div class="things widget ranking"> 
@@ -333,7 +276,7 @@ oneSignal_elements[i].addEventListener('click', oneSignalLinkClickHandler, false
         <a href="https://tvcurse.com/?cat=2052" class="thumb tooltipstered"> <img src="https://tvcurse.com/capas/boruto-naruto-next-generations-episodios.jpg" alt="Boruto: Naruto Next Generations"> </a> 
         <div class="info"> 
          <a href="https://tvcurse.com/?cat=2052" data-jtitle="" class="toppers">Boruto: Naruto Next Generations <small>hot</small> </a> 
-         <p> <span class="tip" title="" data-original-title="total views in this day">Eps. 68</span> <span class="tip" title="" data-original-title="total favorited all time"> </span> </p> 
+         <p> <span class="tip" title="" data-original-title="total views in this day">Eps. 69</span> <span class="tip" title="" data-original-title="total favorited all time"> </span> </p> 
         </div> 
        </div> 
        <div class="item"> 
@@ -346,6 +289,16 @@ oneSignal_elements[i].addEventListener('click', oneSignalLinkClickHandler, false
        </div> 
       </div> 
       <div class="clearfix"></div> 
+     </div> 
+    </div> 
+    <div class="things"> 
+     <div class="widget-title"> 
+      <h2 class="title">Estamos no Facebook!</h2> 
+     </div> 
+     <div class="fb-page" data-href="https://www.facebook.com/animacursemoe/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+      <blockquote cite="https://www.facebook.com/animacursemoe/" class="fb-xfbml-parse-ignore">
+       <a href="https://www.facebook.com/animacursemoe/">AnimaCurse</a>
+      </blockquote>
      </div> 
     </div>
    </aside> 
@@ -375,18 +328,19 @@ oneSignal_elements[i].addEventListener('click', oneSignalLinkClickHandler, false
     </div> 
    </div>
   </footer>
-  <link href="https://tvcurse.com/wp-content/themes/izaya/style.css" rel="stylesheet">
-  <link href="https://tvcurse.com/wp-content/themes/izaya/style799.css" rel="stylesheet" media="all and (max-width:1024px)">
-  <link href="https://tvcurse.com/wp-content/themes/izaya/style499.css" rel="stylesheet" media="all and (max-width:767px)">
-  <link rel="stylesheet" href="https://tvcurse.com/wp-content/themes/izaya/plyr2.css">
+  <link href="https://tvcurse.com/wp-content/themes/izaya/style.css?v=7" rel="stylesheet">
+  <link href="https://tvcurse.com/wp-content/themes/izaya/style799.css?v=3" rel="stylesheet" media="all and (max-width:1024px)">
+  <link href="https://tvcurse.com/wp-content/themes/izaya/style499.css?v=3" rel="stylesheet" media="all and (max-width:767px)">
+  <link rel="stylesheet" href="https://tvcurse.com/wp-content/themes/izaya/videojs.css?v=2">
+  <link rel="stylesheet" href="https://tvcurse.com/wp-content/themes/izaya/vgskin.css">
   <link href="https://tvcurse.com/wp-content/themes/izaya/material-icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700|Roboto:300,400,500,700" rel="stylesheet">
   <script src="/wp-content/themes/izaya/jquery.js"></script>
-  <script src="https://tvcurse.com/wp-content/themes/izaya/plyr2.js"></script>
-  <script src="https://togetherjs.com/togetherjs-min.js"></script>
+  <script src="https://tvcurse.com/wp-content/themes/izaya/video.js?v=2"></script>
+  <script src="https://tvcurse.com/wp-content/themes/izaya/together.js"></script>
   <script type="text/Javascript">var UA = navigator.userAgent;</script>
   <div id="fb-root"></div>
-  <script>(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = 'https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v3.0&appId=260065271094939';
+  <script>(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.async = true;js.src = 'https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v3.0&appId=260065271094939';
 fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script> 
   <script>var items = Array('Bergolinx, você está bem? Aparentemente não existe mais episódios publicados desta série até o momento, venha conferir semana que vem :(','Parece que o bonde dos oniichans não liberou o próximo episódio ainda, ou o anime chegou no último episódio!','Aparentemente o próximo episódio está sendo feito de refém pela máfia internacional dos oniichans, assim que as autoridades resolverem a questão o próximo episódio será lançado!','O próximo episódio não foi ao ar ainda ou não há próximo, QUE NÃO VAI DAR NÃO, VAI DAR SIM BIRL.','Parece que a Big Mom comeu o próximo episódio... Assim que conseguirmos dar um jeito o mesmo irá ao ar! cof cof');var item = items[Math.floor(Math.random()*items.length)];$(document).ready(function() {$(".berg-announcement").text(item);});</script> 
   <script>$(document).ready(function() {$('#tabs .tab:not(:first)').addClass('inactive');$('.container').hide();$('.container:first').show();$('#tabs .tab').click(function(){var t = $(this).attr('id');if($(this).hasClass('inactive')){ //this is the start of our condition

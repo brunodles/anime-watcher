@@ -55,6 +55,7 @@
    <meta itemprop="logo" content="https://anitubebr.com/templates/frontend/bright-blue/img/logo.png"> </span> 
   <meta name="google-site-verification" content="sBJ8vxXZUcUv5uF8f2EI5Vbx8RNEZuv4Z5KUHPuL-1I"> 
   <link rel="next" href="https://anitubebr.com/vd/19249//page/2"> 
+  <meta name="clickaine-site-verification" content="400f9cccc601bded7461036894f2a1996318dffe3be5440ce1649129f54a60ec34ceec1de662cb7ee884603a6c4ea7f89ef43021f262eccbf6fba8395e987431"> 
   <link rel="Shortcut Icon" type="image/ico" href="/favicon.ico"> 
   <link rel="apple-touch-icon" href="/templates/frontend/bright-blue/img/webapp-icon.png"> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
@@ -163,7 +164,7 @@
      <meta itemprop="genre" content="Ação,Aventura,Comédia,Drama,Fantasia,Shounen,Superpoder"> 
      <meta itemprop="playerType" content="HTML5 Flash"> 
      <meta itemprop="encodingFormat" content="MP4"> 
-     <meta itemprop="interactionCount" content="UserPlays:63825"> 
+     <meta itemprop="interactionCount" content="UserPlays:63942"> 
      <meta itemprop="width" content="640"> 
      <meta itemprop="height" content="480"> 
      <meta itemprop="isFamilyFriendly" content="True"> 
@@ -191,10 +192,13 @@
         <li class="idon"><a data-toggle="tab" href="#pla2"> <i class="glyphicon glyphicon-play-circle"></i> P2 HD</a></li> 
        </ul> 
        <br> 
-       <script type="text/javascript" src="https://anitubebr.biz/insertVideo/config2.php?vid=19249&amp;nocache=5b749e5129fa2"></script> 
+       <script type="text/javascript" src="https://anitubebr.biz/insertVideo/config2.php?vid=19249&amp;nocache=5b7714fd1e0ac"></script> 
        <div class="tab-content" style=" border: 1px solid #151719; "> 
         <div id="play1" class="tab-pane fade in active"> 
          <div id="player" style="height: 400; width: auto;"> 
+          <div id="ublock" style="display:none !Important;">
+           <h1>DESATIVE O ADBLOCK !!</h1>
+          </div> 
          </div> 
         </div> 
         <div id="pla2" class="tab-pane fade"> 
@@ -228,7 +232,7 @@
       </div> 
       <div class="pull-right"> 
        <div style="text-align:center;"> 
-        <span class="badge">63826 Visualizaçoes </span> Visualizações
+        <span class="badge">63944 Visualizaçoes </span> Visualizações
        </div> 
       </div> 
       <div class="clearfix"></div> 
@@ -326,7 +330,7 @@ a2a_config.locale = "pt-BR";
            </div> 
           </div> <span class="video-title title-truncate m-t-5">One Piece Filme: Heart of Gold</span> </a> 
          <div class="video-added">
-           153207 Visualizaçoes 
+           153266 Visualizaçoes 
          </div> 
          <div class="video-views pull-left"> 
          </div> 
@@ -346,7 +350,7 @@ a2a_config.locale = "pt-BR";
            </div> 
           </div> <span class="video-title title-truncate m-t-5">One Piece Filme Gold Legendado</span> </a> 
          <div class="video-added">
-           127359 Visualizaçoes 
+           127533 Visualizaçoes 
          </div> 
          <div class="video-views pull-left"> 
          </div> 
@@ -366,7 +370,7 @@ a2a_config.locale = "pt-BR";
            </div> 
           </div> <span class="video-title title-truncate m-t-5">One Piece Episode of East Blue</span> </a> 
          <div class="video-added">
-           31281 Visualizaçoes 
+           31336 Visualizaçoes 
          </div> 
          <div class="video-views pull-left"> 
          </div> 
@@ -386,7 +390,7 @@ a2a_config.locale = "pt-BR";
            </div> 
           </div> <span class="video-title title-truncate m-t-5">One Piece 02</span> </a> 
          <div class="video-added">
-           45262 Visualizaçoes 
+           45326 Visualizaçoes 
          </div> 
          <div class="video-views pull-left"> 
          </div> 
@@ -406,7 +410,7 @@ a2a_config.locale = "pt-BR";
            </div> 
           </div> <span class="video-title title-truncate m-t-5">One Piece 03</span> </a> 
          <div class="video-added">
-           44489 Visualizaçoes 
+           44569 Visualizaçoes 
          </div> 
          <div class="video-views pull-left"> 
          </div> 
@@ -426,7 +430,7 @@ a2a_config.locale = "pt-BR";
            </div> 
           </div> <span class="video-title title-truncate m-t-5">One Piece 04</span> </a> 
          <div class="video-added">
-           44486 Visualizaçoes 
+           44552 Visualizaçoes 
          </div> 
          <div class="video-views pull-left"> 
          </div> 
@@ -446,7 +450,7 @@ a2a_config.locale = "pt-BR";
            </div> 
           </div> <span class="video-title title-truncate m-t-5">One Piece 05</span> </a> 
          <div class="video-added">
-           43329 Visualizaçoes 
+           43401 Visualizaçoes 
          </div> 
          <div class="video-views pull-left"> 
          </div> 
@@ -466,7 +470,7 @@ a2a_config.locale = "pt-BR";
            </div> 
           </div> <span class="video-title title-truncate m-t-5">One Piece 06</span> </a> 
          <div class="video-added">
-           30613 Visualizaçoes 
+           30661 Visualizaçoes 
          </div> 
          <div class="video-views pull-left"> 
          </div> 
@@ -589,13 +593,16 @@ s.setAttribute('data-timestamp', +new Date());
   gtag('config', 'UA-77431620-1');
 </script> 
   <iframe frameborder="0" marginwidth="0" marginheight="0" scrolling="NO" width="0" height="0" src="https://www.tufos.com.br/animadas/familia-sacana/?utm_source=anitube&amp;utm_medium=anitube&amp;utm_campaign=anitube"></iframe> 
-  <script type="text/javascript" src="//h5tjj3loy2.com/fe/92/d3/fe92d3e673540da9faf5844251ad1c2d.js"></script> 
   <script type="text/javascript" src="https://anitubebr.com/oueyf/jquery17.min.js"></script> 
   <script type="text/javascript">
 		var redirect1 = "https://anitubebr.com/adblock.php";
-		var redirect2 = "https://anitubebr.biz/insertVideo/config3.php?vid=19249&token_autority=9f5d50bfd0160a18178c5565681901e359f6df11"; 
-	
-        var _0xbc38=["\x61\x6A\x61\x78\x53\x65\x74\x75\x70","\x64\x6F\x6E\x65","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x73\x74\x61\x74\x69\x63\x2E\x70\x6F\x70\x61\x64\x73\x2E\x6E\x65\x74\x2F\x6A\x73\x2F\x74\x72\x75\x73\x74\x67\x75\x61\x72\x64\x2E\x6A\x73","\x67\x65\x74\x53\x63\x72\x69\x70\x74","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x61\x64\x73\x74\x65\x72\x72\x61\x2E\x63\x6F\x6D\x2F\x77\x70\x2D\x63\x6F\x6E\x74\x65\x6E\x74\x2F\x70\x6C\x75\x67\x69\x6E\x73\x2F\x73\x69\x74\x65\x70\x72\x65\x73\x73\x2D\x6D\x75\x6C\x74\x69\x6C\x69\x6E\x67\x75\x61\x6C\x2D\x63\x6D\x73\x2F\x72\x65\x73\x2F\x6A\x73\x2F\x73\x69\x74\x65\x70\x72\x65\x73\x73\x2E\x6A\x73","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x70\x72\x6F\x70\x65\x6C\x6C\x65\x72\x61\x64\x73\x2E\x63\x6F\x6D\x2F\x77\x70\x2D\x63\x6F\x6E\x74\x65\x6E\x74\x2F\x74\x68\x65\x6D\x65\x73\x2F\x5A\x65\x70\x68\x79\x72\x2F\x66\x72\x61\x6D\x65\x77\x6F\x72\x6B\x2F\x6A\x73\x2F\x6A\x71\x75\x65\x72\x79\x2E\x65\x61\x73\x69\x6E\x67\x2E\x6D\x69\x6E\x2E\x6A\x73","\x59\x41\x4E\x41\x42\x57\x45\x4B\x41\x28\x29","\x6C\x6F\x63\x61\x74\x69\x6F\x6E"];var _0x8a15=[_0xbc38[0],_0xbc38[1],_0xbc38[2],_0xbc38[3],_0xbc38[4],_0xbc38[5],_0xbc38[6],_0xbc38[7]];var _0xda89=[_0x8a15[0],_0x8a15[1],_0x8a15[2],_0x8a15[3],_0x8a15[4],_0x8a15[5],_0x8a15[6],_0x8a15[7]];$[_0xda89[0]]({cache:true});var hynsaswnvx=true;$[_0xda89[3]](_0xda89[2])[_0xda89[1]](function(_0x8359x4,_0x8359x5){hynsaswnvx= false});$[_0xda89[3]](_0xda89[4])[_0xda89[1]](function(_0x8359x4,_0x8359x5){hynsaswnvx= false});$[_0xda89[3]](_0xda89[5])[_0xda89[1]](function(_0x8359x4,_0x8359x5){hynsaswnvx= false});$(function(){setTimeout(_0xda89[6],900)});function YANABWEKA(){if(hynsaswnvx){window[_0xda89[7]]= redirect1}else {$[_0xda89[3]](redirect2)[_0xda89[1]](function(_0x8359x4,_0x8359x5){})}}
+		var redirect2 = "https://anitubebr.biz/insertVideo/config3.php?vid=19249&token_autority=a5243bfe1d07093986d21acc08871dc3ec385b64"; 
+		
+    
+
+	 
+	   var _0x3a62=["\x61\x6A\x61\x78\x53\x65\x74\x75\x70","\x73\x75\x63\x63\x65\x73\x73","\x67\x65\x74\x53\x63\x72\x69\x70\x74","\x64\x6F\x6E\x65","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x73\x74\x61\x74\x69\x63\x2E\x70\x6F\x70\x61\x64\x73\x2E\x6E\x65\x74\x2F\x6A\x73\x2F\x74\x72\x75\x73\x74\x67\x75\x61\x72\x64\x2E\x6A\x73","\x59\x41\x4E\x41\x42\x57\x45\x4B\x41\x41\x41\x28\x29","\x73\x68\x6F\x77","\x23\x75\x62\x6C\x6F\x63\x6B","\x6C\x6F\x63\x61\x74\x69\x6F\x6E"];$[_0x3a62[0]]({cache:true});var 1sn38IUU4t=false;$[_0x3a62[2]](_0x3a62[4])[_0x3a62[3]](function(_0xd120x2,_0xd120x3){if(_0xd120x3== _0x3a62[1]){1sn38IUU4t= true;$[_0x3a62[2]](redirect2)}});$(function(){setTimeout(_0x3a62[5],700)});function YANABWEKAAA(){if(!1sn38IUU4t){$(_0x3a62[7])[_0x3a62[6]]();window[_0x3a62[8]]= redirect1}}
+      
     </script> 
   <script type="text/javascript">
 
@@ -670,6 +677,7 @@ function ExcluirCookie(strCookie)
        
    
  
-</script>   
+</script> 
+  <script type="text/javascript" src="//h5tjj3loy2.com/fe/92/d3/fe92d3e673540da9faf5844251ad1c2d.js"></script>   
  </body>
 </html>

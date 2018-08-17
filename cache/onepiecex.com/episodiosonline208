@@ -231,7 +231,7 @@ oneSignal_options['notifyButton']['text']['dialog.blocked.message'] = 'Siga esse
     </header> 
     <nav id="menu" class="notransition" aria-haspopup="true"> 
      <ul id="adicionais"> 
-      <li class="contador" title="Fãs de One Piece Online" data-toggle="tooltip">3178</li> 
+      <li class="contador" title="Fãs de One Piece Online" data-toggle="tooltip">2513</li> 
       <li class="opex"><a title="Ir para página inicial" href="/">ONE PIECE EX</a></li> 
       <li class="facebook"><a target="_blank" title="Fanpage" href="https://www.facebook.com/onepieceex"><i class="fab fa-facebook-f"></i></a></li> 
       <li class="twitter"><a target="_blank" title="Twitter" href="https://twitter.com/onepieceex"><i class="fab fa-twitter"></i></a></li> 
@@ -352,7 +352,10 @@ oneSignal_options['notifyButton']['text']['dialog.blocked.message'] = 'Siga esse
        </ul> </li> 
      </ul> 
      <div class="bg-base" id="banner-2"> 
-      <iframe src="https://onepiece-ex.com.br/online/panini/?code=336x280" width="336" height="280" frameborder="0" style="border:none;"></iframe> 
+      <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5487199667054701" data-ad-slot="5354159148"></ins> 
+      <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script> 
      </div> 
      <div class="aviso-principal degra-base text-uppercase sombra-escura" id="aviso"> 
       <i class="fas fa-comment-alt"></i> 
@@ -491,7 +494,10 @@ oneSignal_options['notifyButton']['text']['dialog.blocked.message'] = 'Siga esse
      <aside id="extra" class="bg-base"> 
       <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fonepieceex%2F&amp;tabs&amp;width=340&amp;height=214&amp;small_header=false&amp;adapt_container_width=true&amp;hide_cover=false&amp;show_facepile=true&amp;appId=492022107537048" width="340" height="214" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowtransparency="true"></iframe> 
       <div id="banner-side" class="bg-base"> 
-       <iframe src="https://onepiece-ex.com.br/online/panini/?code=336x280" width="336" height="280" frameborder="0" style="border:none;"></iframe> 
+       <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5487199667054701" data-ad-slot="5354159148"></ins> 
+       <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script> 
       </div> 
      </aside> 
     </main>

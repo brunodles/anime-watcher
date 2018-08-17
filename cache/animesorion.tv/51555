@@ -4,7 +4,7 @@
   <title>Himouto! Umaru-chan Episódio 12 – FINAL</title> 
   <meta charset="utf-8"> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
-  <link rel="stylesheet" type="text/css" href="https://www.animesorion.site/wp-content/themes/DESKTOP_V20/style.css"> 
+  <link rel="stylesheet" type="text/css" href="https://www.animesorion.video/wp-content/themes/DESKTOP_V23/style.css"> 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
   <link rel="Shortcut Icon" href="" type="image/x-icon"> 
   <meta name="author" content="RiverLab"> 
@@ -13,6 +13,7 @@
   <meta property="fb:admins" content="AdmAnimesOrion"> 
   <meta property="fb:app_id" content="1565971903463872"> 
   <meta name="msvalidate.01" content="E0D91B536FA8ACC9A82FA15EEF41B681"> 
+  <meta name="google-site-verification" content="nJIHRvbXhOyiaEQzymEVQJxrOkynygIEsAi_PQllGVQ"> 
   <meta name="google-site-verification" content="Vik5y5TEoIMfN7gkv5vvO2aPhMs-qieU1GhnHx0_HTU"> 
   <meta name="google-site-verification" content="2HcfK9E4xD_8dKBruTWM6mw43ihWme9J8VNSsxNw6po"> 
   <meta name="google-site-verification" content="oNk7yz1VIDi-jk9gZY8Xt3C5mYyj0KGN-5QjE7J7rzk"> 
@@ -31,7 +32,7 @@
   <meta content="pt-BR" http-equiv="Content-Language"> 
   <meta content="general" name="rating"> 
   <meta property="og:type" content="website"> 
-  <meta property="og:url" content="https://www.animesorion.site/51555"> 
+  <meta property="og:url" content="https://www.animesorion.video/51555"> 
   <meta property="og:title" content="Himouto! Umaru-chan Episódio 12 – FINAL"> 
   <meta property="og:description" content="Himouto! Umaru-chan Episódio 12 – FINAL"> 
   <meta property="og:image" content=""> 
@@ -41,14 +42,14 @@
   <meta property="og:video:type" content="application/x-shockwave-flash"> 
   <meta property="og:video:width" content="640"> 
   <meta property="og:video:height" content="480"> 
-  <meta property="og:video" content="https://www.animesorion.site/51555"> 
+  <meta property="og:video" content="https://www.animesorion.video/51555"> 
   <meta property="video:duration" content=""> 
   <meta property="video:tag" content="Himouto! Umaru-chan Episódio 12 – FINAL"> 
   <meta property="article:publisher" content="https://www.facebook.com/AdmAnimesOrion"> 
   <meta property="article:tag" content="Himouto! Umaru-chan Episódio 12 – FINAL"> 
   <meta property="article:section" content="Himouto! Umaru-chan 1 Legendado"> 
   <meta name="twitter:card" content="summary"> 
-  <meta name="twitter:url" content="https://www.animesorion.site/51555"> 
+  <meta name="twitter:url" content="https://www.animesorion.video/51555"> 
   <meta name="twitter:title" content="Himouto! Umaru-chan Episódio 12 – FINAL"> 
   <meta name="twitter:description" content="Himouto! Umaru-chan Episódio 12 – FINAL"> 
   <meta name="twitter:image" content=""> 
@@ -60,7 +61,7 @@
   <link rel="dns-prefetch" href="//p.jwpcdn.com"> 
   <link rel="dns-prefetch" href="//s.w.org"> 
   <script type="text/javascript">
-			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.animesorion.site\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.animesorion.video\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
 			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
 		</script> 
   <style type="text/css">
@@ -77,19 +78,19 @@ img.emoji {
 	padding: 0 !important;
 }
 </style> 
-  <link rel="stylesheet" id="player_css-css" href="https://www.animesorion.site/wp-content/themes/DESKTOP_V20/assets/player/video-js.css?ver=4.9.8" type="text/css" media="all"> 
-  <script type="text/javascript" src="https://www.animesorion.site/wp-content/themes/DESKTOP_V20/assets/player/video.js"></script> 
-  <script type="text/javascript" src="https://www.animesorion.site/wp-content/themes/DESKTOP_V20/assets/player/tempovideo.js"></script> 
-  <link rel="https://api.w.org/" href="https://www.animesorion.site/wp-json/"> 
-  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.animesorion.site/xmlrpc.php?rsd"> 
-  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.animesorion.site/wp-includes/wlwmanifest.xml"> 
-  <link rel="prev" title="Ore Monogatari!! Episódio 24 – FINAL" href="https://www.animesorion.site/51551"> 
-  <link rel="next" title="Kuusen Madoushi Kouhosei no Kyoukan Episódio 12 – FINAL" href="https://www.animesorion.site/51567"> 
+  <link rel="stylesheet" id="player_css-css" href="https://www.animesorion.video/wp-content/themes/DESKTOP_V23/assets/player/video-js.css?ver=4.9.8" type="text/css" media="all"> 
+  <script type="text/javascript" src="https://www.animesorion.video/wp-content/themes/DESKTOP_V23/assets/player/video.js"></script> 
+  <script type="text/javascript" src="https://www.animesorion.video/wp-content/themes/DESKTOP_V23/assets/player/tempovideo.js"></script> 
+  <link rel="https://api.w.org/" href="https://www.animesorion.video/wp-json/"> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.animesorion.video/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.animesorion.video/wp-includes/wlwmanifest.xml"> 
+  <link rel="prev" title="Ore Monogatari!! Episódio 24 – FINAL" href="https://www.animesorion.video/51551"> 
+  <link rel="next" title="Kuusen Madoushi Kouhosei no Kyoukan Episódio 12 – FINAL" href="https://www.animesorion.video/51567"> 
   <meta name="generator" content="WordPress 4.9.8"> 
-  <link rel="canonical" href="https://www.animesorion.site/51555"> 
-  <link rel="shortlink" href="https://www.animesorion.site/?p=51555"> 
-  <link rel="alternate" type="application/json+oembed" href="https://www.animesorion.site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.animesorion.site%2F51555"> 
-  <link rel="alternate" type="text/xml+oembed" href="https://www.animesorion.site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.animesorion.site%2F51555&amp;format=xml"> 
+  <link rel="canonical" href="https://www.animesorion.video/51555"> 
+  <link rel="shortlink" href="https://www.animesorion.video/?p=51555"> 
+  <link rel="alternate" type="application/json+oembed" href="https://www.animesorion.video/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.animesorion.video%2F51555"> 
+  <link rel="alternate" type="text/xml+oembed" href="https://www.animesorion.video/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.animesorion.video%2F51555&amp;format=xml"> 
   <!-- PopUps --> 
   <script type="text/javascript" src="//go.pub2srv.com/apu.php?zoneid=1686457"></script> 
   <script>console.log('Trava Ligada');</script>
@@ -112,23 +113,23 @@ img.emoji {
      <i class="spr i-mobMenu"></i> 
     </div> 
     <div class="LogoHeader"> 
-     <a href="https://www.animesorion.site" title="Animes Órion - Animes Online"><i class="spr i-logo"></i></a> 
+     <a href="https://www.animesorion.video" title="Animes Órion - Animes Online"><i class="spr i-logo"></i></a> 
     </div> 
     <div class="menuHeader"> 
      <ul> 
-      <li><a href="https://www.animesorion.site">Home</a></li> 
-      <li id="submenu"><a href="https://www.animesorion.site/lista-de-animes">Lista de Animes</a> 
+      <li><a href="https://www.animesorion.video">Home</a></li> 
+      <li id="submenu"><a href="https://www.animesorion.video/lista-de-animes">Lista de Animes</a> 
        <ul id="submenuitens"> 
-        <li><a href="https://www.animesorion.site/?s=ova&amp;trava=off">Lista de Ovas</a></li> 
-        <li><a href="https://www.animesorion.site/filmes-de-animes-e-animacao">Lista de Filmes</a></li> 
+        <li><a href="https://www.animesorion.video/?s=ova&amp;trava=off">Lista de Ovas</a></li> 
+        <li><a href="https://www.animesorion.video/filmes-de-animes-e-animacao">Lista de Filmes</a></li> 
        </ul> </li> 
-      <li><a href="https://www.animesorion.site/app">App do Site</a></li> 
-      <li><a href="https://www.animesorion.site/historico">Histórico</a></li> 
-      <li><a href="https://www.animesorion.site/contato">Contato</a></li> 
+      <li><a href="https://www.animesorion.video/app">App do Site</a></li> 
+      <li><a href="https://www.animesorion.video/historico">Histórico</a></li> 
+      <li><a href="https://www.animesorion.video/contato">Contato</a></li> 
      </ul> 
     </div> 
     <div class="buscaFormHeader"> 
-     <form method="get" class="headersearch" id="buscaAjax" action="https://www.animesorion.site"> 
+     <form method="get" class="headersearch" id="buscaAjax" action="https://www.animesorion.video"> 
       <input name="s" class="box-search" maxlength="100" aria-label="Pesquisar" autocomplete="off" placeholder="Procurar..." type="text"> 
       <input class="btn-busca" value="" type="submit"> 
      </form> 
@@ -187,21 +188,21 @@ img.emoji {
        Himouto! Umaru-chan Episódio 12 – FINAL 
       </div> 
       <p>
-       <video id="my-video" class="video-js" controls preload="name" width="100%" height="400" poster="https://3.bp.blogspot.com/-RaQvaIbkIKQ/WvN2elrA4nI/AAAAAAAAIkg/KZUVDBqC-QoAfsMZkud-HmXG2mHVxQ84QCLcBGAs/s1600/Fundodosvideos.JPG" data-setup="{}">
+       <video id="my-video" class="video-js" controls preload="name" width="100%" height="400" poster="https://2.bp.blogspot.com/-lSTjYuDBiAQ/VvST8Z7z2OI/AAAAAAAAGPY/c8yAE675bLEMYI-OMwtauCiXeu1yZPZaw/s1400/fundososvideos.jpg" data-setup="{}">
         <source src="https://www.blogger.com/video-play.mp4?contentId=e4e3e680e0b6ed74" type="video/mp4">
        </video></p> 
      </div> 
      <!-- //Container do Episódio/Anime --> 
      <!-- Controles do Video --> 
      <div class="controlesVideo mbottom"> 
-      <a href="https://www.animesorion.site/49057" rel="prev"><i class="spr i-aLeft"></i> Anterior</a> 
-      <a href="https://www.animesorion.site/himouto-umaru-chan-1-legendado"><i class="spr i-listaEp"></i> Lista</a> 
+      <a href="https://www.animesorion.video/49057" rel="prev"><i class="spr i-aLeft"></i> Anterior</a> 
+      <a href="https://www.animesorion.video/himouto-umaru-chan-1-legendado"><i class="spr i-listaEp"></i> Lista</a> 
      </div> 
      <!-- //Controles do Video --> 
      <!-- Compartilhamento --> 
      <div class="containerShare mbottom"> 
-      <a href="http://www.facebook.com/share.php?u=https://www.animesorion.site/51555" rel="nofollow" target="_blank" class="fbShare"><img src="https://www.animesorion.site/wp-content/themes/DESKTOP_V20/img/fb.png"></a> 
-      <a href="whatsapp://send?text=https://www.animesorion.site/51555" data-action="share/whatsapp/share" rel="nofollow" target="_blank" class="wppShare"><img src="https://www.animesorion.site/wp-content/themes/DESKTOP_V20/img/wpp.png"></a> 
+      <a href="http://www.facebook.com/share.php?u=https://www.animesorion.video/51555" rel="nofollow" target="_blank" class="fbShare"><img src="https://www.animesorion.video/wp-content/themes/DESKTOP_V23/img/fb.png"></a> 
+      <a href="whatsapp://send?text=https://www.animesorion.video/51555" data-action="share/whatsapp/share" rel="nofollow" target="_blank" class="wppShare"><img src="https://www.animesorion.video/wp-content/themes/DESKTOP_V23/img/wpp.png"></a> 
      </div> 
      <!-- //Compartilhamento --> 
      <!-- Publicidade Abaixo dos posts --> 
@@ -249,7 +250,7 @@ img.emoji {
       <div class="PostsSectionContainer"> 
        <div class="infoLeft">
         Na Categoria: 
-        <span><a href="https://www.animesorion.site/category/himouto-umaru-chan-1-legendado" rel="category tag">Himouto! Umaru-chan 1 Legendado</a></span> 
+        <span><a href="https://www.animesorion.video/category/himouto-umaru-chan-1-legendado" rel="category tag">Himouto! Umaru-chan 1 Legendado</a></span> 
         <p>Publicado Dia: <span>23-09-2015</span></p> 
        </div> 
        <div class="infoRight">
@@ -327,7 +328,7 @@ img.emoji {
    <!-- Créditos Footer --> 
    <div class="creditosFooter"> 
     <div class="LogoFooter"> 
-     <a href="https://www.animesorion.site" title="Animes Órion"><i class="spr i-logo"></i></a> 
+     <a href="https://www.animesorion.video" title="Animes Órion"><i class="spr i-logo"></i></a> 
     </div> 
     <div class="textoFooter">
       © AnimesOrion 2018 - Todos os Direitos Reservados. 
@@ -346,10 +347,10 @@ img.emoji {
     <a href="https://fb.com/TioRiverLab" title="RiverLab"> 
      <div class="RiverLabSvg"> 
       <div class="RiverLab_logo"> 
-       <img src="https://www.animesorion.site/wp-content/themes/DESKTOP_V20/img/svg/r.svg" style="width: 50px;"> 
-       <img src="https://www.animesorion.site/wp-content/themes/DESKTOP_V20/img/svg/iver2.svg" style="margin-left: -49px;width: 50px;"> 
-       <img src="https://www.animesorion.site/wp-content/themes/DESKTOP_V20/img/svg/iver2.svg" style="margin-left: -54px;width: 50px;"> 
-       <img src="https://www.animesorion.site/wp-content/themes/DESKTOP_V20/img/svg/r.svg" style="width: 50px;margin-left: 16px;"> 
+       <img src="https://www.animesorion.video/wp-content/themes/DESKTOP_V23/img/svg/r.svg" style="width: 50px;"> 
+       <img src="https://www.animesorion.video/wp-content/themes/DESKTOP_V23/img/svg/iver2.svg" style="margin-left: -49px;width: 50px;"> 
+       <img src="https://www.animesorion.video/wp-content/themes/DESKTOP_V23/img/svg/iver2.svg" style="margin-left: -54px;width: 50px;"> 
+       <img src="https://www.animesorion.video/wp-content/themes/DESKTOP_V23/img/svg/r.svg" style="width: 50px;margin-left: 16px;"> 
       </div> 
       <div class="RiverLab_text">
         Desenvolvimento Web! 
@@ -359,10 +360,10 @@ img.emoji {
    <!-- /Logo RiverLab --> 
   </footer> 
   <!-- Scripts --> 
-  <script type="text/javascript" src="https://www.animesorion.site/wp-content/themes/DESKTOP_V20/js/base_functions.js"></script> 
-  <script type="text/javascript" src="https://www.animesorion.site/wp-content/themes/DESKTOP_V20/js/tabs.js"></script> 
+  <script type="text/javascript" src="https://www.animesorion.video/wp-content/themes/DESKTOP_V23/js/base_functions.js"></script> 
+  <script type="text/javascript" src="https://www.animesorion.video/wp-content/themes/DESKTOP_V23/js/tabs.js"></script> 
   <!-- wp footer --> 
-  <script>var comentariosurl = "https://www.animesorion.site/comentarios"; videojs(document.querySelector("video")).remember({"localStorageKey": "51555"});</script>
-  <script type="text/javascript" src="https://www.animesorion.site/wp-includes/js/wp-embed.min.js?ver=4.9.8"></script>  
+  <script>var comentariosurl = "https://www.animesorion.video/comentarios"; videojs(document.querySelector("video")).remember({"localStorageKey": "51555"});</script>
+  <script type="text/javascript" src="https://www.animesorion.video/wp-includes/js/wp-embed.min.js?ver=4.9.8"></script>  
  </body>
 </html>

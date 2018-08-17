@@ -21,7 +21,6 @@ class AnimaKaiFactoryTest {
                 animeName = "Tsukipro The Animation",
                 image = "http://www.animekai.info/2017/10/Screenshot_33.jpg",
                 link = "https://www.animekaionline.com/tsukipro-the-animation/episodio-1",
-                //                video = "http://www.blogger.com/video-play.mp4?contentId=1e5c9ab13c70079b",
                 video = "http://www.blogger.com/video-play.mp4?contentId=b186c220e9973f58",
                 nextEpisodes = arrayListOf()
         )

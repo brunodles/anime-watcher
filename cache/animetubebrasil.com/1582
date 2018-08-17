@@ -381,7 +381,7 @@
       <div class="epVideoAction" id="downEP" onclick="downloadFile('https://www.blogger.com/video-play.mp4?contentId=3eb2b428663ef38f')"> 
        <i class="spr i-down"></i> 
       </div> 
-      <div class="epVideoAction riverlabAction tooltip-bottom" data-tooltip="Minha Lista" data-id="1582" data-action="foundation_addlista" data-nonce="da69b86308" data-login="off"> 
+      <div class="epVideoAction riverlabAction tooltip-bottom" data-tooltip="Minha Lista" data-id="1582" data-action="foundation_addlista" data-nonce="7bcd59adcb" data-login="off"> 
        <i class="spr i-addlista"></i> 
       </div> 
       <div class="epVideoAction tooltip-bottom" data-tooltip="Já assisti"> 

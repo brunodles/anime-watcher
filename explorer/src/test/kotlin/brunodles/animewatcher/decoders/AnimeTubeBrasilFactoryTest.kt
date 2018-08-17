@@ -9,8 +9,7 @@ import org.junit.runner.RunWith
 class AnimeTubeBrasilFactoryTest {
 
     companion object {
-        val VALID_URLS = arrayOf("https://animetubebrasil.com/1582/"
-        )
+        val VALID_URLS = arrayOf("https://animetubebrasil.com/1582/")
         val INVALID_URLS = arrayOf("anitub")
         val currentEpisode = Episode(
                 number = 1,

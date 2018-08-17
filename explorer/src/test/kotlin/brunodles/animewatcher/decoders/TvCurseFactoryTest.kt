@@ -11,10 +11,11 @@ import org.junit.runner.RunWith
 @RunWith(Spectrum::class)
 class TvCurseFactoryTest {
 
-
     companion object {
-        val VALID_URLS = arrayOf("https://tvcurse.com/?p=713", "https://tvcurse.com/?p=713",
-                "tvcurse.com?p=123", "http://tvcurse.com?p=321")
+        val VALID_URLS = arrayOf("https://tvcurse.com/?p=713",
+                "http://tvcurse.com/?p=713",
+                "tvcurse.com?p=123",
+                "http://tvcurse.com?p=321")
         val INVALID_URLS = arrayOf("tvcurse.com/?cat=123")
         val PLAYER_WITH_NEXT = Episode(
                 number = 162,

@@ -214,28 +214,20 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1534156578378-0');
 </script> 
       <!-- End Tags --> 
       <br> 
-      <!-- bebi 
-<script type="text/javascript">
-  if(!window.BB_a) { BB_a = [];} if(!window.BB_ind) { BB_ind = 0; } if(!window.BB_vrsa) { BB_vrsa = 'v3'; }if(!window.BB_r) { BB_r = Math.floor(Math.random()*1000000000)} BB_ind++; BB_a.push({ "pl" : 43643, "index": BB_ind});
-</script>
-<script type="text/javascript">
-  document.write('<scr'+'ipt async data-cfasync="false" id="BB_SLOT_'+BB_r+'_'+BB_ind+'" src="//st.bebi.com/bebi_'+BB_vrsa+'.js"></scr'+'ipt>');
-</script>
---> 
-      <br> 
       <!-- POKEMON 
 <a href="https://goo.gl/PeZiUR" title="pokemon" target="_blank"><img src="https://www.animesonlinebr.com.br/ads/pokemon300x300.gif" alt="pokemon" width="80%" height="NaN" /></a>
 --> 
       <a href="https://goo.gl/PeZiUR" title="pokemon" target="_blank"><img src="https://uploaddeimagens.com.br/images/001/408/846/full/v1.gif" alt="pokemon" width="80%" height="NaN"></a> 
       <br>
       <br> 
-      <p align="center"> </p>
-      <div id="div-gpt-ad-1534156660080-0" style="height:600px; width:160px;"> 
-       <script>
-googletag.cmd.push(function() { googletag.display('div-gpt-ad-1534156660080-0'); });
+      <!-- bebi --> 
+      <script type="text/javascript">
+  if(!window.BB_a) { BB_a = [];} if(!window.BB_ind) { BB_ind = 0; } if(!window.BB_vrsa) { BB_vrsa = 'v3'; }if(!window.BB_r) { BB_r = Math.floor(Math.random()*1000000000)} BB_ind++; BB_a.push({ "pl" : 43643, "index": BB_ind});
 </script> 
-      </div> 
-      <p></p> 
+      <script type="text/javascript">
+  document.write('<scr'+'ipt async data-cfasync="false" id="BB_SLOT_'+BB_r+'_'+BB_ind+'" src="//st.bebi.com/bebi_'+BB_vrsa+'.js"></scr'+'ipt>');
+</script> 
+      <br> 
       <br>
       <br> 
       <div id="tituloSidebar">
@@ -262,13 +254,6 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1534156660080-0');
     </div> 
    </div> 
    <div id="content"> 
-    <div id="menuMobile"> 
-     <div id="div-gpt-ad-1534156765747-0" style="height:250px; width:300px;"> 
-      <p align="center"> <script>
-googletag.cmd.push(function() { googletag.display('div-gpt-ad-1534156765747-0'); });
-</script> </p> 
-     </div> 
-    </div> 
     <div class="bannertop"> 
      <div id="taboola-homepage-thumbnails"></div> 
      <script type="text/javascript">
@@ -400,36 +385,12 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1534156765747-0');
        <center> 
         <h1 class="single"><br><br><a href="https://www.mangasbr.com.br" title="LER MANGAS ONLINE" target="_blank" rel="follow"><br><br><button type="button" class="btn btn-primary btn btn-block">Leia o Mangá Online</button></a></h1> 
         <br> 
-        <!-- bebi 300X250
-<script type="text/javascript">
-  if(!window.BB_a) { BB_a = [];} if(!window.BB_ind) { BB_ind = 0; } if(!window.BB_vrsa) { BB_vrsa = 'v3'; }if(!window.BB_r) { BB_r = Math.floor(Math.random()*1000000000)} BB_ind++; BB_a.push({ "pl" : 43643, "index": BB_ind});
-</script>
-<script type="text/javascript">
-  document.write('<scr'+'ipt async data-cfasync="false" id="BB_SLOT_'+BB_r+'_'+BB_ind+'" src="//st.bebi.com/bebi_'+BB_vrsa+'.js"></scr'+'ipt>');
-</script>
---> 
-        <!-- bebi
-<script type="text/javascript">
-  if(!window.BB_a) { BB_a = [];} if(!window.BB_ind) { BB_ind = 0; } if(!window.BB_vrsa) { BB_vrsa = 'v3'; }if(!window.BB_r) { BB_r = Math.floor(Math.random()*1000000000)} BB_ind++; BB_a.push({ "pl" : 43159, "index": BB_ind});
-</script>
-<script type="text/javascript">
-  document.write('<scr'+'ipt async data-cfasync="false" id="BB_SLOT_'+BB_r+'_'+BB_ind+'" src="//st.bebi.com/bebi_'+BB_vrsa+'.js"></scr'+'ipt>');
-</script>
-<br /><br />
---> 
         <div id="menuMobile"> 
-         <!-- Begin js tags AdTrue for animesonlinebr.com.br_300x250_mobile - Do not Modify --> 
-         <div id="adtrue_tag_10326"></div> 
-         <script data-cfasync="false" type="text/javascript" src="//cdn.adtrue.com/rtb/async.js" async></script> 
-         <script type="text/javascript">
-    var adtrue_tags = window.adtrue_tags || [];
-    adtrue_tags.push({
-        tag_id: 10326,
-        width: 300,
-        height: 250
-    });
-</script> 
-         <!-- End Tags --> 
+         <div id="div-gpt-ad-1534156765747-0" style="height:250px; width:300px;"> 
+          <p align="center"> <script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1534156765747-0'); });
+</script> </p> 
+         </div> 
         </div> 
         <br> 
         <!-- facebook --> 

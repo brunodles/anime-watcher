@@ -11,8 +11,7 @@ class AnimesOnlineBrFactoryTest {
     companion object {
 
         val ANIME_NAME = "Boruto"
-        val VALID_URLS = arrayOf(
-                "https://www.animesonlinebr.com.br/video/50034")
+        val VALID_URLS = arrayOf("https://www.animesonlinebr.com.br/video/50034")
         val INVALID_URLS = emptyArray<String>()
         val ESPISODE_AND_SINGLE = Episode(
                 number = 1,
