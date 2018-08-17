@@ -9,8 +9,12 @@ import spark.kotlin.post
 
 fun main(args: Array<String>) {
     UrlFetcher.useCache = false
-    val gson = Gson()
     port(getHerokuAssignedPort())
+    startServer()
+}
+
+fun startServer() {
+    val gson = Gson()
     post("/decoder") {
         val episode: Episode?
         try {
