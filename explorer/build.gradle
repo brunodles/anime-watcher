@@ -14,11 +14,15 @@ buildconfig {
     field "Boolean", "USE_CACHE", Boolean.parseBoolean(project.properties.get("usecache", "true"))
 }
 
+test {
+    maxParallelForks = Integer.parseInt(project.properties.get("parallelForks", "1"))
+}
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'com.brunodles:alchemy-alchemist:2.1.0'
     implementation 'com.google.code.gson:gson:2.8.2'
-    
+
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.greghaskins:spectrum:1.1.1'
     testImplementation 'com.github.tomakehurst:wiremock:2.18.0'
