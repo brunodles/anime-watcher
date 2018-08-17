@@ -15,8 +15,10 @@ android:
     - sys-img-armeabi-v7a-27
     - tools
   licenses:
+    - 'android-sdk-preview-license-.+'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
+    - 'build-tools.*'
 
 env:
   global:
