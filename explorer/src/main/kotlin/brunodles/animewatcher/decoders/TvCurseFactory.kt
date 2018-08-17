@@ -44,19 +44,19 @@ object TvCurseFactory : PageParser {
 
     interface CurrentEpisode {
 
-        @Selector(".episodename")
+        @Selector("title")
         @TextCollector
         fun description(): String
 
-        @Selector(".episodename")
+        @Selector("title")
         @TextCollector
-        @Regex("(\\d+)")
+        @Regexp("^(?:.*)\\s+?(\\d++)")
         @ToInt
         fun number(): Int
 
-        @Selector(".animename")
-        @TextCollector
-        fun animeName(): String? = null
+        @Selector("[property=article:section]")
+        @AttrCollector("content")
+        fun animeName(): String?
 
         @Selector("[itemprop=thumbnailUrl]")
         @AttrCollector("content")
@@ -83,7 +83,7 @@ object TvCurseFactory : PageParser {
         @ToInt
         fun number(): Int
 
-        @Selector("img")
+        @Selector("#epimg img")
         @AttrCollector("src")
         fun image(): String?
 

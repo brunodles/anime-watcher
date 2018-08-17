@@ -35,7 +35,7 @@ class AnitubeBrFactoryTest {
     }
 
     init {
-        FactoryChecker.checkFactory(AnitubeBrFactory, VALID_URLS, INVALID_URLS, currentEpisode)
+        FactoryChecker.describeFactory(AnitubeBrFactory, VALID_URLS, INVALID_URLS, currentEpisode)
         Spectrum.xit("Check video validation") {}
     }
 }

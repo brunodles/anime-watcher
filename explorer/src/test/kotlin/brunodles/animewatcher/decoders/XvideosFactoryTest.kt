@@ -80,7 +80,7 @@ class XvideosFactoryTest {
 
     init {
         if (UrlFetcher.useCache)
-            FactoryChecker.checkFactory(XvideosFactory, VALID_URLS, INVALID_URLS, currentEpisode)
+            FactoryChecker.describeFactory(XvideosFactory, VALID_URLS, INVALID_URLS, currentEpisode)
         else
             xit("XvideosFactory") {}
     }

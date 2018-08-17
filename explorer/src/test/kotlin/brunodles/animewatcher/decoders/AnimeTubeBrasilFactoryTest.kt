@@ -29,6 +29,6 @@ class AnimeTubeBrasilFactoryTest {
     }
 
     init {
-        FactoryChecker.checkFactory(AnimeTubeBrasilFactory, VALID_URLS, INVALID_URLS, currentEpisode)
+        FactoryChecker.describeFactory(AnimeTubeBrasilFactory, VALID_URLS, INVALID_URLS, currentEpisode)
     }
 }

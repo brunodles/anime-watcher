@@ -4,7 +4,6 @@ import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.PageParser
 import com.greghaskins.spectrum.Spectrum.describe
 import com.greghaskins.spectrum.Spectrum.it
-import junit.framework.AssertionFailedError
 import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -13,36 +12,42 @@ import java.util.regex.Pattern
 
 object FactoryChecker {
 
-    fun checkFactory(pageParser: PageParser, validUrls: Array<String> = emptyArray(),
-                     invalidUrls: Array<String> = emptyArray(), expectedEpisode: Episode? = null) {
-        describe(pageParser::class.java.simpleName) {
+    fun describe(pageParser: PageParser, block: PageParser.() -> Unit) {
+        return describe(pageParser::class.java.simpleName) { block.invoke(pageParser) }
+    }
 
-            if (validUrls.isNotEmpty() || invalidUrls.isNotEmpty())
-                describe("when check isEpisode") {
-
-                    validUrls.forEach { url ->
-                        it("should be able to decode the url \"$url\"") {
-                            Assert.assertTrue(pageParser.isEpisode(url))
-                        }
-                    }
-
-                    invalidUrls.forEach { url ->
-                        it("should not decode other the url \"$url\"") {
-                            Assert.assertFalse(pageParser.isEpisode(url))
-                        }
-                    }
-                }
-
+    fun describeFactory(pageParser: PageParser, validUrls: Array<String> = emptyArray(),
+                        invalidUrls: Array<String> = emptyArray(), expectedEpisode: Episode? = null) {
+        describe(pageParser) {
+            whenCheckIsEpisode(validUrls, invalidUrls)
             expectedEpisode?.let {
-                whenEpisode(pageParser, expectedEpisode)
+                whenEpisode(it)
             }
         }
     }
 
-    private fun whenEpisode(pageParser: PageParser, expectedEpisode: Episode) {
+    fun PageParser.whenCheckIsEpisode(validUrls: Array<String>, invalidUrls: Array<String>) {
+        if (validUrls.isNotEmpty() || invalidUrls.isNotEmpty())
+            describe("when check isEpisode") {
+
+                validUrls.forEach { url ->
+                    it("should be able to decode the url \"$url\"") {
+                        assertTrue(this.isEpisode(url))
+                    }
+                }
+
+                invalidUrls.forEach { url ->
+                    it("should not decode other the url \"$url\"") {
+                        Assert.assertFalse(this.isEpisode(url))
+                    }
+                }
+            }
+    }
+
+    fun PageParser.whenEpisode(expectedEpisode: Episode) {
 
         describe("when episode") {
-            val resultEpisode = pageParser.episode(expectedEpisode.link!!)
+            val resultEpisode = this.episode(expectedEpisode.link!!)
 
             describe("when get currentEpisode") {
                 checkEpisode(expectedEpisode, resultEpisode)
@@ -64,7 +69,7 @@ object FactoryChecker {
                                     "description = \"${it.description}\"," +
                                     "link = \"${it.link}\")"
                         }
-                        throw AssertionError(e.message+". found:\n$message", e)
+                        throw AssertionError(e.message + ". found:\n$message", e)
 
                     }
                 }

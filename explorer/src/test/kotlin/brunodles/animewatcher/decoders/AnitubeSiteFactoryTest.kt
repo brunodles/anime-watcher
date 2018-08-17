@@ -28,6 +28,6 @@ class AnitubeSiteFactoryTest {
     }
 
     init {
-        FactoryChecker.checkFactory(AnitubeSiteFactory, VALID_URLS, INVALID_URLS, currentEpisode)
+        FactoryChecker.describeFactory(AnitubeSiteFactory, VALID_URLS, INVALID_URLS, currentEpisode)
     }
 }

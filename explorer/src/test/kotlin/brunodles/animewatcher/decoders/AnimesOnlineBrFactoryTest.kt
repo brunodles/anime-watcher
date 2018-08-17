@@ -31,7 +31,7 @@ class AnimesOnlineBrFactoryTest {
     }
 
     init {
-        FactoryChecker.checkFactory(AnimesOnlineBrFactory, VALID_URLS, INVALID_URLS, ESPISODE_AND_SINGLE)
+        FactoryChecker.describeFactory(AnimesOnlineBrFactory, VALID_URLS, INVALID_URLS, ESPISODE_AND_SINGLE)
     }
 
 }
