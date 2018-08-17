@@ -6,6 +6,7 @@ import com.github.tomakehurst.wiremock.core.WireMockConfiguration.options
 import com.google.common.net.HttpHeaders.LOCATION
 import com.greghaskins.spectrum.Spectrum
 import com.greghaskins.spectrum.Spectrum.*
+import org.jsoup.nodes.Document
 import org.junit.Assert
 import org.junit.runner.RunWith
 
@@ -18,7 +19,7 @@ class UrlFetcherTest {
 
     init {
         UrlFetcher.cacheDir += "/explorer"
-        beforeEach { wireMockServer.start() }
+        beforeAll { wireMockServer.start() }
         afterAll {
             wireMockServer.resetAll()
             wireMockServer.stop()
@@ -26,35 +27,44 @@ class UrlFetcherTest {
 
         describe("UrlFetcher") {
             describe("with cache") {
-                beforeAll { UrlFetcher.useCache = true }
-                describe("when page have http redirects") {
-                    shouldFollowRedirectWithStatusCode(300)
-                    shouldFollowRedirectWithStatusCode(301)
-                    shouldFollowRedirectWithStatusCode(302)
-                    shouldFollowRedirectWithStatusCode(303)
-                    shouldFollowRedirectWithStatusCode(307)
-                    shouldFollowRedirectWithStatusCode(308)
+                val fetcher: (String) -> Document = { url ->
+                    UrlFetcher.composableFetcher(url)
+                            .withCache()
+                            .withRedirect()
+                            .get()
                 }
-                shouldFollowRedirectWith("Html") { htmlRedirect(it) }
-                shouldFollowRedirectWith("Js") { jsRedirect(it) }
+                describe("when page have http redirects") {
+                    shouldFollowRedirectWithStatusCode(fetcher, 300)
+                    shouldFollowRedirectWithStatusCode(fetcher, 301)
+                    shouldFollowRedirectWithStatusCode(fetcher, 302)
+                    shouldFollowRedirectWithStatusCode(fetcher, 303)
+                    shouldFollowRedirectWithStatusCode(fetcher, 307)
+                    shouldFollowRedirectWithStatusCode(fetcher, 308)
+                }
+                shouldFollowRedirectWith(fetcher, "Html") { htmlRedirect(it) }
+                shouldFollowRedirectWith(fetcher, "Js") { jsRedirect(it) }
             }
             describe("without cache") {
-                beforeAll { UrlFetcher.useCache = false }
-                describe("when page have html redirects") {
-                    shouldFollowRedirectWithStatusCode(300)
-                    shouldFollowRedirectWithStatusCode(301)
-                    shouldFollowRedirectWithStatusCode(302)
-                    shouldFollowRedirectWithStatusCode(303)
-                    shouldFollowRedirectWithStatusCode(307)
-                    shouldFollowRedirectWithStatusCode(308)
+                val fetcher: (String) -> Document = { url ->
+                    UrlFetcher.composableFetcher(url)
+                            .withRedirect()
+                            .get()
                 }
-                shouldFollowRedirectWith("Html") { htmlRedirect(it) }
-                shouldFollowRedirectWith("Js") { jsRedirect(it) }
+                describe("when page have html redirects") {
+                    shouldFollowRedirectWithStatusCode(fetcher, 300)
+                    shouldFollowRedirectWithStatusCode(fetcher, 301)
+                    shouldFollowRedirectWithStatusCode(fetcher, 302)
+                    shouldFollowRedirectWithStatusCode(fetcher, 303)
+                    shouldFollowRedirectWithStatusCode(fetcher, 307)
+                    shouldFollowRedirectWithStatusCode(fetcher, 308)
+                }
+                shouldFollowRedirectWith(fetcher, "Html") { htmlRedirect(it) }
+                shouldFollowRedirectWith(fetcher, "Js") { jsRedirect(it) }
             }
         }
     }
 
-    private fun shouldFollowRedirectWithStatusCode(status: Int, expectedResult: String = status.toString()) {
+    private fun shouldFollowRedirectWithStatusCode(fetcher: (String) -> Document, status: Int, expectedResult: String = status.toString()) {
         describe("with status code $status") {
             beforeEach {
                 wireMockServer.stubFor(get(urlMatching("/redirect$status"))
@@ -68,13 +78,13 @@ class UrlFetcherTest {
                         ))
             }
             it("should return the redirected page") {
-                val result = UrlFetcher.fetchUrl("$host/redirect$status").body().text()
+                val result = fetcher.invoke("$host/redirect$status").body().text()
                 Assert.assertEquals(expectedResult, result)
             }
         }
     }
 
-    private fun shouldFollowRedirectWith(type: String, bodyBuilder: (String) -> String) {
+    private fun shouldFollowRedirectWith(fetcher: (String) -> Document, type: String, bodyBuilder: (String) -> String) {
         val expectedResult = "${type}Result"
         describe("when page have $type redirects") {
             beforeEach {
@@ -90,7 +100,7 @@ class UrlFetcherTest {
             }
 
             it("should fetch the wanted page") {
-                val result = UrlFetcher.fetchUrl("$host/redirect$type").body().text()
+                val result = fetcher.invoke("$host/redirect$type").body().text()
                 Assert.assertEquals(expectedResult, result)
             }
         }

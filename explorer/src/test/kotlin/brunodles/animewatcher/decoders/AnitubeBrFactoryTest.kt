@@ -2,6 +2,8 @@ package brunodles.animewatcher.decoders
 
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.testhelper.FactoryChecker
+import brunodles.animewatcher.testhelper.FactoryChecker.whenCheckIsEpisode
+import brunodles.animewatcher.testhelper.FactoryChecker.whenEpisode
 import com.greghaskins.spectrum.Spectrum
 import org.junit.runner.RunWith
 
@@ -21,8 +23,7 @@ class AnitubeBrFactoryTest {
                 number = 1,
                 description = "One Piece 01",
                 link = "https://anitubebr.com/vd/19249/",
-                video = null,
-//                video = "blob:https://anitubebr.com/ae38a7f2-22ae-4bd6-9775-8342e70cddd4",
+                video = "blob:https://anitubebr.com/ae38a7f2-22ae-4bd6-9775-8342e70cddd4",
                 animeName = "One Piece",
                 nextEpisodes = arrayListOf(
                         Episode(number = 2,
@@ -35,7 +36,9 @@ class AnitubeBrFactoryTest {
     }
 
     init {
-        FactoryChecker.describeFactory(AnitubeBrFactory, VALID_URLS, INVALID_URLS, currentEpisode)
-        Spectrum.xit("Check video validation") {}
+        FactoryChecker.describe(AnitubeBrFactory) {
+            whenEpisode(currentEpisode)
+            whenCheckIsEpisode(VALID_URLS, INVALID_URLS)
+        }
     }
 }
