@@ -4,6 +4,7 @@ import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.testhelper.FactoryChecker
 import brunodles.urlfetcher.UrlFetcher
 import com.greghaskins.spectrum.Spectrum
+import com.greghaskins.spectrum.Spectrum.xit
 import org.junit.runner.RunWith
 
 @RunWith(Spectrum::class)
@@ -78,10 +79,10 @@ class XvideosFactoryTest {
     }
 
     init {
-        val useCache = UrlFetcher.useCache
-        UrlFetcher.useCache = true
-        FactoryChecker.checkFactory(XvideosFactory, VALID_URLS, INVALID_URLS, currentEpisode)
-        UrlFetcher.useCache = useCache
+        if (UrlFetcher.useCache)
+            FactoryChecker.checkFactory(XvideosFactory, VALID_URLS, INVALID_URLS, currentEpisode)
+        else
+            xit("XvideosFactory") {}
     }
 
 }
