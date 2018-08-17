@@ -42,9 +42,9 @@ before_install:
 script:
 - echo "Travis branch is $TRAVIS_BRANCH"
 - echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST  buildNumber $TRAVIS_BUILD_NUMBER"
-- ./gradlew clean app:googleServicesDecrypt assembleDebug -PminSdk=$MIN_SDK
+- ./gradlew app:googleServicesDecrypt assembleDebug -PminSdk=$MIN_SDK
 - ./gradlew lint ktlint checkstyleMain --continue
-- ./gradlew test
+- ./gradlew test -Pusecache=true
 #- ./gradlew app:assembleRelease -PkeyPassword='$KEYPASS' -PstorePassword='$KEYSTOREPASS' -PversionCode=$TRAVIS_BUILD_NUMBER -PversionName=$RELEASE_TAG
 #- ./gradlew connectedAndroidTest -PdisablePreDex --stacktrace -P
 #- ./gradlew jacocoTestReport
