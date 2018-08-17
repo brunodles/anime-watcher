@@ -4,15 +4,17 @@ import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.PageParser
 import com.greghaskins.spectrum.Spectrum.describe
 import com.greghaskins.spectrum.Spectrum.it
+import junit.framework.AssertionFailedError
 import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import java.lang.AssertionError
 import java.util.regex.Pattern
 
 object FactoryChecker {
 
     fun checkFactory(pageParser: PageParser, validUrls: Array<String> = emptyArray(),
-                     invalidUrls: Array<String> = emptyArray(), expectedEpisode: Episode?=null) {
+                     invalidUrls: Array<String> = emptyArray(), expectedEpisode: Episode? = null) {
         describe(pageParser::class.java.simpleName) {
 
             if (validUrls.isNotEmpty() || invalidUrls.isNotEmpty())
@@ -52,7 +54,19 @@ object FactoryChecker {
                 val expectedNextEpisodes = expectedEpisode.nextEpisodes!!
 
                 it("should find ${expectedNextEpisodes.size} episodes") {
-                    assertEquals(expectedNextEpisodes.size, episodes.size)
+                    try {
+                        assertEquals(expectedNextEpisodes.size, episodes.size)
+                    } catch (e: AssertionError) {
+                        val message = episodes.joinToString(",\n") {
+                            "Episode(number = ${it.number}," +
+                                    "animeName = \"${it.animeName}\"," +
+                                    "image = \"${it.image}\"," +
+                                    "description = \"${it.description}\"," +
+                                    "link = \"${it.link}\")"
+                        }
+                        throw AssertionError(e.message+". found:\n$message", e)
+
+                    }
                 }
 
                 for (index in 0 until expectedNextEpisodes.size)
