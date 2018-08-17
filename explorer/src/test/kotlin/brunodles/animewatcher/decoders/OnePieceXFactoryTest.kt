@@ -34,9 +34,7 @@ class OnePieceXFactoryTest {
     }
 
     init {
-        Spectrum.xit("Ignore") {
-            FactoryChecker.checkFactory(OnePieceXFactory, VALID_URLS, INVALID_URLS, currentEpisode)
-        }
+//        FactoryChecker.checkFactory(OnePieceXFactory, VALID_URLS, INVALID_URLS, currentEpisode)
     }
 
 }
