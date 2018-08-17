@@ -73,8 +73,8 @@
                     android:id="@+id/nextEpisodes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="@{false}"
-                    tools:listitem="@layout/item_episode" />
+                    app:nestedScrollingEnabled="@{false}"
+                    tools:listitem="@layout/item_episode"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -86,7 +86,7 @@
                     android:id="@+id/history"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="@{false}"
+                    app:nestedScrollingEnabled="@{false}"
                     tools:listitem="@layout/item_episode" />
 
                 <Space

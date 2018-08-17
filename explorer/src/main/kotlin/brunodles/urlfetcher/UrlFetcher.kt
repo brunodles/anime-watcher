@@ -13,14 +13,17 @@ interface UrlFetcher {
         var cacheDir = BuildConfig.ROOT_DIR
         var useLog = false
 
-        fun fetcher(url: String): UrlFetcher {
-            val fetcher: UrlFetcher = JsoupFetcher(url)
-            return if (useCache)
-                CacheFetcher(url, fetcher)
-            else
-                RedirectFetcher(fetcher)
+        @Deprecated("This does not support composable configuration", ReplaceWith("composableFetcher"))
+        fun fetcher(url: String): UrlFetcher = composableFetcher(url).withRedirect()
+
+        fun composableFetcher(url: String): UrlFetcherComposable {
+            val urlFetcherComposable = UrlFetcherComposable(url)
+            if (useCache)
+                urlFetcherComposable.withCache()
+            return urlFetcherComposable
         }
 
+        @Deprecated("This does not support composable configuration and always use get", ReplaceWith("composableFetcher"))
         fun fetchUrl(url: String): Document = fetcher(url).get()
     }
 }

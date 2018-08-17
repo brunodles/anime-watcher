@@ -36,7 +36,8 @@
                     android:mediaRouteTypes="user"
                     android:minHeight="48dp"
                     android:paddingLeft="16dp"
-                    android:paddingRight="16dp" />
+                    android:paddingRight="16dp"
+                    tools:targetApi="jelly_bean" />
 
                 <ImageButton
                     android:id="@+id/othersCastButton"
@@ -98,7 +99,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
-                    android:nestedScrollingEnabled="@{false}" />
+                    app:nestedScrollingEnabled="@{false}" />
 
                 <Space
                     android:layout_width="0dp"

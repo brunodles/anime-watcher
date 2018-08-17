@@ -18,9 +18,9 @@ import brunodles.adapter.ViewDataBindingAdapter
 import brunodles.animewatcher.ImageLoader
 import brunodles.animewatcher.R
 import brunodles.animewatcher.cast.Caster
+import brunodles.animewatcher.cast.isConnected
 import brunodles.animewatcher.databinding.ActivityPlayerBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
-import brunodles.animewatcher.decoders.UrlChecker
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.parcelable.EpisodeParcel
 import brunodles.animewatcher.parcelable.EpisodeParceler
@@ -43,13 +43,9 @@ class PlayerActivity : AppCompatActivity() {
 
         fun newIntent(context: Context, episode: Episode): Intent = Intent(context, PlayerActivity::class.java)
                 .putExtra(EXTRA_EPISODE, EpisodeParceler.toParcel(episode))
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         fun newIntent(context: Context, link: String): Intent = Intent(context, PlayerActivity::class.java)
                 .setData(Uri.parse(link))
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     }
 
     private lateinit var binding: ActivityPlayerBinding
@@ -71,28 +67,19 @@ class PlayerActivity : AppCompatActivity() {
         sharedPreferences().edit().clear().apply()
     }
 
-    private fun onError(error: Throwable) {
-        val snackbar = Snackbar.make(binding.root, "Failed to process the url, ${error.message}", Snackbar.LENGTH_INDEFINITE)
-        snackbar.setAction("Ok") { snackbar.dismiss() }
-        snackbar.show()
-        Log.e(TAG, "onResume.FindUrl: ", error)
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        sharedPreferences().edit().clear().apply()
     }
 
-    private fun onFetchEpisode(episode: Episode) {
-        Log.d(TAG, "onFetchEpisode: ")
-        episode.video?.let {
-            if (player == null)
-                player = Player(this, binding.player)
-            player?.prepareVideo(it)
-            player?.onEndListener = {
-                episode.nextEpisodes?.firstOrNull()?.let {
-                    startActivity(newIntent(this, it))
-                }
+    private fun createPlayer(episode: Episode?) {
+        player = Player(this, binding.player)
+        player?.onEndListener = {
+            episode?.nextEpisodes?.firstOrNull()?.let {
+                startActivity(newIntent(this, it))
             }
         }
-        binding.title.text = "${episode.number} - ${episode.description}"
-        adapter?.list = episode.nextEpisodes ?: listOf()
-        this.episode = episode
     }
 
     private fun setupRecyclerView() {
@@ -117,6 +104,17 @@ class PlayerActivity : AppCompatActivity() {
         episode?.video?.let { player?.prepareVideo(it) }
     }
 
+    override fun onStart() {
+        super.onStart()
+        caster = Caster.Factory.multiCaster(this, binding.chromeCastButton, binding.othersCastButton)
+
+        caster?.setOnEndListener {
+            episode?.nextEpisodes?.firstOrNull()?.let {
+                startActivity(newIntent(this, it))
+            }
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         Log.d(TAG, "onResume: isEpisodeNull? ${episode == null}")
@@ -129,12 +127,10 @@ class PlayerActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(onSuccess = this::onFetchEpisode,
                         onError = this::onError)
-
-        caster = Caster.Factory.multiCaster(this, binding.chromeCastButton, binding.othersCastButton)
         val preferences = sharedPreferences()
         preferences.getString(PREF_VIDEO, null)?.also { url ->
             if (player == null)
-                player = Player(this, binding.player)
+                createPlayer(episode)
             player?.prepareVideo(url)
             player?.seekTo(preferences.getLong(PREF_POSITION, C.TIME_UNSET))
         }
@@ -148,6 +144,32 @@ class PlayerActivity : AppCompatActivity() {
         return null
     }
 
+    private fun onFetchEpisode(episode: Episode) {
+        Log.d(TAG, "onFetchEpisode: ")
+        episode.video?.let {
+            if (player == null)
+                createPlayer(episode)
+            if (caster.isConnected()) {
+                player?.prepareVideo(it, playWhenReady = false)
+                caster?.playRemote(episode, 0L)
+            } else {
+                player?.prepareVideo(it)
+            }
+        }
+        binding.title.text = "${episode.number} - ${episode.description}"
+        adapter?.list = episode.nextEpisodes ?: listOf()
+        this.episode = episode
+    }
+
+    private fun onError(error: Throwable) {
+        if (binding.root != null) {
+            val snackbar = Snackbar.make(binding.root, "Failed to process the url, ${error.message}", Snackbar.LENGTH_INDEFINITE)
+            snackbar.setAction("Ok") { snackbar.dismiss() }
+            snackbar.show()
+        }
+        Log.e(TAG, "onResume.FindUrl: ", error)
+    }
+
     override fun onPause() {
         super.onPause()
         sharedPreferences().editAndApply {
@@ -156,6 +178,11 @@ class PlayerActivity : AppCompatActivity() {
         }
         player?.stopAndRelease()
         player = null
+    }
+
+    override fun onStop() {
+        super.onStop()
+        caster?.setOnEndListener(null)
         caster = null
     }
 

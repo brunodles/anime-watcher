@@ -44,7 +44,7 @@ class Player(context: Context, playerView: SimpleExoPlayerView) {
             onEndListener?.invoke()
     }
 
-    fun prepareVideo(url: String) {
+    fun prepareVideo(url: String, playWhenReady: Boolean = false) {
         Log.d(TAG, "prepareVideo: $url")
         val bandwidthMeter = DefaultBandwidthMeter()
         val dataSourceFactory = DefaultHttpDataSourceFactory(userAgent, bandwidthMeter,
@@ -54,7 +54,7 @@ class Player(context: Context, playerView: SimpleExoPlayerView) {
         val videoSource = ExtractorMediaSource(Uri.parse(url),
                 dataSourceFactory, extractorsFactory, null, null)
         exoPlayer.prepare(videoSource, false, false)
-        exoPlayer.playWhenReady = true
+        exoPlayer.playWhenReady = playWhenReady
     }
 
     fun getCurrentPosition() = exoPlayer.currentPosition

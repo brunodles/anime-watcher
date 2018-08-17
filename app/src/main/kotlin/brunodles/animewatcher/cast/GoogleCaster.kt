@@ -8,17 +8,21 @@ import brunodles.animewatcher.explorer.Episode
 import com.google.android.gms.cast.MediaInfo
 import com.google.android.gms.cast.MediaLoadOptions
 import com.google.android.gms.cast.MediaMetadata
+import com.google.android.gms.cast.MediaStatus
 import com.google.android.gms.cast.framework.*
+import com.google.android.gms.cast.framework.media.RemoteMediaClient
 import com.google.android.gms.common.images.WebImage
 
 class GoogleCaster(context: Context, mediaRouteButton: MediaRouteButton?,
-                   val listener: DeviceConnectedListener? = null) : Caster{
+                   val listener: DeviceConnectedListener? = null) : Caster {
 
     companion object {
         val TAG = "GoogleCaster"
     }
 
+    private var endListener: (() -> Unit)? = null
     val mSessionManager: SessionManager
+
     //    val mSessionManagerListener: SessionManagerListener = SessionManagerListenerImpl()
     init {
         val applicationContext = context.applicationContext
@@ -51,5 +55,37 @@ class GoogleCaster(context: Context, mediaRouteButton: MediaRouteButton?,
                 .build()
         remoteMediaClient?.load(mediaInfo, mediaLoadOptions)
         remoteMediaClient?.play()
+        remoteMediaClient?.addListener(object : RemoteMediaClient.Listener {
+            override fun onPreloadStatusUpdated() {
+            }
+
+            override fun onSendingRemoteMediaRequest() {
+            }
+
+            override fun onMetadataUpdated() {
+            }
+
+            override fun onAdBreakStatusUpdated() {
+            }
+
+            override fun onStatusUpdated() {
+                Log.d(TAG, "onStatusUpdated: ")
+                val mediaStatus = remoteMediaClient.mediaStatus
+                if (mediaStatus.playerState == MediaStatus.PLAYER_STATE_IDLE
+                        && mediaStatus.idleReason == MediaStatus.IDLE_REASON_FINISHED)
+                    endListener?.invoke()
+            }
+
+            override fun onQueueStatusUpdated() {
+            }
+
+        })
     }
+
+    override fun setOnEndListener(listener: (() -> Unit)?) {
+        Log.d(TAG, "setOnEndListener: ")
+        this.endListener = listener
+    }
+
+    override fun isConnected(): Boolean = castSession()?.isConnected ?: false
 }
