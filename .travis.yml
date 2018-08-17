@@ -5,16 +5,18 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-27.0.2
+    - build-tools-27.0.3
     - android-27
     - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
     - addon-google_apis-google-27
-    # emulators. Uncomment to run instrumented tests
-    # - sys-img-armeabi-v7a-$ANDROID_TARGET
-    # repeated as suggested to get the latest sdk version
+    - sys-img-armeabi-v7a-15
+    - sys-img-armeabi-v7a-27
     - tools
+  licenses:
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
 
 env:
   global:
