@@ -100,7 +100,9 @@ object FactoryChecker {
 
         if (expected.video != null)
             it("should return the correct video") {
-                val matches = Pattern.compile(expected.video).matcher(episode?.video).matches()
+                val matches = episode?.video?.let {
+                    Pattern.compile(expected.video).matcher(it).matches()
+                } ?: false
                 val condition = matches || expected.video == episode?.video
                 assertTrue("" +
                         "\n Expected \"${expected.video}\"" +
