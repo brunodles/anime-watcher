@@ -8,19 +8,23 @@ import com.brunodles.alchemist.TransmutationsBook
 
 object AlchemistFactory {
 
+    var urlFetcher: UrlFetcher = UrlFetcher.composableFetcher().withCache()
+
     val alchemist: Alchemist by lazy {
-        System.setProperty("user-agent", "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
+        System.setProperty(
+            "user-agent",
+            "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+        )
         Alchemist.Builder()
-                .uriResolver {
-                    UrlFetcher.composableFetcher(it)
-                            .get()
-                            .html()
-                }
-                .transformers(
-                        TransmutationsBook.Builder()
-                                .add(ToIntTransmutation())
-                                .build())
-                .build()
+            .uriResolver {
+                urlFetcher.get(it).html()
+            }
+            .transformers(
+                TransmutationsBook.Builder()
+                    .add(ToIntTransmutation())
+                    .build()
+            )
+            .build()
     }
 }
 
@@ -31,5 +35,5 @@ annotation class ToInt
 class ToIntTransmutation : AnnotationTransmutation<ToInt, List<String>, List<Int>> {
 
     override fun transform(value: AnnotationInvocation<ToInt, List<String>>): List<Int> =
-            value.result.map(String::toInt).toList()
+        value.result.map(String::toInt).toList()
 }

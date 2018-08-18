@@ -17,10 +17,12 @@ object OnePieceXFactory : PageParser {
 
     private val EPISODE_URL_REGEX = Regex("one-?piece-e?x.com.br/episodios/online/\\d+")
     private val SERVER_URL_PATTERN = Pattern.compile("var\\s+servidor\\s*=\\s*[\"'](.*?)[\"'];")
-    private val DATA_URL_PATTERN = Pattern.compile("var\\s*codigo\\s*=\\s*[\"'](https?)://[\"'].*?[\"'](.*?)[\"'];")
+    private val DATA_URL_PATTERN =
+        Pattern.compile("var\\s*codigo\\s*=\\s*[\"'](https?)://[\"'].*?[\"'](.*?)[\"'];")
     private val VIDEO_URL_PATTERN = Pattern.compile("[\"']([HML]Q|Online)[\"']:\\s*[\"'](.*?)[\"']")
     private val PREFERED_QUALITY_ORDER = arrayOf("HQ", "MQ", "LQ", "ONLINE")
-    private val ANIME_NAME = "One Piece"
+    private const val ANIME_NAME = "One Piece"
+    private val urlFetcher = UrlFetcher.fetcher()
 
     override fun isEpisode(url: String): Boolean = url.contains(EPISODE_URL_REGEX)
 
@@ -29,9 +31,15 @@ object OnePieceXFactory : PageParser {
         with(episode) {
             val videoUrl = findVideoUrl(video().html())
 
-            return Episode(description(), number(), ANIME_NAME, null, videoUrl,
-                    url, listOf(Episode("Next", number() + 1, ANIME_NAME,
-                    link = nextEpisode())))
+            return Episode(
+                description(), number(), ANIME_NAME, null, videoUrl,
+                url, listOf(
+                    Episode(
+                        "Next", number() + 1, ANIME_NAME,
+                        link = nextEpisode()
+                    )
+                )
+            )
         }
     }
 
@@ -61,7 +69,7 @@ object OnePieceXFactory : PageParser {
         val matcher = DATA_URL_PATTERN.matcher(iframeHtml)
         matcher.find() // should we throw and exception?
         val jsonUrl = "${matcher.group(1)}://$server${matcher.group(2)}"
-        return UrlFetcher.fetcher(jsonUrl).get().text()
+        return urlFetcher.get(jsonUrl).text()
     }
 
     interface CurrentEpisode {

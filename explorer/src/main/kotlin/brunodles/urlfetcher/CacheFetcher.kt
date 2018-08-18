@@ -6,30 +6,30 @@ import java.io.File
 import java.net.URL
 import java.util.regex.Pattern
 
-internal class CacheFetcher(private val url: String, private val nestedFetcher: UrlFetcher) :
-        UrlFetcher {
+internal class CacheFetcher(private val nestedFetcher: UrlFetcher) : UrlFetcher {
 
-    private val key by lazy { urlToKey(url) }
-
-    override fun post(): Document {
+    override fun post(url: String): Document {
+        val key = urlToKey(url)
         if (isPageCached(key))
             return Jsoup.parse(loadPage(key))
-        val document = nestedFetcher.post()
+        val document = nestedFetcher.post(url)
         savePage(key, document.html())
         return document
     }
 
-    override fun get(): Document {
+    override fun get(url: String): Document {
+        val key = urlToKey(url)
         if (isPageCached(key))
             return Jsoup.parse(loadPage(key))
-        val document = nestedFetcher.get()
+        val document = nestedFetcher.get(url)
         savePage(key, document.html())
         return document
     }
 
     companion object {
 
-        private val DOMAIN_PATTERN = Pattern.compile("^(?:.*?)([\\w\\d-]+(?:\\.\\w{2,5}))(?:\\.\\w{2,4})?\$")
+        private val DOMAIN_PATTERN =
+            Pattern.compile("^(?:.*?)([\\w\\d-]+(?:\\.\\w{2,5}))(?:\\.\\w{2,4})?\$")
         private val INVALID_TEXT_PATTERN = Regex("[^\\d\\w]+")
         private val MAX_FILENAME_SIZE = 100
 
@@ -49,9 +49,9 @@ internal class CacheFetcher(private val url: String, private val nestedFetcher: 
             val url = URL(urlStr)
             with(url) {
                 val hostStr = extractDomain(url)
-                        .replace(Regex("[^\\d\\w.]"), "")
+                    .replace(Regex("[^\\d\\w.]"), "")
                 return (hostStr + "/" + path.fixed() + query.fixed())
-                        .max(MAX_FILENAME_SIZE)
+                    .max(MAX_FILENAME_SIZE)
             }
         }
 

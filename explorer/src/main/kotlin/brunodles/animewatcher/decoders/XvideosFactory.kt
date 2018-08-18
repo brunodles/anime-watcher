@@ -12,6 +12,7 @@ import org.jsoup.select.Elements
 object XvideosFactory : PageParser {
 
     private val URL_REGEX = Regex("xvideos.com/.*?\\d+")
+    private val urlFetcher = UrlFetcher.fetcher()
 
     override fun isEpisode(url: String): Boolean = url.contains(URL_REGEX)
 
@@ -26,7 +27,7 @@ object XvideosFactory : PageParser {
 
     class XvideoExplorer(private val url: String) {
 
-        private val mainDoc: Elements = UrlFetcher.fetcher(url).get().body().select("#main")
+        private val mainDoc: Elements = urlFetcher.get(url).body().select("#main")
 
         fun currentVideo(): Episode {
 

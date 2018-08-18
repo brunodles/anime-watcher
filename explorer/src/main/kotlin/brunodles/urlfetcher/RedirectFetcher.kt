@@ -7,13 +7,13 @@ internal class RedirectFetcher(val nestedFetcher: UrlFetcher) : UrlFetcher {
     private val JS_REDIRECT_LOCATION_REGEX = Regex("(?:window|self|top)?location(?:\\.href|assign|replace)?\\s*=\\s*[\"'](.*?)[\"'];")
     private val JS_REDIRECT_NAVIGATE_REGEX = Regex("navigateTo\\(.*?[\"'](https?.*?)[\"']\\)")
 
-    override fun post(): Document {
-        val document = nestedFetcher.post()
+    override fun post(url: String): Document {
+        val document = nestedFetcher.post(url)
         return followRedirect(document)
     }
 
-    override fun get(): Document {
-        val document = nestedFetcher.get()
+    override fun get(url: String): Document {
+        val document = nestedFetcher.get(url)
         return followRedirect(document)
     }
 
@@ -21,13 +21,13 @@ internal class RedirectFetcher(val nestedFetcher: UrlFetcher) : UrlFetcher {
         val redirectNoScript = redirecNoScript(document)
         if (redirectNoScript != null && redirectNoScript.isNotBlank()) {
             Logger.log { "follow redirectNoScript to $redirectNoScript" }
-            return UrlFetcher.fetcher(redirectNoScript).get()
+            return nestedFetcher.get(redirectNoScript)
         }
 
         val redirectJs = redirectJs(document)
         if (redirectJs != null && redirectJs.isNotBlank()) {
             Logger.log { "follow redirectJs to $redirectJs" }
-            return UrlFetcher.fetcher(redirectJs).get()
+            return nestedFetcher.get(redirectJs)
         }
 
         return document

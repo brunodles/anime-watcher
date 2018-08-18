@@ -8,11 +8,11 @@ import org.jsoup.nodes.Document
  */
 interface UrlFetcher {
 
-    fun post(): Document
-    fun get(): Document
+    fun post(url: String): Document
+    fun get(url: String): Document
 
     companion object {
-        var useCache: Boolean = BuildConfig.USE_CACHE
+        val useCache: Boolean = BuildConfig.USE_CACHE
         var cacheDir = BuildConfig.ROOT_DIR
         var useLog = false
 
@@ -21,11 +21,11 @@ interface UrlFetcher {
          * This instance may handle caches.
          * @See useCache
          */
-        fun fetcher(url: String): UrlFetcher {
-            val urlFetcherComposable = composableFetcher(url)
+        fun fetcher(): UrlFetcher {
+            val urlFetcherComposable = composableFetcher()
             if (useCache)
                 urlFetcherComposable.withCache()
-                        .withRedirect()
+                    .withRedirect()
             return urlFetcherComposable
         }
 
@@ -35,10 +35,12 @@ interface UrlFetcher {
          * * Cache
          * * Follow Redirects
          */
-        fun composableFetcher(url: String) = UrlFetcherComposable(url)
+        fun composableFetcher() = UrlFetcherComposable()
 
-        @Deprecated("This does not support composable configuration and always use GET",
-                ReplaceWith("composableFetcher"), DeprecationLevel.ERROR)
-        fun fetchUrl(url: String): Document = fetcher(url).get()
+        @Deprecated(
+            "This does not support composable configuration and always use GET",
+            ReplaceWith("composableFetcher"), DeprecationLevel.ERROR
+        )
+        fun fetchUrl(url: String): Document = fetcher().get(url)
     }
 }

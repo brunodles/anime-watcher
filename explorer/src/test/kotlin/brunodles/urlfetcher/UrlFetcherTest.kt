@@ -33,10 +33,10 @@ class UrlFetcherTest {
         describe("UrlFetcher") {
             describe("with cache") {
                 val fetcher: (String) -> Document = { url ->
-                    UrlFetcher.composableFetcher(url)
-                            .withCache()
-                            .withRedirect()
-                            .get()
+                    UrlFetcher.composableFetcher()
+                        .withCache()
+                        .withRedirect()
+                        .get(url)
                 }
                 describe("when page have http redirects") {
                     shouldFollowRedirectWithStatusCode(fetcher, 300)
@@ -51,9 +51,9 @@ class UrlFetcherTest {
             }
             describe("without cache") {
                 val fetcher: (String) -> Document = { url ->
-                    UrlFetcher.composableFetcher(url)
-                            .withRedirect()
-                            .get()
+                    UrlFetcher.composableFetcher()
+                        .withRedirect()
+                        .get(url)
                 }
                 describe("when page have html redirects") {
                     shouldFollowRedirectWithStatusCode(fetcher, 300)
@@ -69,18 +69,28 @@ class UrlFetcherTest {
         }
     }
 
-    private fun shouldFollowRedirectWithStatusCode(fetcher: (String) -> Document, status: Int, expectedResult: String = status.toString()) {
+    private fun shouldFollowRedirectWithStatusCode(
+        fetcher: (String) -> Document,
+        status: Int,
+        expectedResult: String = status.toString()
+    ) {
         describe("with status code $status") {
             beforeEach {
-                wireMockServer.stubFor(get(urlMatching("/redirect$status"))
-                        .willReturn(aResponse()
+                wireMockServer.stubFor(
+                    get(urlMatching("/redirect$status"))
+                        .willReturn(
+                            aResponse()
                                 .withStatus(status)
                                 .withHeader(LOCATION, "$host/response$status")
-                        ))
-                wireMockServer.stubFor(get(urlMatching("/response$status"))
-                        .willReturn(aResponse()
+                        )
+                )
+                wireMockServer.stubFor(
+                    get(urlMatching("/response$status"))
+                        .willReturn(
+                            aResponse()
                                 .withBody(expectedResult)
-                        ))
+                        )
+                )
             }
             it("should return the redirected page") {
                 val result = fetcher.invoke("$host/redirect$status").body().text()
@@ -89,19 +99,29 @@ class UrlFetcherTest {
         }
     }
 
-    private fun shouldFollowRedirectWith(fetcher: (String) -> Document, type: String, bodyBuilder: (String) -> String) {
+    private fun shouldFollowRedirectWith(
+        fetcher: (String) -> Document,
+        type: String,
+        bodyBuilder: (String) -> String
+    ) {
         val expectedResult = "${type}Result"
         describe("when page have $type redirects") {
             beforeEach {
-                wireMockServer.stubFor(get(urlMatching("/redirect$type"))
-                        .willReturn(aResponse()
+                wireMockServer.stubFor(
+                    get(urlMatching("/redirect$type"))
+                        .willReturn(
+                            aResponse()
                                 .withStatus(200)
                                 .withBody(bodyBuilder("$host/response$type"))
-                        ))
-                wireMockServer.stubFor(get(urlMatching("/response$type"))
-                        .willReturn(aResponse()
+                        )
+                )
+                wireMockServer.stubFor(
+                    get(urlMatching("/response$type"))
+                        .willReturn(
+                            aResponse()
                                 .withBody(expectedResult)
-                        ))
+                        )
+                )
             }
 
             it("should fetch the wanted page") {
@@ -112,17 +132,17 @@ class UrlFetcherTest {
     }
 
     private fun jsRedirect(url: String) = "<html>\n" +
-            " <head>\n" +
-            "  <script>window.googleJavaScriptRedirect=1</script>\n" +
-            "  <script>var n={navigateTo:function(b,a,d){if(b!=a&&b.google){if(b.google.r){b.google.r=0;b.location.href=d;a.location.replace(\"about:blank\");}}else{a.location.replace(d);}}};n.navigateTo(window.parent,window,\"$url\");</script>\n" +
-            " </head>\n" +
-            " <body></body>\n" +
-            "</html>"
+        " <head>\n" +
+        "  <script>window.googleJavaScriptRedirect=1</script>\n" +
+        "  <script>var n={navigateTo:function(b,a,d){if(b!=a&&b.google){if(b.google.r){b.google.r=0;b.location.href=d;a.location.replace(\"about:blank\");}}else{a.location.replace(d);}}};n.navigateTo(window.parent,window,\"$url\");</script>\n" +
+        " </head>\n" +
+        " <body></body>\n" +
+        "</html>"
 
     private fun htmlRedirect(url: String) = "<html>\n" +
-            " <head>\n" +
-            "  <noscript>\n<meta http-equiv=\"refresh\" content=\"0;URL='$url'\">\n</noscript>\n" +
-            " </head>\n" +
-            " <body></body>\n" +
-            "</html>"
+        " <head>\n" +
+        "  <noscript>\n<meta http-equiv=\"refresh\" content=\"0;URL='$url'\">\n</noscript>\n" +
+        " </head>\n" +
+        " <body></body>\n" +
+        "</html>"
 }

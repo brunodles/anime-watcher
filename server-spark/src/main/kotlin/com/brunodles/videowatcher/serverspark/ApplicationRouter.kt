@@ -1,5 +1,6 @@
 package com.brunodles.videowatcher.serverspark
 
+import brunodles.animewatcher.AlchemistFactory
 import brunodles.animewatcher.decoders.UrlChecker
 import brunodles.animewatcher.explorer.Episode
 import brunodles.urlfetcher.UrlFetcher
@@ -8,8 +9,8 @@ import spark.kotlin.port
 import spark.kotlin.post
 
 fun main(args: Array<String>) {
-    UrlFetcher.useCache = false
     port(getHerokuAssignedPort())
+    AlchemistFactory.urlFetcher = UrlFetcher.composableFetcher()
     startServer()
 }
 

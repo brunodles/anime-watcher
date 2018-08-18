@@ -14,12 +14,13 @@ import java.util.regex.Pattern
 object AnimesOrionFactory : PageParser {
 
     private val URL_REGEX = Regex("^(:?https?://)?(:?www.)?animesorion.(?:tv|site|video)/\\d+.*?$")
+    private val urlFetcher = UrlFetcher.fetcher()
 
     override fun isEpisode(url: String): Boolean =
             url.matches(URL_REGEX)
 
     override fun episode(url: String): Episode {
-        val document = UrlFetcher.fetcher(url).get()
+        val document = urlFetcher.get(url)
         val html = document.html()
         if (document.title().contains("todos", true))
             return parseAbout(document, url)
@@ -30,7 +31,7 @@ object AnimesOrionFactory : PageParser {
         val links = html.select(".lcp_catlist a")
         links.sortBy { it.attr("href").extractWithRegex("(\\d+)").toInt() }
         val first = links.removeAt(0).attr("href")
-        val episode = parsePlayer(UrlFetcher.fetcher(first).get().html(), url)
+        val episode = parsePlayer(urlFetcher.get(first).html(), url)
         return episode.copy(nextEpisodes = links.map {
             Episode(it.text(), it.text().extractWithRegex("^(?:.*)\\s+?(\\d++)").toInt(),
                     episode.animeName, link = it.href())
