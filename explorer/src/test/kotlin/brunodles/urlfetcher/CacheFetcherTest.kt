@@ -52,7 +52,6 @@ class CacheFetcherTest {
                         assertEquals(value, CacheFetcher.extractDomain(key))
                     }
                 }
-
             }
         }
     }

@@ -26,7 +26,7 @@ object XvideosFactory : PageParser {
 
     class XvideoExplorer(private val url: String) {
 
-        private val mainDoc: Elements = UrlFetcher.fetchUrl(url).body().select("#main")
+        private val mainDoc: Elements = UrlFetcher.fetcher(url).get().body().select("#main")
 
         fun currentVideo(): Episode {
 
@@ -114,9 +114,6 @@ object XvideosFactory : PageParser {
             return doc.select("script")
                     .filter { it.attributes().none() }
                     .find { it.toString().contains("video_related") }
-
         }
-
     }
 }
-

@@ -70,7 +70,6 @@ object FactoryChecker {
                                     "link = \"${it.link}\")"
                         }
                         throw AssertionError(e.message + ". found:\n$message", e)
-
                     }
                 }
 
@@ -80,7 +79,6 @@ object FactoryChecker {
                         checkEpisode(expectedNextEpisodes[index], episode)
                     }
             }
-
         }
     }
 

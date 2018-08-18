@@ -37,7 +37,6 @@ class ApplicationRouterKtTest {
                     stop()
                     thread.join()
                 }
-
             }
         }
     }

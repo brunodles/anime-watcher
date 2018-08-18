@@ -73,5 +73,4 @@ object AnimesOnlineBrFactory : PageParser {
         }
         return emptyList()
     }
-
 }

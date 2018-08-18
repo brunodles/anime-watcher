@@ -19,5 +19,4 @@ class UrlFetcherComposable internal constructor(val url: String) : UrlFetcher {
     override fun post(): Document = internalFetcher.post()
 
     override fun get(): Document = internalFetcher.get()
-
 }

@@ -84,5 +84,4 @@ class XvideosFactoryTest {
         else
             xit("XvideosFactory") {}
     }
-
 }

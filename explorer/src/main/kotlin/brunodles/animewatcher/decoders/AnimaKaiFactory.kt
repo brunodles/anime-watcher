@@ -1,6 +1,7 @@
 package brunodles.animewatcher.decoders
 
-import brunodles.animewatcher.explorer.*
+import brunodles.animewatcher.explorer.Episode
+import brunodles.animewatcher.explorer.PageParser
 import brunodles.urlfetcher.UrlFetcher
 import brunodles.urlfetcher.alt
 import brunodles.urlfetcher.src
@@ -14,7 +15,7 @@ object AnimaKaiFactory : PageParser {
     override fun isEpisode(url: String): Boolean = url.matches(EPISODE_URL_REGEX)
 
     override fun episode(url: String): Episode {
-        val doc = UrlFetcher.fetchUrl(url)
+        val doc = UrlFetcher.fetcher(url).get()
         val video = doc.select(".box-video video")
         val text = video.alt()
         val src = video.select("source").src()

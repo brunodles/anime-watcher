@@ -29,5 +29,4 @@ class AnimaKaiFactoryTest {
     init {
         FactoryChecker.describeFactory(AnimaKaiFactory, VALID_URLS, INVALID_URLS, currentEpisode)
     }
-
 }

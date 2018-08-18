@@ -21,13 +21,13 @@ internal class RedirectFetcher(val nestedFetcher: UrlFetcher) : UrlFetcher {
         val redirectNoScript = redirecNoScript(document)
         if (redirectNoScript != null && redirectNoScript.isNotBlank()) {
             Logger.log { "follow redirectNoScript to $redirectNoScript" }
-            return UrlFetcher.fetchUrl(redirectNoScript)
+            return UrlFetcher.fetcher(redirectNoScript).get()
         }
 
         val redirectJs = redirectJs(document)
         if (redirectJs != null && redirectJs.isNotBlank()) {
             Logger.log { "follow redirectJs to $redirectJs" }
-            return UrlFetcher.fetchUrl(redirectJs)
+            return UrlFetcher.fetcher(redirectJs).get()
         }
 
         return document

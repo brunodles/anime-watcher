@@ -41,5 +41,4 @@ class OnePieceXFactoryTest {
             whenCheckIsEpisode(VALID_URLS, INVALID_URLS)
         }
     }
-
 }

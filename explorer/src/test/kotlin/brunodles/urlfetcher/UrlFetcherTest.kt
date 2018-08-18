@@ -1,15 +1,20 @@
 package brunodles.urlfetcher
 
 import com.github.tomakehurst.wiremock.WireMockServer
-import com.github.tomakehurst.wiremock.client.WireMock.*
+import com.github.tomakehurst.wiremock.client.WireMock.aResponse
+import com.github.tomakehurst.wiremock.client.WireMock.get
+import com.github.tomakehurst.wiremock.client.WireMock.urlMatching
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration.options
 import com.google.common.net.HttpHeaders.LOCATION
 import com.greghaskins.spectrum.Spectrum
-import com.greghaskins.spectrum.Spectrum.*
+import com.greghaskins.spectrum.Spectrum.afterAll
+import com.greghaskins.spectrum.Spectrum.beforeAll
+import com.greghaskins.spectrum.Spectrum.beforeEach
+import com.greghaskins.spectrum.Spectrum.describe
+import com.greghaskins.spectrum.Spectrum.it
 import org.jsoup.nodes.Document
 import org.junit.Assert
 import org.junit.runner.RunWith
-
 
 @RunWith(Spectrum::class)
 class UrlFetcherTest {
@@ -120,5 +125,4 @@ class UrlFetcherTest {
             " </head>\n" +
             " <body></body>\n" +
             "</html>"
-
 }

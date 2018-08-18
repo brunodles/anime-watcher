@@ -17,6 +17,5 @@ internal class JsoupFetcher(private val url: String) : UrlFetcher {
     companion object {
         private val USER_AGENT = "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"
         private val REFERRER = "http://www.google.com"
-
     }
 }

@@ -61,7 +61,7 @@ object OnePieceXFactory : PageParser {
         val matcher = DATA_URL_PATTERN.matcher(iframeHtml)
         matcher.find() // should we throw and exception?
         val jsonUrl = "${matcher.group(1)}://$server${matcher.group(2)}"
-        return UrlFetcher.fetchUrl(jsonUrl).text()
+        return UrlFetcher.fetcher(jsonUrl).get().text()
     }
 
     interface CurrentEpisode {
