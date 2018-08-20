@@ -2,6 +2,8 @@ package brunodles.animewatcher.decoders
 
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.testhelper.FactoryChecker
+import brunodles.animewatcher.testhelper.FactoryChecker.whenCheckIsEpisode
+import brunodles.animewatcher.testhelper.FactoryChecker.whenEpisode
 import brunodles.urlfetcher.UrlFetcher
 import com.greghaskins.spectrum.Spectrum
 import com.greghaskins.spectrum.Spectrum.xit
@@ -79,9 +81,13 @@ class XvideosFactoryTest {
     }
 
     init {
-        if (UrlFetcher.useCache)
-            FactoryChecker.describeFactory(XvideosFactory, VALID_URLS, INVALID_URLS, currentEpisode)
-        else
-            xit("XvideosFactory") {}
+        FactoryChecker.describe(XvideosFactory) {
+            if (UrlFetcher.useCache)
+                whenEpisode(currentEpisode)
+            else
+                xit("when episode") {}
+            whenCheckIsEpisode(VALID_URLS, INVALID_URLS)
+
+        }
     }
 }

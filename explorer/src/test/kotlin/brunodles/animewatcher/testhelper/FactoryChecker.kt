@@ -5,8 +5,7 @@ import brunodles.animewatcher.explorer.PageParser
 import com.greghaskins.spectrum.Spectrum.describe
 import com.greghaskins.spectrum.Spectrum.it
 import org.junit.Assert
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
+import org.junit.Assert.*
 import java.lang.AssertionError
 import java.util.regex.Pattern
 
@@ -47,29 +46,33 @@ object FactoryChecker {
     fun PageParser.whenEpisode(expectedEpisode: Episode) {
 
         describe("when episode") {
-            val resultEpisode = this.episode(expectedEpisode.link!!)
+            val resultEpisode = this.episode(expectedEpisode.link)
 
-            describe("when get currentEpisode") {
+            describe("when get VIDEO_URL_NOT_ENCODED") {
                 checkEpisode(expectedEpisode, resultEpisode)
             }
 
             describe("when get nextEpisodes") {
 
-                val episodes = resultEpisode.nextEpisodes!!
-                val expectedNextEpisodes = expectedEpisode.nextEpisodes!!
+                val episodes = resultEpisode.nextEpisodes
+                val expectedNextEpisodes = expectedEpisode.nextEpisodes
 
                 it("should find ${expectedNextEpisodes.size} episodes") {
                     try {
                         assertEquals(expectedNextEpisodes.size, episodes.size)
                     } catch (e: AssertionError) {
-                        val message = episodes.joinToString(",\n") {
-                            "Episode(number = ${it.number}," +
-                                    "animeName = \"${it.animeName}\"," +
-                                    "image = \"${it.image}\"," +
-                                    "description = \"${it.description}\"," +
-                                    "link = \"${it.link}\")"
+                        if (episodes.isNotEmpty()) {
+                            val message = episodes.joinToString(",\n") {
+                                "Episode(number = ${it.number}," +
+                                        "animeName = \"${it.animeName}\"," +
+                                        "image = \"${it.image}\"," +
+                                        "description = \"${it.description}\"," +
+                                        "link = \"${it.link}\")"
+                            }
+                            throw AssertionError(e.message + ". found:\n$message", e)
+                        } else {
+                            throw e
                         }
-                        throw AssertionError(e.message + ". found:\n$message", e)
                     }
                 }
 

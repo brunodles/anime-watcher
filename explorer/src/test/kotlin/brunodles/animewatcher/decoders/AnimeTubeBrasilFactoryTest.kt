@@ -2,6 +2,8 @@ package brunodles.animewatcher.decoders
 
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.testhelper.FactoryChecker
+import brunodles.animewatcher.testhelper.FactoryChecker.whenCheckIsEpisode
+import brunodles.animewatcher.testhelper.FactoryChecker.whenEpisode
 import com.greghaskins.spectrum.Spectrum
 import org.junit.runner.RunWith
 
@@ -28,6 +30,9 @@ class AnimeTubeBrasilFactoryTest {
     }
 
     init {
-        FactoryChecker.describeFactory(AnimeTubeBrasilFactory, VALID_URLS, INVALID_URLS, currentEpisode)
+        FactoryChecker.describe(AnimeTubeBrasilFactory) {
+            whenEpisode(currentEpisode)
+            whenCheckIsEpisode(VALID_URLS, INVALID_URLS)
+        }
     }
 }
