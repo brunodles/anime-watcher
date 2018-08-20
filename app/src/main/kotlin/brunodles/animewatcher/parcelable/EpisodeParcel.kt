@@ -11,7 +11,7 @@ data class EpisodeParcel(
         val image: String? = null,
         val video: String? = null,
         val link: String,
-        val nextEpisodes: List<EpisodeParcel>? = arrayListOf()) : Parcelable {
+        val nextEpisodes: List<EpisodeParcel> = arrayListOf()) : Parcelable {
 
     constructor(parcel: Parcel) : this(
             parcel.readString(),
@@ -29,7 +29,7 @@ data class EpisodeParcel(
             episode.image,
             episode.video,
             episode.link,
-            episode.nextEpisodes?.map { EpisodeParcel(it) }?.toList()
+            episode.nextEpisodes.map { EpisodeParcel(it) }.toList()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

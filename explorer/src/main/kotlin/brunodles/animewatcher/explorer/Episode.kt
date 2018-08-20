@@ -11,7 +11,7 @@ data class Episode(
         val image: String? = null,
         val video: String? = null,
         val link: String,
-        val nextEpisodes: List<Episode>? = arrayListOf(),
+        val nextEpisodes: List<Episode> = arrayListOf(),
         val temporaryVideoUrl: Boolean = false) : Serializable {
 
     companion object {
@@ -29,7 +29,7 @@ data class Episode(
             "temporaryVideoUrl" to temporaryVideoUrl
     ).filterValues { it != null }
 
-    fun containsNextEpisodes() = nextEpisodes != null && !nextEpisodes.isEmpty()
+    fun containsNextEpisodes() = !nextEpisodes.isEmpty()
 
     fun isPlayable() = video != null
 }

@@ -13,6 +13,6 @@ object EpisodeParceler {
             episode.image,
             episode.video,
             episode.link,
-            episode.nextEpisodes?.map { fromParcel(it) }?.toList()
+            episode.nextEpisodes.map { fromParcel(it) }.toList()
     )
 }
