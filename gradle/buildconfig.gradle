@@ -34,7 +34,7 @@ class BuildConfigTask extends DefaultTask {
         outFile.createNewFile()
         StringBuilder content = new StringBuilder()
         if (!project.buildconfig.targetPackage.isEmpty())
-            content.append("package ${project.buildconfig.targetPackage};\n")
+            content.append("package ${project.buildconfig.targetPackage};\n\n")
         content.append("public final class BuildConfig {\n")
 
         project.buildconfig.configFields.each { f ->
