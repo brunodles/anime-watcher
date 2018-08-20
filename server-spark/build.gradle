@@ -1,0 +1,31 @@
+apply plugin: 'kotlin'
+apply plugin: 'application'
+
+mainClassName = "com.brunodles.videowatcher.serverspark.ApplicationRouterKt"
+
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(":explorer")
+
+    implementation "com.sparkjava:spark-kotlin:1.0.0-alpha"
+    implementation 'com.google.code.gson:gson:2.8.2'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'com.squareup.okhttp3:okhttp:3.11.0'
+}
+
+task stage {
+    dependsOn installDist
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"

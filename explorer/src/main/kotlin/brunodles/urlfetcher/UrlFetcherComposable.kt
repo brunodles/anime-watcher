@@ -2,12 +2,11 @@ package brunodles.urlfetcher
 
 import org.jsoup.nodes.Document
 
-class UrlFetcherComposable internal constructor(val url: String) : UrlFetcher {
-
-    private var internalFetcher: UrlFetcher = JsoupFetcher(url)
+class UrlFetcherComposable internal constructor() : UrlFetcher {
+    private var internalFetcher: UrlFetcher = JsoupFetcher()
 
     fun withCache(): UrlFetcherComposable {
-        internalFetcher = CacheFetcher(url, internalFetcher)
+        internalFetcher = CacheFetcher(internalFetcher)
         return this
     }
 
@@ -16,8 +15,7 @@ class UrlFetcherComposable internal constructor(val url: String) : UrlFetcher {
         return this
     }
 
-    override fun post(): Document = internalFetcher.post()
+    override fun post(url: String): Document = internalFetcher.post(url)
 
-    override fun get(): Document = internalFetcher.get()
-
+    override fun get(url: String): Document = internalFetcher.get(url)
 }

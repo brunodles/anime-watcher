@@ -3,20 +3,20 @@ package brunodles.urlfetcher
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
-internal class JsoupFetcher(private val url: String) : UrlFetcher {
+internal class JsoupFetcher() : UrlFetcher {
 
-    override fun post(): Document = jsoupConnection().post()
+    override fun post(url: String): Document = jsoupConnection(url).post()
 
-    override fun get(): Document = jsoupConnection().get()
+    override fun get(url: String): Document = jsoupConnection(url).get()
 
-    private fun jsoupConnection() = Jsoup.connect(url)
-            .userAgent(USER_AGENT)
-            .referrer(REFERRER)
-            .timeout(10000)
+    private fun jsoupConnection(url: String) = Jsoup.connect(url)
+        .userAgent(USER_AGENT)
+        .referrer(REFERRER)
+        .timeout(10000)
 
     companion object {
-        private val USER_AGENT = "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"
+        private val USER_AGENT =
+            "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"
         private val REFERRER = "http://www.google.com"
-
     }
 }

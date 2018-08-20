@@ -20,16 +20,16 @@ class ViewDataBindingAdapter<ITEM, BINDER : ViewDataBinding>(
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup?, index: Int): ViewHolder<BINDER> {
-        val context = viewGroup?.context
+    override fun onCreateViewHolder(viewGroup: ViewGroup, index: Int): ViewHolder<BINDER> {
+        val context = viewGroup.context
         if (layoutInflater == null)
             layoutInflater = LayoutInflater.from(context)
-        val binding = DataBindingUtil.inflate<BINDER>(layoutInflater, layoutId, viewGroup, false)
+        val binding = DataBindingUtil.inflate<BINDER>(layoutInflater!!, layoutId, viewGroup, false)
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder<BINDER>?, index: Int) {
-        if (holder != null) onBind(holder, list[index], index)
+    override fun onBindViewHolder(holder: ViewHolder<BINDER>, index: Int) {
+        onBind(holder, list[index], index)
     }
 
     override fun getItemCount(): Int = list.size

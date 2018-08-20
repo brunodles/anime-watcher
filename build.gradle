@@ -1,23 +1,23 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.10'
-    ext.plugin_version = '3.0.1'
+    ext.kotlin_version = '1.2.50'
+    ext.plugin_version = '3.1.4'
     ext.playservices_version = '11.8.0'
     ext.support_libs_version = '27.0.2'
 
     repositories {
-        maven { url 'https://maven.google.com' }
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
+        google()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$plugin_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-noarg:$kotlin_version"
-        classpath 'com.google.gms:google-services:3.1.0'
+        classpath 'com.google.gms:google-services:4.0.0'
         classpath 'io.fabric.tools:gradle:1.+'
-        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.7.3'
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.2'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

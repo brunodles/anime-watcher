@@ -53,13 +53,36 @@
                 <data android:scheme="http" />
                 <data android:scheme="https" />
 
-                <data android:host="animacurse.moe" />
+                <data android:host="www.animekaionline.com" />
                 <data android:host="animekaionline.com" />
+
+                <data android:host="www.animesonlinebr.com.br" />
                 <data android:host="animesonlinebr.com.br" />
+
+                <data android:host="www.animesorion.tv" />
                 <data android:host="animesorion.tv" />
-                <data android:host="animes.zlx.com.br" />
-                <data android:host="anitubex.com" />
+
+                <data android:host="www.animesorion.site" />
+                <data android:host="animesorion.site" />
+
+                <data android:host="www.animetubebrasil.com" />
+                <data android:host="animetubebrasil.com" />
+
+                <data android:host="www.anitube.site" />
+                <data android:host="anitube.site" />
+
+                <data android:host="www.one-piece-x.com.br" />
                 <data android:host="one-piece-x.com.br" />
+
+                <data android:host="www.onepiece-ex.com.br" />
+                <data android:host="onepiece-ex.com.br" />
+
+                <data android:host="www.tvcurse.com" />
+                <data android:host="tvcurse.com" />
+
+                <data android:host="www.animacurse.moe" /> <!--Check -->
+                <data android:host="animacurse.moe" /> <!--Check -->
+                <!--<data android:host="animes.zlx.com.br" />-->
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />

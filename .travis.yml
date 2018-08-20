@@ -5,16 +5,20 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-27.0.2
+    - build-tools-27.0.3
     - android-27
     - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
     - addon-google_apis-google-27
-    # emulators. Uncomment to run instrumented tests
-    # - sys-img-armeabi-v7a-$ANDROID_TARGET
-    # repeated as suggested to get the latest sdk version
+    - sys-img-armeabi-v7a-15
+    - sys-img-armeabi-v7a-27
     - tools
+  licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+    - 'build-tools.*'
 
 env:
   global:
@@ -38,9 +42,9 @@ before_install:
 script:
 - echo "Travis branch is $TRAVIS_BRANCH"
 - echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST  buildNumber $TRAVIS_BUILD_NUMBER"
-- ./gradlew clean app:googleServicesDecrypt assembleDebug -PminSdk=$MIN_SDK
-- ./gradlew lint ktlint checkstyleMain --continue
-- ./gradlew test
+- ./gradlew app:googleServicesDecrypt assembleDebug -PminSdk=$MIN_SDK
+- ./gradlew lint ktlint checkstyleMain --continue -x app:ktlint
+- ./gradlew test -Pusecache=true -PparallelForks=2
 #- ./gradlew app:assembleRelease -PkeyPassword='$KEYPASS' -PstorePassword='$KEYSTOREPASS' -PversionCode=$TRAVIS_BUILD_NUMBER -PversionName=$RELEASE_TAG
 #- ./gradlew connectedAndroidTest -PdisablePreDex --stacktrace -P
 #- ./gradlew jacocoTestReport

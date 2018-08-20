@@ -3,6 +3,7 @@ package brunodles.animewatcher.player
 import android.content.Context
 import android.util.Log
 import brunodles.animewatcher.ImageLoader
+import brunodles.animewatcher.decoders.UrlChecker
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.parcelable.EpisodeParcel
 import brunodles.animewatcher.parcelable.EpisodeParceler
@@ -32,7 +33,7 @@ class EpisodeController(val context: Context) {
     }
 
     fun findVideoOn(episode: EpisodeParcel): Single<Episode> {
-        return if (episode.isInfoMissing())
+        return if (episode.isVideoMissing())
             findVideoOn(episode.link)
         else
             Single.just(episode)
@@ -71,7 +72,7 @@ class EpisodeController(val context: Context) {
 
     private fun preFetchNextEpisodes(episode: Episode) {
         if (!episode.containsNextEpisodes()) {
-            Log.d(TAG, "preFetchNextEpisodes: nextEpisodes is empty")
+            Log.d(TAG, "preFetchNextEpisodes: nextEpisode is empty")
             return
         }
         Observable.fromIterable(episode.nextEpisodes)

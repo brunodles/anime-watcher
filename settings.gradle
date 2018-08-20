@@ -1,11 +1,9 @@
-include ':explorer', ':decodertesthelper'
-include ':app'
+include ':explorer', ':server-spark'
 include ':cli'
 //include ':testcacher'
-include ':decoders:animacurse'
-include ':decoders:animakai'
-include ':decoders:animesonlinebr'
-include ':decoders:animesorion'
-include ':decoders:animesproject'
-include ':decoders:anitubex'
-include ':decoders:onepiecex'
+
+// include android related modules inside this verification
+// This will be used to skip android modules for web server releases.
+if ((System.getenv("INCLUDE_ANDROID") ?: "true").toBoolean()) {
+    include ':app'
+}

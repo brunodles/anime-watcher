@@ -31,5 +31,5 @@ data class Episode(
 
     fun containsNextEpisodes() = nextEpisodes != null && !nextEpisodes.isEmpty()
 
-    fun isPlayable() = video != null && nextEpisodes != null && !nextEpisodes.isEmpty()
+    fun isPlayable() = video != null
 }

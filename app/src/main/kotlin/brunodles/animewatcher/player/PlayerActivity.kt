@@ -41,12 +41,10 @@ class PlayerActivity : AppCompatActivity() {
         val PREF_VIDEO = "video"
         val PREF_POSITION = "position"
 
-        fun newIntent(context: Context, episode: Episode): Intent
-                = Intent(context, PlayerActivity::class.java)
+        fun newIntent(context: Context, episode: Episode): Intent = Intent(context, PlayerActivity::class.java)
                 .putExtra(EXTRA_EPISODE, EpisodeParceler.toParcel(episode))
 
-        fun newIntent(context: Context, link: String): Intent
-                = Intent(context, PlayerActivity::class.java)
+        fun newIntent(context: Context, link: String): Intent = Intent(context, PlayerActivity::class.java)
                 .setData(Uri.parse(link))
     }
 
@@ -62,7 +60,7 @@ class PlayerActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_player)
         setupRecyclerView()
 
-        binding.playRemote.setOnClickListener {
+        binding.playRemote.setOnClickListener { it ->
             episode?.let { caster?.playRemote(it, player.getCurrentPosition()) }
         }
 
@@ -124,7 +122,7 @@ class PlayerActivity : AppCompatActivity() {
         val observable = if (intent.hasExtra(EXTRA_EPISODE))
             episodeController.findVideoOn(intent.getParcelableExtra<EpisodeParcel>(EXTRA_EPISODE))
         else
-            episodeController.findVideoOn(UrlChecker.findUrl(intent))
+            episodeController.findVideoOn(findUrl(intent))
         observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(onSuccess = this::onFetchEpisode,
@@ -136,6 +134,14 @@ class PlayerActivity : AppCompatActivity() {
             player?.prepareVideo(url)
             player?.seekTo(preferences.getLong(PREF_POSITION, C.TIME_UNSET))
         }
+    }
+
+    private fun findUrl(intent: android.content.Intent): String? {
+        if (intent.data != null)
+            return intent.data.toString()
+        if (intent.hasExtra(Intent.EXTRA_TEXT))
+            return intent.getStringExtra(Intent.EXTRA_TEXT)
+        return null
     }
 
     private fun onFetchEpisode(episode: Episode) {
@@ -222,6 +228,5 @@ class PlayerActivity : AppCompatActivity() {
     }
 }
 
-private fun SharedPreferences.editAndApply(function: SharedPreferences.Editor.() -> Unit)
-        = this.edit().also { function.invoke(it) }.apply()
+private fun SharedPreferences.editAndApply(function: SharedPreferences.Editor.() -> Unit) = this.edit().also { function.invoke(it) }.apply()
 

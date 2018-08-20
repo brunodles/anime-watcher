@@ -1,0 +1,1 @@
+web: ./server-spark/build/install/server-spark/bin/server-spark

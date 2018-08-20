@@ -14,13 +14,18 @@ buildconfig {
     field "Boolean", "USE_CACHE", Boolean.parseBoolean(project.properties.get("usecache", "true"))
 }
 
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile 'org.jsoup:jsoup:1.8.3'
+test {
+    maxParallelForks = Integer.parseInt(project.properties.get("parallelForks", "1"))
+}
 
-    testCompile 'junit:junit:4.12'
-    testCompile 'com.greghaskins:spectrum:1.1.1'
-    testCompile 'com.github.tomakehurst:wiremock:2.12.0'
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'com.brunodles:alchemy-alchemist:2.1.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'com.greghaskins:spectrum:1.1.1'
+    testImplementation 'com.github.tomakehurst:wiremock:2.18.0'
 }
 
 sourceCompatibility = "1.7"
