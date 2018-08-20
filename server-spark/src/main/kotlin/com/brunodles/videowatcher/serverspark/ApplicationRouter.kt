@@ -18,6 +18,7 @@ fun startServer() {
     val gson = Gson()
     post("/decoder") {
         val episode: Episode?
+        response.type("Application/json;charset=utf-8")
         try {
             episode = UrlChecker.videoInfo(request.body())
         } catch (e: Exception) {
