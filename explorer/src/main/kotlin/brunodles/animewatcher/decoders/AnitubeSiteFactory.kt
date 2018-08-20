@@ -26,7 +26,7 @@ object AnitubeSiteFactory : PageParser {
             return Episode(description, number, animeName, image, video, url,
                     nextEpisode()?.let {
                         listOf(Episode(it.title(), it.number(), animeName, link = it.link()))
-                    })
+                    } ?: emptyList() )
         }
     }
 

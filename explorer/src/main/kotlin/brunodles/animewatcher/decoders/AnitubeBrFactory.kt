@@ -22,7 +22,7 @@ object AnitubeBrFactory : PageParser {
             return Episode(description(), number(), animeName(), image(), null, url,
                     nextEpisodes()?.let {
                         listOf(Episode(it.title(), number() + 1, animeName(), link = it.link()))
-                    })
+                    } ?: emptyList())
         }
     }
 

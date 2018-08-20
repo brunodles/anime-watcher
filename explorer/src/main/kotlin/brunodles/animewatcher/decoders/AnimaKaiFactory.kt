@@ -18,34 +18,33 @@ object AnimaKaiFactory : PageParser {
     override fun episode(url: String): Episode {
         val doc = urlFetcher.get(url)
         val video = doc.select(".box-video video")
-        val text = video.alt()
         val src = video.select("source").src()
         return Episode(
-            number = url.split("-").last().toIntOrNull() ?: 0,
-            animeName = animeName(doc),
-            image = imageUrl(doc),
-            description = text,
-            video = src,
-            link = url
+                number = url.split("-").last().toIntOrNull() ?: 0,
+                animeName = animeName(doc),
+                image = imageUrl(doc),
+                description = doc.select("[property=og:description]").attr("content"),
+                video = src,
+                link = url
         )
     }
 
     private fun imageUrl(doc: Document): String? {
         val url = doc.head()
-            .select("meta[property=og:image]")
-            ?.attr("content")
-            ?.split("http")
-            ?.last()
+                .select("meta[property=og:image]")
+                ?.attr("content")
+                ?.split("http")
+                ?.last()
         if (url != null)
             return "http$url"
         return null
     }
 
     private fun animeName(doc: Document): String? =
-        doc.head()
-            .select("meta[property=og:description]")
-            ?.attr("content")
-            ?.split(" ")
-            ?.filter { !it.matches(NUMBER_REGEX) }
-            ?.joinToString(" ")
+            doc.head()
+                    .select("meta[property=og:description]")
+                    ?.attr("content")
+                    ?.split(" ")
+                    ?.filter { !it.matches(NUMBER_REGEX) }
+                    ?.joinToString(" ")
 }
