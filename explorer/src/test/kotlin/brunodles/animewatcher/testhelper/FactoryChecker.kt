@@ -5,7 +5,8 @@ import brunodles.animewatcher.explorer.PageParser
 import com.greghaskins.spectrum.Spectrum.describe
 import com.greghaskins.spectrum.Spectrum.it
 import org.junit.Assert
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import java.lang.AssertionError
 import java.util.regex.Pattern
 
@@ -48,7 +49,7 @@ object FactoryChecker {
         describe("when episode") {
             val resultEpisode = this.episode(expectedEpisode.link)
 
-            describe("when get VIDEO_URL_NOT_ENCODED") {
+            describe("when get current episode") {
                 checkEpisode(expectedEpisode, resultEpisode)
             }
 
