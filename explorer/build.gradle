@@ -17,8 +17,8 @@ test {
 }
 
 dependencies {
+    compile 'com.brunodles:alchemy-alchemist:2.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'com.brunodles:alchemy-alchemist:2.1.0'
     implementation 'com.google.code.gson:gson:2.8.2'
 
     testImplementation 'junit:junit:4.12'
