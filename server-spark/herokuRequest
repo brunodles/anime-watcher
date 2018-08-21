@@ -1,0 +1,8 @@
+#!/bin/bash
+if [ -z $1 ]; then
+    echo "Missing url parameter"
+    echo "Usage: $0 <wanted url>"
+    echo "Sample: $0 https://github.com/brunodles/anime-watcher"
+else
+    curl https://anime-watcher-spark.herokuapp.com/decoder -d "$1"
+fi
