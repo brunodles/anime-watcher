@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import brunodles.adapter.EmptyAdapter
 import brunodles.animewatcher.ImageLoader
 import brunodles.animewatcher.R
@@ -41,9 +42,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import java.util.*
+import java.util.Random
 import java.util.concurrent.TimeUnit
-
 
 class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
 
@@ -71,25 +71,35 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
         nextAdapter = EpisodeAdapter()
         binding.history.layoutManager = layoutManager
         binding.history.adapter = EmptyAdapter()
-        binding.nextEpisodes.layoutManager = GridLayoutManager(this, resources.getInteger(R.integer.home_columns), GridLayoutManager.VERTICAL, true)
+        binding.nextEpisodes.layoutManager = GridLayoutManager(
+            this,
+            resources.getInteger(R.integer.home_columns),
+            GridLayoutManager.VERTICAL,
+            true
+        )
         binding.nextEpisodes.adapter = nextAdapter
         binding.signInButton.setOnClickListener {
-            startActivityForResult(Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient), RC_SIGN_IN)
+            startActivityForResult(
+                Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient),
+                RC_SIGN_IN
+            )
         }
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build()
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
         mGoogleApiClient = GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build()
+            .enableAutoManage(this, this)
+            .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+            .build()
 
         auth = FirebaseAuth.getInstance()
 
-        setImage(Single.just(Preferences(this).getLastAnimeImage())
-                .subscribeOn(Schedulers.io()))
+        setImage(
+            Single.just(Preferences(this).getLastAnimeImage())
+                .subscribeOn(Schedulers.io())
+        )
     }
 
     override fun onStart() {
@@ -119,7 +129,7 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
     }
 
     private fun handleSignInResult(result: GoogleSignInResult) {
-        Log.d(TAG, "handleSignInResult:" + result.isSuccess)
+        Log.d(TAG, "handleSignInResult: ${result.status}. IsSuccess? " + result.isSuccess)
         if (result.isSuccess) {
             // Signed in successfully, show authenticated UI.
             val acct = result.signInAccount
@@ -135,20 +145,20 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
 
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         auth.signInWithCredential(credential)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "signInWithCredential:success")
-                        val user = auth.currentUser
-                        updateUI(user)
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w(TAG, "signInWithCredential:failure", task.exception)
-                        //                            Toast.makeText(this@GoogleSignInActivity, "Authentication failed.",
-                        //                                    Toast.LENGTH_SHORT).show()
-                        updateUI(null)
-                    }
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInWithCredential:success")
+                    val user = auth.currentUser
+                    updateUI(user)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT)
+                        .show()
+                    updateUI(null)
                 }
+            }
     }
 
     private fun updateUI(user: FirebaseUser?) {
@@ -161,31 +171,42 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
         //        historyAdapter.setUser(user)
 
         val options = FirebaseRecyclerOptions.Builder<String>()
-                .setQuery(Firebase.history(user)
-                        .limitToLast(100)
-                        .orderByKey(), String::class.java)
-                .build()
+            .setQuery(
+                Firebase.history(user)
+                    .limitToLast(100)
+                    .orderByKey(), String::class.java
+            )
+            .build()
         historyAdapter = object :
-                FirebaseRecyclerAdapter<String, HomeAdapter.EpisodeHolder>(options) {
+            FirebaseRecyclerAdapter<String, HomeAdapter.EpisodeHolder>(options) {
 
-            override fun onBindViewHolder(holder: HomeAdapter.EpisodeHolder, position: Int, model: String) {
+            override fun onBindViewHolder(
+                holder: HomeAdapter.EpisodeHolder,
+                position: Int,
+                model: String
+            ) {
                 holder.onBind(UNKNOWN_EPISODE)
                 model.let { link ->
                     disposable.add(Firebase.videoRef(link)
-                            .singleObservable(Episode::class.java)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribeBy(
-                                    onSuccess = { holder.onBind(it) },
-                                    onError = { Log.e(TAG, "onBindViewHolder: ", it) }
-                            ))
+                        .singleObservable(Episode::class.java)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeBy(
+                            onSuccess = { holder.onBind(it) },
+                            onError = { Log.e(TAG, "onBindViewHolder: ", it) }
+                        ))
                 }
                 holder.clickListener = ::onItemClick
             }
 
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAdapter.EpisodeHolder
-                    = HomeAdapter.EpisodeHolder(ItemEpisodeBinding.inflate(
-                    LayoutInflater.from(parent?.context), parent, false))
+            override fun onCreateViewHolder(
+                parent: ViewGroup,
+                viewType: Int
+            ): HomeAdapter.EpisodeHolder = HomeAdapter.EpisodeHolder(
+                ItemEpisodeBinding.inflate(
+                    LayoutInflater.from(parent?.context), parent, false
+                )
+            )
         }
         binding.history.adapter = historyAdapter
         //        binding.history.adapter = EmptyStateAdapterDecorator(historyAdapter, object :
@@ -207,79 +228,94 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
     private fun suggestNextEpisode(user: FirebaseUser) {
         nextAdapter?.clear()
         disposable.add(Firebase.history(user)
-                .limitToLast(30)
-                .orderByKey()
-                .typedChildObserver(String::class.java)
-                .subscribeOn(Schedulers.io())
-                .doOnNext { Log.d(TAG, "suggestNextEpisode: lastUrl: ${it.element}") }
-                .flatMapSingle { Firebase.videoRef(it.element).singleObservable(Episode::class.java) }
-                .take(5, TimeUnit.SECONDS)
-                .toMap { it.animeName ?: "Unknown" }
-                .doOnSuccess { Log.d(TAG, "suggestNextEpisode: keys: ${it.keys}") }
-                .flatMapObservable { Observable.fromIterable(it.values) }
-                .doOnNext { Log.d(TAG, "suggestNextEpisode: last: ${it.animeName} - ${it.number} ${it.description}") }
-                .filter { it.nextEpisodes?.first() != null }
-                .map { it.nextEpisodes!!.first() }
-                .doOnNext { Log.d(TAG, "suggestNextEpisode: suggestion: ${it.animeName} - ${it.number} ${it.description}") }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                        onNext = { nextAdapter?.add(it) },
-                        onError = { Log.e(TAG, "suggestNextEpisode: ", it) },
-                        onComplete = {
-                            Log.d(TAG, "suggestNextEpisode: nextAdapter.count = ${nextAdapter?.itemCount}")
-                        }
-                ))
+            .limitToLast(30)
+            .orderByKey()
+            .typedChildObserver(String::class.java)
+            .subscribeOn(Schedulers.io())
+            .doOnNext { Log.d(TAG, "suggestNextEpisode: lastUrl: ${it.element}") }
+            .flatMapSingle {
+                Firebase.videoRef(it.element).singleObservable(Episode::class.java)
+            }
+            .take(5, TimeUnit.SECONDS)
+            .toMap { it.animeName ?: "Unknown" }
+            .doOnSuccess { Log.d(TAG, "suggestNextEpisode: keys: ${it.keys}") }
+            .flatMapObservable { Observable.fromIterable(it.values) }
+            .doOnNext {
+                Log.d(
+                    TAG,
+                    "suggestNextEpisode: last: ${it.animeName} - ${it.number} ${it.description}"
+                )
+            }
+            .filter { it.nextEpisodes.isNotEmpty() }
+            .map { it.nextEpisodes.first() }
+            .doOnNext {
+                Log.d(
+                    TAG,
+                    "suggestNextEpisode: suggestion: ${it.animeName} - ${it.number} ${it.description}"
+                )
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onNext = { nextAdapter?.add(it) },
+                onError = { Log.e(TAG, "suggestNextEpisode: ", it) },
+                onComplete = {
+                    Log.d(
+                        TAG,
+                        "suggestNextEpisode: nextAdapter.count = ${nextAdapter?.itemCount}"
+                    )
+                }
+            ))
     }
 
     private fun updateAnimeImage(user: FirebaseUser) {
         val image = Firebase.lastOnHistory(user)
-                .subscribeOn(Schedulers.io())
-                .flatMap { Firebase.videoRef(it).singleObservable(Episode::class.java) }
-                .flatMapObservable { ImageLoader.searchObservable("Wallpaper ${it.animeName}") }
-                .map { it.size(800, 600) }
-                .map { it.listImageUrls() }
-                .doOnNext {
-                    Observable.fromIterable(it)
-                            .subscribeOn(Schedulers.io())
-                            .subscribeBy(onNext = { ImageLoader.fetch(this, it) })
-                }
-                .map { it.firsts(5) }
-                .map { it.random() }
-                .singleOrError()
-                .timeout(30, TimeUnit.SECONDS)
-                .doOnSuccess { Preferences(this).setLastAnimeImage(it) }
-                .doOnError {
-                    if (it.message?.contains("decode stream") == true)
-                        updateAnimeImage(user)
-                }
+            .subscribeOn(Schedulers.io())
+            .flatMap { Firebase.videoRef(it).singleObservable(Episode::class.java) }
+            .flatMapObservable { ImageLoader.searchObservable("Wallpaper ${it.animeName}") }
+            .map { it.size(800, 600) }
+            .map { it.listImageUrls() }
+            .doOnNext { it ->
+                Observable.fromIterable(it)
+                    .subscribeOn(Schedulers.io())
+                    .subscribeBy(onNext = { ImageLoader.fetch(this, it) })
+            }
+            .map { it.firsts(5) }
+            .map { it.random() }
+            .singleOrError()
+            .timeout(30, TimeUnit.SECONDS)
+            .doOnSuccess { Preferences(this).setLastAnimeImage(it) }
+            .doOnError {
+                if (it.message?.contains("decode stream") == true)
+                    updateAnimeImage(user)
+            }
         setImage(image)
     }
 
     private fun setImage(single: Single<String>) =
-            disposable.add(single.flatMap {
-                ImageLoader.picasso(this)
-                        .load(it)
-                        .asSingle()
-            }.observeOn(AndroidSchedulers.mainThread())
-                    .doOnSuccess {
-                        Palette.from(it).generate {
-                            it.vibrantSwatch?.let {
-                                binding.mainCollapsing.setContentScrimColor(it.rgb)
-                                binding.coordinator.setStatusBarBackgroundColor(it.rgb)
-                                binding.mainAppbar.setBackgroundColor(it.rgb)
-                                binding.mainCollapsing.setExpandedTitleColor(it.titleTextColor)
+        disposable.add(single.flatMap {
+            ImageLoader.picasso(this)
+                .load(it)
+                .asSingle()
+        }.observeOn(AndroidSchedulers.mainThread())
+            .doOnSuccess { it ->
+                Palette.from(it).generate {
+                    it.vibrantSwatch?.let {
+                        binding.mainCollapsing.setContentScrimColor(it.rgb)
+                        binding.coordinator.setStatusBarBackgroundColor(it.rgb)
+                        binding.mainAppbar.setBackgroundColor(it.rgb)
+                        binding.mainCollapsing.setExpandedTitleColor(it.titleTextColor)
 
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-                                    window.statusBarColor = it.rgb
-                            }
-                        }
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                            window.statusBarColor = it.rgb
                     }
-                    .subscribeBy(
-                            onSuccess = { binding.mainBackdrop.setImageBitmap(it) },
-                            onError = {
-                                Log.e(TAG, "setImage: setImage", it)
-                            }
-                    ))
+                }
+            }
+            .subscribeBy(
+                onSuccess = { binding.mainBackdrop.setImageBitmap(it) },
+                onError = {
+                    Log.e(TAG, "setImage: setImage", it)
+                }
+            ))
 
     fun onItemClick(episode: Episode) {
         startActivity(PlayerActivity.newIntent(this, episode))
@@ -288,7 +324,6 @@ class HomeActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
     override fun onConnectionFailed(p0: ConnectionResult) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-
 }
 
 private fun <E> List<E>.firsts(max: Int): List<E> {

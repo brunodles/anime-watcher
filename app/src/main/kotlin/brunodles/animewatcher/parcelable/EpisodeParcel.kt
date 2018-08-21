@@ -5,31 +5,33 @@ import android.os.Parcelable
 import brunodles.animewatcher.explorer.Episode
 
 data class EpisodeParcel(
-        val description: String,
-        val number: Int,
-        val animeName: String? = null,
-        val image: String? = null,
-        val video: String? = null,
-        val link: String,
-        val nextEpisodes: List<EpisodeParcel> = arrayListOf()) : Parcelable {
+    val description: String,
+    val number: Int,
+    val animeName: String? = null,
+    val image: String? = null,
+    val video: String? = null,
+    val link: String,
+    val nextEpisodes: List<EpisodeParcel> = arrayListOf()
+) : Parcelable {
 
     constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readInt(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.createTypedArrayList(CREATOR))
+        parcel.readString(),
+        parcel.readInt(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.createTypedArrayList(CREATOR)
+    )
 
     constructor(episode: Episode) : this(
-            episode.description,
-            episode.number,
-            episode.animeName,
-            episode.image,
-            episode.video,
-            episode.link,
-            episode.nextEpisodes.map { EpisodeParcel(it) }.toList()
+        episode.description,
+        episode.number,
+        episode.animeName,
+        episode.image,
+        episode.video,
+        episode.link,
+        episode.nextEpisodes?.map { EpisodeParcel(it) }?.toList() ?: emptyList()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
