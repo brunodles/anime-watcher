@@ -1,8 +1,10 @@
 package brunodles.animewatcher.player
 
+//import brunodles.animewatcher.decoders.UrlChecker
 import android.content.Context
 import android.util.Log
-import brunodles.animewatcher.decoders.UrlChecker
+import brunodles.animewatcher.ImageLoader
+import brunodles.animewatcher.api.ApiFactory
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.parcelable.EpisodeParcel
 import brunodles.animewatcher.parcelable.EpisodeParceler
@@ -50,22 +52,19 @@ class EpisodeController(val context: Context) {
     }
 
     private fun fetchVideo(url: String): Single<Episode> {
-        return Single.just(url)
+        Log.d(TAG, "fetchVideo: url: $url")
+        return ApiFactory.api.decoder(url)
             .subscribeOn(Schedulers.io())
-            .map {
-                UrlChecker.videoInfo(url)
-                    ?: throw RuntimeException("Can't find video info")
-            }
-//                .map {
-//                    if (it.image.isNullOrBlank()) {
-//                        Log.d(TAG, "fetchVideo: invalid image $url")
-//                        it.copy(image = ImageLoader.first("${it.animeName} ${it.number} ${it.description}"))
-//                    } else {
-//                        it
-//                    }
-//                }
+            .map(::getImageIfNeeded)
             .doOnSuccess { Firebase.addVideo(it) }
             .timeout(1, TimeUnit.MINUTES)
+    }
+
+    private fun getImageIfNeeded(episode: Episode): Episode {
+        return if (episode.image.isNullOrBlank())
+            episode.copy(image = ImageLoader.first("${episode.animeName} ${episode.number} ${episode.description}"))
+        else
+            episode
     }
 
     private fun preFetchNextEpisodes(episode: Episode) {

@@ -50,13 +50,15 @@ object ImageLoader {
                     .build()
             return try {
                 val response = client.newCall(request).execute()
-                response.body().string()
+                response.body()?.let {
+                    val result = it.string()
+                    it.close()
+                    return result
+                }
             } catch (e: IOException) {
                 null
             }
-
         }
-
     }
 
     fun first(query: String): String? = search(query).first()
