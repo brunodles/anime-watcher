@@ -1,0 +1,55 @@
+def SUBDOMAINS = ["", "www."]
+
+def PAGES = [
+        // Anime kai
+        "animekaionline.com",
+        "animeskai.com",
+        "animakai.info",
+        // Animes Online Br
+        "animesonlinebr.com.br",
+        //Animes Orion
+        "animesorion.site",
+        "animesorion.tv",
+        "animesorion.video",
+        // Anitube brasil
+        "animetubebrasil.com",
+        // Anitube Br
+        "anitubebr.com",
+        // Anitube site
+        "anitube.site",
+        // One Piece Ex
+        "onepiece-ex.com.br",
+        "one-piece-x.com.br",
+        // Anima/tv Curse
+        "tvcurse.com",
+        "animacurse.moe",
+        "animacurse.tv",
+        // XVideos
+        "xvideos.com"
+]
+
+def DOMAINS = PAGES.collectMany { domain ->
+    SUBDOMAINS.collect { it + domain }
+}
+
+def GOOGLE_SEARCH_QUERY = PAGES.collect { "site:$it" }.join(" OR ")
+
+task printDomains {
+    doLast {
+        DOMAINS.each {
+            println it
+        }
+    }
+}
+
+task googleSearch {
+    doLast {
+        println GOOGLE_SEARCH_QUERY
+    }
+}
+
+task intentFilterData {
+    doLast {
+        println DOMAINS.collect { "<data android:host=\"$it\" />" }.join("\n")
+    }
+}
