@@ -16,7 +16,9 @@ class TvCurseFactoryTest {
             "https://tvcurse.com/?p=713",
             "http://tvcurse.com/?p=713",
             "tvcurse.com?p=123",
-            "http://tvcurse.com?p=321"
+            "http://tvcurse.com?p=321",
+            "animacurse.moe/?p=713",
+            "animacurse.tv/?p=713"
         )
         val INVALID_URLS = arrayOf("tvcurse.com/?cat=123")
         val PLAYER_WITH_NEXT = Episode(

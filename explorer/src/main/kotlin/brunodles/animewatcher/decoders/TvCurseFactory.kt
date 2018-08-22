@@ -11,7 +11,7 @@ import com.brunodles.alchemist.regex.Regex
 import com.brunodles.alchemist.selector.Selector
 
 object TvCurseFactory : PageParser {
-    private val URL_REGEX = kotlin.text.Regex("tvcurse\\.com/?\\?p=")
+    private val URL_REGEX = kotlin.text.Regex("(?:tvcurse\\.com|animacurse\\.(?:tv|moe))\\/?\\?p=")
 
     override fun episode(url: String): Episode {
         val currentEpisode = AlchemistFactory.alchemist.parseUrl(url, CurrentEpisode::class.java)
@@ -23,13 +23,15 @@ object TvCurseFactory : PageParser {
             }
             val description = description()
             val number = number()
-            return Episode(description, number, animeName(), image(), video(), url,
-                    nextEpisodes)
+            return Episode(
+                description, number, animeName(), image(), video(), url,
+                nextEpisodes
+            )
         }
     }
 
     override fun isEpisode(url: String): Boolean =
-            url.contains(URL_REGEX)
+        url.contains(URL_REGEX)
 
     private fun List<NextEpisode>?.toEpisode(animeName: String?): List<Episode> {
         this?.let {
