@@ -32,9 +32,11 @@ def DOMAINS = PAGES.collectMany { domain ->
     SUBDOMAINS.collect { it + domain }
 }
 
-def GOOGLE_SEARCH_QUERY = PAGES.collect { "site:$it" }.join(" OR ")
+def GOOGLE_SEARCH_PAGES_QUERY = PAGES.collect { "site:$it" }.join(" OR ")
 
 task printDomains {
+    description "Prints all domains"
+    group "sites"
     doLast {
         DOMAINS.each {
             println it
@@ -42,13 +44,27 @@ task printDomains {
     }
 }
 
-task googleSearch {
+task googleSearchPagesQuery {
+    description "Prints google search query for multiple sites"
+    group "sites"
     doLast {
-        println GOOGLE_SEARCH_QUERY
+        println GOOGLE_SEARCH_PAGES_QUERY
+    }
+}
+
+task googleSearch {
+    description "Prints google search url. Use \"query\" parameter to inform wanted text to search."
+    group "sites"
+    doLast {
+        def query = project.property("query")
+        println "query: $query"
+        println "http://google.com/search?q=" + URLEncoder.encode("$query $GOOGLE_SEARCH_PAGES_QUERY", "UTF-8")
     }
 }
 
 task intentFilterData {
+    description "Prints all intent-filter data elements for all domains"
+    group "sites"
     doLast {
         println DOMAINS.collect { "<data android:host=\"$it\" />" }.join("\n")
     }
