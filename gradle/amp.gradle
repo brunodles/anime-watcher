@@ -1,0 +1,89 @@
+class AndroidManifestPreprocessorExtension {
+    HashMap<String, String> placeHolders = new HashMap<>()
+
+    void placeholder(String key, String value) {
+        placeHolders.put('${' + key + '}', value)
+    }
+}
+
+class AndroidManifestPreprocessorTask extends DefaultTask {
+
+    String group = "Android Manifest Preprocessor"
+    String description = "Replace placeholders for configured strings."
+    List<TaskConfiguration> configurations
+
+    AndroidManifestPreprocessorTask() {
+        outputs.upToDateWhen { false }
+    }
+
+    @TaskAction
+    def execute(IncrementalTaskInputs inputs) {
+        AndroidManifestPreprocessorExtension extension = project.extensions.getByType(AndroidManifestPreprocessorExtension.class)
+
+        configurations.each { config ->
+            def input = config.inputFile
+            def workingText = input.text
+            extension.placeHolders.each { placeholder ->
+                workingText = workingText.replace(placeholder.key, placeholder.value)
+            }
+            config.outputFile.write(workingText)
+        }
+    }
+
+    static class TaskConfiguration {
+        File inputFile
+        File outputFile
+
+        TaskConfiguration(File inputFile, File outputFile) {
+            this.inputFile = inputFile
+            this.outputFile = outputFile
+        }
+    }
+}
+
+class AndroidManifestPreprocessorPlugin implements Plugin<Project> {
+
+    @SuppressWarnings("GroovyUnusedDeclaration")
+    public static final String VERSION = "0.1"
+    private AndroidManifestPreprocessorExtension extension
+
+    @Override
+    void apply(Project project) {
+        project.afterEvaluate {
+            if (!containsAndroid(project))
+                throw GradleException("Project does not contains Android Plugin")
+            project.android.applicationVariants.all { variant ->
+                println variant.name + " " + variant.baseName
+                def manifestFiles = variant.sourceSets.collect { sourceSet ->
+                    new AndroidManifestPreprocessorTask.TaskConfiguration(
+                            new File(sourceSet.manifestFile.parentFile, "manifest/AndroidManifest.xml"),
+                            sourceSet.manifestFile
+                    )
+                }.findAll { it.inputFile.exists() }
+                        .toList()
+
+                def task = project.tasks.create("preProcessAndroidManifest${variant.name.capitalize()}", AndroidManifestPreprocessorTask.class) {
+                    configurations = manifestFiles
+                }
+                def pluginTaskName = "check${variant.name.capitalize()}Manifest"
+                def pluginTask = project.tasks.getByName(pluginTaskName)
+                if (pluginTask == null) {
+                    logger.debug("The task \"${pluginTaskName}\" does not exists!")
+                    return
+                }
+                pluginTask.dependsOn.add(task)
+            }
+        }
+        extension = project.extensions.create("amp", AndroidManifestPreprocessorExtension)
+    }
+
+    private static boolean containsAndroid(Project project) {
+        def plugins = project.plugins
+        if (plugins == null || plugins.isEmpty())
+            return false
+        return plugins.findPlugin("com.android.application") != null ||
+                plugins.findPlugin("com.android.library") != null
+    }
+}
+
+plugins.apply(AndroidManifestPreprocessorPlugin.class)
