@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: "kotlin-kapt"
 apply plugin: 'io.fabric'
+apply from: rootProject.file("gradle/amp.gradle")
+apply from: rootProject.file("gradle/sites.gradle")
 
 android {
     signingConfigs {
@@ -40,6 +42,10 @@ android {
     dataBinding {
         enabled = true
     }
+}
+
+amp {
+    placeholder "intentfilter-data", DOMAINS.collect { "<data android:host=\"$it\"/>" }.join("\n\t\t\t\t").toString()
 }
 
 dependencies {

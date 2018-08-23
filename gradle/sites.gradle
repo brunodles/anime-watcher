@@ -28,7 +28,7 @@ def PAGES = [
         "xvideos.com"
 ]
 
-def DOMAINS = PAGES.collectMany { domain ->
+ext.DOMAINS = PAGES.collectMany { domain ->
     SUBDOMAINS.collect { it + domain }
 }
 
