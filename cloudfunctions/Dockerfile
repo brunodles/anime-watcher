@@ -1,4 +1,7 @@
-FROM node:8
+FROM node:6.11.5-alpine
+MAINTAINER Bruno de Lima e Silva <dlimaun@gmail.com>
+LABEL version='4.2.0'
+LABEL description='Firebase CLI packaged on alpine linux'
 
 USER node
 RUN mkdir /home/node/.npm-global
