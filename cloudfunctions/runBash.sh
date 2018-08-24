@@ -1,1 +1,1 @@
-docker run -it -v "$(pwd):/home/node/app" -w "/home/node/app" --user=node -p 9005:9005 node_firebase bash
+docker run -it -v "$(pwd):/home/node/app" -w "/home/node/app" --user=node -p 9005:9005 -p 5000:5000 node_firebase sh
