@@ -1,23 +1,27 @@
-// The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
 const functions = require('firebase-functions');
 
-exports.addImage = functions.database.ref('{environment}/videos/{pageUrl}')
-    .onWrite(event => {
-      // Only edit data when it is first created.
-      if (event.data.previous.exists()) {
-        return null;
-      }
-      // Exit when the data is deleted.
-      if (!event.data.exists()) {
-        return null;
-      }
+const Client = require('node-rest-client').Client;
+const client = new Client();
+client.on('error', function (err) {
+    console.error('Something went wrong on the client', err);
+})
 
-      const episode = event.data.val();
-      const imageRef = event.data.ref.child("image");
+const SERVER_URLS = ["https://anime-watcher-ktor.herokuapp.com/decoder",
+    "https://anime-watcher-spark.herokuapp.com/decoder"];
 
-      if (imageRef.val() === undefined) {
-        return imageRef.set("https://i.ytimg.com/vi/h1ctARmpOlw/maxresdefault.jpg");
-      } else {
-        return null
-      }
-    });
+exports.helloWorld = functions.https.onRequest((req, res) => {
+    var url = Object.keys(req.body)[0];
+    console.log(url);
+    client.post(SERVER_URLS[0], url,  function (data, response) {
+        return res.status(200)
+            .type('application/json')
+            .send(data);
+    }).on('error', function (error) {
+        console.log("First server errored, trying next")
+        client.post(SERVER_URLS[1], url,  function (data, response) {
+                return res.status(200)
+                    .type('application/json')
+                    .send(data);
+            })
+    })
+});
