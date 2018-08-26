@@ -7,7 +7,7 @@ client.on('error', (err) => {
 })
 
 const SERVER_URLS = [
-//    "https://anime-watcher-spark.herokuapp.com",
+    "https://anime-watcher-spark.herokuapp.com",
     "https://anime-watcher-ktor.herokuapp.com",
 ];
 
