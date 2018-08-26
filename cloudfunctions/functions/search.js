@@ -1,5 +1,3 @@
-
-const SUBDOMAINS = ["", "www."]
 const PAGES = [
         // Anime kai
         "animekaionline.com",
@@ -28,9 +26,7 @@ const PAGES = [
         "xvideos.com"
 ]
 exports.search = (req, res) => {
-    var query = req.query.query + " "+ PAGES.map( (p) => SUBDOMAINS.map( (s) => s+p ))
-        .reduce((acc, val) => acc.concat(val), [])
-        .map( (p) => "site:"+p)
+    var query = req.query.query + " "+ PAGES.map( (p) => "site:"+p)
         .join(" OR ");
 
     res.redirect("http://google.com/search?q="+encodeURI(query))
