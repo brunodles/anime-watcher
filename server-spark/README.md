@@ -31,9 +31,9 @@ curl https://anime-watcher-spark.herokuapp.com/decoder -d "https://www.animesori
 ## Documentation
 We use [Api Blueprint](https://apiblueprint.org/) for documentation.
 
-Our documentation is [here](server.apib).
+Our documentation is [here](server_blueprint.md).
 
-You can use one [mock server](https://apiblueprint.org/tools.html#mock%20servers]
+You can use one [mock server](https://apiblueprint.org/tools.html#mock%20servers)
 to run the documentation as a server.
 
 If you want to see documentation in a better way, use a
