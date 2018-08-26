@@ -1,26 +1,52 @@
-apply plugin: 'java'
 apply plugin: 'kotlin'
-apply plugin: 'application'
-
-mainClassName = "com.brunodles.animewatcher.cli.MainKt"
-
-run {
-    if (project.hasProperty("args")) {
-        args project.property("args")
-    }
-}
-jar {
-    manifest {
-        attributes 'Main-Class': mainClassName
-    }
-
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-}
-
-dependencies {
-    implementation project(':explorer')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-}
 
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
+
+dependencies {
+    compile project(':explorer')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}
+
+task decoder(type: JavaExec) {
+    classpath sourceSets.main.runtimeClasspath
+    main "com.brunodles.animewatcher.cli.DecoderKt"
+    group "run"
+    args project.findProject("args") ?: []
+}
+
+task googleSearchPagesQuery {
+    description "Prints google search query for multiple sites"
+    group "sites"
+    doLast {
+        println GOOGLE_SEARCH_PAGES_QUERY
+    }
+}
+
+task googleSearch {
+    description "Prints google search url. Use \"query\" parameter to inform wanted text to search."
+    group "run"
+    doLast {
+        def query = project.property("query")
+        println "query: $query"
+        println "http://google.com/search?q=" + URLEncoder.encode("$query $GOOGLE_SEARCH_PAGES_QUERY", "UTF-8")
+    }
+}
+
+task intentFilterData {
+    description "Prints all intent-filter data elements for all domains"
+    group "run"
+    doLast {
+        println DOMAINS.collect { "<data android:host=\"$it\" />" }.join("\n")
+    }
+}
+
+task printDomains {
+    description "Prints all domains"
+    group "sites"
+    doLast {
+        DOMAINS.each {
+            println it
+        }
+    }
+}
