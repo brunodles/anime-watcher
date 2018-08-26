@@ -5,6 +5,9 @@ import brunodles.animewatcher.decoders.UrlChecker
 import brunodles.animewatcher.explorer.Episode
 import brunodles.urlfetcher.UrlFetcher
 import com.google.gson.Gson
+import spark.Spark.path
+import spark.kotlin.RouteHandler
+import spark.kotlin.get
 import spark.kotlin.port
 import spark.kotlin.post
 
@@ -14,20 +17,31 @@ fun main(args: Array<String>) {
     startServer()
 }
 
+val gson = Gson()
+
 fun startServer() {
-    val gson = Gson()
+    // Deprecated
     post("/decoder") {
-        val episode: Episode?
-        response.type("Application/json;charset=utf-8")
-        try {
-            episode = UrlChecker.videoInfo(request.body())
-        } catch (e: Exception) {
-            e.printStackTrace()
-            this.response.status(500)
-            return@post gson.toJson(e)
-        }
-        gson.toJson(episode)
+        decoder { body() }
     }
+    path("/v1") {
+        get("/decoder") {
+            decoder { queryParams("url") }
+        }
+    }
+}
+
+private fun RouteHandler.decoder(urlParameter: spark.Request.() -> String): Any {
+    val episode: Episode?
+    response.type("Application/json;charset=utf-8")
+    try {
+        episode = UrlChecker.videoInfo(urlParameter.invoke(request))
+    } catch (e: Exception) {
+        e.printStackTrace()
+        this.response.status(500)
+        return gson.toJson(e)
+    }
+    return gson.toJson(episode)
 }
 
 private fun getHerokuAssignedPort(): Int = System.getenv("PORT")?.toInt() ?: 4567
