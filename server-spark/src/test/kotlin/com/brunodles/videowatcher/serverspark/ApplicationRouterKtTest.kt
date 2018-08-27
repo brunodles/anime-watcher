@@ -16,6 +16,7 @@ import org.junit.runners.model.Statement
 import spark.kotlin.port
 import spark.kotlin.stop
 import java.net.URL
+import java.net.URLEncoder
 
 @RunWith(JUnit4::class)
 class ApplicationRouterKtTest {
@@ -41,12 +42,13 @@ class ApplicationRouterKtTest {
                 }
             }
         }
+
+        val client = OkHttpClient()
     }
 
     @Test
-    fun temp() {
+    fun whenRequestDecode_withPost_shouldReturn_expectedValue() {
         val url = URL("http://localhost:${port()}/decoder")
-        val client = OkHttpClient()
         val request = Request.Builder()
             .url(url)
             .post(
@@ -57,7 +59,27 @@ class ApplicationRouterKtTest {
             )
             .build()
 
-        val response = client.newCall(request).execute().body()?.bytes()?.let { String(it) }
+        val response = client.call(request)
         assertEquals(EXPECTED, response)
     }
+
+    @Test
+    fun whenRequestV1Decode_withGet_shouldReturn_expectedValue() {
+        val url = URL(
+            "http://localhost:${port()}/v1/decoder?url=" + URLEncoder.encode(
+                "https://www.animekaionline.com/tsukipro-the-animation/episodio-1",
+                "UTF-8"
+            )
+        )
+        val request = Request.Builder()
+            .url(url)
+            .get()
+            .build()
+
+        val response = client.call(request)
+        assertEquals(EXPECTED, response)
+    }
+
+    private fun OkHttpClient.call(request: Request) =
+        this.newCall(request).execute().body()?.bytes()?.let { String(it) }
 }
