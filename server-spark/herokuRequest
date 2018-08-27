@@ -4,5 +4,7 @@ if [ -z $1 ]; then
     echo "Usage: $0 <wanted url>"
     echo "Sample: $0 https://github.com/brunodles/anime-watcher"
 else
-    curl https://anime-watcher-spark.herokuapp.com/decoder -d "$1"
+    # deprecated
+    #curl https://anime-watcher-spark.herokuapp.com/decoder -d "$1"
+    curl -G https://anime-watcher-spark.herokuapp.com/v1/decoder --data-urlencode "url=$1"
 fi
