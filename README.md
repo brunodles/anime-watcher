@@ -20,15 +20,16 @@ Then we won't send money ( through ads) to those pages.
 ## About the project
 
 This project is divided into these modules:
-* [Explorer](/explorer) : a module to decode pages
-* [Server Spark](/server-spark) : a web server that uses Explorer modules
-* [Cli](/cli) : simple command to interact with Explorer on terminal
+* [Explorer](/explorer) : a module to decode pages.
+* [Server Spark](/server-spark) : a web server that uses Explorer modules.
+* [Cli](/cli) : simple command to interact with Explorer on terminal.
 * [App](app) : an android app that uses communicates with Server-Spark to
 play decoded pages.
-* [Cloud Functions](/cloudfunctions) : firebase cloud functions, that will
-be used as a router.
-
-For further details follow the links above.
+* [Cloud Functions](/cloudfunctions) : firebase cloud functions, work as a middleware.
+* [Firebase Structure](/Firebase.md) : how data are stored.
+* [Decoders](/decoders) : were used for decoders, some pages still there.
+* [Cache](/cache) : just a shared cache folder.
+* [gradle](/gradle) : useful script, some will be extracted to a plugin.
 
 ## Contributing
 We have a lot of issues and ideas to implement.
