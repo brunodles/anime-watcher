@@ -33,3 +33,17 @@ ext.DOMAINS = PAGES.collectMany { domain ->
 }
 
 ext.GOOGLE_SEARCH_PAGES_QUERY = PAGES.collect { "site:$it" }.join(" OR ")
+
+/**
+ * Use `firebase database:set "/pages"` on firebase cli to override data.
+ * This will enabled all known pages.
+ */
+task firebasePages {
+    description "Prints a json for pages. The output should be used to override firebase pages reference."
+    group "pages"
+    doLast {
+        println "{\n" + PAGES.collect {
+            "\t\"${it.replace('.', '_')}\":{\"url\":\"$it\",\"enabled\":\"true\"}"
+        }.join(",\n") + "\n}"
+    }
+}
