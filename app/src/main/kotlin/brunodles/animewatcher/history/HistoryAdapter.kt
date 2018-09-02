@@ -1,4 +1,4 @@
-package brunodles.animewatcher.home
+package brunodles.animewatcher.history
 
 import android.databinding.ViewDataBinding
 import android.support.v7.widget.RecyclerView
@@ -7,12 +7,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import brunodles.animewatcher.ImageLoader
 import brunodles.animewatcher.R
-import brunodles.animewatcher.collection.ArrayWithKeys
 import brunodles.animewatcher.databinding.ItemEmptyBinding
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
 import brunodles.animewatcher.databinding.ItemUnknownBinding
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.persistence.Firebase
+import brunodles.collection.ArrayWithKeys
 import brunodles.rxfirebase.EventType
 import brunodles.rxfirebase.TypedEvent
 import brunodles.rxfirebase.singleObservable
@@ -25,7 +25,7 @@ import io.reactivex.schedulers.Schedulers
 
 typealias OnItemClick<ITEM_TYPE> = (ITEM_TYPE) -> Unit
 
-class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HistoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         const val TYPE_UNKNOWN = 0
@@ -70,9 +70,19 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             layoutInflater = LayoutInflater.from(context)
 
         return when (viewType) {
-            TYPE_EMPTY -> EmptyHolder(ItemEmptyBinding.inflate(layoutInflater!!, parent, false))
-            TYPE_EPISODE -> EpisodeHolder(ItemEpisodeBinding.inflate(layoutInflater!!, parent, false))
-            else -> UnknownHolder(ItemUnknownBinding.inflate(layoutInflater!!, parent, false))
+            TYPE_EMPTY -> EmptyHolder(
+                ItemEmptyBinding.inflate(layoutInflater!!, parent, false)
+            )
+            TYPE_EPISODE -> EpisodeHolder(
+                ItemEpisodeBinding.inflate(layoutInflater!!, parent, false)
+            )
+            else -> UnknownHolder(
+                ItemUnknownBinding.inflate(
+                    layoutInflater!!,
+                    parent,
+                    false
+                )
+            )
         }
     }
 

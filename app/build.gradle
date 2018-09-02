@@ -44,7 +44,7 @@ android {
 }
 
 amp {
-    placeholder "intentfilter-data", DOMAINS.collect { "<data android:host=\"$it\"/>" }.join("\n\t\t\t\t").toString()
+    placeholder "intentfilter-data", DOMAINS.collect { "<data android:host=\"$it\"/>" }.join("\n                ").toString()
 }
 
 dependencies {

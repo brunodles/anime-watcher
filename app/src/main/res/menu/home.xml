@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item
+        android:id="@+id/history"
+        android:icon="@drawable/ic_history_black_24dp"
+        android:title="History"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/nextEpisodes"
+        android:icon="@drawable/ic_skip_next_black_24dp"
+        android:title="Next Episodes"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="Settings"
+        app:showAsAction="always"
+        />
+</menu>
