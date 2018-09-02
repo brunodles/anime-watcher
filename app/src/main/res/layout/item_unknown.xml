@@ -9,7 +9,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/card_margin"
         app:cardCornerRadius="@dimen/card_corner_radius"
-        app:elevation="@dimen/card_elevation">
+        app:elevation="@dimen/card_elevation"
+        >
 
         <TextView
             android:id="@+id/text"
@@ -18,7 +19,7 @@
             android:background="#ccc"
             android:gravity="center"
             android:padding="16dp"
-            android:text="=( Unknown Item">
-        </TextView>
+            android:text="=( Unknown Item"
+            ></TextView>
     </android.support.v7.widget.CardView>
 </layout>
