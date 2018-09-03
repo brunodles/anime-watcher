@@ -57,7 +57,6 @@ object XvideosFactory : PageParser {
                                 number = ++index,
                                 animeName = it.fullTitle,
                                 image = it.image,
-                                video = it.videoLink.formatUrl(),
                                 link = it.videoLink.formatUrl())
                     }
         }
