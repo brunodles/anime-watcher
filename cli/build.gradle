@@ -12,7 +12,13 @@ task decoder(type: JavaExec) {
     classpath sourceSets.main.runtimeClasspath
     main "com.brunodles.animewatcher.cli.DecoderKt"
     group "run"
-    args project.findProject("args") ?: []
+    args project.findProperty("args") ?: []
+    doFirst {
+        if (!project.hasProperty("args")) {
+            def errorMessage = "Missing page argument.\nWhen using with gradle: gradle cli:decoder -Pargs=<wanted page>"
+            throw new GradleException(errorMessage)
+        }
+    }
 }
 
 task googleSearchPagesQuery {
