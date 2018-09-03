@@ -60,12 +60,12 @@ class TvCurseFactoryTest {
             )
         )
         val PLAYER_WITHOUT_NEXT = Episode(
-            number = 18,
-            description = "Assistir Steins;Gate 0 - Episódio 18 Online",
-            animeName = "Steins;Gate 0",
-            image = "https://tvcurse.com/imgs/steins-gate-0-episodio-18.jpg",
-            link = "https://tvcurse.com/?p=414764",
-            video = "https://tvcurse.com/dd/YTljODYzMGJlNDMxMzRmMw==",
+            number = 11,
+            description = "Assistir Himouto! Umaru-chan ova 11 – Especial ova 11 Online",
+            animeName = "Himouto! Umaru-chan",
+            image = "https://tvcurse.com/imgs/himouto-umaru-chan-ova-11.webp",
+            link = "https://tvcurse.com/?p=43449",
+            video = "https://tvcurse.com/dd/YzRjMjhmMDc4MGY5NzExNg==",
             nextEpisodes = emptyList()
         )
     }

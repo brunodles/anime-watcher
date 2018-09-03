@@ -48,7 +48,6 @@ object AnimeTubeBrasilFactory : PageParser {
 
         @Selector(".epVideoControl .epVideoControlItem:last-child a")
         @AttrCollector("href")
-        @StringFormat("https://animetubebrasil.com%s")
         fun nextEpisode(): String
     }
 }
