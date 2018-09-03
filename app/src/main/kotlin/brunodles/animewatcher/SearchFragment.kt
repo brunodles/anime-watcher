@@ -1,6 +1,9 @@
 package brunodles.animewatcher
 
+import android.content.Intent
+import android.content.Intent.ACTION_VIEW
 import android.databinding.DataBindingUtil
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -31,7 +34,7 @@ class SearchFragment : Fragment() {
         super.onStart()
         binding.searchText.setOnEditorActionListener { v, actionId, event ->
             val query = binding.searchText.text.toString()
-            binding.webView.loadUrl(buildUrl(query))
+            startActivity(Intent(ACTION_VIEW).setData(Uri.parse(query)))
             return@setOnEditorActionListener true
         }
     }

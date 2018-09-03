@@ -17,7 +17,7 @@ task decoder(type: JavaExec) {
 
 task googleSearchPagesQuery {
     description "Prints google search query for multiple sites"
-    group "sites"
+    group "run"
     doLast {
         println GOOGLE_SEARCH_PAGES_QUERY
     }
@@ -43,7 +43,7 @@ task intentFilterData {
 
 task printDomains {
     description "Prints all domains"
-    group "sites"
+    group "run"
     doLast {
         DOMAINS.each {
             println it
