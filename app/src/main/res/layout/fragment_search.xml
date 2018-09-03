@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
 
         <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
+            android:id="@+id/searchLayout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="Search Text"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             >
 
             <android.support.design.widget.TextInputEditText
@@ -21,9 +27,24 @@
                 android:imeOptions="actionSearch"
                 android:inputType="textAutoComplete"
                 android:maxLines="1"
+                android:paddingEnd="56dp"
+                android:paddingRight="56dp"
                 />
+
         </android.support.design.widget.TextInputLayout>
 
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/searchButton"
+            android:layout_width="56dp"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Search"
+            android:src="@drawable/ic_search_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/searchLayout"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/searchLayout"
+            app:tint="@color/colorPrimary"
+            />
         <!-- todo add a list or a webView-->
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 </layout>

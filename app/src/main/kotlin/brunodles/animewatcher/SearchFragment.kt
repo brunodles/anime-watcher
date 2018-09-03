@@ -33,10 +33,17 @@ class SearchFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         binding.searchText.setOnEditorActionListener { v, actionId, event ->
-            val query = binding.searchText.text.toString()
-            startActivity(Intent(ACTION_VIEW).setData(Uri.parse(buildUrl(query))))
+            search()
             return@setOnEditorActionListener true
         }
+        binding.searchButton.setOnClickListener { v ->
+            search()
+        }
+    }
+
+    fun search() {
+        val query = binding.searchText.text.toString()
+        startActivity(Intent(ACTION_VIEW).setData(Uri.parse(buildUrl(query))))
     }
 
     private fun buildUrl(query: String) = GOOGLE_SEARCH + URLEncoder.encode(
