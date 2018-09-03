@@ -8,7 +8,7 @@ import org.jsoup.nodes.Document
 
 object AnimaKaiFactory : PageParser {
 
-    private val EPISODE_URL_REGEX = Regex("(?:https?:\\/\\/)?(?:www\\.)?((animekaionline|animeskai)\\.com|animakai\\.info)\\/(.*?)\\/(episodio|ep)-\\d+")
+    private val EPISODE_URL_REGEX = Regex("(?:https?:\\/\\/)?(?:www\\.)?((animekaionline|animeskai)\\.(?:com|net)|animakai\\.info)\\/(.*?)\\/(episodio|ep)-\\d+")
     private val NUMBER_REGEX = Regex("\\d+")
     private val urlFetcher = UrlFetcher.fetcher()
 
