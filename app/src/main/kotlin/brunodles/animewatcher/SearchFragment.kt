@@ -34,7 +34,7 @@ class SearchFragment : Fragment() {
         super.onStart()
         binding.searchText.setOnEditorActionListener { v, actionId, event ->
             val query = binding.searchText.text.toString()
-            startActivity(Intent(ACTION_VIEW).setData(Uri.parse(query)))
+            startActivity(Intent(ACTION_VIEW).setData(Uri.parse(buildUrl(query))))
             return@setOnEditorActionListener true
         }
     }
