@@ -10,7 +10,7 @@ class UrlFetcherComposable internal constructor() : UrlFetcher {
         return this
     }
 
-    fun withRedirect(): UrlFetcherComposable {
+    fun withJsRedirect(): UrlFetcherComposable {
         internalFetcher = RedirectFetcher(internalFetcher)
         return this
     }

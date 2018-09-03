@@ -25,7 +25,7 @@ interface UrlFetcher {
             val urlFetcherComposable = composableFetcher()
             if (useCache)
                 urlFetcherComposable.withCache()
-                    .withRedirect()
+                    .withJsRedirect()
             return urlFetcherComposable
         }
 
