@@ -25,6 +25,7 @@ android {
         multiDexEnabled true
 
         buildConfigField "Boolean", "IMAGE_LOADER_LOGGGIN_ENABLED", project.properties.get("image_log", "false")
+        buildConfigField "String", "GOGOLE_QUERY", '"' + GOOGLE_SEARCH_PAGES_QUERY + '"'
     }
     buildTypes {
         release {
@@ -44,7 +45,9 @@ android {
 }
 
 amp {
-    placeholder "intentfilter-data", DOMAINS.collect { "<data android:host=\"$it\"/>" }.join("\n                ").toString()
+    placeholder "intentfilter-data", DOMAINS.collect {
+        "<data android:host=\"$it\"/>"
+    }.join("\n                ").toString()
 }
 
 dependencies {

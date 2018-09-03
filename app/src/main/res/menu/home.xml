@@ -7,18 +7,24 @@
         android:id="@+id/history"
         android:icon="@drawable/ic_history_black_24dp"
         android:title="History"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         />
     <item
         android:id="@+id/nextEpisodes"
         android:icon="@drawable/ic_skip_next_black_24dp"
         android:title="Next Episodes"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="Search"
+        app:showAsAction="ifRoom"
         />
     <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="Settings"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         />
 </menu>

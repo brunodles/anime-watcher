@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import brunodles.animewatcher.R
+import brunodles.animewatcher.SearchFragment
 import brunodles.animewatcher.databinding.ActivityHomeBinding
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.history.HistoryFragment
@@ -28,6 +29,7 @@ class HomeActivity : AppCompatActivity() {
     private val disposable = CompositeDisposable()
     private val historyFragment by lazy { HistoryFragment() }
     private val nextEpisodeFragment by lazy { NextEpisodeFragment() }
+    private val searchFragment by lazy { SearchFragment() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +51,7 @@ class HomeActivity : AppCompatActivity() {
     private fun fragmentFor(itemId: Int): Fragment = when (itemId) {
         R.id.history -> historyFragment
         R.id.nextEpisodes -> nextEpisodeFragment
+        R.id.search -> searchFragment
         else -> historyFragment
     }
 
