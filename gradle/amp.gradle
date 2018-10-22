@@ -53,25 +53,13 @@ class AndroidManifestPreprocessorPlugin implements Plugin<Project> {
             if (!containsAndroid(project))
                 throw GradleException("Project does not contains Android Plugin")
             project.android.applicationVariants.all { variant ->
-                println variant.name + " " + variant.baseName
-                def manifestFiles = variant.sourceSets.collect { sourceSet ->
-                    new AndroidManifestPreprocessorTask.TaskConfiguration(
-                            new File(sourceSet.manifestFile.parentFile, "manifest/AndroidManifest.xml"),
-                            sourceSet.manifestFile
-                    )
-                }.findAll { it.inputFile.exists() }
-                        .toList()
+                def manifestFiles = findManifestFiles(variant)
 
                 def task = project.tasks.create("preProcessAndroidManifest${variant.name.capitalize()}", AndroidManifestPreprocessorTask.class) {
                     configurations = manifestFiles
                 }
-                def pluginTaskName = "check${variant.name.capitalize()}Manifest"
-                def pluginTask = project.tasks.getByName(pluginTaskName)
-                if (pluginTask == null) {
-                    logger.debug("The task \"${pluginTaskName}\" does not exists!")
-                    return
-                }
-                pluginTask.dependsOn.add(task)
+                Task pluginTask = findPluginTask(project, variant)
+                pluginTask?.dependsOn?.add(task)
             }
         }
         extension = project.extensions.create("amp", AndroidManifestPreprocessorExtension)
@@ -83,6 +71,29 @@ class AndroidManifestPreprocessorPlugin implements Plugin<Project> {
             return false
         return plugins.findPlugin("com.android.application") != null ||
                 plugins.findPlugin("com.android.library") != null
+    }
+
+    private static List<AndroidManifestPreprocessorTask.TaskConfiguration> findManifestFiles(variant) {
+        variant.sourceSets.collect { sourceSet ->
+            new AndroidManifestPreprocessorTask.TaskConfiguration(
+                    new File(sourceSet.manifestFile.parentFile, "manifest/AndroidManifest.xml"),
+                    sourceSet.manifestFile
+            )
+        }.findAll {
+            it.inputFile.exists()
+        }.toList()
+    }
+
+    private static Task findPluginTask(project, variant) {
+        def pluginTaskName = "check${variant.name.capitalize()}Manifest"
+        def pluginTask = project.tasks.findByName(pluginTaskName)
+
+        if (pluginTask == null) {
+            project.logger.log(LogLevel.ERROR, "The task \"${pluginTaskName}\" does not exists!")
+            return null
+        }
+
+        return pluginTask
     }
 }
 
