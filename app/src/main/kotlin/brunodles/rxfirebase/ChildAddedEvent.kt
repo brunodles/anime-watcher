@@ -28,18 +28,18 @@ fun <T> Query.observableChildAdded(valueClass: Class<T>): Observable<T> {
 }
 
 private class ChildAddedListener(val emitter: ObservableEmitter<DataSnapshot>) : ChildEventListener {
-    override fun onChildMoved(p0: DataSnapshot?, p1: String?) {
+    override fun onChildMoved(p0: DataSnapshot, p1: String?) {
     }
 
-    override fun onChildChanged(p0: DataSnapshot?, p1: String?) {
+    override fun onChildChanged(p0: DataSnapshot, p1: String?) {
     }
 
-    override fun onChildAdded(p0: DataSnapshot?, p1: String?) {
+    override fun onChildAdded(p0: DataSnapshot, p1: String?) {
         if (p0 != null)
             emitter.onNext(p0)
     }
 
-    override fun onChildRemoved(p0: DataSnapshot?) {
+    override fun onChildRemoved(p0: DataSnapshot) {
     }
 
     override fun onCancelled(p0: DatabaseError) {
@@ -50,13 +50,13 @@ private class ChildAddedListener(val emitter: ObservableEmitter<DataSnapshot>) :
 
 private class ChildAddedParseListener<T>(val emitter: ObservableEmitter<T?>, val valueClass: Class<T>) :
         ChildEventListener {
-    override fun onChildMoved(p0: DataSnapshot?, p1: String?) {
+    override fun onChildMoved(p0: DataSnapshot, p1: String?) {
     }
 
-    override fun onChildChanged(p0: DataSnapshot?, p1: String?) {
+    override fun onChildChanged(p0: DataSnapshot, p1: String?) {
     }
 
-    override fun onChildAdded(p0: DataSnapshot?, p1: String?) {
+    override fun onChildAdded(p0: DataSnapshot, p1: String?) {
         if (p0 == null || !p0.exists()) {
             emitter.onError(IllegalArgumentException("Value not found on requested reference."))
             return
@@ -70,7 +70,7 @@ private class ChildAddedParseListener<T>(val emitter: ObservableEmitter<T?>, val
         }
     }
 
-    override fun onChildRemoved(p0: DataSnapshot?) {
+    override fun onChildRemoved(p0: DataSnapshot) {
     }
 
     override fun onCancelled(p0: DatabaseError) {

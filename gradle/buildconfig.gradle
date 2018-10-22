@@ -66,10 +66,10 @@ class BuildConfigPlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
         project.sourceSets {
-            main.java.srcDir 'build/build-config'
+            main.java.srcDir "${project.buildDir}/build-config"
         }
         def task = project.tasks.create("generateBuildConfigClasses", BuildConfigTask.class)
-        def compileKotlin = project.tasks.getByName("compileKotlin")
+        def compileKotlin = project.tasks.findByName("compileKotlin")
         if (compileKotlin != null)
             compileKotlin.dependsOn.add(task)
         else
