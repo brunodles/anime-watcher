@@ -5,6 +5,7 @@ buildscript {
     ext.plugin_version = '3.1.4'
     ext.playservices_version = '11.8.0'
     ext.support_libs_version = '27.0.2'
+    ext.firebase_version = '11.8.0'
 
     repositories {
         jcenter()
