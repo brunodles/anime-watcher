@@ -4,9 +4,12 @@ import android.content.Context
 import android.util.Log
 import brunodles.animewatcher.BuildConfig
 import brunodles.animewatcher.explorer.Episode
+import brunodles.animewatcher.persistence.Firebase
 import brunodles.animewatcher.player.EpisodeController
+import brunodles.rxfirebase.typedChildObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import java.net.URLEncoder
 
 internal class SearchController(val context: Context) {
@@ -23,7 +26,14 @@ internal class SearchController(val context: Context) {
     )
 
     fun addSearch(query: String) {
+        Firebase.addToSearchHistory(query)
     }
+
+    fun searchHistory() = Firebase.searchHistory()
+        .limitToLast(100)
+        .orderByKey()
+        .typedChildObserver(String::class.java)
+        .subscribeOn(Schedulers.io())
 
     fun onUrl(
         url: String?,
