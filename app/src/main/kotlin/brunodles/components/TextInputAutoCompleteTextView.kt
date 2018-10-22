@@ -1,6 +1,7 @@
 package brunodles.components
 
 import android.content.Context
+import android.graphics.Rect
 import android.support.design.widget.TextInputLayout
 import android.support.v7.widget.AppCompatAutoCompleteTextView
 import android.util.AttributeSet
@@ -25,6 +26,22 @@ class TextInputAutoCompleteTextView : AppCompatAutoCompleteTextView {
         attrs,
         defStyleAttr
     )
+
+    /*
+    Auto performFilter
+    Thanks to CommonsWare on: https://stackoverflow.com/a/2126852/1622925
+     */
+    override fun enoughToFilter(): Boolean = true
+
+    /*
+    When receive focus performFiltering, so the dropdown pops up.
+    Thanks to David Vávra on: https://stackoverflow.com/a/5783983/1622925
+     */
+    override fun onFocusChanged(focused: Boolean, direction: Int, previouslyFocusedRect: Rect?) {
+        super.onFocusChanged(focused, direction, previouslyFocusedRect)
+        if (focused && adapter != null)
+            performFiltering(text, 0)
+    }
 
     override fun onCreateInputConnection(outAttrs: EditorInfo): InputConnection? {
         val ic = super.onCreateInputConnection(outAttrs)
