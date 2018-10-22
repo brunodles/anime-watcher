@@ -8,12 +8,12 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import brunodles.animewatcher.R
-import brunodles.animewatcher.SearchFragment
 import brunodles.animewatcher.databinding.ActivityHomeBinding
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.history.HistoryFragment
 import brunodles.animewatcher.nextepisodes.NextEpisodeFragment
 import brunodles.animewatcher.player.PlayerActivity
+import brunodles.animewatcher.search.SearchFragment
 import io.reactivex.disposables.CompositeDisposable
 
 class HomeActivity : AppCompatActivity() {
