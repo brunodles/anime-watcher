@@ -16,6 +16,9 @@ import brunodles.animewatcher.R
 import brunodles.animewatcher.databinding.FragmentSearchBinding
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.player.PlayerActivity
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.plusAssign
+import io.reactivex.rxkotlin.subscribeBy
 
 class SearchFragment : Fragment() {
 
@@ -25,6 +28,7 @@ class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
     private val searchController: SearchController by lazy { SearchController(context!!) }
+    private val disposables = CompositeDisposable()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -81,6 +85,23 @@ class SearchFragment : Fragment() {
         binding.searchButton.setOnClickListener { v ->
             search()
         }
+        val autoCompleteAdapter = AutoCompleteAdapter(context!!)
+        disposables += searchController.searchHistory()
+            .doOnSubscribe { autoCompleteAdapter.clear() }
+            .subscribeBy(
+                onNext = {
+                    Log.d(TAG, "onStart: searchHistory.onNext: ${it.element}")
+                    autoCompleteAdapter.add(it.element)
+                }
+            )
+        binding.searchText.setAdapter(autoCompleteAdapter)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        binding.searchText.setOnEditorActionListener(null)
+        binding.searchButton.setOnClickListener(null)
+        disposables.dispose()
     }
 
     fun search() {
