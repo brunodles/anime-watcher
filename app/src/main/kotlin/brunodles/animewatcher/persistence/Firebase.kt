@@ -18,6 +18,7 @@ object Firebase {
     private val REF_USERS = "users"
     private val REF_HISTORY = "history"
     private val REF_NUMBER = "number"
+    private val REF_SEARCH = "search"
     private val EMPTY_URL = ""
 
     /** Return the reference to all videos mapped by the firebase **/
@@ -25,37 +26,54 @@ object Firebase {
 
     /** Return the reference to a single video **/
     fun videoRef(url: String) = videosRef()
-            .child(fixUrlToFirebase(url))
-            .orderByChild(REF_NUMBER)
+        .child(fixUrlToFirebase(url))
+        .orderByChild(REF_NUMBER)
 
     fun addVideo(episode: Episode) =
-            videosRef().child(fixUrlToFirebase(episode.link)).updateChildren(episode.toMap())
+        videosRef().child(fixUrlToFirebase(episode.link)).updateChildren(episode.toMap())
 
     fun addToHistory(url: String) {
-        val currentUser = FirebaseAuth.getInstance().currentUser!!
+        val currentUser = currentUser()!!
         lastOnHistory(currentUser).subscribeBy(
-                onSuccess = {
-                    if (url != it)
-                        history(currentUser).push().setValue(url)
-                },
-                onError = {
-                    Log.d("Firebase", "addToHistory: failed to add to history", it)
-                }
+            onSuccess = {
+                if (url != it)
+                    history(currentUser).push().setValue(url)
+            },
+            onError = {
+                Log.d("Firebase", "addToHistory: failed to add to history", it)
+            }
         )
     }
 
+    private fun currentUser() = FirebaseAuth.getInstance().currentUser
+
     fun lastOnHistory(currentUser: FirebaseUser): Single<String> {
         return Firebase.history(currentUser)
-                .limitToLast(1)
-                .orderByKey()
-                .observableChildAdded(String::class.java)
-                .timeout(5, TimeUnit.SECONDS, Observable.just(EMPTY_URL))
-                .first(EMPTY_URL)
+            .limitToLast(1)
+            .orderByKey()
+            .observableChildAdded(String::class.java)
+            .timeout(5, TimeUnit.SECONDS, Observable.just(EMPTY_URL))
+            .first(EMPTY_URL)
     }
 
     fun history(currentUser: FirebaseUser) =
-            firebaseRef().child(REF_USERS).child(currentUser.uid)
-                    .child(REF_HISTORY)
+        userRef(currentUser)
+            .child(REF_HISTORY)
+
+    fun addToSearchHistory(query: String) {
+        val currentUser = currentUser()!!
+        searchRef(currentUser)
+            .push()
+            .setValue(query)
+    }
+
+    private fun searchRef(currentUser: FirebaseUser) =
+        userRef(currentUser).child(REF_SEARCH)
+
+    fun searchHistory() = searchRef(currentUser()!!)
+
+    private fun userRef(currentUser: FirebaseUser) =
+        firebaseRef().child(REF_USERS).child(currentUser.uid)
 
     private fun firebaseRef() = FirebaseDatabase.getInstance().getReference(BuildConfig.BUILD_TYPE)
 }
