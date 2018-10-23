@@ -1,7 +1,6 @@
 package brunodles.animewatcher.persistence
 
 import android.util.Log
-import brunodles.animewatcher.BuildConfig
 import brunodles.animewatcher.explorer.Episode
 import brunodles.rxfirebase.observableChildAdded
 import com.google.firebase.auth.FirebaseAuth
@@ -75,5 +74,5 @@ object Firebase {
     private fun userRef(currentUser: FirebaseUser) =
         firebaseRef().child(REF_USERS).child(currentUser.uid)
 
-    private fun firebaseRef() = FirebaseDatabase.getInstance().getReference(BuildConfig.BUILD_TYPE)
+    private fun firebaseRef() = FirebaseDatabase.getInstance().reference
 }
