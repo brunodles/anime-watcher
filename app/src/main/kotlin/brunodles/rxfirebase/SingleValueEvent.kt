@@ -44,8 +44,7 @@ private class SingleEventListener(val emitter: ObservableEmitter<DataSnapshot>) 
 private class SingleEventParseListener<T>(
     val emitter: SingleEmitter<T?>,
     val valueClass: Class<T>
-) :
-    ValueEventListener {
+) : ValueEventListener {
 
     override fun onCancelled(p0: DatabaseError) {
         emitter.onError(p0.toException())
