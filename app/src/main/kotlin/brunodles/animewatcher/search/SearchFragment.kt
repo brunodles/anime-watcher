@@ -78,11 +78,11 @@ class SearchFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        binding.searchText.setOnEditorActionListener { v, actionId, event ->
+        binding.searchText.setOnEditorActionListener { _, _, _ ->
             search()
             return@setOnEditorActionListener true
         }
-        binding.searchButton.setOnClickListener { v ->
+        binding.searchButton.setOnClickListener { _ ->
             search()
         }
         val autoCompleteAdapter = AutoCompleteAdapter(context!!)
