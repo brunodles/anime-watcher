@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="navigation_margin">56dp</dimen>
-    <dimen name="toolbar_height">80dp</dimen>
-    <dimen name="toolbar_padding">24dp</dimen>
 </resources>
