@@ -7,7 +7,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.Query
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
-import java.lang.IllegalArgumentException
 
 fun DatabaseReference.observableChildAdded(): Observable<DataSnapshot> {
     return Observable.create { emitter ->
@@ -27,7 +26,8 @@ fun <T> Query.observableChildAdded(valueClass: Class<T>): Observable<T> {
     }
 }
 
-private class ChildAddedListener(val emitter: ObservableEmitter<DataSnapshot>) : ChildEventListener {
+private class ChildAddedListener(val emitter: ObservableEmitter<DataSnapshot>) :
+    ChildEventListener {
     override fun onChildMoved(p0: DataSnapshot, p1: String?) {
     }
 
@@ -35,8 +35,7 @@ private class ChildAddedListener(val emitter: ObservableEmitter<DataSnapshot>) :
     }
 
     override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-        if (p0 != null)
-            emitter.onNext(p0)
+        emitter.onNext(p0)
     }
 
     override fun onChildRemoved(p0: DataSnapshot) {
@@ -45,11 +44,12 @@ private class ChildAddedListener(val emitter: ObservableEmitter<DataSnapshot>) :
     override fun onCancelled(p0: DatabaseError) {
         emitter.onError(p0.toException())
     }
-
 }
 
-private class ChildAddedParseListener<T>(val emitter: ObservableEmitter<T?>, val valueClass: Class<T>) :
-        ChildEventListener {
+private class ChildAddedParseListener<T>(
+    val emitter: ObservableEmitter<T?>,
+    val valueClass: Class<T>
+) : ChildEventListener {
     override fun onChildMoved(p0: DataSnapshot, p1: String?) {
     }
 
@@ -57,7 +57,7 @@ private class ChildAddedParseListener<T>(val emitter: ObservableEmitter<T?>, val
     }
 
     override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-        if (p0 == null || !p0.exists()) {
+        if (!p0.exists()) {
             emitter.onError(IllegalArgumentException("Value not found on requested reference."))
             return
         }
