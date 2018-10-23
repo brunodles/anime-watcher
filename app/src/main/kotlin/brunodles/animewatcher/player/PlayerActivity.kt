@@ -34,12 +34,12 @@ class PlayerActivity : AppCompatActivity() {
 
     companion object {
 
-        val TAG = "PlayerActivity"
-        val STATE_EPISODE = "episode"
-        val STATE_POSITION = "position"
-        val EXTRA_EPISODE = "episode"
-        val PREF_VIDEO = "video"
-        val PREF_POSITION = "position"
+        const val TAG = "PlayerActivity"
+        const val STATE_EPISODE = "episode"
+        const val STATE_POSITION = "position"
+        const val EXTRA_EPISODE = "episode"
+        const val PREF_VIDEO = "video"
+        const val PREF_POSITION = "position"
 
         fun newIntent(context: Context, episode: Episode): Intent = Intent(context, PlayerActivity::class.java)
                 .putExtra(EXTRA_EPISODE, EpisodeParceler.toParcel(episode))
