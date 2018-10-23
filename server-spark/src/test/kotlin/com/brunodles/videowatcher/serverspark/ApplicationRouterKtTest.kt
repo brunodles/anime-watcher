@@ -8,6 +8,7 @@ import okhttp3.Request
 import okhttp3.RequestBody
 import org.junit.Assert.assertEquals
 import org.junit.ClassRule
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.rules.TestRule
 import org.junit.runner.RunWith
@@ -18,6 +19,7 @@ import java.net.URL
 import java.net.URLEncoder
 
 @RunWith(JUnit4::class)
+@Ignore
 class ApplicationRouterKtTest {
 
     companion object {
