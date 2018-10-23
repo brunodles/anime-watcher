@@ -1,11 +1,13 @@
 package brunodles.animewatcher.player
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.databinding.DataBindingUtil
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
@@ -41,10 +43,12 @@ class PlayerActivity : AppCompatActivity() {
         const val PREF_VIDEO = "video"
         const val PREF_POSITION = "position"
 
-        fun newIntent(context: Context, episode: Episode): Intent = Intent(context, PlayerActivity::class.java)
+        fun newIntent(context: Context, episode: Episode): Intent =
+            Intent(context, PlayerActivity::class.java)
                 .putExtra(EXTRA_EPISODE, EpisodeParceler.toParcel(episode))
 
-        fun newIntent(context: Context, link: String): Intent = Intent(context, PlayerActivity::class.java)
+        fun newIntent(context: Context, link: String): Intent =
+            Intent(context, PlayerActivity::class.java)
                 .setData(Uri.parse(link))
     }
 
@@ -60,7 +64,7 @@ class PlayerActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_player)
         setupRecyclerView()
 
-        binding.playRemote.setOnClickListener { it ->
+        binding.playRemote.setOnClickListener { _ ->
             episode?.let { caster?.playRemote(it, player.getCurrentPosition()) }
         }
 
@@ -82,17 +86,19 @@ class PlayerActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupRecyclerView() {
         val manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.nextEpisodes.layoutManager = manager
-        adapter = ViewDataBindingAdapter<Episode, ItemEpisodeBinding>(R.layout.item_episode) { viewHolder, item, _ ->
-            viewHolder.binder.description.text = "${item.number} - ${item.description}"
-            viewHolder.binder.title.text = item.animeName
-            ImageLoader.loadImageInto(item.image, viewHolder.binder.image)
-            viewHolder.binder.root.setOnClickListener {
-                startActivity(newIntent(this, item.link))
+        adapter =
+            ViewDataBindingAdapter(R.layout.item_episode) { viewHolder, item, _ ->
+                viewHolder.binder.description.text = "${item.number} - ${item.description}"
+                viewHolder.binder.title.text = item.animeName
+                ImageLoader.loadImageInto(item.image, viewHolder.binder.image)
+                viewHolder.binder.root.setOnClickListener {
+                    startActivity(newIntent(this, item.link))
+                }
             }
-        }
         binding.nextEpisodes.adapter = adapter
     }
 
@@ -106,7 +112,8 @@ class PlayerActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        caster = Caster.Factory.multiCaster(this, binding.chromeCastButton, binding.othersCastButton)
+        caster =
+            Caster.Factory.multiCaster(this, binding.chromeCastButton, binding.othersCastButton)
 
         caster?.setOnEndListener {
             episode?.nextEpisodes?.firstOrNull()?.let {
@@ -124,9 +131,11 @@ class PlayerActivity : AppCompatActivity() {
         else
             episodeController.findVideoOn(findUrl(intent))
         observable.observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribeBy(onSuccess = this::onFetchEpisode,
-                        onError = this::onError)
+            .subscribeOn(Schedulers.io())
+            .subscribeBy(
+                onSuccess = this::onFetchEpisode,
+                onError = this::onError
+            )
         val preferences = sharedPreferences()
         preferences.getString(PREF_VIDEO, null)?.also { url ->
             if (player == null)
@@ -144,6 +153,7 @@ class PlayerActivity : AppCompatActivity() {
         return null
     }
 
+    @SuppressLint("SetTextI18n")
     private fun onFetchEpisode(episode: Episode) {
         Log.d(TAG, "onFetchEpisode: ")
         episode.video?.let {
@@ -157,16 +167,18 @@ class PlayerActivity : AppCompatActivity() {
             }
         }
         binding.title.text = "${episode.number} - ${episode.description}"
-        adapter?.list = episode.nextEpisodes ?: listOf()
+        adapter?.list = episode.nextEpisodes
         this.episode = episode
     }
 
     private fun onError(error: Throwable) {
-        if (binding.root != null) {
-            val snackbar = Snackbar.make(binding.root, "Failed to process the url, ${error.message}", Snackbar.LENGTH_INDEFINITE)
-            snackbar.setAction("Ok") { snackbar.dismiss() }
-            snackbar.show()
-        }
+        val snackbar = Snackbar.make(
+            binding.root,
+            "Failed to process the url, ${error.message}",
+            Snackbar.LENGTH_INDEFINITE
+        )
+        snackbar.setAction("Ok") { snackbar.dismiss() }
+        snackbar.show()
         Log.e(TAG, "onResume.FindUrl: ", error)
     }
 
@@ -231,5 +243,6 @@ class PlayerActivity : AppCompatActivity() {
     }
 }
 
-private fun SharedPreferences.editAndApply(function: SharedPreferences.Editor.() -> Unit) = this.edit().also { function.invoke(it) }.apply()
+private fun SharedPreferences.editAndApply(function: SharedPreferences.Editor.() -> Unit) =
+    this.edit().also { function.invoke(it) }.apply()
 
