@@ -17,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import brunodles.adapter.ViewDataBindingAdapter
+import brunodles.animewatcher.BuildConfig
 import brunodles.animewatcher.ImageLoader
 import brunodles.animewatcher.R
 import brunodles.animewatcher.cast.Caster
@@ -64,11 +65,18 @@ class PlayerActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_player)
         setupRecyclerView()
 
+        setOthersCastVisibility(if (BuildConfig.CONNECT_SDK) View.VISIBLE else View.GONE)
+
         binding.playRemote.setOnClickListener { _ ->
             episode?.let { caster?.playRemote(it, player.getCurrentPosition()) }
         }
 
         sharedPreferences().edit().clear().apply()
+    }
+
+    private fun setOthersCastVisibility(visibility: Int) {
+        binding.othersLabel.visibility = visibility
+        binding.othersCastButton.visibility = visibility
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -90,8 +98,7 @@ class PlayerActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         val manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.nextEpisodes.layoutManager = manager
-        adapter =
-            ViewDataBindingAdapter(R.layout.item_episode) { viewHolder, item, _ ->
+        adapter = ViewDataBindingAdapter(R.layout.item_episode) { viewHolder, item, _ ->
                 viewHolder.binder.description.text = "${item.number} - ${item.description}"
                 viewHolder.binder.title.text = item.animeName
                 ImageLoader.loadImageInto(item.image, viewHolder.binder.image)
@@ -114,12 +121,6 @@ class PlayerActivity : AppCompatActivity() {
         super.onStart()
         caster =
             Caster.Factory.multiCaster(this, binding.chromeCastButton, binding.othersCastButton)
-
-        caster?.setOnEndListener {
-            episode?.nextEpisodes?.firstOrNull()?.let {
-                startActivity(newIntent(this, it))
-            }
-        }
     }
 
     override fun onResume() {
@@ -194,7 +195,6 @@ class PlayerActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        caster?.setOnEndListener(null)
         caster = null
     }
 

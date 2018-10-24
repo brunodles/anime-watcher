@@ -1,6 +1,5 @@
 package brunodles.animewatcher.cast
 
-
 import android.app.Activity
 import android.os.Build
 import android.util.Log
@@ -15,22 +14,21 @@ import com.connectsdk.device.ConnectableDeviceListener
 import com.connectsdk.device.DevicePicker
 import com.connectsdk.discovery.DiscoveryManager
 import com.connectsdk.service.DeviceService
-import com.connectsdk.service.capability.MediaControl
 import com.connectsdk.service.capability.MediaPlayer
 import com.connectsdk.service.command.ServiceCommandError
 
 @Suppress("DEPRECATION")
-internal class ConnectSdkCaster(activity: Activity, val mediaRouteButton: ImageButton?,
-                                val listener: DeviceConnectedListener? = null) : Caster,
-        ConnectableDeviceListener {
+internal class ConnectSdkCaster(
+    activity: Activity, private val mediaRouteButton: ImageButton?,
+    val listener: DeviceConnectedListener? = null
+) : Caster, ConnectableDeviceListener {
 
     companion object {
-        val TAG = "ConnectSdkCaster"
+        private const val TAG = "ConnectSdkCaster"
     }
 
-    val mDiscoveryManager: DiscoveryManager
-    var mDevice: ConnectableDevice? = null
-    private var endListener: (() -> Unit)? = null
+    private val mDiscoveryManager: DiscoveryManager
+    private var mDevice: ConnectableDevice? = null
 
     init {
         DiscoveryManager.init(activity.applicationContext)
@@ -43,13 +41,14 @@ internal class ConnectSdkCaster(activity: Activity, val mediaRouteButton: ImageB
 
     private fun pickDevice(activity: Activity) {
         val devicePicker = DevicePicker(activity)
-        val dialog = devicePicker.getPickerDialog("Cast to") { adapter: AdapterView<*>, _: View, position: Int, _: Long ->
-            mDevice = adapter.getItemAtPosition(position) as ConnectableDevice
-            mDevice?.let {
-                it.addListener(this)
-                it.connect()
+        val dialog =
+            devicePicker.getPickerDialog("Cast to") { adapter: AdapterView<*>, _: View, position: Int, _: Long ->
+                mDevice = adapter.getItemAtPosition(position) as ConnectableDevice
+                mDevice?.let {
+                    it.addListener(this)
+                    it.connect()
+                }
             }
-        }
         dialog.show()
     }
 
@@ -64,11 +63,19 @@ internal class ConnectSdkCaster(activity: Activity, val mediaRouteButton: ImageB
         listener?.invoke(this)
     }
 
-    override fun onPairingRequired(device: ConnectableDevice?, service: DeviceService?, pairingType: DeviceService.PairingType?) {
+    override fun onPairingRequired(
+        device: ConnectableDevice?,
+        service: DeviceService?,
+        pairingType: DeviceService.PairingType?
+    ) {
         Log.d(TAG, "onPairingRequired: ")
     }
 
-    override fun onCapabilityUpdated(device: ConnectableDevice?, added: MutableList<String>?, removed: MutableList<String>?) {
+    override fun onCapabilityUpdated(
+        device: ConnectableDevice?,
+        added: MutableList<String>?,
+        removed: MutableList<String>?
+    ) {
         Log.d(TAG, "onCapabilityUpdated: ")
     }
 
@@ -76,48 +83,27 @@ internal class ConnectSdkCaster(activity: Activity, val mediaRouteButton: ImageB
         Log.e(TAG, "onConnectionFailed: ", error?.cause)
     }
 
-
     override fun playRemote(currentEpisode: Episode, position: Long) {
-        Log.d(TAG, "playRemote: ${currentEpisode}")
+        Log.d(TAG, "playRemote: $currentEpisode")
         val mediaInfo = MediaInfo.Builder(currentEpisode.video!!, "video/mp4")
-                .setTitle(currentEpisode.animeName ?: currentEpisode.description)
-                .setDescription(currentEpisode.description)
-                .setIcon(currentEpisode.image!!)
-                .build()
-        val launchListener = SeekOnLaunchListener(position) { endListener?.invoke() }
+            .setTitle(currentEpisode.animeName ?: currentEpisode.description)
+            .setDescription(currentEpisode.description)
+            .setIcon(currentEpisode.image!!)
+            .build()
+        val launchListener = SeekOnLaunchListener(position)
         mDevice?.mediaPlayer?.playMedia(mediaInfo, false, launchListener)
     }
 
-    private class SeekOnLaunchListener(val position: Long, val endListener: () -> Unit) :
-            MediaPlayer.LaunchListener {
+    private class SeekOnLaunchListener(val position: Long) :
+        MediaPlayer.LaunchListener {
         override fun onSuccess(result: MediaPlayer.MediaLaunchObject?) {
             Log.d(TAG, "SeekOnLaunchListener.onSuccess: ")
-            result?.mediaControl?.let {
-                it.seek(position, null)
-                it.subscribePlayState(object : MediaControl.PlayStateListener {
-                    override fun onSuccess(status: MediaControl.PlayStateStatus?) {
-                        Log.d(TAG, "PlayStateListener.onSuccess: state: \"${status?.name}\"")
-                        if (status == MediaControl.PlayStateStatus.Finished) {
-                            endListener.invoke()
-                        }
-                    }
-
-                    override fun onError(error: ServiceCommandError?) {
-                        Log.e(TAG, "PlayStateListener.onError: ", error?.cause)
-                    }
-
-                })
-            }
+            result?.mediaControl?.seek(position, null)
         }
 
         override fun onError(error: ServiceCommandError?) {
             Log.e(TAG, "SeekOnLaunchListener.onError: ", error?.cause)
         }
-    }
-
-    override fun setOnEndListener(listener: (() -> Unit)?) {
-        Log.d(TAG, "setOnEndListener: ")
-        this.endListener = listener
     }
 
     override fun isConnected(): Boolean = mDevice?.isConnected ?: false
