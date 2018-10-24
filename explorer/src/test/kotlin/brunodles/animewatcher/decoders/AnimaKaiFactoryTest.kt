@@ -21,8 +21,8 @@ class AnimaKaiFactoryTest {
         val INVALID_URLS = emptyArray<String>()
         val TSUKIPRO_EPISODE = Episode(
             number = 1,
-            description = "Tsukipro The Animation 1",
-            animeName = "Tsukipro The Animation",
+            description = "Tsukipro The Animation 1 online aqui no site",
+            animeName = "Tsukipro The Animation online aqui no site",
             image = "http://www.animekai.info/2017/10/Screenshot_33.jpg",
             link = "https://www.animekaionline.com/tsukipro-the-animation/episodio-1",
             video = "http://www.blogger.com/video-play.mp4?contentId=b186c220e9973f58",
@@ -30,19 +30,19 @@ class AnimaKaiFactoryTest {
         )
         val HIMOUTO_UMARU_CHAN_EPISODE = Episode(
             number = 1,
-            description = "Himouto! Umaru-chan 1",
-            animeName = "Himouto! Umaru-chan",
+            description = "Himouto! Umaru-chan 1 online aqui no site",
+            animeName = "Himouto! Umaru-chan online aqui no site",
             image = "http/imagens/848x380/",
             link = "https://www.animeskai.net/himouto-umaru-chan/ep-1",
             video = "http://www.blogger.com/video-play.mp4?contentId=a1bc047412d3b897"
         )
         val ERROR_EPISODE = Episode(
             number = 1,
-            description = " ",
+            description = "  online aqui no site",
             link = "https://www.animeskai.net/anime/my-hero/ep-01",
             image = "http/imagens/848x380/",
             video = "",
-            animeName = " "
+            animeName = "  online aqui no site"
         )
     }
 
