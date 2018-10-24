@@ -10,7 +10,6 @@ import com.brunodles.alchemist.collectors.AttrCollector
 import com.brunodles.alchemist.collectors.TextCollector
 import com.brunodles.alchemist.selector.Selector
 import org.jsoup.nodes.Document
-import java.lang.RuntimeException
 import java.util.regex.Pattern
 
 object AnimesOrionFactory : PageParser {
