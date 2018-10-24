@@ -26,6 +26,9 @@ android {
 
         buildConfigField "Boolean", "IMAGE_LOADER_LOGGGIN_ENABLED", project.properties.get("image_log", "false")
         buildConfigField "String", "GOGOLE_QUERY", '"' + GOOGLE_SEARCH_PAGES_QUERY + '"'
+        toggler.stringPropertyNames().each {
+            buildConfigField "Boolean", it.toUpperCase(), "DEBUG && "+toggler.getProperty(it)
+        }
     }
     buildTypes {
         release {
@@ -38,6 +41,10 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
         debug.java.srcDirs += 'src/debug/kotlin'
         release.java.srcDirs += 'src/release/kotlin'
+        if (Boolean.valueOf(toggler.getOrDefault("CONNECT_SDK", "false")))
+            main.java.srcDirs += 'src/connectsdk_enabled/kotlin'
+        else
+            main.java.srcDirs += 'src/connectsdk_disabled/kotlin'
     }
     dataBinding {
         enabled = true
@@ -83,7 +90,8 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer:r2.4.1'
 
     // Using lite version, since full version does not work on devices API 24+. Also does not support google cast.
-    implementation 'com.connectsdk:connect-sdk-android-lite:1.6.0'
+    if (Boolean.valueOf(toggler.getOrDefault("CONNECT_SDK", "false")))
+        implementation 'com.connectsdk:connect-sdk-android-lite:1.6.0'
 
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
