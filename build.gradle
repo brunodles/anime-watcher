@@ -7,6 +7,12 @@ buildscript {
     ext.firebase_version = '15.0.2'
     ext.support_libs_version = '27.1.1'
 
+    def toggler = new Properties()
+    def togglerPropperties = file("feature_toggle.properties")
+    if (togglerPropperties.exists())
+        toggler.load(new FileReader(togglerPropperties))
+    ext.toggler = toggler
+
     repositories {
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
