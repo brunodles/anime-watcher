@@ -14,11 +14,12 @@ import java.util.regex.Pattern
 
 object AnimesOrionFactory : PageParser {
 
-    private val URL_REGEX = Regex("^(:?https?://)?(:?www.)?animesorion.(?:tv|site|video|online)/\\d+.*?$")
+    private val URL_REGEX =
+        Regex("^(:?https?://)?(:?www.)?animesorion.(?:tv|site|video|online)/\\d+.*?$")
     private val urlFetcher = UrlFetcher.fetcher()
 
     override fun isEpisode(url: String): Boolean =
-            url.matches(URL_REGEX)
+        url.matches(URL_REGEX)
 
     override fun episode(url: String): Episode {
         val document = urlFetcher.get(url)
@@ -34,8 +35,10 @@ object AnimesOrionFactory : PageParser {
         val first = links.removeAt(0).attr("href")
         val episode = parsePlayer(urlFetcher.get(first).html(), url)
         return episode.copy(nextEpisodes = links.map {
-            Episode(it.text(), it.text().extractWithRegex("^(?:.*)\\s+?(\\d++)").toInt(),
-                    episode.animeName, link = it.href())
+            Episode(
+                it.text(), it.text().extractWithRegex("^(?:.*)\\s+?(\\d++)").toInt(),
+                episode.animeName, link = it.href()
+            )
         }.toList())
     }
 
@@ -46,8 +49,10 @@ object AnimesOrionFactory : PageParser {
             val nextEpisodes = if (URL_REGEX.matches(nextEpisodeLink))
                 listOf(Episode("Next", number() + 1, animeName(), link = nextEpisodeLink))
             else emptyList()
-            return Episode(description(), number(), animeName(), null, video(), url,
-                    nextEpisodes)
+            return Episode(
+                description(), number(), animeName(), null, video(), url,
+                nextEpisodes
+            )
         }
     }
 
