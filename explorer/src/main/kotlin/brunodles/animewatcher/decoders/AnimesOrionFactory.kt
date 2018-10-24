@@ -7,13 +7,15 @@ import brunodles.animewatcher.explorer.PageParser
 import brunodles.urlfetcher.UrlFetcher
 import brunodles.urlfetcher.href
 import com.brunodles.alchemist.collectors.AttrCollector
+import com.brunodles.alchemist.collectors.TextCollector
 import com.brunodles.alchemist.selector.Selector
 import org.jsoup.nodes.Document
+import java.lang.RuntimeException
 import java.util.regex.Pattern
 
 object AnimesOrionFactory : PageParser {
 
-    private val URL_REGEX = Regex("^(:?https?://)?(:?www.)?animesorion.(?:tv|site|video)/\\d+.*?$")
+    private val URL_REGEX = Regex("^(:?https?://)?(:?www.)?animesorion.(?:tv|site|video|online)/\\d+.*?$")
     private val urlFetcher = UrlFetcher.fetcher()
 
     override fun isEpisode(url: String): Boolean =
@@ -52,7 +54,7 @@ object AnimesOrionFactory : PageParser {
 
     interface CurrentEpisode {
 
-        @Selector("[itemprop=description]")
+        @Selector("[itemprop=name]")
         @AttrCollector("content")
         fun description(): String
 
@@ -62,8 +64,8 @@ object AnimesOrionFactory : PageParser {
         @ToInt
         fun number(): Int
 
-        @Selector("[property=article:section]")
-        @AttrCollector("content")
+        @Selector("[rel='category tag']")
+        @TextCollector
         fun animeName(): String?
 
         @Selector("video source")
