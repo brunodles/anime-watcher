@@ -18,7 +18,7 @@ object OnePieceXFactory : PageParser {
     private val EPISODE_URL_REGEX = Regex("one-?piece-e?x.com.br/episodios/online/\\d+")
     private val SERVER_URL_PATTERN = Pattern.compile("var\\s+servidor\\s*=\\s*[\"'](.*?)[\"'];")
     private val DATA_URL_PATTERN =
-        Pattern.compile("var\\s*codigo\\s*=\\s*[\"'](https?)://[\"'].*?[\"'](.*?)[\"'];")
+        Pattern.compile("var\\s*codigo\\s*=\\s*[\"'](https?):\\/\\/[\"'].*?[\"'](.*?)[\"'];")
     private val VIDEO_URL_PATTERN = Pattern.compile("[\"']([HML]Q|Online)[\"']:\\s*[\"'](.*?)[\"']")
     private val PREFERED_QUALITY_ORDER = arrayOf("HQ", "MQ", "LQ", "ONLINE")
     private const val ANIME_NAME = "One Piece"

@@ -9,7 +9,6 @@ import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.Single
 import io.reactivex.SingleEmitter
-import java.lang.IllegalArgumentException
 
 fun <T> DatabaseReference.singleObservable(valueClass: Class<T>): Single<T> {
     return Single.create { emitter ->
@@ -30,29 +29,29 @@ fun <T> Query.singleObservable(valueClass: Class<T>): Single<T> {
 }
 
 private class SingleEventListener(val emitter: ObservableEmitter<DataSnapshot>) :
-        ValueEventListener {
+    ValueEventListener {
 
     override fun onCancelled(p0: DatabaseError) {
         emitter.onError(p0.toException())
     }
 
-    override fun onDataChange(p0: DataSnapshot?) {
-        if (p0 != null)
-            emitter.onNext(p0)
+    override fun onDataChange(p0: DataSnapshot) {
+        emitter.onNext(p0)
         emitter.onComplete()
     }
-
 }
 
-private class SingleEventParseListener<T>(val emitter: SingleEmitter<T?>, val valueClass: Class<T>) :
-        ValueEventListener {
+private class SingleEventParseListener<T>(
+    val emitter: SingleEmitter<T?>,
+    val valueClass: Class<T>
+) : ValueEventListener {
 
     override fun onCancelled(p0: DatabaseError) {
         emitter.onError(p0.toException())
     }
 
-    override fun onDataChange(p0: DataSnapshot?) {
-        if (p0 == null || !p0.exists()) {
+    override fun onDataChange(p0: DataSnapshot) {
+        if (!p0.exists()) {
             emitter.onError(IllegalArgumentException("Value not found on requested reference."))
             return
         }

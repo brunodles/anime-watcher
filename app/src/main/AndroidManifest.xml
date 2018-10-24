@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="brunodles.animewatcher">
+    package="brunodles.animewatcher"
+    >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -16,16 +18,19 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="548b9234ed2aeda85a21cf3c1698e2da893049e0" />
+            android:value="548b9234ed2aeda85a21cf3c1698e2da893049e0"
+            />
         <meta-data
             android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
-            android:value="brunodles.animewatcher.cast.CastOptionsProvider" />
+            android:value="brunodles.animewatcher.cast.CastOptionsProvider"
+            />
 
-        <activity android:name=".home.HomeActivity">
+        <activity android:name=".onboarding.OnboardingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,15 +39,20 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".home.HomeActivity" />
+
         <activity
             android:name=".player.PlayerActivity"
             android:configChanges="orientation|screenLayout|screenSize"
             android:launchMode="singleTop"
             android:parentActivityName=".home.HomeActivity"
-            tools:targetApi="jelly_bean">
+            android:theme="@style/AppTheme.Fullscreen"
+            tools:targetApi="jelly_bean"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".home.HomeActivity" />
+                android:value=".home.HomeActivity"
+                />
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -53,38 +63,38 @@
                 <data android:scheme="http" />
                 <data android:scheme="https" />
 
-                <data android:host="animekaionline.com" />
-				<data android:host="www.animekaionline.com" />
-				<data android:host="animeskai.com" />
-				<data android:host="www.animeskai.com" />
-				<data android:host="animakai.info" />
-				<data android:host="www.animakai.info" />
-				<data android:host="animesonlinebr.com.br" />
-				<data android:host="www.animesonlinebr.com.br" />
-				<data android:host="animesorion.site" />
-				<data android:host="www.animesorion.site" />
-				<data android:host="animesorion.tv" />
-				<data android:host="www.animesorion.tv" />
-				<data android:host="animesorion.video" />
-				<data android:host="www.animesorion.video" />
-				<data android:host="animetubebrasil.com" />
-				<data android:host="www.animetubebrasil.com" />
-				<data android:host="anitubebr.com" />
-				<data android:host="www.anitubebr.com" />
-				<data android:host="anitube.site" />
-				<data android:host="www.anitube.site" />
-				<data android:host="onepiece-ex.com.br" />
-				<data android:host="www.onepiece-ex.com.br" />
-				<data android:host="one-piece-x.com.br" />
-				<data android:host="www.one-piece-x.com.br" />
-				<data android:host="tvcurse.com" />
-				<data android:host="www.tvcurse.com" />
-				<data android:host="animacurse.moe" />
-				<data android:host="www.animacurse.moe" />
-				<data android:host="animacurse.tv" />
-				<data android:host="www.animacurse.tv" />
-				<data android:host="xvideos.com" />
-				<data android:host="www.xvideos.com" />
+                <data android:host="animekaionline.com"/>
+                <data android:host="www.animekaionline.com"/>
+                <data android:host="animeskai.com"/>
+                <data android:host="www.animeskai.com"/>
+                <data android:host="animakai.info"/>
+                <data android:host="www.animakai.info"/>
+                <data android:host="animesonlinebr.com.br"/>
+                <data android:host="www.animesonlinebr.com.br"/>
+                <data android:host="animesorion.site"/>
+                <data android:host="www.animesorion.site"/>
+                <data android:host="animesorion.tv"/>
+                <data android:host="www.animesorion.tv"/>
+                <data android:host="animesorion.video"/>
+                <data android:host="www.animesorion.video"/>
+                <data android:host="animetubebrasil.com"/>
+                <data android:host="www.animetubebrasil.com"/>
+                <data android:host="anitubebr.com"/>
+                <data android:host="www.anitubebr.com"/>
+                <data android:host="anitube.site"/>
+                <data android:host="www.anitube.site"/>
+                <data android:host="onepiece-ex.com.br"/>
+                <data android:host="www.onepiece-ex.com.br"/>
+                <data android:host="one-piece-x.com.br"/>
+                <data android:host="www.one-piece-x.com.br"/>
+                <data android:host="tvcurse.com"/>
+                <data android:host="www.tvcurse.com"/>
+                <data android:host="animacurse.moe"/>
+                <data android:host="www.animacurse.moe"/>
+                <data android:host="animacurse.tv"/>
+                <data android:host="www.animacurse.tv"/>
+                <data android:host="xvideos.com"/>
+                <data android:host="www.xvideos.com"/>
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -95,10 +105,6 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name="cat.ereza.customactivityoncrash.activity.DefaultErrorActivity"
-            android:process=":error_activity" />
     </application>
 
 </manifest>

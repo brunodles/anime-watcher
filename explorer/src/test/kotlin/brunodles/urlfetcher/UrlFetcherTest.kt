@@ -35,7 +35,7 @@ class UrlFetcherTest {
                 val fetcher: (String) -> Document = { url ->
                     UrlFetcher.composableFetcher()
                         .withCache()
-                        .withRedirect()
+                        .withJsRedirect()
                         .get(url)
                 }
                 describe("when page have http redirects") {
@@ -52,7 +52,7 @@ class UrlFetcherTest {
             describe("without cache") {
                 val fetcher: (String) -> Document = { url ->
                     UrlFetcher.composableFetcher()
-                        .withRedirect()
+                        .withJsRedirect()
                         .get(url)
                 }
                 describe("when page have html redirects") {

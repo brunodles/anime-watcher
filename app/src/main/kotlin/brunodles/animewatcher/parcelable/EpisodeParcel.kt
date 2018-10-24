@@ -31,7 +31,7 @@ data class EpisodeParcel(
         episode.image,
         episode.video,
         episode.link,
-        episode.nextEpisodes?.map { EpisodeParcel(it) }?.toList() ?: emptyList()
+        episode.nextEpisodes.asSequence().map { EpisodeParcel(it) }.toList()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

@@ -1,0 +1,96 @@
+{
+  "data": [
+    {
+      "description": "Assistir Dragon Ball Super Dublado Episódio 1",
+      "number": 1,
+      "animeName": "Dragon Ball Super Dublado",
+      "video": "https://www.blogger.com/video-play.mp4?contentId\u003d8ca7f7f864406273",
+      "link": "https://www.animesorion.video/60417",
+      "nextEpisodes": [
+        {
+          "description": "Next",
+          "number": 2,
+          "animeName": "Dragon Ball Super Dublado",
+          "link": "https://www.animesorion.video/114084",
+          "nextEpisodes": [],
+          "temporaryVideoUrl": false
+        }
+      ],
+      "temporaryVideoUrl": false
+    },
+    {
+      "description": "Tsukipro The Animation 1",
+      "number": 1,
+      "animeName": "Tsukipro The Animation",
+      "image": "http://www.animekai.info/2017/10/Screenshot_33.jpg",
+      "video": "http://www.blogger.com/video-play.mp4?contentId\u003db186c220e9973f58",
+      "link": "https://www.animekaionline.com/tsukipro-the-animation/episodio-1",
+      "nextEpisodes": [],
+      "temporaryVideoUrl": false
+    },
+    {
+      "description": "Himouto! Umaru-chan 1",
+      "number": 1,
+      "animeName": "Himouto! Umaru-chan",
+      "image": "http/imagens/848x380/",
+      "video": "http://www.blogger.com/video-play.mp4?contentId\u003da1bc047412d3b897",
+      "link": "http://www.animeskai.com/himouto-umaru-chan/ep-1",
+      "nextEpisodes": [],
+      "temporaryVideoUrl": false
+    },
+    {
+      "description": "Episódio 01 – Eu sou Uzumaki Boruto!! online, Boruto - Episódio 01 – Eu sou Uzumaki Boruto!! Online",
+      "number": 1,
+      "animeName": "Boruto",
+      "video": "https://www.blogger.com/video-play.mp4?contentId\u003d3dbfcd746b2b8f21",
+      "link": "https://www.animesonlinebr.com.br/video/50034",
+      "nextEpisodes": [
+        {
+          "description": "Boruto -  Episódio 02 – O Filho do Hokage!!",
+          "number": 2,
+          "animeName": "Boruto",
+          "link": "https://animesonlinebr.com.br/video/50035",
+          "nextEpisodes": [],
+          "temporaryVideoUrl": false
+        }
+      ],
+      "temporaryVideoUrl": false
+    },
+    {
+      "description": "Boku No Hero Academia Episódio 2",
+      "number": 2,
+      "animeName": "Boku No Hero Academia 1",
+      "video": "https://www.blogger.com/video-play.mp4?contentId\u003db0bccad36e2be8e1",
+      "link": "http://www.animesorion.video/71672",
+      "nextEpisodes": [
+        {
+          "description": "Next",
+          "number": 3,
+          "animeName": "Boku No Hero Academia 1",
+          "link": "https://www.animesorion.video/71808",
+          "nextEpisodes": [],
+          "temporaryVideoUrl": false
+        }
+      ],
+      "temporaryVideoUrl": false
+    },
+    {
+      "description": "Eu Sou Ruffy!",
+      "number": 1,
+      "animeName": "One Piece",
+      "video": "https://www.blogger.com/video-play.mp4?contentId\u003d3eb2b428663ef38f",
+      "link": "https://animetubebrasil.com/1582/",
+      "nextEpisodes": [
+        {
+          "description": "Next",
+          "number": 2,
+          "animeName": "One Piece",
+          "link": "https://animetubebrasil.com/1583/",
+          "nextEpisodes": [],
+          "temporaryVideoUrl": false
+        }
+      ],
+      "temporaryVideoUrl": false
+    }
+  ]
+}

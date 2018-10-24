@@ -1,5 +1,6 @@
-package brunodles.animewatcher.home
+package brunodles.animewatcher.nextepisodes
 
+import android.annotation.SuppressLint
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import brunodles.animewatcher.ImageLoader
 import brunodles.animewatcher.R
 import brunodles.animewatcher.databinding.ItemEpisodeBinding
 import brunodles.animewatcher.explorer.Episode
+import brunodles.animewatcher.history.OnItemClick
 
 class EpisodeAdapter : RecyclerView.Adapter<EpisodeAdapter.EpisodeHolder>() {
 
@@ -23,24 +25,31 @@ class EpisodeAdapter : RecyclerView.Adapter<EpisodeAdapter.EpisodeHolder>() {
 
     override fun getItemCount(): Int = list.count()
 
-    override fun onBindViewHolder(holder: EpisodeAdapter.EpisodeHolder, position: Int) {
-        holder?.let {
+    override fun onBindViewHolder(holder: EpisodeHolder, position: Int) {
+        holder.let {
             it.onBind(list[position])
             it.clickListener = internalEpisodeClickListener
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeAdapter.EpisodeHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeHolder {
         val context = parent.context
         if (layoutInflater == null)
             layoutInflater = LayoutInflater.from(context)
-        return EpisodeHolder(ItemEpisodeBinding.inflate(layoutInflater!!, parent, false))
+        return EpisodeHolder(
+            ItemEpisodeBinding.inflate(
+                layoutInflater!!,
+                parent,
+                false
+            )
+        )
     }
 
     class EpisodeHolder(val binder: ItemEpisodeBinding) : RecyclerView.ViewHolder(binder.root) {
 
         var clickListener: OnItemClick<Episode>? = null
 
+        @SuppressLint("SetTextI18n")
         fun onBind(item: Episode) {
             binder.root.setOnClickListener { clickListener?.invoke(item) }
             if (item.number > 0)

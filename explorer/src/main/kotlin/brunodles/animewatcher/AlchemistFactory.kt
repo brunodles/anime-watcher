@@ -8,7 +8,7 @@ import com.brunodles.alchemist.TransmutationsBook
 
 object AlchemistFactory {
 
-    var urlFetcher: UrlFetcher = UrlFetcher.composableFetcher().withCache()
+    var urlFetcher: UrlFetcher = UrlFetcher.fetcher()
 
     val alchemist: Alchemist by lazy {
         System.setProperty(

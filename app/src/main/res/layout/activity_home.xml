@@ -2,100 +2,30 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    >
 
-    <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/coordinator"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/mainAppbar"
+        <FrameLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:expanded="true">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
 
-            <android.support.design.widget.CollapsingToolbarLayout
-                android:id="@+id/mainCollapsing"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                app:contentScrim="?attr/colorPrimary"
-                app:expandedTitleMarginEnd="64dp"
-                app:expandedTitleMarginStart="48dp"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-                <ImageView
-                    android:id="@+id/mainBackdrop"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fitsSystemWindows="true"
-                    android:scaleType="centerCrop"
-                    app:layout_collapseMode="parallax"
-                    app:layout_collapseParallaxMultiplier="0.75"
-                    tools:ignore="ContentDescription" />
-
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/mainToolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/toolbar_height"
-                    android:paddingTop="@dimen/toolbar_padding"
-                    app:layout_collapseMode="pin"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    app:title="@string/app_name" />
-            </android.support.design.widget.CollapsingToolbarLayout>
-        </android.support.design.widget.AppBarLayout>
-
-        <android.support.v4.widget.NestedScrollView
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:background="@color/colorPrimary"
+            android:theme="@style/AppTheme.Dark"
+            app:menu="@menu/home"
+            />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <com.google.android.gms.common.SignInButton
-                    android:id="@+id/sign_in_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/card_margin" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="@string/suggested_next" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/nextEpisodes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:nestedScrollingEnabled="@{false}"
-                    tools:listitem="@layout/item_episode"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="@string/watch_history" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/history"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:nestedScrollingEnabled="@{false}"
-                    tools:listitem="@layout/item_episode" />
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/navigation_margin" />
-
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
-
-    </android.support.design.widget.CoordinatorLayout>
+    </LinearLayout>
 
 </layout>

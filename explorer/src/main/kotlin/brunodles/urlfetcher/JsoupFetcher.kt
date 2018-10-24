@@ -13,6 +13,8 @@ internal class JsoupFetcher() : UrlFetcher {
         .userAgent(USER_AGENT)
         .referrer(REFERRER)
         .timeout(10000)
+        .followRedirects(true)
+        .ignoreHttpErrors(true)
 
     companion object {
         private val USER_AGENT =

@@ -7,7 +7,6 @@ import brunodles.animewatcher.explorer.PageParser
 import com.brunodles.alchemist.collectors.AttrCollector
 import com.brunodles.alchemist.collectors.TextCollector
 import com.brunodles.alchemist.selector.Selector
-import com.brunodles.alchemist.stringformat.StringFormat
 
 object AnimeTubeBrasilFactory : PageParser {
 
@@ -48,7 +47,6 @@ object AnimeTubeBrasilFactory : PageParser {
 
         @Selector(".epVideoControl .epVideoControlItem:last-child a")
         @AttrCollector("href")
-        @StringFormat("https://animetubebrasil.com%s")
         fun nextEpisode(): String
     }
 }

@@ -13,29 +13,30 @@ class AnitubeBrFactoryTest {
 
     companion object {
         val VALID_URLS = arrayOf(
-                "https://www.anitubebr.com/vd/19249/",
-                "https://anitubebr.com/vd/19249/",
-                "http://www.anitubebr.com/vd/19249/",
-                "http://anitubebr.com/vd/19249/",
-                "www.anitubebr.com/vd/19249/",
-                "anitubebr.com/vd/19249/"
+            "https://www.anitubebr.com/vd/19249/",
+            "https://anitubebr.com/vd/19249/",
+            "http://www.anitubebr.com/vd/19249/",
+            "http://anitubebr.com/vd/19249/",
+            "www.anitubebr.com/vd/19249/",
+            "anitubebr.com/vd/19249/"
         )
         val INVALID_URLS = arrayOf("anitub")
         val currentEpisode = Episode(
-                number = 1,
-                description = "One Piece 01",
-                link = "https://anitubebr.com/vd/19249/",
+            number = 1,
+            description = "One Piece 01",
+            link = "https://anitubebr.com/vd/19249/",
 //                video = "blob:https://anitubebr.com/ae38a7f2-22ae-4bd6-9775-8342e70cddd4",
-                video = null,
-                animeName = "One Piece",
-                nextEpisodes = arrayListOf(
-                        Episode(
-                                number = 2,
-                                animeName = "One Piece",
-                                description = "Próximo Episódio",
-                                link = "https://anitubebr.com/vd/19250/"
-                        )
+            video = null,
+            animeName = "One Piece",
+            image = "",
+            nextEpisodes = arrayListOf(
+                Episode(
+                    number = 2,
+                    animeName = "One Piece",
+                    description = "Próximo Episódio",
+                    link = "https://anitubebr.com/vd/19250/"
                 )
+            )
         )
     }
 

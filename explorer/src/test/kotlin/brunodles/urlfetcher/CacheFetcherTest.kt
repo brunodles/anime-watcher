@@ -3,7 +3,7 @@ package brunodles.urlfetcher
 import com.greghaskins.spectrum.Spectrum
 import com.greghaskins.spectrum.Spectrum.describe
 import com.greghaskins.spectrum.Spectrum.it
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
 import org.junit.runner.RunWith
 
 @RunWith(Spectrum::class)

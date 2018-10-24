@@ -2,13 +2,15 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="brunodles.animewatcher.player.PlayerActivity">
+        tools:context="brunodles.animewatcher.player.PlayerActivity"
+        >
 
         <com.google.android.exoplayer2.ui.SimpleExoPlayerView
             android:id="@+id/player"
@@ -16,18 +18,21 @@
             android:layout_height="wrap_content"
             android:keepScreenOn="true"
             android:minHeight="240dp"
-            app:resize_mode="fixed_width" />
+            app:resize_mode="fixed_width"
+            />
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/otherContent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:columnCount="2"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
 
                 <android.support.v7.app.MediaRouteButton
                     android:id="@+id/chromeCastButton"
@@ -37,7 +42,8 @@
                     android:minHeight="48dp"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
-                    tools:targetApi="jelly_bean" />
+                    tools:targetApi="jelly_bean"
+                    />
 
                 <ImageButton
                     android:id="@+id/othersCastButton"
@@ -45,30 +51,34 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"
-                    android:contentDescription="Connect to Device"
+                    android:contentDescription="@string/player_cast_to_device"
                     android:minHeight="48dp"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
-                    android:src="@drawable/ic_cast_black_24dp" />
+                    android:src="@drawable/ic_cast_black_24dp"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="ChromeCast" />
+                    android:text="@string/player_chromecast"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Others" />
+                    android:text="@string/player_cast_others"
+                    />
 
                 <Button
                     android:id="@+id/playRemote"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_columnSpan="2"
-                    android:text="Play" />
+                    android:text="@string/player_cast_play_remote"
+                    />
 
                 <TextView
                     android:id="@+id/title"
@@ -80,7 +90,8 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
                     android:textIsSelectable="true"
-                    tools:text="One Piece" />
+                    tools:text="One Piece"
+                    />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -89,7 +100,8 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="Next Episodes" />
+                    android:text="@string/player_next_episodes"
+                    />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/nextEpisodes"
@@ -99,11 +111,13 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
-                    app:nestedScrollingEnabled="@{false}" />
+                    app:nestedScrollingEnabled="@{false}"
+                    />
 
                 <Space
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/navigation_margin" />
+                    android:layout_height="@dimen/navigation_margin"
+                    />
 
             </GridLayout>
         </android.support.v4.widget.NestedScrollView>

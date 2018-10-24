@@ -13,25 +13,29 @@ class OnePieceXFactoryTest {
     companion object {
 
         val VALID_URLS = arrayOf(
-                "https://onepiece-ex.com.br/episodios/online/208/",
-                "http://one-piece-x.com.br/episodios/online/207/",
-                "one-piece-x.com.br/episodios/online/209")
+            "https://onepiece-ex.com.br/episodios/online/208/",
+            "http://one-piece-x.com.br/episodios/online/207/",
+            "one-piece-x.com.br/episodios/online/209"
+        )
         val INVALID_URLS = arrayOf(
-                "https://one-piece-x.com.br/episodios/t04/",
-                "one-piece-x.com.br/episodios/online")
+            "https://one-piece-x.com.br/episodios/t04/",
+            "one-piece-x.com.br/episodios/online"
+        )
 
         val currentEpisode = Episode(
-                number = 208,
-                animeName = "One Piece",
-                description = "Os piratas do Foxy!! A Davy Back!",
-                link = "https://one-piece-x.com.br/episodios/online/208/",
-                video = "https:\\/\\/\\w+.onepieceex\\.com\\.br\\/episodios\\/lq\\/OpEx_208_LQ.mp4\\?st=.*",
-                nextEpisodes = arrayListOf(
-                        Episode(description = "Next",
-                                number = 209,
-                                animeName = "One Piece",
-                                link = "https://onepiece-ex.com.br/episodios/online/209")
+            number = 208,
+            animeName = "One Piece",
+            description = "Os piratas do Foxy!! A Davy Back!",
+            link = "https://one-piece-x.com.br/episodios/online/208/",
+            video = "https:\\/\\/\\w+.onepieceex\\.com\\.br\\/episodios\\/\\w+\\/OpEx_\\d+_\\w+.mp4\\?st=.*",
+            nextEpisodes = arrayListOf(
+                Episode(
+                    description = "Next",
+                    number = 209,
+                    animeName = "One Piece",
+                    link = "https://onepiece-ex.com.br/episodios/online/209"
                 )
+            )
         )
     }
 

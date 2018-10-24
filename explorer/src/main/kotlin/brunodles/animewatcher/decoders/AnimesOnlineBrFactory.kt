@@ -11,16 +11,74 @@ import com.brunodles.alchemist.selector.Selector
 
 object AnimesOnlineBrFactory : PageParser {
 
-    private val EPISODE_URL_REGEX = Regex("https?://www\\.animesonlinebr\\.com\\.br/video/\\d+")
+    private val EPISODE_URL_REGEX =
+        Regex("https?://www\\.animesonlinebr\\.com\\.br/(?:video|desenho)/\\d+")
 
     override fun isEpisode(url: String): Boolean = url.matches(EPISODE_URL_REGEX)
 
     override fun episode(url: String): Episode {
+        return if (url.contains("video"))
+            decodeVideo(url)
+        else
+            decodeAbout(url)
+    }
+
+    private fun decodeVideo(url: String): Episode {
         val currentEpisode = AlchemistFactory.alchemist.parseUrl(url, CurrentEpisode::class.java)
-        with(currentEpisode) {
-            return Episode(description(), number(), animeName(), null, video(), url,
-                    nextEpisodes().toEpisode(animeName()))
+        return with(currentEpisode) {
+            Episode(
+                description(),
+                number(),
+                animeName(),
+                null,
+                video(),
+                url,
+                nextEpisodes().toEpisode(animeName())
+            )
         }
+    }
+
+    private fun decodeAbout(url: String): Episode {
+        val about = AlchemistFactory.alchemist.parseUrl(url, About::class.java)
+        val firstEpisodeUrl = about.nextEpisodes().removeAt(0).link()
+        return decodeVideo(firstEpisodeUrl).copy(
+            link = url,
+            nextEpisodes = about.nextEpisodes().map {
+                Episode(
+                    number = it.number(),
+                    description = it.description(),
+                    animeName = about.animeName(),
+                    link = it.link()
+                )
+            }
+        )
+    }
+
+    interface About {
+
+        @Selector(".boxAnimeSobreLinha [itemprop=author]")
+        @TextCollector
+        fun animeName(): String
+
+        @Selector(".list li a")
+        @Nested
+        fun nextEpisodes(): ArrayList<EpisodeListItem>
+    }
+
+    interface EpisodeListItem {
+        @Selector("a")
+        @TextCollector
+        fun description(): String
+
+        @Selector("a")
+        @AttrCollector("href")
+        fun link(): String
+
+        @Selector("a")
+        @TextCollector
+        @Regexp("^(?:.*)\\s+?(\\d++)")
+        @ToInt
+        fun number(): Int
     }
 
     interface CurrentEpisode {
@@ -30,7 +88,7 @@ object AnimesOnlineBrFactory : PageParser {
         @Regexp("^(?:.*?[–-]\\s?)(.*?)\$")
         fun description(): String
 
-        @Selector("[itemprop=name]")
+        @Selector("[itemprop=description]")
         @TextCollector
         @Regexp("(\\d+)")
         @ToInt
