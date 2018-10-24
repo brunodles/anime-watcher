@@ -8,7 +8,6 @@ import brunodles.animewatcher.explorer.Episode
 interface Caster {
 
     fun playRemote(currentEpisode: Episode, position: Long)
-    fun setOnEndListener(listener: (() -> Unit)? = null)
     fun isConnected(): Boolean
 
     object Factory {

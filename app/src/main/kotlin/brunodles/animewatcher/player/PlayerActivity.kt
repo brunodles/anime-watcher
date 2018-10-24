@@ -114,12 +114,6 @@ class PlayerActivity : AppCompatActivity() {
         super.onStart()
         caster =
             Caster.Factory.multiCaster(this, binding.chromeCastButton, binding.othersCastButton)
-
-        caster?.setOnEndListener {
-            episode?.nextEpisodes?.firstOrNull()?.let {
-                startActivity(newIntent(this, it))
-            }
-        }
     }
 
     override fun onResume() {
@@ -194,7 +188,6 @@ class PlayerActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        caster?.setOnEndListener(null)
         caster = null
     }
 

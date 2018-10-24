@@ -30,7 +30,6 @@ internal class ConnectSdkCaster(activity: Activity, val mediaRouteButton: ImageB
 
     val mDiscoveryManager: DiscoveryManager
     var mDevice: ConnectableDevice? = null
-    private var endListener: (() -> Unit)? = null
 
     init {
         DiscoveryManager.init(activity.applicationContext)
@@ -84,40 +83,22 @@ internal class ConnectSdkCaster(activity: Activity, val mediaRouteButton: ImageB
                 .setDescription(currentEpisode.description)
                 .setIcon(currentEpisode.image!!)
                 .build()
-        val launchListener = SeekOnLaunchListener(position) { endListener?.invoke() }
+        val launchListener = SeekOnLaunchListener(position)
         mDevice?.mediaPlayer?.playMedia(mediaInfo, false, launchListener)
     }
 
-    private class SeekOnLaunchListener(val position: Long, val endListener: () -> Unit) :
+    private class SeekOnLaunchListener(val position: Long) :
             MediaPlayer.LaunchListener {
         override fun onSuccess(result: MediaPlayer.MediaLaunchObject?) {
             Log.d(TAG, "SeekOnLaunchListener.onSuccess: ")
             result?.mediaControl?.let {
                 it.seek(position, null)
-                it.subscribePlayState(object : MediaControl.PlayStateListener {
-                    override fun onSuccess(status: MediaControl.PlayStateStatus?) {
-                        Log.d(TAG, "PlayStateListener.onSuccess: state: \"${status?.name}\"")
-                        if (status == MediaControl.PlayStateStatus.Finished) {
-                            endListener.invoke()
-                        }
-                    }
-
-                    override fun onError(error: ServiceCommandError?) {
-                        Log.e(TAG, "PlayStateListener.onError: ", error?.cause)
-                    }
-
-                })
             }
         }
 
         override fun onError(error: ServiceCommandError?) {
             Log.e(TAG, "SeekOnLaunchListener.onError: ", error?.cause)
         }
-    }
-
-    override fun setOnEndListener(listener: (() -> Unit)?) {
-        Log.d(TAG, "setOnEndListener: ")
-        this.endListener = listener
     }
 
     override fun isConnected(): Boolean = mDevice?.isConnected ?: false
