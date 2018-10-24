@@ -6,6 +6,4 @@
     <dimen name="episode_image_width">80dp</dimen>
 
     <dimen name="navigation_margin">0dp</dimen>
-    <dimen name="toolbar_height">56dp</dimen>
-    <dimen name="toolbar_padding">0dp</dimen>
 </resources>

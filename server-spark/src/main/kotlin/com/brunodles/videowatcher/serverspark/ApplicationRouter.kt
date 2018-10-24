@@ -44,4 +44,4 @@ private fun RouteHandler.decoder(urlParameter: spark.Request.() -> String): Any 
     return gson.toJson(episode)
 }
 
-private fun getHerokuAssignedPort(): Int = System.getenv("PORT")?.toInt() ?: 4567
+fun getHerokuAssignedPort(): Int = System.getenv("PORT")?.toInt() ?: 4567

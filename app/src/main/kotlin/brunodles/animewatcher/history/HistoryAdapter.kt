@@ -1,5 +1,7 @@
 package brunodles.animewatcher.history
 
+import android.annotation.SuppressLint
+import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -71,14 +73,25 @@ class HistoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         return when (viewType) {
             TYPE_EMPTY -> EmptyHolder(
-                ItemEmptyBinding.inflate(layoutInflater!!, parent, false)
+                DataBindingUtil.inflate(
+                    layoutInflater!!,
+                    R.layout.item_empty,
+                    parent,
+                    false
+                )
             )
             TYPE_EPISODE -> EpisodeHolder(
-                ItemEpisodeBinding.inflate(layoutInflater!!, parent, false)
+                DataBindingUtil.inflate(
+                    layoutInflater!!,
+                    R.layout.item_episode,
+                    parent,
+                    false
+                )
             )
             else -> UnknownHolder(
-                ItemUnknownBinding.inflate(
+                DataBindingUtil.inflate(
                     layoutInflater!!,
+                    R.layout.item_unknown,
                     parent,
                     false
                 )
@@ -86,8 +99,8 @@ class HistoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    open class ViewHolder<out BINDER : ViewDataBinding, ITEM : Any>(protected val binder: BINDER)
-        : RecyclerView.ViewHolder(binder.root) {
+    open class ViewHolder<out BINDER : ViewDataBinding, ITEM : Any>(protected val binder: BINDER) :
+        RecyclerView.ViewHolder(binder.root) {
 
         var clickListener: OnItemClick<ITEM>? = null
 
@@ -105,7 +118,8 @@ class HistoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     class EpisodeHolder(binder: ItemEpisodeBinding) :
-            ViewHolder<ItemEpisodeBinding, Episode>(binder) {
+        ViewHolder<ItemEpisodeBinding, Episode>(binder) {
+        @SuppressLint("SetTextI18n")
         override fun onBind(item: Episode) {
             super.onBind(item)
             if (item.number > 0)
@@ -121,46 +135,46 @@ class HistoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     fun setUser(user: FirebaseUser) {
         updatesDisposable?.dispose()
         updatesDisposable = Firebase.history(user)
-                .limitToLast(100)
-                .orderByKey()
-                .typedChildObserver(String::class.java)
-                .subscribeOn(Schedulers.io())
-                .flatMapSingle { link ->
-                    Firebase.videoRef(link.element)
-                            .singleObservable(Episode::class.java)
-                            .subscribeOn(Schedulers.io())
-                            .map { TypedEvent(link.event, it, link.key) }
-                }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                        onNext = {
-                            when (it.event) {
-                                EventType.CHANGED -> {
-                                    val index = list.replace(it.element, it.key)
-                                    if (index >= 0) notifyItemChanged(index)
-                                }
-                                EventType.MOVED -> TODO()
-                                EventType.ADDED -> {
-                                    val previousSize = list.size
-                                    val index = list.add(it.element, it.key)
-                                    if (index >= 0 && previousSize == 0)
-                                        notifyItemChanged(index)
-                                    else
-                                        notifyItemInserted(index)
-                                }
-                                EventType.REMOVED -> {
-                                    val index = list.removeByKey(it.key)
-                                    if (list.isEmpty())
-                                        notifyItemChanged(0)
-                                    else
-                                        notifyItemRemoved(index)
-                                }
-                            }
-                        },
-                        onError = {
-                            Log.e(TAG, "setUser: ", it)
+            .limitToLast(100)
+            .orderByKey()
+            .typedChildObserver(String::class.java)
+            .subscribeOn(Schedulers.io())
+            .flatMapSingle { link ->
+                Firebase.videoRef(link.element)
+                    .singleObservable(Episode::class.java)
+                    .subscribeOn(Schedulers.io())
+                    .map { TypedEvent(link.event, it, link.key) }
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onNext = {
+                    when (it.event) {
+                        EventType.CHANGED -> {
+                            val index = list.replace(it.element, it.key)
+                            if (index >= 0) notifyItemChanged(index)
                         }
-                )
+                        EventType.MOVED -> TODO()
+                        EventType.ADDED -> {
+                            val previousSize = list.size
+                            val index = list.add(it.element, it.key)
+                            if (index >= 0 && previousSize == 0)
+                                notifyItemChanged(index)
+                            else
+                                notifyItemInserted(index)
+                        }
+                        EventType.REMOVED -> {
+                            val index = list.removeByKey(it.key)
+                            if (list.isEmpty())
+                                notifyItemChanged(0)
+                            else
+                                notifyItemRemoved(index)
+                        }
+                    }
+                },
+                onError = {
+                    Log.e(TAG, "setUser: ", it)
+                }
+            )
     }
 
     fun disconnect() {

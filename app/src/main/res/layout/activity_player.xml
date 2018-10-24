@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"
-                    android:contentDescription="Connect to Device"
+                    android:contentDescription="@string/player_cast_to_device"
                     android:minHeight="48dp"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
@@ -62,14 +62,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="ChromeCast"
+                    android:text="@string/player_chromecast"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Others"
+                    android:text="@string/player_cast_others"
                     />
 
                 <Button
@@ -77,7 +77,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_columnSpan="2"
-                    android:text="Play"
+                    android:text="@string/player_cast_play_remote"
                     />
 
                 <TextView
@@ -100,7 +100,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="Next Episodes"
+                    android:text="@string/player_next_episodes"
                     />
 
                 <android.support.v7.widget.RecyclerView

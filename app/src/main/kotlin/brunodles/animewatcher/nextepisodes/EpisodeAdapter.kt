@@ -1,5 +1,6 @@
 package brunodles.animewatcher.nextepisodes
 
+import android.annotation.SuppressLint
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -48,6 +49,7 @@ class EpisodeAdapter : RecyclerView.Adapter<EpisodeAdapter.EpisodeHolder>() {
 
         var clickListener: OnItemClick<Episode>? = null
 
+        @SuppressLint("SetTextI18n")
         fun onBind(item: Episode) {
             binder.root.setOnClickListener { clickListener?.invoke(item) }
             if (item.number > 0)

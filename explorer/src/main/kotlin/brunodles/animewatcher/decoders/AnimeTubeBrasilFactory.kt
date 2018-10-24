@@ -7,7 +7,6 @@ import brunodles.animewatcher.explorer.PageParser
 import com.brunodles.alchemist.collectors.AttrCollector
 import com.brunodles.alchemist.collectors.TextCollector
 import com.brunodles.alchemist.selector.Selector
-import com.brunodles.alchemist.stringformat.StringFormat
 
 object AnimeTubeBrasilFactory : PageParser {
 

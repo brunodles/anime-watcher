@@ -43,6 +43,18 @@ subprojects { project ->
         if (project.plugins.hasPlugin("kotlin") || project.plugins.hasPlugin("kotlin-android")) {
             project.apply from: "${project.rootDir}/gradle/ktlint.gradle"
         }
+        project.tasks.withType(Test) {
+            testLogging {
+                afterSuite { desc, result ->
+                    if (!desc.parent) { // will match the outermost suite
+                        def output = "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+                        def startItem = '|  ', endItem = '  |'
+                        def repeatLength = startItem.length() + output.length() + endItem.length()
+                        println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
+                    }
+                }
+            }
+        }
     }
 }
 

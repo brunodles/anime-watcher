@@ -5,15 +5,30 @@
   <meta charset="utf-8"> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
   <link rel="stylesheet" type="text/css" href="https://animetubebrasil.com/wp-content/themes/animetubebrasil/style.css"> 
-  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
   <script type="text/javascript" src="https://animetubebrasil.com/wp-content/themes/animetubebrasil/js/slider.min.js"></script> 
   <link rel="Shortcut Icon" href="img/favicon.png" type="image/x-icon"> 
   <meta name="author" content="RiverLab"> 
-  <!-- Pop-ups Web --> 
-  <!-- Pop-ups Mobile --> 
-  <!-- WP Head --> 
   <link rel="dns-prefetch" href="//s.w.org"> 
   <link rel="alternate" type="application/rss+xml" title="Feed de comentários para AnimeTubeBrasil » One Piece" href="https://animetubebrasil.com/1582/feed/"> 
+  <script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/animetubebrasil.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script> 
+  <style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style> 
   <link rel="stylesheet" id="player_css-css" href="https://animetubebrasil.com/wp-content/themes/animetubebrasil/assets/player/video-js.css?ver=4.9.8" type="text/css" media="all"> 
   <script type="text/javascript" src="https://animetubebrasil.com/wp-content/themes/animetubebrasil/assets/player/video.js"></script> 
   <link rel="https://api.w.org/" href="https://animetubebrasil.com/wp-json/"> 
@@ -30,7 +45,6 @@
   <link rel="icon" href="https://animetubebrasil.com/wp-content/uploads/2018/07/favicon.png" sizes="192x192"> 
   <link rel="apple-touch-icon-precomposed" href="https://animetubebrasil.com/wp-content/uploads/2018/07/favicon.png"> 
   <meta name="msapplication-TileImage" content="https://animetubebrasil.com/wp-content/uploads/2018/07/favicon.png"> 
-  <!-- SEO --> 
   <meta name="description" content="Assistir One Piece Episódio 1 Online Grátis à qualquer hora no melhor site para assistir animes"> 
   <link rel="canonical" href="https://animetubebrasil.com/1582/"> 
   <meta property="og:locale" content="pt_BR"> 
@@ -51,7 +65,6 @@
   <meta property="og:video" content="https://animetubebrasil.com/1582/"> 
   <meta property="video:duration" content=""> 
   <meta property="video:tag" content="One Piece Episódio 1"> 
-  <!-- Fim SEO --> 
  </head> 
  <body> 
   <div class="videoReportBox" style="display: none;"> 
@@ -80,8 +93,7 @@
      <input type="hidden" name="submitted" id="submitted" value="true"> 
     </form> 
    </div> 
-  </div>
-  <!-- Resultados da busca --> 
+  </div> 
   <div class="AjaxSearchBox"> 
    <div class="mwidth">
     <i class="spr i-close-2" id="closeAjaxSearch"></i> 
@@ -89,18 +101,14 @@
     </div> 
    </div> 
   </div> 
-  <!-- Fim resultados da busca --> 
-  <!-- Mensagem de aviso --> 
   <div class="userOffBox"> 
    <div class="userOffBoxContainer"> 
     <i class="spr i-close" id="closeUserOffBox"></i> 
     <p>Para ativar essa função faça: <a href="https://animetubebrasil.com/perfil/">Login</a> <a href="https://animetubebrasil.com/perfil/?action=registrar">Cadastro</a></p> 
    </div> 
   </div> 
-  <!-- Fim Mensagem de aviso --> 
   <header class="mHeader"> 
    <div class="mwidth fbox"> 
-    <!-- Menu Header --> 
     <div class="MenuSite"> 
      <i class="spr i-menu"></i> 
      <nav class="mainNav"> 
@@ -117,18 +125,14 @@
       </ul> 
      </nav> 
     </div> 
-    <!-- Logo do Site --> 
     <div class="webLogo"> 
      <a href="https://animetubebrasil.com"> <img src="https://animetubebrasil.com/wp-content/themes/animetubebrasil/img/icons/logo.png"> </a> 
     </div> 
-    <!-- Busca --> 
     <form method="get" class="headersearch" id="buscaAjax" action="https://animetubebrasil.com"> 
      <input name="s" class="box-search" maxlength="100" aria-label="Pesquisar" autocomplete="off" placeholder="Procurar..." type="text"> 
      <input class="btn-busca" value="" type="submit"> 
     </form> 
-    <!-- Menu Usuário --> 
     <div class="userHeader"> 
-     <!-- Usuário Offline --> 
      <div class="criarConta"> 
       <span id="criarContaText">Criar Conta</span> 
       <i class="spr i-profile"></i> 
@@ -141,10 +145,8 @@
       </div> 
      </div> 
     </div> 
-    <!-- Fim Menu Usuários --> 
    </div> 
   </header> 
-  <!-- Letras --> 
   <nav class="letrasheader"> 
    <div class="mwidth fbox"> 
     <a href="https://animetubebrasil.com/lista-de-animes/" class="letra">
@@ -257,15 +259,31 @@
      </div></a> 
    </div> 
   </nav> 
-  <!-- Index Container --> 
   <section class="episodioContainer mtop"> 
    <div class="mwidth fbox"> 
-    <!-- Lateral --> 
     <aside class="widgets"> 
-     <!-- Notícias --> 
-     <!-- Anuncios Laterais Web --> 
-     <!-- Animes em Destaque --> 
      <div class="slider"> 
+      <article class="aniSobre aniDestaque"> 
+       <div class="aniSobreImg"> 
+        <a href="https://animetubebrasil.com/anime/496" title="Naruto Shippuden"> <img src="https://animetubebrasil.com/wp-content/uploads/2018/07/naruto-shippuden-poster-1.png"> </a> 
+       </div> 
+       <div class="aniSobreInfos"> 
+        <div class="aniSobreTitulo">
+         <a href="https://animetubebrasil.com/anime/496" title="Naruto Shippuden">Naruto Shippuden</a>
+        </div> 
+        <div class="aniSobreSinopse" id="sinopseCurta">
+         Dois anos e meio se passaram após a partida de Uzumaki Naruto e Jiraiya da vila de Konoha, para um treinamento a parte com Naruto. Logo ao voltar à vila os primeiros a encontrá-lo foram Sakura e Konohamaru. Agora Naruto e seus amigos não tem apenas que se preocupar com o resgate de Sasuke, mas também com uma organização chamada Akatsuki, que está atrás dos Jinchuurikis (ninjas que carregam um Bijuu em seus corpos, junto a isso inumeros outros acontecimentos ocorrem ao longo da série.
+        </div> 
+        <div class="aniSobreGeneros"> 
+         <a href="https://animetubebrasil.com/genero/acao/" rel="tag">Ação</a>
+         <a href="https://animetubebrasil.com/genero/artes-marciais/" rel="tag">Artes Marciais</a>
+         <a href="https://animetubebrasil.com/genero/aventura/" rel="tag">Aventura</a>
+         <a href="https://animetubebrasil.com/genero/comedia/" rel="tag">Comédia</a>
+         <a href="https://animetubebrasil.com/genero/shounen/" rel="tag">Shounen</a>
+         <a href="https://animetubebrasil.com/genero/super-poder/" rel="tag">Super Poder</a>
+        </div> 
+       </div> 
+      </article> 
       <article class="aniSobre aniDestaque"> 
        <div class="aniSobreImg"> 
         <a href="https://animetubebrasil.com/anime/390" title="Shingeki no Kyojin 3 Temporada"> <img src="https://animetubebrasil.com/wp-content/uploads/2018/07/Shingeki-no-Kyojin-3-temp.jpg"> </a> 
@@ -330,11 +348,7 @@
       </article> 
      </div> 
     </aside> 
-    <!-- Episódio Container --> 
     <section class="mContainer"> 
-     <!-- Videos em Destaque --> 
-     <!-- Anúncio Mobile --> 
-     <!-- Episódio Titulo --> 
      <div class="epTitulo"> 
       <div class="Player">
         P1
@@ -348,15 +362,12 @@
        </div> 
       </div> 
      </div> 
-     <!-- Video Container --> 
      <div class="epViedoC" oncontextmenu="return false"> 
       <video id="my_video_1" poster="https://animetubebrasil.com/wp-content/themes/animetubebrasil/img/poster.jpg" class="video-js vjs-sublime-skin" width="840" height="472" controls preload="none" data-setup="{ &quot;aspectRatio&quot;:&quot;840:472&quot;, &quot;playbackRates&quot;: [1, 1.5, 2] }"> 
        <source src="https://www.blogger.com/video-play.mp4?contentId=3eb2b428663ef38f" type="video/mp4"> 
       </video> 
      </div> 
-     <!-- Video Controles --> 
      <div class="epVideoControles"> 
-      <!-- Anterior, lista, Proóximo --> 
       <div class="epVideoControl"> 
        <div class="epVideoControlItem"> 
         <i class="spr i-anterior"></i> 
@@ -369,16 +380,14 @@
         <a href="https://animetubebrasil.com/1583/"><span id="sub">Próximo</span> <i class="spr i-proximo"></i></a>
        </div> 
       </div> 
-      <!-- Reportar --> 
       <div class="epVideoReport"> 
        <i class="spr i-report"></i> Reportar 
        <span id="sub">Episódios com erro</span> 
       </div> 
-      <!-- Action Controles --> 
       <div class="epVideoAction" id="downEP" onclick="downloadFile('https://www.blogger.com/video-play.mp4?contentId=3eb2b428663ef38f')"> 
        <i class="spr i-down"></i> 
       </div> 
-      <div class="epVideoAction riverlabAction tooltip-bottom" data-tooltip="Minha Lista" data-id="1582" data-action="foundation_addlista" data-nonce="fdc77ec073" data-login="off"> 
+      <div class="epVideoAction riverlabAction tooltip-bottom" data-tooltip="Minha Lista" data-id="1582" data-action="foundation_addlista" data-nonce="b07c7f4bf5" data-login="off"> 
        <i class="spr i-addlista"></i> 
       </div> 
       <div class="epVideoAction tooltip-bottom" data-tooltip="Já assisti"> 
@@ -402,20 +411,16 @@
        </div> 
       </div>
      </div> 
-     <!-- Anuncio Web e Mobile --> 
-     <!-- Comentários --> 
      <div class="comments"> 
       <div class="commentsC"> 
        <div class="comments-title">
          Sem Comentários
        </div> 
        <h3>Apenas usuários logados podem comentar</h3> 
-       <ul class="comment-list"></ul>
-       <!-- .comment-list --> 
+       <ul class="comment-list"></ul> 
       </div> 
      </div>
     </section> 
-    <!--  --> 
    </div> 
   </section>
   <footer class="mFooter"> 
@@ -423,23 +428,23 @@
     <div class="mFooterItem"> 
      <div class="mFooterItemTitle">
       <i class="spr i-about"></i> Sobre nós
-     </div> Anime Tube Brasil é um site para Assistir Animes Online, todos animes que você quiser estão aqui! Todos os direitos reservados para os criadores e produtores dos animes aqui compartilhados, site feito de fãs para fãs. 
+     </div> AnimeTubeBrasil é um site para Assistir Animes Online, todos animes que você quiser estão aqui! Todos os direitos reservados para os criadores e produtores dos animes aqui compartilhados, site feito de fãs para fãs. 
     </div> 
     <div class="mFooterItem"> 
      <div class="mFooterItemTitle">
       <i class="spr i-maisvistos"></i> Animes Mais Vistos
      </div> 
      <ul class="aniMaisVistos"> 
-      <li><a href="https://animetubebrasil.com/anime/17">Boruto</a></li> 
       <li><a href="https://animetubebrasil.com/anime/496">Naruto Shippuden</a></li> 
-      <li><a href="https://animetubebrasil.com/anime/306">Boku no Hero Academia 3 Temporada</a></li> 
+      <li><a href="https://animetubebrasil.com/anime/17">Boruto</a></li> 
       <li><a href="https://animetubebrasil.com/anime/4080">Dragon Ball Super (Dublado)</a></li> 
-      <li><a href="https://animetubebrasil.com/anime/356">Dragon Ball Heroes</a></li> 
+      <li><a href="https://animetubebrasil.com/anime/306">Boku no Hero Academia 3 Temporada</a></li> 
       <li><a href="https://animetubebrasil.com/anime/390">Shingeki no Kyojin 3 Temporada</a></li> 
-      <li><a href="https://animetubebrasil.com/anime/2009">Dragon Ball Super</a></li> 
+      <li><a href="https://animetubebrasil.com/anime/356">Dragon Ball Heroes</a></li> 
       <li><a href="https://animetubebrasil.com/anime/358">Black Clover</a></li> 
+      <li><a href="https://animetubebrasil.com/anime/2009">Dragon Ball Super</a></li> 
       <li><a href="https://animetubebrasil.com/anime/18">Nanatsu no Taizai 2 Temporada</a></li> 
-      <li><a href="https://animetubebrasil.com/anime/103">Boku no Hero Academia (1° Temporada)</a></li> 
+      <li><a href="https://animetubebrasil.com/anime/1581">One Piece</a></li> 
      </ul> 
     </div> 
     <div class="mFooterItem"> 
@@ -447,8 +452,8 @@
       <i class="spr i-parceiros"></i> Parceiros
      </div> 
      <ul class="parceiros"> 
-      <li>Parceiro 1</li> 
-      <li>Parceiro 2</li> 
+      <li><a href="https://animesonline.biz/">AnimesOnline</a></li> 
+      <li><a href="https://assistaanimes.com/">AssitaAnimes</a></li> 
       <li>Parceiro 3</li> 
       <li>Parceiro 4</li> 
       <li>Parceiro 5</li> 
@@ -479,7 +484,6 @@
      </div> </a> 
    </div> 
   </footer> 
-  <!-- Scripts do Site --> 
   <script type="text/javascript" src="https://animetubebrasil.com/wp-content/themes/animetubebrasil/js/functions_v1.js"></script> 
   <script type="text/javascript" src="https://animetubebrasil.com/wp-content/themes/animetubebrasil/assets/player/grupo.js"></script> 
   <script src="https://animetubebrasil.com/wp-content/themes/animetubebrasil/assets/player/memory.js"></script> 
@@ -493,7 +497,6 @@ $(document).ready(function(){
 	});
 });
  </script> 
-  <!-- Fim Wordpress --> 
   <script>var ajaxurl = "https://animetubebrasil.com/wp-admin/admin-ajax.php";</script>
   <script type="text/javascript" src="https://animetubebrasil.com/wp-includes/js/comment-reply.min.js?ver=4.9.8"></script> 
   <script type="text/javascript" src="https://animetubebrasil.com/wp-includes/js/wp-embed.min.js?ver=4.9.8"></script> 
