@@ -44,7 +44,7 @@ script:
 - echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST  buildNumber $TRAVIS_BUILD_NUMBER"
 - ./gradlew app:googleServicesDecrypt assembleDebug -PminSdk=$MIN_SDK
 - ./gradlew lint ktlint checkstyleMain --continue -x app:ktlint
-- ./gradlew test -Pusecache=true
+- ./gradlew cleanTest test -Pusecache=true -PparallelForks=2
 #- ./gradlew app:assembleRelease -PkeyPassword='$KEYPASS' -PstorePassword='$KEYSTOREPASS' -PversionCode=$TRAVIS_BUILD_NUMBER -PversionName=$RELEASE_TAG
 #- ./gradlew connectedAndroidTest -PdisablePreDex --stacktrace -P
 #- ./gradlew jacocoTestReport
