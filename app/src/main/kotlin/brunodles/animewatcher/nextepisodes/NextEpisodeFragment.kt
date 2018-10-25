@@ -13,11 +13,8 @@ import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.home.HomeActivity
 import brunodles.animewatcher.persistence.Firebase
 import brunodles.animewatcher.player.PlayerActivity
-import brunodles.rxfirebase.singleObservable
-import brunodles.rxfirebase.typedChildObserver
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -65,31 +62,13 @@ class NextEpisodeFragment : Fragment() {
 
     private fun suggestNextEpisode(user: FirebaseUser) {
         adapter.clear()
-        disposable.add(Firebase.history(user)
-            .limitToLast(30)
-            .orderByKey()
-            .typedChildObserver(String::class.java)
+        disposable.add(Firebase.nextEpisodes(user)
             .subscribeOn(Schedulers.io())
-            .doOnNext { Log.d(HomeActivity.TAG, "suggestNextEpisode: lastUrl: ${it.element}") }
-            .flatMapSingle {
-                Firebase.videoRef(it.element).singleObservable(Episode::class.java)
-            }
             .take(5, TimeUnit.SECONDS)
-            .toMap { it.animeName ?: "Unknown" }
-            .doOnSuccess { Log.d(HomeActivity.TAG, "suggestNextEpisode: keys: ${it.keys}") }
-            .flatMapObservable { Observable.fromIterable(it.values) }
             .doOnNext {
                 Log.d(
                     HomeActivity.TAG,
-                    "suggestNextEpisode: last: ${it.animeName} - ${it.number} ${it.description}"
-                )
-            }
-            .filter { it.nextEpisodes.isNotEmpty() }
-            .map { it.nextEpisodes.first() }
-            .doOnNext {
-                Log.d(
-                    HomeActivity.TAG,
-                    "suggestNextEpisode: suggestion: ${it.animeName} - ${it.number} ${it.description}"
+                    "suggestNextEpisode: ${it.animeName} - ${it.number} ${it.description}"
                 )
             }
             .observeOn(AndroidSchedulers.mainThread())
