@@ -22,6 +22,7 @@ object Firebase {
     private const val REF_NUMBER = "number"
     private const val REF_SEARCH = "search"
     private const val REF_LAST_ON_HISTORY = "historyLast"
+    private const val REF_NEXT = "next"
     private const val EMPTY_URL = ""
 
     /** Return the reference to all videos mapped by the firebase **/
@@ -84,6 +85,10 @@ object Firebase {
         userRef(currentUser).child(REF_SEARCH)
 
     fun searchHistory() = searchRef(currentUser()!!)
+
+    fun nextEpisodes(user: FirebaseUser) =
+        userRef(user).child(REF_NEXT)
+            .observableChildAdded(Episode::class.java)
 
     private fun userRef(currentUser: FirebaseUser) =
         firebaseRef().child(REF_USERS).child(currentUser.uid)
