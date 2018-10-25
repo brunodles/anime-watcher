@@ -1,4 +1,4 @@
-package brunodles.animewatcher.cast
+package brunodles.animewatcher.castfalse
 
 import android.app.Activity
 import android.widget.ImageButton
@@ -11,10 +11,6 @@ object ConnectSdkCasterFactory {
     ): Caster {
         return object : Caster {
             override fun playRemote(currentEpisode: Episode, position: Long) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun setOnEndListener(listener: (() -> Unit)?) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
