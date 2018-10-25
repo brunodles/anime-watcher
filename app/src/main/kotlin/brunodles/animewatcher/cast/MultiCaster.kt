@@ -17,14 +17,14 @@ internal class MultiCaster(
         val TAG = "MultiCaster"
     }
 
+    val casters = ArrayList<Caster>()
+    var current: Caster? = null
+
     init {
         if (BuildConfig.CONNECT_SDK)
             addCaster(ConnectSdkCasterFactory.create(activity, imageButton) { current = it })
         addCaster(GoogleCaster(activity, mediaRouteButton) { current = it })
     }
-
-    val casters = ArrayList<Caster>()
-    var current: Caster? = null
 
     private fun addCaster(caster: Caster) {
         casters.add(caster)
