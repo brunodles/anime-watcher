@@ -22,7 +22,7 @@ object OnePieceXFactory : PageParser {
     private val VIDEO_URL_PATTERN = Pattern.compile("[\"']([HML]Q|Online)[\"']:\\s*[\"'](.*?)[\"']")
     private val PREFERED_QUALITY_ORDER = arrayOf("HQ", "MQ", "LQ", "ONLINE")
     private const val ANIME_NAME = "One Piece"
-    private val urlFetcher = UrlFetcher.fetcher()
+    private val urlFetcher by lazy { UrlFetcher.fetcher() }
 
     override fun isEpisode(url: String): Boolean = url.contains(EPISODE_URL_REGEX)
 
