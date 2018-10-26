@@ -62,4 +62,3 @@ private fun Routing.v1Routing(videoChecker: VideoChecker) {
         throw ClosedFileSystemException()
     }
 }
-
