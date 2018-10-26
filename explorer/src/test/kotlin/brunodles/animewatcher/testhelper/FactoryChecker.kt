@@ -1,7 +1,10 @@
 package brunodles.animewatcher.testhelper
 
+import brunodles.animewatcher.explorer.BuildConfig
 import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.explorer.PageParser
+import brunodles.urlfetcher.CacheFetcher
+import brunodles.urlfetcher.UrlFetcher
 import com.greghaskins.spectrum.Spectrum.describe
 import com.greghaskins.spectrum.Spectrum.it
 import org.junit.Assert
@@ -14,7 +17,11 @@ import java.util.regex.Pattern
 object FactoryChecker {
 
     fun describe(pageParser: PageParser, block: PageParser.() -> Unit) {
-        return describe(pageParser::class.java.simpleName) { block.invoke(pageParser) }
+        if (BuildConfig.USE_CACHE && !BuildConfig.UPDATE_CACHE)
+            UrlFetcher.fetcherOverride = CacheFetcher(FailFetcher())
+        val result = describe(pageParser::class.java.simpleName) { block.invoke(pageParser) }
+        UrlFetcher.fetcherOverride = null
+        return result
     }
 
     fun describeFactory(
