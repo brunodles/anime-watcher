@@ -15,6 +15,8 @@ interface UrlFetcher {
         val useCache: Boolean = BuildConfig.USE_CACHE
         var cacheDir = BuildConfig.ROOT_DIR
         var useLog = false
+        /** Overrides result of fetcher method */
+        var fetcherOverride: UrlFetcher? = null
 
         /**
          * Returns an instance of UrlFetcher.
@@ -22,6 +24,7 @@ interface UrlFetcher {
          * @See useCache
          */
         fun fetcher(): UrlFetcher {
+            fetcherOverride?.let { return it }
             val urlFetcherComposable = composableFetcher()
             if (useCache)
                 urlFetcherComposable.withCache()
