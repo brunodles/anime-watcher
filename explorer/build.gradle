@@ -10,6 +10,7 @@ buildconfig {
     targetPackage = "brunodles.animewatcher.explorer"
     field "String", "ROOT_DIR", "\"${project.rootDir.getPath()}\""
     field "Boolean", "USE_CACHE", Boolean.parseBoolean(properties.get("usecache", "true"))
+    field "Boolean", "UPDATE_CACHE", Boolean.parseBoolean(properties.get("updatecache", "false"))
 
     toggler.stringPropertyNames().each {
         field "Boolean", it.toUpperCase(), toggler.getProperty(it)
