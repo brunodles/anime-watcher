@@ -13,7 +13,7 @@ import spark.kotlin.post
 
 fun main(args: Array<String>) {
     port(getHerokuAssignedPort())
-    AlchemistFactory.urlFetcher = UrlFetcher.composableFetcher()
+    AlchemistFactory.setUrlFetcher(UrlFetcher.composableFetcher())
     startServer()
 }
 
