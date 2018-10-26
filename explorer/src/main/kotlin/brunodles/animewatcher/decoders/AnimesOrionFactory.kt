@@ -14,8 +14,9 @@ import java.util.regex.Pattern
 
 object AnimesOrionFactory : PageParser {
 
+    @Suppress("RegExpRedundantEscape")
     private val URL_REGEX =
-        Regex("^(:?https?://)?(:?www.)?animesorion.(?:tv|site|video|online)/\\d+.*?$")
+        Regex("^(?:https?\\:\\/\\/)?(?:www.)?animesorion.(\\w+)\\/(\\d+).*?\$")
     private val urlFetcher = UrlFetcher.fetcher()
 
     override fun isEpisode(url: String): Boolean =
