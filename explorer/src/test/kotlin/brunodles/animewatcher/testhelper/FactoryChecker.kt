@@ -12,14 +12,13 @@ import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Assert.fail
-import java.lang.AssertionError
 import java.util.regex.Pattern
 
 object FactoryChecker {
 
     fun describe(pageParser: PageParser, block: PageParser.() -> Unit) {
         if (BuildConfig.USE_CACHE && !BuildConfig.UPDATE_CACHE)
-            UrlFetcher.fetcherOverride = RedirectFetcher(CacheFetcher(FailFetcher()))
+            UrlFetcher.fetcherOverride = RetryFetcher(RedirectFetcher(CacheFetcher(FailFetcher())))
         val result = describe(pageParser::class.java.simpleName) { block.invoke(pageParser) }
         UrlFetcher.fetcherOverride = null
         return result
