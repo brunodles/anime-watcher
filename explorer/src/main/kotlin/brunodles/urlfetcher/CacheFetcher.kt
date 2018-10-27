@@ -47,12 +47,10 @@ internal class CacheFetcher(private val nestedFetcher: UrlFetcher) : UrlFetcher 
 
         private fun urlToKey(urlStr: String): String {
             val url = URL(urlStr)
-            with(url) {
-                val hostStr = extractDomain(url)
-                    .replace(Regex("[^\\d\\w.]"), "")
-                return (hostStr + "/" + path.fixed() + query.fixed())
-                    .max(MAX_FILENAME_SIZE)
-            }
+            val hostStr = extractDomain(url)
+                .replace(Regex("[^\\d\\w.]"), "")
+            return (hostStr + "/" + url.path.fixed() + url.query.fixed())
+                .max(MAX_FILENAME_SIZE)
         }
 
         private fun String?.fixed() = this?.replace(INVALID_TEXT_PATTERN, "") ?: ""
