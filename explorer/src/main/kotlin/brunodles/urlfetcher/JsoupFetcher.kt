@@ -3,9 +3,7 @@ package brunodles.urlfetcher
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
-internal class JsoupFetcher() : UrlFetcher {
-
-    override fun post(url: String): Document = jsoupConnection(url).post()
+internal class JsoupFetcher : UrlFetcher {
 
     override fun get(url: String): Document = jsoupConnection(url).get()
 

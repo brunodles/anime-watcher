@@ -8,15 +8,6 @@ import java.util.regex.Pattern
 
 internal class CacheFetcher(private val nestedFetcher: UrlFetcher) : UrlFetcher {
 
-    override fun post(url: String): Document {
-        val key = urlToKey(url)
-        if (isPageCached(key))
-            return Jsoup.parse(loadPage(key))
-        val document = nestedFetcher.post(url)
-        savePage(key, document.html())
-        return document
-    }
-
     override fun get(url: String): Document {
         val key = urlToKey(url)
         if (isPageCached(key))

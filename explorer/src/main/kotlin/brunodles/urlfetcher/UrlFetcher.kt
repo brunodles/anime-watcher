@@ -8,7 +8,6 @@ import org.jsoup.nodes.Document
  */
 interface UrlFetcher {
 
-    fun post(url: String): Document
     fun get(url: String): Document
 
     companion object {
