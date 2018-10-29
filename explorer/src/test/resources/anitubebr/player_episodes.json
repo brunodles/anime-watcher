@@ -1,0 +1,18 @@
+{
+  "description": "One Piece 01",
+  "number": 1,
+  "animeName": "One Piece",
+  "image": "",
+  "link": "https://anitubebr.com/vd/19249/",
+  "nextEpisodes": [
+    {
+      "description": "Próximo Episódio",
+      "number": 2,
+      "animeName": "One Piece",
+      "link": "https://anitubebr.com/vd/19250/",
+      "nextEpisodes": [],
+      "temporaryVideoUrl": false
+    }
+  ],
+  "temporaryVideoUrl": false
+}
