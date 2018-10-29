@@ -1,0 +1,18 @@
+{
+  "description": "Eu Sou Ruffy!",
+  "number": 1,
+  "animeName": "One Piece",
+  "video": "https://www.blogger.com/video-play.mp4?contentId\u003d3eb2b428663ef38f",
+  "link": "https://animetubebrasil.com/1582/",
+  "nextEpisodes": [
+    {
+      "description": "Next",
+      "number": 2,
+      "animeName": "One Piece",
+      "link": "https://animetubebrasil.com/1583/",
+      "nextEpisodes": [],
+      "temporaryVideoUrl": false
+    }
+  ],
+  "temporaryVideoUrl": false
+}
