@@ -1,0 +1,48 @@
+File outputDir = new File(project.buildDir, "resource-helper")
+File inputDir = new File(project.projectDir, 'src/test/resources/')
+sourceSets.test.java.srcDirs outputDir
+String relativePath = inputDir.path+"/"
+
+task("compileResourcesClass") {
+    doLast {
+        def packageDir = new File(outputDir, "resource_helper")
+        packageDir.mkdirs()
+
+        String classContent = buildClass(relativePath, inputDir, 0)
+        File resourcesClass = new File(packageDir, "Resources.java")
+        resourcesClass.write(classContent)
+    }
+}
+
+def task = tasks.findByPath("compileKotlin")
+if (task != null)
+    task.dependsOn('compileResourcesClass')
+else
+    tasks.getByName("compileJava").dependsOn("compileResourcesClass")
+
+static def buildClass(String relativePath, File file, int tabCount = 0) {
+    def tabs = ""
+    tabCount.times { tabs += "\t" }
+    def fieldName = fileToFieldName(file)
+
+    if (!file.isDirectory()) {
+        def value = file.path.replace(relativePath, "")
+        return "${tabs}public static String $fieldName = \"${value}\";\n"
+    }
+
+    String classText = ""
+    if (tabCount == 0) {
+        fieldName = fieldName.capitalize()
+        classText += "package resource_helper;\n"
+        classText += "${tabs}public class ${fieldName.capitalize()} {\n"
+    } else {
+        classText += "${tabs}public static class $fieldName {\n"
+    }
+    classText += file.listFiles().collect { buildClass(relativePath, it, tabCount + 1) }.join()
+    classText += "${tabs}}\n"
+    return classText
+}
+
+static def fileToFieldName(File file) {
+    return file.name.split("[^a-zA-Z0-9]+").collect { it.capitalize() }.join().uncapitalize()
+}
