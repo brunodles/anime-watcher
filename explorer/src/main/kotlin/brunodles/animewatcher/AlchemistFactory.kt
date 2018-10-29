@@ -27,9 +27,8 @@ object AlchemistFactory {
     }
 
     fun getUrlFetcher(): UrlFetcher {
-        if (urlFetcher == null)
-            urlFetcher = UrlFetcher.fetcher()
-        return urlFetcher!!
+        urlFetcher?.let { return it }
+        return UrlFetcher.fetcher()
     }
 
     fun setUrlFetcher(urlFetcher: UrlFetcher) {
