@@ -1,6 +1,7 @@
 apply plugin: 'kotlin'
 apply plugin: "kotlin-noarg"
 apply from: rootProject.file('gradle/buildconfig.gradle')
+apply from: rootProject.file('gradle/resource_helper.gradle')
 
 noArg {
     annotation("brunodles.kotlin.annotation.NoArgs")
