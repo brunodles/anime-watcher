@@ -1,0 +1,47 @@
+{
+  "description": "Assistir One Piece - Episódio 162 – Chopper em perigo! Antigo Deus x Sacerdote Shura! Online",
+  "number": 162,
+  "animeName": "One Piece",
+  "image": "https://tvcurse.com/imgs/one-piece-episodio-162.webp",
+  "video": "https://tvcurse.com/dd/ODJkMDU0ZDYzZjc5MzA5NQ\u003d\u003d",
+  "link": "https://tvcurse.com/?p\u003d713",
+  "nextEpisodes": [
+    {
+      "description": "Episódio 163 – Sempre Misteriosa! Provação das cordas e provação do amor!?",
+      "number": 163,
+      "animeName": "One Piece",
+      "image": "https://tvcurse.com/imgs/one-piece-episodio-163.webp",
+      "link": "https://tvcurse.com/?p\u003d714",
+      "nextEpisodes": [],
+      "temporaryVideoUrl": false
+    },
+    {
+      "description": "Episódio 164 – Acendam a chama da sabedoria! Wiper, o Guerreiro",
+      "number": 164,
+      "animeName": "One Piece",
+      "image": "https://tvcurse.com/imgs/one-piece-episodio-164.webp",
+      "link": "https://tvcurse.com/?p\u003d715",
+      "nextEpisodes": [],
+      "temporaryVideoUrl": false
+    },
+    {
+      "description": "Episódio 165 – Terra Flutuante de Ouro, Jaya! Para o Santuário de Deus!",
+      "number": 165,
+      "animeName": "One Piece",
+      "image": "https://tvcurse.com/imgs/one-piece-episodio-165.webp",
+      "link": "https://tvcurse.com/?p\u003d716",
+      "nextEpisodes": [],
+      "temporaryVideoUrl": false
+    },
+    {
+      "description": "Episódio 166 – Véspera do Festival do Ouro! Afeta a Vearth",
+      "number": 166,
+      "animeName": "One Piece",
+      "image": "https://tvcurse.com/imgs/one-piece-episodio-166.webp",
+      "link": "https://tvcurse.com/?p\u003d717",
+      "nextEpisodes": [],
+      "temporaryVideoUrl": false
+    }
+  ],
+  "temporaryVideoUrl": false
+}
