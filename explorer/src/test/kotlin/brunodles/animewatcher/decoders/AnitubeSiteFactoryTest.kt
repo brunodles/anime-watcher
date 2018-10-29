@@ -1,6 +1,5 @@
 package brunodles.animewatcher.decoders
 
-import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.testhelper.FactoryChecker
 import brunodles.animewatcher.testhelper.FactoryChecker.whenCheckIsEpisode
 import brunodles.animewatcher.testhelper.FactoryChecker.whenEpisode
