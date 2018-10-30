@@ -27,10 +27,10 @@ class TvCurseFactoryTest {
     init {
         FactoryChecker.describe(TvCurseFactory) {
             describe("when page contains next episodes") {
-                whenEpisode(Resources.tvcurse.playerWithNextEpisodesJson.loadEpisodeResource())
+                whenEpisode(Resources.responses.tvcurse.playerWithNextEpisodesJson.loadEpisodeResource())
             }
             describe("when page does not contains next") {
-                whenEpisode(Resources.tvcurse.playerWithoutNextEpisodesJson.loadEpisodeResource())
+                whenEpisode(Resources.responses.tvcurse.playerWithoutNextEpisodesJson.loadEpisodeResource())
             }
             whenCheckIsEpisode(VALID_URLS, INVALID_URLS)
         }

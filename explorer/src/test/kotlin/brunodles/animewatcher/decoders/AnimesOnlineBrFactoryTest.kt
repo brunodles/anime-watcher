@@ -24,10 +24,10 @@ class AnimesOnlineBrFactoryTest {
         FactoryChecker.describe(AnimesOnlineBrFactory) {
             whenCheckIsEpisode(VALID_URLS, INVALID_URLS)
             Spectrum.describe("when episode page") {
-                whenEpisode(Resources.animesonlinebr.playerEpisodesJson.loadEpisodeResource())
+                whenEpisode(Resources.responses.animesonlinebr.playerEpisodesJson.loadEpisodeResource())
             }
             Spectrum.describe("when anime about page") {
-                whenEpisode(Resources.animesonlinebr.aboutPageEpisodesJson.loadEpisodeResource())
+                whenEpisode(Resources.responses.animesonlinebr.aboutPageEpisodesJson.loadEpisodeResource())
             }
         }
     }

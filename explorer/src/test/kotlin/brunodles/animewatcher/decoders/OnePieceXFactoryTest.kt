@@ -26,7 +26,7 @@ class OnePieceXFactoryTest {
 
     init {
         FactoryChecker.describe(OnePieceXFactory) {
-            whenEpisode(Resources.onepiecex.playerEpisodesJson.loadEpisodeResource())
+            whenEpisode(Resources.responses.onepiecex.playerEpisodesJson.loadEpisodeResource())
             whenCheckIsEpisode(VALID_URLS, INVALID_URLS)
         }
     }

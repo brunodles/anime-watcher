@@ -18,7 +18,7 @@ class AnimeTubeBrasilFactoryTest {
 
     init {
         FactoryChecker.describe(AnimeTubeBrasilFactory) {
-            whenEpisode(Resources.animetubebrasil.playerEpisodesJson.loadEpisodeResource())
+            whenEpisode(Resources.responses.animetubebrasil.playerEpisodesJson.loadEpisodeResource())
             whenCheckIsEpisode(VALID_URLS, INVALID_URLS)
         }
     }

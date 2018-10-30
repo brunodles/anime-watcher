@@ -26,7 +26,7 @@ class AnitubeBrFactoryTest {
 
     init {
         FactoryChecker.describe(AnitubeBrFactory) {
-            whenEpisode(Resources.anitubebr.playerEpisodesJson.loadEpisodeResource())
+            whenEpisode(Resources.responses.anitubebr.playerEpisodesJson.loadEpisodeResource())
             whenCheckIsEpisode(VALID_URLS, INVALID_URLS)
             xit("check video url") {}
         }

@@ -25,7 +25,7 @@ class XvideosFactoryTest {
     init {
         FactoryChecker.describe(XvideosFactory) {
             if (UrlFetcher.useCache)
-                whenEpisode(Resources.xvideos.playerEpisodesJson.loadEpisodeResource())
+                whenEpisode(Resources.responses.xvideos.playerEpisodesJson.loadEpisodeResource())
             else
                 xit("when episode") {}
             whenCheckIsEpisode(VALID_URLS, INVALID_URLS)

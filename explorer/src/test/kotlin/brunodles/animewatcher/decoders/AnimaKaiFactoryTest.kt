@@ -25,13 +25,13 @@ class AnimaKaiFactoryTest {
     init {
         FactoryChecker.describe(AnimaKaiFactory) {
             describe("when page returns 200 (Success)") {
-                whenEpisode(Resources.animakai.tskiproEpisodesJson.loadEpisodeResource())
+                whenEpisode(Resources.responses.animakai.tskiproEpisodesJson.loadEpisodeResource())
             }
             describe("when page returns 500 (Server Error, but is a success)") {
-                whenEpisode(Resources.animakai.umaruchanEpisodesJson.loadEpisodeResource())
+                whenEpisode(Resources.responses.animakai.umaruchanEpisodesJson.loadEpisodeResource())
             }
             describe("when page is empty") {
-                whenEpisode(Resources.animakai.errorEpisodesJson.loadEpisodeResource())
+                whenEpisode(Resources.responses.animakai.errorEpisodesJson.loadEpisodeResource())
             }
             whenCheckIsEpisode(VALID_URLS, INVALID_URLS)
         }

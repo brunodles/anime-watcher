@@ -28,13 +28,13 @@ class AnimesOrionFactoryTest {
     init {
         FactoryChecker.describe(AnimesOrionFactory) {
             describe("when single next episodes") {
-                whenEpisode(Resources.animesorion.singleNextEpisodesJson.loadEpisodeResource())
+                whenEpisode(Resources.responses.animesorion.singleNextEpisodesJson.loadEpisodeResource())
             }
             describe("when about page") {
-                whenEpisode(Resources.animesorion.aboutPageEpisodesJson.loadEpisodeResource())
+                whenEpisode(Resources.responses.animesorion.aboutPageEpisodesJson.loadEpisodeResource())
             }
             describe("when no next episodes") {
-                whenEpisode(Resources.animesorion.noNextEpisodesJson.loadEpisodeResource())
+                whenEpisode(Resources.responses.animesorion.noNextEpisodesJson.loadEpisodeResource())
             }
             whenCheckIsEpisode(VALID_URLS, INVALID_URLS)
         }
