@@ -15,8 +15,8 @@ class OnePieceXFactoryTest {
 
         val VALID_URLS = arrayOf(
             "https://onepiece-ex.com.br/episodios/online/208/",
-            "http://one-piece-x.com.br/episodios/online/207/",
-            "one-piece-x.com.br/episodios/online/209"
+            "http://onepiece-ex.com.br/episodios/online/207/",
+            "onepiece-ex.com.br/episodios/online/209"
         )
         val INVALID_URLS = arrayOf(
             "https://one-piece-x.com.br/episodios/t04/",
