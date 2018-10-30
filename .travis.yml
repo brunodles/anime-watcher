@@ -20,6 +20,11 @@ android:
     - 'google-gdk-license-.+'
     - 'build-tools.*'
 
+addons:
+  apt:
+    packages:
+    - tree
+
 env:
   global:
     - RELEASE_TAG=$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)
