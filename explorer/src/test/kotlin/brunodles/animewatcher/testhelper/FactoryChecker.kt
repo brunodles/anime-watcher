@@ -18,7 +18,7 @@ object FactoryChecker {
 
     fun describe(pageParser: PageParser, block: PageParser.() -> Unit) {
         if (BuildConfig.USE_CACHE && !BuildConfig.UPDATE_CACHE)
-            UrlFetcher.fetcherOverride = RetryFetcher(RedirectFetcher(CacheFetcher(FailFetcher())))
+            UrlFetcher.fetcherOverride = RetryFetcher(RedirectFetcher(ResourceFetcher(CacheFetcher(FailFetcher()))))
         val result = describe(pageParser::class.java.simpleName) { block.invoke(pageParser) }
         UrlFetcher.fetcherOverride = null
         return result
