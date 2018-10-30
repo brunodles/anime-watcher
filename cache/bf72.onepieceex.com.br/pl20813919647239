@@ -20,7 +20,7 @@
   <link href="//bf72.onepieceex.com.br/assets/css/adplayerX.css?v=18042018" rel="stylesheet" type="text/css"> 
   <script src="https://code.jquery.com/jquery.js"></script> 
   <script type="text/javascript" src="//bf72.onepieceex.com.br/assets/js/adplayerX.js?v=1308201711h"></script> 
-  <script type="text/javascript">var autoplay = false;var servidor = 'sanji';var contador = 4;var medida = 100/contador;var ok;var lqp;var block = false;var temProximo = false;var temProximo = true;proximo = false;ativouPlayer = false;</script> 
+  <script type="text/javascript">var autoplay = false;var servidor = 'klahador';var contador = 4;var medida = 100/contador;var ok;var lqp;var block = false;var temProximo = false;var temProximo = true;proximo = false;ativouPlayer = false;</script> 
   <script type="text/javascript">
       		console.log('======================================================================');
       		console.log('Bem vindo ao player da OPEX. Qualquer problema, entre em contato o/');
@@ -29,8 +29,8 @@
       		console.log('======================================================================');
       		console.log('Seu novo anfitrião é -> ' + servidor );
   //     		if (sessionStorage.getItem('servidor') === null ) {
-  //     			var servidor = 'sanji';
-  //     			sessionStorage.setItem("servidor", 'sanji');
+  //     			var servidor = 'klahador';
+  //     			sessionStorage.setItem("servidor", 'klahador');
       			// console.log('Seu novo anfitrião é -> ' + sessionStorage.getItem('servidor') );
 		// 	// console.log('Servidor var-> '+ servidor);
 
@@ -40,7 +40,7 @@
 		// 	console.log('Anfitrião já definido. Aos cuidados de -> ' + sessionStorage.servidor);
 		// }
 
-		var codigo = 'https://'+servidor+'.onepieceex.com.br/player.php?code=plays.eB1QLzcveh9UGVkvh4PLb0viYUy6NW3m';
+		var codigo = 'https://'+servidor+'.onepieceex.com.br/player.php?code=plays.e2Af7Pqy9Q0jn4DrHEoLxQw0JIR08VlO';
 		// console.log(codigo);
 	</script> 
   <script type="text/javascript">
@@ -288,11 +288,11 @@ function salvarTempo(){
 		var regressivo = Math.round(duracao - tempoAtual);
 
 		// Se tem um valor armazenado e o tempo for maior que 1
-		if ( localStorage.tepisodios210 == false ||  tempoAtual != localStorage.tepisodios210 &&  tempoAtual > 1 ) {
-			// console.log('Tempo Salvo -> '+localStorage.tepisodios210);
+		if ( localStorage.tepisodios208 == false ||  tempoAtual != localStorage.tepisodios208 &&  tempoAtual > 1 ) {
+			// console.log('Tempo Salvo -> '+localStorage.tepisodios208);
 			console.log('Tempo atual salvo.');
 
-			localStorage['tepisodios210'] = tempoAtual;
+			localStorage['tepisodios208'] = tempoAtual;
 
 			// Exibir próximo episódio
 			if (tempoAtual > quaseFim && proximo == false){
@@ -303,15 +303,15 @@ function salvarTempo(){
 				// $("#ad-v-player").append('<div id="proximo">O próximo episódio começa em <span>'+regressivo+'</span></div>');
 				if ( temProximo == true ){
 					if ($("#proximo").length == 1){
-						$('#ad-v-player #proximo').html('O próximo episódio começa em <span>'+regressivo+'</span> segundos OU <a target="_parent" href="https://onepiece-ex.com.br/episodios/online/211"> clique aqui</a>');
+						$('#ad-v-player #proximo').html('O próximo episódio começa em <span>'+regressivo+'</span> segundos OU <a target="_parent" href="https://onepiece-ex.com.br/episodios/online/209"> clique aqui</a>');
 						$('#ad-v-player #proximo').css( "left", "0" );
 					}else{
-						$('#ad-v-player').append('<div id="proximo">O próximo episódio começa em <span>'+regressivo+'</span> segundos OU <a target="_parent" href="https://onepiece-ex.com.br/episodios/online/211"> clique aqui</a> </div>');
+						$('#ad-v-player').append('<div id="proximo">O próximo episódio começa em <span>'+regressivo+'</span> segundos OU <a target="_parent" href="https://onepiece-ex.com.br/episodios/online/209"> clique aqui</a> </div>');
 						$('#ad-v-player #proximo').css( "left", "-5000" );
 					}
 					if ( regressivo < 1 )
-					// window.location.href = "http://bf72.onepieceex.com.br/pl/211/1/874035065";
-				top.location.href = "https://onepiece-ex.com.br/episodios/online/211";
+					// window.location.href = "http://bf72.onepieceex.com.br/pl/209/1/874035065";
+				top.location.href = "https://onepiece-ex.com.br/episodios/online/209";
 			}else {
 				if ($("#proximo").length == 1){
 					$('#ad-v-player #proximo').html('O próximo episódio ainda não foi lançado. Assine as notificações, siga no Facebook e aguarde! (Todo Domingo)');
@@ -324,7 +324,7 @@ function salvarTempo(){
 		}
 
 			$( "#ad-v-player #proximo" ).on( "click", function() {
-				window.top.location = "https://onepiece-ex.com.br/episodios/online/211";
+				window.top.location = "https://onepiece-ex.com.br/episodios/online/209";
 			});
 
 			// Remover próximo episódio
@@ -341,21 +341,21 @@ function salvarTempo(){
 		console.log('Play');
 		var player = $('#advideox')[0];
 		// Continua de onde parou
-		if (localStorage.tepisodios210 && player.currentTime == 0) {
-			console.log('Continuar do segundo '+localStorage.tepisodios210 +'?');
+		if (localStorage.tepisodios208 && player.currentTime == 0) {
+			console.log('Continuar do segundo '+localStorage.tepisodios208 +'?');
 
 			player.pause();
 			$("#ad-v-player").append('<div id="continuar"><div id="dialog"><h1>Gostaria de continuar de onde parou?</h1><a href="#" id="nao">Não</a><a href="#" id="sim">Sim</a></div></div>');
 			$( "#sim" ).click(function(e) {
 				$( "#continuar" ).remove();
 				player.play();
-				player.currentTime = localStorage.tepisodios210;
+				player.currentTime = localStorage.tepisodios208;
 				e.preventDefault();
 			});
 			$( "#nao" ).click(function(e) {
 				e.preventDefault();
 				$( "#continuar" ).remove();
-				localStorage.removeItem('tepisodios210');
+				localStorage.removeItem('tepisodios208');
 				player.play();
 				e.preventDefault();
 			});

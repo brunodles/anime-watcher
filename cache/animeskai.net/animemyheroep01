@@ -67,7 +67,7 @@
   _pop.push(['siteId', 2877592]);
   _pop.push(['minBid', 0]);
   _pop.push(['popundersPerIP', 0]);
-  _pop.push(['delayBetween', 0]);
+  _pop.push(['delayBetween', 60]);
   _pop.push(['default', false]);
   _pop.push(['defaultPerDay', 0]);
   _pop.push(['topmostLayer', false]);
@@ -211,8 +211,15 @@ document.getElementsByTagName("head")[0].appendChild(s);
       </div> 
       <!--/listagem-episodios--> 
       <div class="col-right right pgn-single-episodio"> 
-       <a href="/" title="" class="acessar-pgn hidden-xs"> <span class="thumb"> <img src="http://www.animesonlinekai.com/imagens/capa/" alt="" class="img-full"> </span> <span class="texto">Acessar página do anime <b></b></span> </a> 
-       <!--/acessar-pgn--> 
+       <script type="text/javascript">
+    google_ad_client = "ca-pub-2796241792274913";
+    google_ad_slot = "3321056621";
+    google_ad_width = 300;
+    google_ad_height = 250;
+</script> 
+       <!-- TESTT --> 
+       <script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+</script> 
        <div class="lista-episodios-relacionados"> 
         <!--/nav-episodios--> 
        </div> 
