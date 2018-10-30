@@ -12,9 +12,13 @@ internal class CacheFetcher(private val nestedFetcher: UrlFetcher) : UrlFetcher 
         val key = urlToKey(url)
         if (isPageCached(key))
             return Jsoup.parse(loadPage(key))
-        val document = nestedFetcher.get(url)
-        savePage(key, document.html())
-        return document
+        try {
+            val document: Document = nestedFetcher.get(url)
+            savePage(key, document.html())
+            return document
+        } catch (e: Throwable) {
+            throw WrappedException(key, e)
+        }
     }
 
     companion object {
@@ -69,4 +73,7 @@ internal class CacheFetcher(private val nestedFetcher: UrlFetcher) : UrlFetcher 
                 url.host
         }
     }
+
+    class WrappedException(cachePath: String, cause: Throwable) :
+        RuntimeException("Failed to fetch cache using $cachePath", cause)
 }
