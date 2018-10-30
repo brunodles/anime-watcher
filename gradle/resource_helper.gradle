@@ -1,7 +1,7 @@
 File outputDir = new File(project.buildDir, "resource-helper")
 File inputDir = new File(project.projectDir, 'src/test/resources/')
 sourceSets.test.java.srcDirs outputDir
-String relativePath = inputDir.path+"/"
+String relativePath = inputDir.path + "/"
 
 task("compileResourcesClass") {
     doLast {
@@ -44,5 +44,14 @@ static def buildClass(String relativePath, File file, int tabCount = 0) {
 }
 
 static def fileToFieldName(File file) {
-    return file.name.split("[^a-zA-Z0-9]+").collect { it.capitalize() }.join().uncapitalize()
+    String fieldName = file.name
+            .split("[^a-zA-Z0-9]+")
+            .collect { it.capitalize() }
+            .join()
+            .uncapitalize()
+            .toString()
+
+    if (fieldName.matches(/^[^a-zA-Z_].*/))
+        return "_" + fieldName
+    return fieldName
 }
