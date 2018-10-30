@@ -3,7 +3,6 @@ package brunodles.urlfetcher
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.io.File
-import java.net.URL
 import java.util.regex.Pattern
 
 internal class CacheFetcher(private val nestedFetcher: UrlFetcher) : UrlFetcher {
@@ -23,10 +22,10 @@ internal class CacheFetcher(private val nestedFetcher: UrlFetcher) : UrlFetcher 
 
     companion object {
 
-        private val DOMAIN_PATTERN =
-            Pattern.compile("^(?:.*?)([\\w\\d-]+(?:\\.\\w{2,5}))(?:\\.\\w{2,4})?\$")
+        private val URL_PATTERN =
+            Pattern.compile("^(?:.*?\\/\\/)?(?:www\\.)?([\\w\\.\\-]+?)[\\/\\?\\&](.+)\$")
         private val INVALID_TEXT_PATTERN = Regex("[^\\d\\w]+")
-        private val MAX_FILENAME_SIZE = 100
+        private const val MAX_FILENAME_SIZE = 100
 
         private fun isPageCached(key: String): Boolean = file(key).exists()
 
@@ -40,11 +39,14 @@ internal class CacheFetcher(private val nestedFetcher: UrlFetcher) : UrlFetcher 
             return file(key).inputStream().bufferedReader().use { it.readText() }
         }
 
-        private fun urlToKey(urlStr: String): String {
-            val url = URL(urlStr)
-            val hostStr = extractDomain(url)
+        fun urlToKey(urlStr: String): String {
+            val matcher = URL_PATTERN.matcher(urlStr)
+            if (!matcher.find())
+                throw IllegalArgumentException("Invalid Url parameter: \"$urlStr\"")
+            val hostStr = matcher.group(1)
                 .replace(Regex("[^\\d\\w.]"), "")
-            return (hostStr + "/" + url.path.fixed() + url.query.fixed())
+            val path = matcher.group(2)
+            return (hostStr + "/" + path.fixed())
                 .max(MAX_FILENAME_SIZE)
         }
 
@@ -62,15 +64,6 @@ internal class CacheFetcher(private val nestedFetcher: UrlFetcher) : UrlFetcher 
                 return File(hostDir, split[1])
             }
             return File(dir, key)
-        }
-
-        fun extractDomain(url: String) = extractDomain(URL(url))
-        fun extractDomain(url: URL): String {
-            val matcher = DOMAIN_PATTERN.matcher(url.host)
-            return if (matcher.find())
-                matcher.group(1)
-            else
-                url.host
         }
     }
 
