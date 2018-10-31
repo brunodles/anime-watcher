@@ -1,33 +1,13 @@
-language: android
+language: java
 jdk: oraclejdk8
 
-android:
-  components:
-    - tools
-    - platform-tools
-    - build-tools-28.0.3
-    - android-27
-    - extra-google-google_play_services
-    - extra-google-m2repository
-    - extra-android-m2repository
-    - addon-google_apis-google-27
-    - sys-img-armeabi-v7a-15
-    - sys-img-armeabi-v7a-27
-    - tools
-  licenses:
-    - 'android-sdk-preview-license-.+'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
-    - 'build-tools.*'
+env:
+  - INCLUDE_ANDROID=false
 
 script:
-  - ./gradlew clean app:googleServicesDecrypt assembleDebug
-  - ./gradlew lint ktlint checkstyleMain --continue -x app:ktlint
-#- ./gradlew cleanTest test -Pusecache=true -PparallelForks=1
-#- ./gradlew app:assembleRelease -PkeyPassword='$KEYPASS' -PstorePassword='$KEYSTOREPASS' -PversionCode=$TRAVIS_BUILD_NUMBER -PversionName=$RELEASE_TAG
-#- ./gradlew connectedAndroidTest -PdisablePreDex --stacktrace -P
-#- ./gradlew jacocoTestReport
-#- ./gradlew explorer:uploadReports -PbuildNumber=$TRAVIS_BUILD_NUMBER
+  - ./gradlew clean assemble
+  - ./gradlew lint ktlint checkstyleMain --continue
+#  - ./gradlew cleanTest test -Pusecache=true -PparallelForks=1
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -36,4 +16,3 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
-    - $HOME/.android/build-cache
