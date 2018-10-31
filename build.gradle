@@ -6,6 +6,7 @@ buildscript {
     ext.playservices_version = '15.0.1'
     ext.firebase_version = '15.0.2'
     ext.support_libs_version = '27.1.1'
+    ext.ktor_version = '0.9.1'
 
     def toggler = new Properties()
     def togglerPropperties = file("feature_toggle.properties")
@@ -37,6 +38,8 @@ allprojects {
         jcenter()
         mavenCentral()
         maven { url 'https://maven.fabric.io/public' }
+        maven { url "https://dl.bintray.com/kotlin/ktor" }
+        maven { url "https://dl.bintray.com/kotlin/kotlin-eap" }
     }
 }
 

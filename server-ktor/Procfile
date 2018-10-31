@@ -1,0 +1,1 @@
+web: ./server-ktor/build/install/server-ktor/bin/server-ktor

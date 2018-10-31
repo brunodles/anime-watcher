@@ -1,6 +1,6 @@
-include ':explorer', ':server-spark'
+include ':explorer'
 include ':cli'
-//include ':testcacher'
+include ':server-spark', ':server-ktor'
 
 // include android related modules inside this verification
 // This will be used to skip android modules for web server releases.
