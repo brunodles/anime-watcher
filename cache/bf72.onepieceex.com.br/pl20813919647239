@@ -20,7 +20,7 @@
   <link href="//bf72.onepieceex.com.br/assets/css/adplayerX.css?v=18042018" rel="stylesheet" type="text/css"> 
   <script src="https://code.jquery.com/jquery.js"></script> 
   <script type="text/javascript" src="//bf72.onepieceex.com.br/assets/js/adplayerX.js?v=1308201711h"></script> 
-  <script type="text/javascript">var autoplay = false;var servidor = 'sanji';var contador = 4;var medida = 100/contador;var ok;var lqp;var block = false;var temProximo = false;var temProximo = true;proximo = false;ativouPlayer = false;</script> 
+  <script type="text/javascript">var autoplay = false;var servidor = 'klahador';var contador = 4;var medida = 100/contador;var ok;var lqp;var block = false;var temProximo = false;var temProximo = true;proximo = false;ativouPlayer = false;</script> 
   <script type="text/javascript">
       		console.log('======================================================================');
       		console.log('Bem vindo ao player da OPEX. Qualquer problema, entre em contato o/');
@@ -29,8 +29,8 @@
       		console.log('======================================================================');
       		console.log('Seu novo anfitrião é -> ' + servidor );
   //     		if (sessionStorage.getItem('servidor') === null ) {
-  //     			var servidor = 'sanji';
-  //     			sessionStorage.setItem("servidor", 'sanji');
+  //     			var servidor = 'klahador';
+  //     			sessionStorage.setItem("servidor", 'klahador');
       			// console.log('Seu novo anfitrião é -> ' + sessionStorage.getItem('servidor') );
 		// 	// console.log('Servidor var-> '+ servidor);
 
@@ -40,7 +40,7 @@
 		// 	console.log('Anfitrião já definido. Aos cuidados de -> ' + sessionStorage.servidor);
 		// }
 
-		var codigo = 'https://'+servidor+'.onepieceex.com.br/player.php?code=plays.eAKATBQwK1A4Mayw92QSQJJqma0mWIpi';
+		var codigo = 'https://'+servidor+'.onepieceex.com.br/player.php?code=plays.e2Af7Pqy9Q0jn4DrHEoLxQw0JIR08VlO';
 		// console.log(codigo);
 	</script> 
   <script type="text/javascript">

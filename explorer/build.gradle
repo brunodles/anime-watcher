@@ -1,6 +1,7 @@
 apply plugin: 'kotlin'
 apply plugin: "kotlin-noarg"
 apply from: rootProject.file('gradle/buildconfig.gradle')
+apply from: rootProject.file('gradle/resource_helper.gradle')
 
 noArg {
     annotation("brunodles.kotlin.annotation.NoArgs")
@@ -9,7 +10,8 @@ noArg {
 buildconfig {
     targetPackage = "brunodles.animewatcher.explorer"
     field "String", "ROOT_DIR", "\"${project.rootDir.getPath()}\""
-    field "Boolean", "USE_CACHE", Boolean.parseBoolean(properties.get("usecache", "true"))
+    field "Boolean", "USE_CACHE", Boolean.parseBoolean(project.properties.get("usecache", "true"))
+    field "Boolean", "UPDATE_CACHE", Boolean.parseBoolean(project.properties.get("updatecache", "false"))
 
     toggler.stringPropertyNames().each {
         field "Boolean", it.toUpperCase(), toggler.getProperty(it)

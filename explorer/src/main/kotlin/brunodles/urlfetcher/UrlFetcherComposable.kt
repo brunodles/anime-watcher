@@ -15,7 +15,5 @@ class UrlFetcherComposable internal constructor() : UrlFetcher {
         return this
     }
 
-    override fun post(url: String): Document = internalFetcher.post(url)
-
     override fun get(url: String): Document = internalFetcher.get(url)
 }

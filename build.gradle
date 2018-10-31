@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
@@ -52,8 +54,25 @@ subprojects { project ->
         if (project.plugins.hasPlugin("kotlin") || project.plugins.hasPlugin("kotlin-android")) {
             project.apply from: "${project.rootDir}/gradle/ktlint.gradle"
         }
+        // Thanks to Shubham Chaudhary, for mor info: https://stackoverflow.com/a/36130467/1622925
         project.tasks.withType(Test) {
             testLogging {
+
+                events TestLogEvent.FAILED,
+                        TestLogEvent.SKIPPED,
+                        TestLogEvent.STANDARD_OUT,
+                        TestLogEvent.STANDARD_ERROR
+                exceptionFormat TestExceptionFormat.FULL
+                showExceptions true
+                showCauses true
+                showStackTraces true
+                debug {
+                    events TestLogEvent.FAILED,
+                            TestLogEvent.SKIPPED,
+                            TestLogEvent.STANDARD_OUT,
+                            TestLogEvent.STANDARD_ERROR
+                    exceptionFormat TestExceptionFormat.FULL
+                }
                 afterSuite { desc, result ->
                     if (!desc.parent) { // will match the outermost suite
                         def output = "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"

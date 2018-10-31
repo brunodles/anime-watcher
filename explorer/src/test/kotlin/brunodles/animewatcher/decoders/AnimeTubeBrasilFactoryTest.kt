@@ -1,11 +1,12 @@
 package brunodles.animewatcher.decoders
 
-import brunodles.animewatcher.explorer.Episode
 import brunodles.animewatcher.testhelper.FactoryChecker
 import brunodles.animewatcher.testhelper.FactoryChecker.whenCheckIsEpisode
 import brunodles.animewatcher.testhelper.FactoryChecker.whenEpisode
+import brunodles.loadEpisodeResource
 import com.greghaskins.spectrum.Spectrum
 import org.junit.runner.RunWith
+import resource_helper.Resources
 
 @RunWith(Spectrum::class)
 class AnimeTubeBrasilFactoryTest {
@@ -13,25 +14,11 @@ class AnimeTubeBrasilFactoryTest {
     companion object {
         val VALID_URLS = arrayOf("https://animetubebrasil.com/1582/")
         val INVALID_URLS = arrayOf("anitub")
-        val currentEpisode = Episode(
-                number = 1,
-                description = "Eu Sou Ruffy!",
-                link = "https://animetubebrasil.com/1582/",
-                video = "https://www.blogger.com/video-play.mp4?contentId=3eb2b428663ef38f",
-                animeName = "One Piece",
-                nextEpisodes = arrayListOf(
-                        Episode(number = 2,
-                                animeName = "One Piece",
-                                description = "Next",
-                                link = "https://animetubebrasil.com/1583/"
-                        )
-                )
-        )
     }
 
     init {
         FactoryChecker.describe(AnimeTubeBrasilFactory) {
-            whenEpisode(currentEpisode)
+            whenEpisode(Resources.responses.animetubebrasil.playerEpisodesJson.loadEpisodeResource())
             whenCheckIsEpisode(VALID_URLS, INVALID_URLS)
         }
     }

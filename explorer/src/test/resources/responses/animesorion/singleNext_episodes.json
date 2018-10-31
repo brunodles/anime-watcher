@@ -1,0 +1,18 @@
+{
+  "description": "Boku No Hero Academia Episódio 2",
+  "number": 2,
+  "animeName": "Boku No Hero Academia 1",
+  "video": "https://www.blogger.com/video-play.mp4?contentId\u003db0bccad36e2be8e1",
+  "link": "https://www.animesorion.site/71672",
+  "nextEpisodes": [
+    {
+      "description": "Next",
+      "number": 3,
+      "animeName": "Boku No Hero Academia 1",
+      "link": "https://www.animesorion.org/71808",
+      "nextEpisodes": [],
+      "temporaryVideoUrl": false
+    }
+  ],
+  "temporaryVideoUrl": false
+}
