@@ -22,7 +22,9 @@ class CacheFetcherTest {
             "https://onepiece-ex.com.br/episodios/online/208/" to "onepieceex.com.br/episodiosonline208",
             "http://one-piece-x.com.br/episodios/online/207/" to "onepiecex.com.br/episodiosonline207",
             "http://tvcurse.com/?p=713" to "tvcurse.com/p713",
-            "https://www.xvideos.com/video12026193/anita_troca_o_peluche_pelo_pau" to "xvideos.com/video12026193anita_troca_o_peluche_pelo_pau"
+            "https://www.xvideos.com/video12026193/anita_troca_o_peluche_pelo_pau" to "xvideos.com/video12026193anita_troca_o_peluche_pelo_pau",
+
+            "http://localhost:8888/redirect300" to "localhost8888/redirect300"
         )
     }
 
