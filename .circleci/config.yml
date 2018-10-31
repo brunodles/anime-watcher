@@ -37,5 +37,5 @@ jobs:
           path: ./explorer/build/reports
           destination: explorer-reports
       - store_artifacts:
-          path: ./server/build/reports
+          path: ./server-ktor/build/reports
           destination: server-reports
