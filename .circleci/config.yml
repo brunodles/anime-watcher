@@ -26,3 +26,13 @@ jobs:
       - run:
           name: Tests - Local
           command: ./gradlew cleanTest test -Pusecache=true -PparallelForks=1
+
+      - store_artifacts:
+          path: /app/build/reports
+          destination: app-reports
+      - store_artifacts:
+          path: /explorer/build/reports
+          destination: explorer-reports
+      - store_artifacts:
+          path: /server/build/reports
+          destination: server-reports
