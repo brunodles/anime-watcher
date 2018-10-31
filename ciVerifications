@@ -1,0 +1,9 @@
+# This script is currently simulating ci builds.
+# It does the same commands currently on ci.
+
+# Fail fast, if a command fail the script will fail
+set -e
+./gradlew clean assembleDebug
+./gradlew lint ktlint checkstyleMain --continue -x app:ktlint
+./gradlew cleanTest test -Pusecache=true -PparallelForks=1
+./gradlew jacocoTestReport
