@@ -20,33 +20,8 @@ android:
     - 'google-gdk-license-.+'
     - 'build-tools.*'
 
-addons:
-  apt:
-    packages:
-    - tree
-
-env:
-  global:
-    - RELEASE_TAG=$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)
-
-# Emulator Management: Create, Start and Wait
-#before_script:
-#  - echo no | android create avd --force -n test -t android-27 --abi armeabi-v7a
-#  - emulator -avd test -no-audio -no-window &
-#  - android-wait-for-emulator
-#  - adb shell input keyevent 82 &
-
-before_install:
-  - yes | sdkmanager "platforms;android-27"
-
 script:
-- ./gradlew clean app:googleServicesDecrypt assembleDebug -PgoogleServicesKey="$GOOGLE_SERVICES_KEY"
-- ./gradlew lint ktlint checkstyleMain --continue -x app:ktlint
-#- ./gradlew cleanTest test -Pusecache=true -PparallelForks=1
-#- ./gradlew app:assembleRelease -PkeyPassword='$KEYPASS' -PstorePassword='$KEYSTOREPASS' -PversionCode=$TRAVIS_BUILD_NUMBER -PversionName=$RELEASE_TAG
-#- ./gradlew connectedAndroidTest -PdisablePreDex --stacktrace -P
-#- ./gradlew jacocoTestReport
-#- ./gradlew explorer:uploadReports -PbuildNumber=$TRAVIS_BUILD_NUMBER
+./gradlew ktlint -x app:ktlint
 
 
 before_cache:
@@ -57,21 +32,3 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
-
-#before_deploy:
-#  # Set up git user name and tag this commit
-#  - git config --local user.name "TravisCi"
-#  #- git config --local user.email "travis@brunodles.com"
-#  - git tag "$RELEASE_TAG"
-#deploy:
-#  provider: releases
-#  api_key: "$GITHUBOAUTHTOKEN"
-#  file: "app/build/outputs/apk/release/app-release.apk"
-#  skip_cleanup: true
-#  on:
-#    branch: master
-#    repo: brunodles/anime-watcher
-
-notifications:
-  email: false
-  slack: brunodles:UcI2SRdgkY9He1ZwJ8tXrECD
