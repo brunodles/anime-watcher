@@ -42,3 +42,20 @@ jobs:
       - store_artifacts:
           path: ./server-ktor/build/reports
           destination: server-reports
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - build
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+                - develop
+    jobs:
+      - build
