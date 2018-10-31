@@ -24,6 +24,9 @@ jobs:
       - run:
           name: Tests - Local
           command: ./gradlew cleanTest test -Pusecache=true -PparallelForks=1
+      - run:
+          name: Coverage
+          command: ./gradlew jacocoTestReport
 
       - save_cache:
           paths:
