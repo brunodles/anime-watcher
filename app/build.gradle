@@ -134,13 +134,13 @@ configurations.all { config ->
 task googleServicesEncrypt(type: Exec) {
     description "Encrypt 'google-services.json' using 'KEY' environement variable."
     workingDir project.projectDir
-    commandLine "openssl aes-256-cbc -k \"\$KEY\" -in google-services.json -out google-services.json.enc".split(" ")
+    commandLine "openssl aes-256-cbc -k \"\$GOOGLE_SERVICES_KEY\" -in google-services.json -out google-services.json.enc".split(" ")
 }
 
 task googleServicesDecrypt(type: Exec) {
     description "Decrypt 'google-services.json' using 'KEY' environement variable."
     workingDir project.projectDir
-    commandLine "openssl aes-256-cbc -d -k \"\$KEY\" -in google-services.json.enc -out google-services.json".split(" ")
+    commandLine "openssl aes-256-cbc -d -k \"\$GOOGLE_SERVICES_KEY\" -in google-services.json.enc -out google-services.json".split(" ")
 }
 
 apply plugin: 'com.google.gms.google-services'
