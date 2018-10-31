@@ -6,7 +6,7 @@ env:
 
 script:
   - ./gradlew clean assemble
-  - ./gradlew lint ktlint checkstyleMain --continue
+  - ./gradlew ktlint checkstyleMain --continue
 #  - ./gradlew cleanTest test -Pusecache=true -PparallelForks=1
 
 before_cache:
