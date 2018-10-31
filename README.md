@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/brunodles/anime-watcher/tree/master.svg?style=svg)](https://circleci.com/gh/brunodles/anime-watcher/tree/master)
 [![Build Status](https://travis-ci.org/brunodles/anime-watcher.svg?branch=master)](https://travis-ci.org/brunodles/anime-watcher)
 # Anime Watcher
 An video player / browser to navigate through unsafe pages.
