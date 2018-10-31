@@ -17,13 +17,16 @@ jobs:
 
       - run:
           name: Assemble
-          command: ./gradlew app:googleServicesDecrypt assembleDebug
+          command: ./gradlew clean app:googleServicesDecrypt assembleDebug
       - run:
           name: Linters
           command: ./gradlew lint ktlint checkstyleMain --continue -x app:ktlint
       - run:
           name: Tests - Local
           command: ./gradlew cleanTest test -Pusecache=true -PparallelForks=1
+      - run:
+          name: Coverage
+          command: ./gradlew jacocoTestReport
 
       - save_cache:
           paths:
@@ -37,5 +40,22 @@ jobs:
           path: ./explorer/build/reports
           destination: explorer-reports
       - store_artifacts:
-          path: ./server/build/reports
+          path: ./server-ktor/build/reports
           destination: server-reports
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - build
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+                - develop
+    jobs:
+      - build

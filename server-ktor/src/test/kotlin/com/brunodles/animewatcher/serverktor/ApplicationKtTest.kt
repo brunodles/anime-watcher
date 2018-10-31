@@ -47,7 +47,7 @@ class ApplicationKtTest {
 
     @Test
     fun whenValidUrl_butServerCantBeReached_shouldReturnBadGateway() = withTestApplication({
-        animewatcher { url -> null }
+        animewatcher { null }
     }) {
         val handleRequest = handleUrlRequest("http://validAnimeWebPage.com/linkToEpisode")
         with(handleRequest) {
@@ -57,7 +57,7 @@ class ApplicationKtTest {
 
     @Test
     fun whenValidUrl_shouldReturnEpisodeInfo() = withTestApplication({
-        animewatcher { url -> Episode("Description", 10, "animeName", link = "") }
+        animewatcher { Episode("Description", 10, "animeName", link = "") }
     }) {
         val handleRequest = handleUrlRequest("http://validAnimeWebPage.com/linkToEpisode")
         with(handleRequest) {

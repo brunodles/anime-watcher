@@ -1,5 +1,6 @@
 package brunodles.urlfetcher
 
+import brunodles.animewatcher.explorer.BuildConfig
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock.aResponse
 import com.github.tomakehurst.wiremock.client.WireMock.get
@@ -14,10 +15,8 @@ import com.greghaskins.spectrum.Spectrum.describe
 import com.greghaskins.spectrum.Spectrum.it
 import org.jsoup.nodes.Document
 import org.junit.Assert
-import org.junit.Ignore
 import org.junit.runner.RunWith
 
-@Ignore
 @RunWith(Spectrum::class)
 class UrlFetcherTest {
     val httpPort = 8888
@@ -25,11 +24,14 @@ class UrlFetcherTest {
     val wireMockServer = WireMockServer(options().port(httpPort).httpsPort(httpPort + 1))
 
     init {
-        UrlFetcher.cacheDir += "/explorer"
-        beforeAll { wireMockServer.start() }
+        beforeAll {
+            UrlFetcher.cacheDir = "${BuildConfig.ROOT_DIR}/explorer"
+            wireMockServer.start()
+        }
         afterAll {
             wireMockServer.resetAll()
             wireMockServer.stop()
+            UrlFetcher.cacheDir = BuildConfig.ROOT_DIR
         }
 
         describe("UrlFetcher") {

@@ -23,7 +23,7 @@ internal class CacheFetcher(private val nestedFetcher: UrlFetcher) : UrlFetcher 
     companion object {
 
         private val URL_PATTERN =
-            Pattern.compile("^(?:.*?\\/\\/)?(?:www\\.)?([\\w\\.\\-]+?)[\\/\\?\\&](.+)\$")
+            Pattern.compile("^(?:.+?\\:\\/\\/)?(?:www\\.)?([\\w\\.\\-\\:]+)(?:[\\/\\?\\&](.+?))?\$")
         private val INVALID_TEXT_PATTERN = Regex("[^\\d\\w]+")
         private const val MAX_FILENAME_SIZE = 100
 
@@ -45,7 +45,9 @@ internal class CacheFetcher(private val nestedFetcher: UrlFetcher) : UrlFetcher 
                 throw IllegalArgumentException("Invalid Url parameter: \"$urlStr\"")
             val hostStr = matcher.group(1)
                 .replace(Regex("[^\\d\\w.]"), "")
-            val path = matcher.group(2)
+            if (matcher.groupCount() <= 1)
+                return hostStr.fixed() + "/_index"
+            val path = matcher.group(2) ?: "_index"
             return (hostStr + "/" + path.fixed())
                 .max(MAX_FILENAME_SIZE)
         }
