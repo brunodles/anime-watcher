@@ -1,9 +1,14 @@
 # This script is currently simulating ci builds.
 # It does the same commands currently on ci.
+# need to be on environment vars:
+# GOOGLE_SERVICES_KEY
+
+# Setup environment
+rm app/google-services.json
 
 # Fail fast, if a command fail the script will fail
 set -e
-./gradlew clean app:googleServicesDecrypt assembleDebug -PgoogleServicesKey=$GOOGLE_SERVICES_KEY
+./gradlew clean app:googleServicesDecrypt assembleDebug
 ./gradlew lint ktlint checkstyleMain --continue -x app:ktlint
 ./gradlew cleanTest test -Pusecache=true -PparallelForks=1
 ./gradlew jacocoTestReport
