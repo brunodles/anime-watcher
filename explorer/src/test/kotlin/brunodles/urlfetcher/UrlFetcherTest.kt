@@ -15,7 +15,6 @@ import com.greghaskins.spectrum.Spectrum.describe
 import com.greghaskins.spectrum.Spectrum.it
 import org.jsoup.nodes.Document
 import org.junit.Assert
-import org.junit.Ignore
 import org.junit.runner.RunWith
 
 @RunWith(Spectrum::class)
