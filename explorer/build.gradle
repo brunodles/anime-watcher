@@ -18,10 +18,6 @@ buildconfig {
     }
 }
 
-test {
-    maxParallelForks = Integer.parseInt(project.properties.get("parallelForks", "1"))
-}
-
 dependencies {
     compile 'com.brunodles:alchemy-alchemist:2.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

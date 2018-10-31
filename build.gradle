@@ -56,6 +56,9 @@ subprojects { project ->
         }
         // Thanks to Shubham Chaudhary, for mor info: https://stackoverflow.com/a/36130467/1622925
         project.tasks.withType(Test) {
+            failFast = true
+            ignoreFailures= false
+            maxParallelForks = Integer.parseInt(project.properties.get("parallelForks", "1"))
             testLogging {
 
                 events TestLogEvent.FAILED,
