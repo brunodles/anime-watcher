@@ -40,7 +40,7 @@ before_install:
   - yes | sdkmanager "platforms;android-27"
 
 script:
-- ./gradlew app:googleServicesDecrypt assembleDebug
+- ./gradlew clean app:googleServicesDecrypt assembleDebug -PgoogleServicesKey="$GOOGLE_SERVICES_KEY"
 - ./gradlew lint ktlint checkstyleMain --continue -x app:ktlint
 #- ./gradlew cleanTest test -Pusecache=true -PparallelForks=1
 #- ./gradlew app:assembleRelease -PkeyPassword='$KEYPASS' -PstorePassword='$KEYSTOREPASS' -PversionCode=$TRAVIS_BUILD_NUMBER -PversionName=$RELEASE_TAG
