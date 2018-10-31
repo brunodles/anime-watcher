@@ -11,45 +11,54 @@ class CacheFetcherTest {
 
     companion object {
         val URLS = mapOf(
-                "http://google.com.br" to "google.com",
-                "http://www.google.com.br" to "google.com",
-                "http://search.google.com.br" to "google.com",
-                "http://keep.google.com" to "google.com",
-                "http://maps.google.com" to "google.com",
+            "http://google.com.br" to "google.com.br/_index",
+            "http://www.google.com.br" to "google.com.br/_index",
+            "http://search.google.com.br" to "search.google.com.br/_index",
+            "http://keep.google.com" to "keep.google.com/_index",
+            "http://maps.google.com" to "maps.google.com/_index",
 
-                "https://www.animekaionline.com/tsukipro-the-animation/episodio-1" to "animekaionline.com",
-                "https://www.animesonlinebr.com.br/video/50034" to "animesonlinebr.com",
-                "http://www.animesorion.video/71672" to "animesorion.video",
-                "http://www.animesorion.tv/71672" to "animesorion.tv",
-                "http://animesorion.tv" to "animesorion.tv",
-                "https://www.animesorion.site/71672" to "animesorion.site",
-                "http://animesorion.site" to "animesorion.site",
-                "https://animetubebrasil.com/1582/" to "animetubebrasil.com",
-                "http://animetubebrasil.com" to "animetubebrasil.com",
-                "https://www.anitubebr.com/vd/19249/" to "anitubebr.com",
-                "http://anitubebr.com" to "anitubebr.com",
-                "https://www.anitube.site/765/" to "anitube.site",
-                "http://www.anitube.site" to "anitube.site",
-                "https://onepiece-ex.com.br/episodios/online/208/" to "onepiece-ex.com",
-                "http://one-piece-x.com.br/episodios/online/207/" to "one-piece-x.com",
-                "http://onepiecex.com.br" to "onepiecex.com",
-                "http://tamanegi.onepiece-ex.com.br" to "onepiece-ex.com",
-                "http://onepiece-ex.com.br" to "onepiece-ex.com",
-                "http://tvcurse.com/?p=713" to "tvcurse.com",
-                "https://www.xvideos.com/video12026193/anita_troca_o_peluche_pelo_pau" to "xvideos.com",
+            "https://www.animekaionline.com/tsukipro-the-animation/episodio-1" to "animekaionline.com/tsukiprotheanimationepisodio1",
+            "https://www.animesonlinebr.com.br/video/50034" to "animesonlinebr.com.br/video50034",
 
-                "http://tvcurse.com" to "tvcurse.com",
-                "http://anitube.tv" to "anitube.tv",
-                "http://bagunça.subs.ow.no-ip.com.br" to "no-ip.com"
+            "http://www.animesorion.video/71672" to "animesorion.video/71672",
+            "http://www.animesorion.tv/71672" to "animesorion.tv/71672",
+            "http://animesorion.tv" to "animesorion.tv/_index",
+            "https://www.animesorion.site/71672" to "animesorion.site/71672",
+            "http://animesorion.site" to "animesorion.site/_index",
+
+            "https://animetubebrasil.com/1582/" to "animetubebrasil.com/1582",
+            "http://animetubebrasil.com" to "animetubebrasil.com/_index",
+
+            "https://www.anitubebr.com/vd/19249/" to "anitubebr.com/vd19249",
+            "http://anitubebr.com" to "anitubebr.com/_index",
+
+            "https://www.anitube.site/765/" to "anitube.site/765",
+            "http://www.anitube.site" to "anitube.site/_index",
+            "http://anitube.tv" to "anitube.tv/_index",
+
+            "https://onepiece-ex.com.br/episodios/online/208/" to "onepieceex.com.br/episodiosonline208",
+            "http://one-piece-x.com.br/episodios/online/207/" to "onepiecex.com.br/episodiosonline207",
+            "http://onepiecex.com.br" to "onepiecex.com.br/_index",
+            "http://tamanegi.onepiece-ex.com.br" to "tamanegi.onepieceex.com.br/_index",
+            "http://onepiece-ex.com.br" to "onepieceex.com.br/_index",
+
+            "http://tvcurse.com/?p=713" to "tvcurse.com/p713",
+            "http://tvcurse.com" to "tvcurse.com/_index",
+
+            "https://www.xvideos.com/video12026193/anita_troca_o_peluche_pelo_pau" to "xvideos.com/video12026193anita_troca_o_peluche_pelo_pau",
+
+            "http://bagunca.subs.ow.no-ip.com.br" to "bagunca.subs.ow.noip.com.br/_index",
+
+            "http://localhost:8888/redirect300" to "localhost8888/redirect300"
         )
     }
 
     init {
-        describe("when extractDomain") {
-            URLS.forEach { key, value ->
-                describe("with $key") {
-                    it("should return \"$value\"") {
-                        assertEquals(value, CacheFetcher.extractDomain(key))
+        describe("when parseToKey") {
+            URLS.forEach { url, expectedKey ->
+                describe("with $url") {
+                    it("should return \"$expectedKey\"") {
+                        assertEquals(expectedKey, CacheFetcher.urlToKey(url))
                     }
                 }
             }

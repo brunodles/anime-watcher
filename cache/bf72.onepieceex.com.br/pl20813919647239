@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+ <head> 
+  <meta charset="utf-8"> 
+  <title>OPEX Player - BF 72</title> 
+  <meta name="description" content="Bla bla bla"> 
+  <meta name="author" content="Baruch Vitorino"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link rel="stylesheet" href="https://bf72.onepieceex.com.br/styles.css?123333"> 
+  <link rel="icon" type="image/png" href="/favicon.png"> 
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet" type="text/css"> 
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,600" rel="stylesheet" type="text/css"> 
+  <link href="https://fonts.googleapis.com/css?family=Bree+Serif:400,600" rel="stylesheet" type="text/css"> 
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]--> 
+  <link href="//bf72.onepieceex.com.br/assets/css/adplayerX.css?v=18042018" rel="stylesheet" type="text/css"> 
+  <script src="https://code.jquery.com/jquery.js"></script> 
+  <script type="text/javascript" src="//bf72.onepieceex.com.br/assets/js/adplayerX.js?v=1308201711h"></script> 
+  <script type="text/javascript">var autoplay = false;var servidor = 'klahador';var contador = 4;var medida = 100/contador;var ok;var lqp;var block = false;var temProximo = false;var temProximo = true;proximo = false;ativouPlayer = false;</script> 
+  <script type="text/javascript">
+      		console.log('======================================================================');
+      		console.log('Bem vindo ao player da OPEX. Qualquer problema, entre em contato o/');
+      		console.log('Versão: 2.2');
+      		console.log('Baruch toys');
+      		console.log('======================================================================');
+      		console.log('Seu novo anfitrião é -> ' + servidor );
+  //     		if (sessionStorage.getItem('servidor') === null ) {
+  //     			var servidor = 'klahador';
+  //     			sessionStorage.setItem("servidor", 'klahador');
+      			// console.log('Seu novo anfitrião é -> ' + sessionStorage.getItem('servidor') );
+		// 	// console.log('Servidor var-> '+ servidor);
+
+		// } else {
+		// 	// console.log('Anfitrião já definido -> ' + sessionStorage.servidor);
+		// 	var servidor = sessionStorage.getItem('servidor');
+		// 	console.log('Anfitrião já definido. Aos cuidados de -> ' + sessionStorage.servidor);
+		// }
+
+		var codigo = 'https://'+servidor+'.onepieceex.com.br/player.php?code=plays.e2Af7Pqy9Q0jn4DrHEoLxQw0JIR08VlO';
+		// console.log(codigo);
+	</script> 
+  <script type="text/javascript">
+		window.onload = function(){
+			setTimeout(function() {
+				var ad = document.querySelector("ins.adsbygoogle");
+				if (ad && ad.innerHTML.replace(/\s/g, "").length == 0) {
+					ad.style.cssText = 'display:block !important';
+					block = true;
+				}else{
+					block = false;
+				}
+
+			}, 2000);
+		};
+
+	</script> 
+  <script type="text/javascript">
+		var trigger = setInterval(function(){
+			$.getJSON( codigo, function( json ) {
+			// console.log(json);
+			console.log('Adblock Status: ' + block);
+
+			// Verificando se está bloqueado
+			if ( block == true ){
+				$( "#mensagem" ).text( "Oops! Libere nosso site no Adblock e atualize a página ( aperte F5 )!");
+				clearInterval(trigger);
+				return;
+			}
+
+			// console.log( json.total );
+
+			// Barulinho
+			var audio = {};
+			audio["pim"] = new Audio();
+			audio["pim"].src = "https://"+servidor+".onepieceex.com.br/knuckle.mp3"
+
+			if (json.code == 0 ){
+				audio["pim"].play();
+
+				$( "#mensagem" ).removeClass( "esperando" );
+
+				$( "#mensagem" ).text( ' ' + json.mensagem + '' );
+				$( "#link" ).text( 'Baixar' );
+				$( "#andamento" ).width( '100%' );
+
+				clearInterval(trigger);
+
+				$( "#andamento" ).css("background", "rgba(65,26,26,.9)" );
+
+				var final = 0;
+				ok = setInterval(function() {
+					contador--;
+					final = final + medida;
+					$( "#andamento" ).width( final + '%' );
+
+					if( contador < 1 && ativouPlayer == false) {
+						// $("#link").fadeIn("slow");
+						// $("#link").attr("href", json.link);
+						// $("#link").attr("href", json.link);
+
+						//
+						// Preparando para o Player
+						//
+						clearInterval(ok);
+						clearInterval(trigger);
+						// console.log(ok);
+						// Verificando compatibilidade
+						var compatibilidade = document.createElement( "video" ),
+						mpeg4, h264, ogg, webm;
+						if ( compatibilidade.canPlayType ) {
+							// Check para MPEG-4
+							mpeg4 = "" !== compatibilidade.canPlayType( 'video/mp4; codecs="mp4v.20.8"' );
+
+							// Check para h264
+							h264 = "" !== ( compatibilidade.canPlayType( 'video/mp4; codecs="avc1.42E01E"' )
+								|| compatibilidade.canPlayType( 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"' ) );
+
+							// Check para Ogg
+							ogg = "" !== compatibilidade.canPlayType( 'video/ogg; codecs="theora"' );
+
+							// Check para Webm
+							webm = "" !== compatibilidade.canPlayType( 'video/webm; codecs="vp8, vorbis"' );
+						}
+
+						if ( 'LQ' in json ){
+							qualidadePadrão = "SD";
+						}else {
+							json.LQ = '';
+						}
+
+						if ( 'Online' in json && webm == true){
+							qualidadePadrão = "SD+"
+						}else {
+							json.Online = '';
+						}
+
+						if ( 'OnlineHD' in json && webm == true){
+							console.log('HD Disponível ;D');
+						} else {
+							json.OnlineHD = '';
+						}
+
+						// Removendo interface de loading
+						$("#mensagem").fadeOut(1000).remove();
+						$("#andamento").remove();
+
+						//
+						// Inicio do Player
+						//
+						if ( ativouPlayer == false) {
+							$(function(){
+								ativouPlayer = true;
+								$("#advideox").adplayer({
+									share:0,
+									volume: 1, 
+									keyboard: true,
+									autoplay: false,
+									light: false,
+									brightness: true,
+									logo: {
+										src: "//bf72.onepieceex.com.br/assets/opex.png",
+										position: "TopRight",
+										href: "https://one-piecex.com.br",
+										target: "blank",
+										opacity: "0.5",
+										height: "44",
+										width: "89"
+									},
+										// subtitles: "697_srt.srt",
+										quality: {
+											"default": qualidadePadrão,
+											"HD+": json.OnlineHD,
+											"SD+": json.Online,
+											"SD": json.LQ,
+										},
+
+									});
+							});
+						}
+						// Salvar onde parou!
+						var player =  $('#advideox')[0];
+						player.addEventListener("timeupdate", salvarTempo);
+						player.addEventListener("play", continuar);
+
+						var onError = function() {
+							console.log ('erro @.@ Recarregando...');
+							$('#advideox')[0].src = $('#advideox')[0].src;
+							$('#advideox')[0].pause();
+						};
+
+						player.addEventListener('error', onError, true);
+////
+						// var mudou = function() {
+						// 	console.log ('Fix');
+						// 	// $('#advideox')[0].pause();
+						// 	$('#advideox')[0].currentTime = 0;
+
+						// 	$('#advideox')[0].play();
+						// };
+
+						// player.addEventListener('loadedmetadata', mudou, true);
+
+						if ( autoplay == true )
+							player.play();
+						// Fim do Player
+
+						// Ajustando Player
+						larguraPlayer = $("#ad-v-player").css("width").replace(/[^-\d\.]/g, '');
+						alturaPlayer = larguraPlayer*9/16;
+						alturaTela = window.screen.height;
+						if ( alturaPlayer < alturaTela )
+							$('#ad-v-player').height( alturaPlayer );
+
+					//Correção temporaria
+					if ( $("#ad-v-player").length ){
+						alturaPlayerAtual = $("#ad-v-player").css("height").replace(/[^-\d\.]/g, '');
+						larguraPlayerAtual = $("#ad-v-player").css("width").replace(/[^-\d\.]/g, '');
+
+						alturaPlayerIdeal = Math.round( larguraPlayerAtual*9/16 );
+
+						if (  alturaPlayerAtual == 0){
+							// $('#ad-v-player').height( alturaPlayerIdeal );
+							$( '#ad-v-player' ).css( "height", alturaPlayerIdeal );
+							console.log('Altura atual '+alturaPlayerAtual + '-> corrigida para '+alturaPlayerIdeal);
+						}
+					}
+
+						// Ajustando no Resize
+						$(window).resize(function() {
+
+							larguraPlayer = $("#ad-v-player").css("width").replace(/[^-\d\.]/g, '');
+							alturaPlayer = larguraPlayer*9/16;
+							alturaTela = window.screen.height;
+							if ( alturaPlayer < alturaTela ){
+								$('#ad-v-player').height( alturaPlayer );
+								console.log('Ajustando altura ideal ' + alturaPlayer);
+							}
+							$('.ad-fullscreen-container').height( '100%' );
+			                // setTimeout(function(){
+			                	// Só pra garantir =P
+			                    // alturaPlayerAtual = $("#ad-v-player").css("height").replace(/[^-\d\.]/g, '');
+			                    // larguraPlayerAtual = $("#ad-v-player").css("width").replace(/[^-\d\.]/g, '');
+
+			                    // alturaPlayerIdeal = Math.round( larguraPlayerAtual*9/16 );
+			                    // $('#ad-v-player').height( alturaPlayerIdeal );
+			                    // console.log('Ajustando altura ideal ' + alturaPlayerIdeal);
+			                // }, 2000);
+							// console.log('tamanho de T -> '+alturaTela);
+							// console.log('tamanho de P -> '+alturaPlayer);
+						});
+
+						$( "#mensagem" ).text( "Tudo pronto =)");
+						clearInterval(ok);
+					} else {
+						$( "#mensagem" ).text( "Terminando os preparos em " + contador.toString() + "...");
+					}
+
+				}, 1000);
+
+} else {
+	$( "#mensagem" ).text( ' ' + json.mensagem +  ' ('+servidor+')' );
+}
+
+if (json.code == 1 ){
+	$( "#mensagem" ).addClass( "esperando" );
+	$( "#andamento" ).width( json.andamento + '%' );
+}
+
+if (json.code == 3 ){
+	audio["pim"].play();
+	$( "#mensagem" ).text( ' ' + json.mensagem + ' ' );
+	clearInterval(trigger);
+}
+});
+},2000);
+$("#ad-v-player").append('<div id="proximo"></div>');
+function salvarTempo(){
+	var player = $('#advideox')[0];
+
+	var tempoAtual = Math.round(player.currentTime);
+	var duracao = Math.round(player.duration);
+		// var quaseFim = Math.round(duracao - duracao * 10 / 100);
+		var quaseFim = Math.round(duracao - 30);
+		var regressivo = Math.round(duracao - tempoAtual);
+
+		// Se tem um valor armazenado e o tempo for maior que 1
+		if ( localStorage.tepisodios208 == false ||  tempoAtual != localStorage.tepisodios208 &&  tempoAtual > 1 ) {
+			// console.log('Tempo Salvo -> '+localStorage.tepisodios208);
+			console.log('Tempo atual salvo.');
+
+			localStorage['tepisodios208'] = tempoAtual;
+
+			// Exibir próximo episódio
+			if (tempoAtual > quaseFim && proximo == false){
+				console.log('Hora de exibir um aviso para o próximo!');
+				// proximo = true;
+				// console.log(quaseFim);
+				// console.log(proximo);
+				// $("#ad-v-player").append('<div id="proximo">O próximo episódio começa em <span>'+regressivo+'</span></div>');
+				if ( temProximo == true ){
+					if ($("#proximo").length == 1){
+						$('#ad-v-player #proximo').html('O próximo episódio começa em <span>'+regressivo+'</span> segundos OU <a target="_parent" href="https://onepiece-ex.com.br/episodios/online/209"> clique aqui</a>');
+						$('#ad-v-player #proximo').css( "left", "0" );
+					}else{
+						$('#ad-v-player').append('<div id="proximo">O próximo episódio começa em <span>'+regressivo+'</span> segundos OU <a target="_parent" href="https://onepiece-ex.com.br/episodios/online/209"> clique aqui</a> </div>');
+						$('#ad-v-player #proximo').css( "left", "-5000" );
+					}
+					if ( regressivo < 1 )
+					// window.location.href = "http://bf72.onepieceex.com.br/pl/209/1/874035065";
+				top.location.href = "https://onepiece-ex.com.br/episodios/online/209";
+			}else {
+				if ($("#proximo").length == 1){
+					$('#ad-v-player #proximo').html('O próximo episódio ainda não foi lançado. Assine as notificações, siga no Facebook e aguarde! (Todo Domingo)');
+					$('#ad-v-player #proximo').css( "left", "0" );
+				}else{
+					$('#ad-v-player').append('<div id="proximo">O próximo episódio ainda não foi lançado. Assine as notificações, siga no Facebook e aguarde! (Todo Domingo!)</div>');
+					$('#ad-v-player #proximo').css( "left", "-5000" );
+				}
+			}
+		}
+
+			$( "#ad-v-player #proximo" ).on( "click", function() {
+				window.top.location = "https://onepiece-ex.com.br/episodios/online/209";
+			});
+
+			// Remover próximo episódio
+			if (tempoAtual < quaseFim && $("#proximo").length == 1 ){
+				// console.log('Passou do fim');
+				$('#ad-v-player #proximo').remove();
+			}
+
+		}
+		// console.log(tempoAtual);
+	}
+
+	function continuar(){
+		console.log('Play');
+		var player = $('#advideox')[0];
+		// Continua de onde parou
+		if (localStorage.tepisodios208 && player.currentTime == 0) {
+			console.log('Continuar do segundo '+localStorage.tepisodios208 +'?');
+
+			player.pause();
+			$("#ad-v-player").append('<div id="continuar"><div id="dialog"><h1>Gostaria de continuar de onde parou?</h1><a href="#" id="nao">Não</a><a href="#" id="sim">Sim</a></div></div>');
+			$( "#sim" ).click(function(e) {
+				$( "#continuar" ).remove();
+				player.play();
+				player.currentTime = localStorage.tepisodios208;
+				e.preventDefault();
+			});
+			$( "#nao" ).click(function(e) {
+				e.preventDefault();
+				$( "#continuar" ).remove();
+				localStorage.removeItem('tepisodios208');
+				player.play();
+				e.preventDefault();
+			});
+
+}
+};
+
+</script> 
+ </head> 
+ <body> 
+  <div id="centro"> 
+   <p id="mensagem">...</p> 
+   <div id="andamento"></div> 
+   <div style="max-width:100%"> 
+    <video id="advideox" autoplay width="100%" height="100%"></video> 
+   </div> 
+  </div>   
+ </body>
+</html>

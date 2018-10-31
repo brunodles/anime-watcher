@@ -8,8 +8,7 @@ import com.brunodles.alchemist.TransmutationsBook
 
 object AlchemistFactory {
 
-    var urlFetcher: UrlFetcher = UrlFetcher.fetcher()
-
+    private var urlFetcher: UrlFetcher? = null
     val alchemist: Alchemist by lazy {
         System.setProperty(
             "user-agent",
@@ -17,7 +16,7 @@ object AlchemistFactory {
         )
         Alchemist.Builder()
             .uriResolver {
-                urlFetcher.get(it).html()
+                getUrlFetcher().get(it).html()
             }
             .transformers(
                 TransmutationsBook.Builder()
@@ -25,6 +24,15 @@ object AlchemistFactory {
                     .build()
             )
             .build()
+    }
+
+    fun getUrlFetcher(): UrlFetcher {
+        urlFetcher?.let { return it }
+        return UrlFetcher.fetcher()
+    }
+
+    fun setUrlFetcher(urlFetcher: UrlFetcher) {
+        this.urlFetcher = urlFetcher
     }
 }
 

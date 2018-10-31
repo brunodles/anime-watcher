@@ -1,0 +1,19 @@
+{
+  "description": "Eu Sou Ruffy!",
+  "number": 1,
+  "animeName": "One Piece",
+  "image": "https://www.anitube.site/player/img/Capa-Player-Cine.png",
+  "video": "https://www.blogger.com/video-play.mp4?contentId\u003d3eb2b428663ef38f",
+  "link": "https://www.anitube.site/765/",
+  "nextEpisodes": [
+    {
+      "description": "O Grande Espadachim Aparece!",
+      "number": 2,
+      "animeName": "One Piece",
+      "link": "https://www.anitube.site/802/",
+      "nextEpisodes": [],
+      "temporaryVideoUrl": false
+    }
+  ],
+  "temporaryVideoUrl": false
+}

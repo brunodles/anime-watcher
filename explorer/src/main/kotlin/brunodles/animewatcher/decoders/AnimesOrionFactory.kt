@@ -14,15 +14,15 @@ import java.util.regex.Pattern
 
 object AnimesOrionFactory : PageParser {
 
+    @Suppress("RegExpRedundantEscape")
     private val URL_REGEX =
-        Regex("^(:?https?://)?(:?www.)?animesorion.(?:tv|site|video|online)/\\d+.*?$")
-    private val urlFetcher = UrlFetcher.fetcher()
+        Regex("^(?:https?\\:\\/\\/)?(?:www.)?animesorion.(\\w+)\\/(\\d+).*?\$")
 
     override fun isEpisode(url: String): Boolean =
         url.matches(URL_REGEX)
 
     override fun episode(url: String): Episode {
-        val document = urlFetcher.get(url)
+        val document = getUrl(url)
         val html = document.html()
         if (document.title().contains("todos", true))
             return parseAbout(document, url)
@@ -33,7 +33,7 @@ object AnimesOrionFactory : PageParser {
         val links = html.select(".lcp_catlist a")
         links.sortBy { it.attr("href").extractWithRegex("(\\d+)").toInt() }
         val first = links.removeAt(0).attr("href")
-        val episode = parsePlayer(urlFetcher.get(first).html(), url)
+        val episode = parsePlayer(getUrl(first).html(), url)
         return episode.copy(nextEpisodes = links.map {
             Episode(
                 it.text(), it.text().extractWithRegex("^(?:.*)\\s+?(\\d++)").toInt(),
@@ -41,6 +41,8 @@ object AnimesOrionFactory : PageParser {
             )
         }.toList())
     }
+
+    private fun getUrl(url: String) = UrlFetcher.fetcher().get(url)
 
     fun parsePlayer(html: String, url: String): Episode {
         val currentEpisode = AlchemistFactory.alchemist.parseHtml(html, CurrentEpisode::class.java)

@@ -67,7 +67,7 @@
   _pop.push(['siteId', 2877592]);
   _pop.push(['minBid', 0]);
   _pop.push(['popundersPerIP', 0]);
-  _pop.push(['delayBetween', 0]);
+  _pop.push(['delayBetween', 60]);
   _pop.push(['default', false]);
   _pop.push(['defaultPerDay', 0]);
   _pop.push(['topmostLayer', false]);
@@ -218,42 +218,39 @@ document.getElementsByTagName("head")[0].appendChild(s);
       </div> 
       <!--/listagem-episodios--> 
       <div class="col-right right pgn-single-episodio"> 
-       <a href="/1891" title="" class="acessar-pgn hidden-xs"> <span class="thumb"> <img src="http://www.animesonlinekai.com/imagens/capa/a6a5c55de1998cc9589aba7159713ac9a17851bf.jpg" alt="" class="img-full"> </span> <span class="texto">Acessar página do anime <b>Himouto! Umaru-</b></span> </a> 
-       <!--/acessar-pgn--> 
+       <script type="text/javascript">
+    google_ad_client = "ca-pub-2796241792274913";
+    google_ad_slot = "3321056621";
+    google_ad_width = 300;
+    google_ad_height = 250;
+</script> 
+       <!-- TESTT --> 
+       <script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+</script> 
        <div class="lista-episodios-relacionados"> 
         <nav class="nav-episodios full-hidden niceScroll"> 
          <ul> 
-          <li> <a href="/himouto-umaru-chan/episodio-12" title="Himouto! Umaru-chan 12"> <span class="thumb"> <img src="http://static.anitube.se/thumb/1_85418.jpg" alt="" class="img-full"> <span class="tempo">45:23</span> </span> <span class="tt">Episódio 12</span> <span class="autor">por Yoca</span> </a> </li> 
+          <li> <a href="/himouto-umaru-chan/episodio-12" title="Himouto! Umaru-chan 12"> <span class="thumb"> <img src="http://static.anitube.se/thumb/1_85418.jpg" alt="" class="img-full"> <span class="tempo"></span> </span> <span class="tt">Episódio 12</span> <span class="autor">por Yoca</span> </a> </li> 
          </ul> 
         </nav> 
         <nav class="nav-episodios full-hidden niceScroll"> 
          <ul> 
-          <li> <a href="/himouto-umaru-chan/episodio-11" title="Himouto! Umaru-chan 11"> <span class="thumb"> <img src="http://www.animeskai.com/imagens/253x142/15612302.jpg" alt="" class="img-full"> <span class="tempo">45:23</span> </span> <span class="tt">Episódio 11</span> <span class="autor">por Yoca</span> </a> </li> 
+          <li> <a href="/himouto-umaru-chan/episodio-11" title="Himouto! Umaru-chan 11"> <span class="thumb"> <img src="http://www.animeskai.com/imagens/253x142/15612302.jpg" alt="" class="img-full"> <span class="tempo"></span> </span> <span class="tt">Episódio 11</span> <span class="autor">por Yoca</span> </a> </li> 
          </ul> 
         </nav> 
         <nav class="nav-episodios full-hidden niceScroll"> 
          <ul> 
-          <li> <a href="/himouto-umaru-chan/episodio-10" title="Himouto! Umaru-chan 10"> <span class="thumb"> <img src="http://www.animeskai.com/imagens/253x142/15603841.jpg" alt="" class="img-full"> <span class="tempo">45:23</span> </span> <span class="tt">Episódio 10</span> <span class="autor">por Yoca</span> </a> </li> 
+          <li> <a href="/himouto-umaru-chan/episodio-10" title="Himouto! Umaru-chan 10"> <span class="thumb"> <img src="http://www.animeskai.com/imagens/253x142/15603841.jpg" alt="" class="img-full"> <span class="tempo"></span> </span> <span class="tt">Episódio 10</span> <span class="autor">por Yoca</span> </a> </li> 
          </ul> 
         </nav> 
         <nav class="nav-episodios full-hidden niceScroll"> 
          <ul> 
-          <li> <a href="/himouto-umaru-chan/episodio-9" title="Himouto! Umaru-chan 9"> <span class="thumb"> <img src="http://www.animeskai.com/imagens/253x142/15595774.jpg" alt="" class="img-full"> <span class="tempo">45:23</span> </span> <span class="tt">Episódio 9</span> <span class="autor">por Yoca</span> </a> </li> 
+          <li> <a href="/himouto-umaru-chan/episodio-9" title="Himouto! Umaru-chan 9"> <span class="thumb"> <img src="http://www.animeskai.com/imagens/253x142/15595774.jpg" alt="" class="img-full"> <span class="tempo"></span> </span> <span class="tt">Episódio 9</span> <span class="autor">por Yoca</span> </a> </li> 
          </ul> 
         </nav> 
         <nav class="nav-episodios full-hidden niceScroll"> 
          <ul> 
-          <li> <a href="/himouto-umaru-chan/episodio-8" title="Himouto! Umaru-chan 8"> <span class="thumb"> <img src="http://www.animeskai.com/imagens/253x142/15587546.jpg" alt="" class="img-full"> <span class="tempo">45:23</span> </span> <span class="tt">Episódio 8</span> <span class="autor">por Yoca</span> </a> </li> 
-         </ul> 
-        </nav> 
-        <nav class="nav-episodios full-hidden niceScroll"> 
-         <ul> 
-          <li> <a href="/himouto-umaru-chan/episodio-7" title="Himouto! Umaru-chan 7"> <span class="thumb"> <img src="http://www.animeskai.com/imagens/253x142/15579582.jpg" alt="" class="img-full"> <span class="tempo">45:23</span> </span> <span class="tt">Episódio 7</span> <span class="autor">por Yoca</span> </a> </li> 
-         </ul> 
-        </nav> 
-        <nav class="nav-episodios full-hidden niceScroll"> 
-         <ul> 
-          <li> <a href="/himouto-umaru-chan/episodio-6" title="Himouto! Umaru-chan 6"> <span class="thumb"> <img src="http://www.animeskai.com/imagens/253x142/15571558.jpg" alt="" class="img-full"> <span class="tempo">45:23</span> </span> <span class="tt">Episódio 6</span> <span class="autor">por Yoca</span> </a> </li> 
+          <li> <a href="/himouto-umaru-chan/episodio-8" title="Himouto! Umaru-chan 8"> <span class="thumb"> <img src="http://www.animeskai.com/imagens/253x142/15587546.jpg" alt="" class="img-full"> <span class="tempo"></span> </span> <span class="tt">Episódio 8</span> <span class="autor">por Yoca</span> </a> </li> 
          </ul> 
         </nav> 
         <!--/nav-episodios--> 

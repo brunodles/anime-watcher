@@ -1,0 +1,18 @@
+{
+  "description": "Episódio 01 – Eu sou Uzumaki Boruto!! online, Boruto - Episódio 01 – Eu sou Uzumaki Boruto!! Online",
+  "number": 1,
+  "animeName": "Boruto",
+  "video": "https://www.blogger.com/video-play.mp4?contentId\u003d3dbfcd746b2b8f21",
+  "link": "https://www.animesonlinebr.com.br/video/50034",
+  "nextEpisodes": [
+    {
+      "description": "Boruto -  Episódio 02 – O Filho do Hokage!!",
+      "number": 2,
+      "animeName": "Boruto",
+      "link": "https://animesonlinebr.com.br/video/50035",
+      "nextEpisodes": [],
+      "temporaryVideoUrl": false
+    }
+  ],
+  "temporaryVideoUrl": false
+}

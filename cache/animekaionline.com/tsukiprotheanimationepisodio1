@@ -67,7 +67,7 @@
   _pop.push(['siteId', 2877592]);
   _pop.push(['minBid', 0]);
   _pop.push(['popundersPerIP', 0]);
-  _pop.push(['delayBetween', 0]);
+  _pop.push(['delayBetween', 60]);
   _pop.push(['default', false]);
   _pop.push(['defaultPerDay', 0]);
   _pop.push(['topmostLayer', false]);
@@ -211,42 +211,39 @@ document.getElementsByTagName("head")[0].appendChild(s);
       </div> 
       <!--/listagem-episodios--> 
       <div class="col-right right pgn-single-episodio"> 
-       <a href="/2718" title="" class="acessar-pgn hidden-xs"> <span class="thumb"> <img src="http://www.animesonlinekai.com/imagens/capa/ecb6270f80039e4e823188d57b17d2429dd5ebbd.jpg" alt="" class="img-full"> </span> <span class="texto">Acessar página do anime <b>Tsukipro The An</b></span> </a> 
-       <!--/acessar-pgn--> 
+       <script type="text/javascript">
+    google_ad_client = "ca-pub-2796241792274913";
+    google_ad_slot = "3321056621";
+    google_ad_width = 300;
+    google_ad_height = 250;
+</script> 
+       <!-- TESTT --> 
+       <script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+</script> 
        <div class="lista-episodios-relacionados"> 
         <nav class="nav-episodios full-hidden niceScroll"> 
          <ul> 
-          <li> <a href="/tsukipro-the-animation/episodio-13" title="Tsukipro The Animation 13"> <span class="thumb"> <img src="http://www.animesonlinekai.com/imagens/253x142/f11cc0f12ae7e0cb8d9528d79a1c83ba3477a571.png" alt="" class="img-full"> <span class="tempo">45:23</span> </span> <span class="tt">Episódio 13</span> <span class="autor">por Yoca</span> </a> </li> 
+          <li> <a href="/tsukipro-the-animation/episodio-13" title="Tsukipro The Animation 13"> <span class="thumb"> <img src="http://www.animesonlinekai.com/imagens/253x142/f11cc0f12ae7e0cb8d9528d79a1c83ba3477a571.png" alt="" class="img-full"> <span class="tempo"></span> </span> <span class="tt">Episódio 13</span> <span class="autor">por Yoca</span> </a> </li> 
          </ul> 
         </nav> 
         <nav class="nav-episodios full-hidden niceScroll"> 
          <ul> 
-          <li> <a href="/tsukipro-the-animation/episodio-12" title="Tsukipro The Animation 12"> <span class="thumb"> <img src="http://www.animesonlinekai.com/imagens/253x142/e0bb95c3010d311d6806281d0eabebea354d33e8.png" alt="" class="img-full"> <span class="tempo">45:23</span> </span> <span class="tt">Episódio 12</span> <span class="autor">por Yoca</span> </a> </li> 
+          <li> <a href="/tsukipro-the-animation/episodio-12" title="Tsukipro The Animation 12"> <span class="thumb"> <img src="http://www.animesonlinekai.com/imagens/253x142/e0bb95c3010d311d6806281d0eabebea354d33e8.png" alt="" class="img-full"> <span class="tempo"></span> </span> <span class="tt">Episódio 12</span> <span class="autor">por Yoca</span> </a> </li> 
          </ul> 
         </nav> 
         <nav class="nav-episodios full-hidden niceScroll"> 
          <ul> 
-          <li> <a href="/tsukipro-the-animation/episodio-11" title="Tsukipro The Animation 11"> <span class="thumb"> <img src="http://www.animesonlinekai.com/imagens/253x142/c236f8e52ee34efafa4ad5d80ca7fe50f9e4272c.png" alt="" class="img-full"> <span class="tempo">45:23</span> </span> <span class="tt">Episódio 11</span> <span class="autor">por Yoca</span> </a> </li> 
+          <li> <a href="/tsukipro-the-animation/episodio-11" title="Tsukipro The Animation 11"> <span class="thumb"> <img src="http://www.animesonlinekai.com/imagens/253x142/c236f8e52ee34efafa4ad5d80ca7fe50f9e4272c.png" alt="" class="img-full"> <span class="tempo"></span> </span> <span class="tt">Episódio 11</span> <span class="autor">por Yoca</span> </a> </li> 
          </ul> 
         </nav> 
         <nav class="nav-episodios full-hidden niceScroll"> 
          <ul> 
-          <li> <a href="/tsukipro-the-animation/episodio-10" title="Tsukipro The Animation 10"> <span class="thumb"> <img src="http://www.animesonlinekai.com/imagens/253x142/dee341e30edf20ed4c48b02570d0f18fe025f709.png" alt="" class="img-full"> <span class="tempo">45:23</span> </span> <span class="tt">Episódio 10</span> <span class="autor">por Yoca</span> </a> </li> 
+          <li> <a href="/tsukipro-the-animation/episodio-10" title="Tsukipro The Animation 10"> <span class="thumb"> <img src="http://www.animesonlinekai.com/imagens/253x142/dee341e30edf20ed4c48b02570d0f18fe025f709.png" alt="" class="img-full"> <span class="tempo"></span> </span> <span class="tt">Episódio 10</span> <span class="autor">por Yoca</span> </a> </li> 
          </ul> 
         </nav> 
         <nav class="nav-episodios full-hidden niceScroll"> 
          <ul> 
-          <li> <a href="/tsukipro-the-animation/episodio-9" title="Tsukipro The Animation 9"> <span class="thumb"> <img src="http://www.animesonlinekai.com/imagens/253x142/9ddbb954710a5edd7c393fcaaebd88bb58edde3b.png" alt="" class="img-full"> <span class="tempo">45:23</span> </span> <span class="tt">Episódio 9</span> <span class="autor">por Yoca</span> </a> </li> 
-         </ul> 
-        </nav> 
-        <nav class="nav-episodios full-hidden niceScroll"> 
-         <ul> 
-          <li> <a href="/tsukipro-the-animation/episodio-8" title="Tsukipro The Animation 8"> <span class="thumb"> <img src="http://www.animesonlinekai.com/imagens/253x142/fdf88566d50d7b71406b15a7c6ded97b1bd8fcf4.jpg" alt="" class="img-full"> <span class="tempo">45:23</span> </span> <span class="tt">Episódio 8</span> <span class="autor">por Yoca</span> </a> </li> 
-         </ul> 
-        </nav> 
-        <nav class="nav-episodios full-hidden niceScroll"> 
-         <ul> 
-          <li> <a href="/tsukipro-the-animation/episodio-7" title="Tsukipro The Animation 7"> <span class="thumb"> <img src="http://www.animekai.info/2017/11/Tsukipro-The-Animation7.png" alt="" class="img-full"> <span class="tempo">45:23</span> </span> <span class="tt">Episódio 7</span> <span class="autor">por Yoca</span> </a> </li> 
+          <li> <a href="/tsukipro-the-animation/episodio-9" title="Tsukipro The Animation 9"> <span class="thumb"> <img src="http://www.animesonlinekai.com/imagens/253x142/9ddbb954710a5edd7c393fcaaebd88bb58edde3b.png" alt="" class="img-full"> <span class="tempo"></span> </span> <span class="tt">Episódio 9</span> <span class="autor">por Yoca</span> </a> </li> 
          </ul> 
         </nav> 
         <!--/nav-episodios--> 
