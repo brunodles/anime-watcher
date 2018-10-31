@@ -46,7 +46,7 @@ internal class CacheFetcher(private val nestedFetcher: UrlFetcher) : UrlFetcher 
             val hostStr = matcher.group(1)
                 .replace(Regex("[^\\d\\w.]"), "")
             if (matcher.groupCount() <= 1)
-                return hostStr.fixed()+"/_index"
+                return hostStr.fixed() + "/_index"
             val path = matcher.group(2) ?: "_index"
             return (hostStr + "/" + path.fixed())
                 .max(MAX_FILENAME_SIZE)
